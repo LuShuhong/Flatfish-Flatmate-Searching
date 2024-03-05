@@ -1,6 +1,6 @@
 import { MainPage } from "./pages/MainPage/MainPage";
 import { NavBar } from "./components/NavBar/NavBar";
-import { Matches } from "./components/Matches/Matches";
+import { Matches } from "./pages/MainPage/Matches/Matches";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
