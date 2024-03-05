@@ -5,12 +5,15 @@ import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen bg-gradient-to-tr from-[#D7CEC7] to-[#D7CEC7]">
       <NavBar />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/matches" element={<Matches />} />
-      </Routes>
+      <div className="h-92%">
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          {/* Other pages */}
+          <Route path="/matches" element={<Matches />} />
+        </Routes>
+      </div>
     </div>
   );
 }
