@@ -1,3 +1,3 @@
 export const Logo: React.FC = () => {
-  return <div className="">FlatFish</div>;
+  return <div className="text-6xl">FlatFish.</div>;
 };

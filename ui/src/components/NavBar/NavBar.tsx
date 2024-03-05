@@ -3,9 +3,11 @@ import { Navigation } from "../Navigation/Navigation";
 
 export const NavBar: React.FC = () => {
   return (
-    <div className="flex items-center w-full h-navBarHeight bg-slate-400">
-      <Logo />
-      <Navigation />
+    <div className="flex items-center justify-center w-full h-navBarHeight bg-slate-400">
+      <div className="flex w-11/12 justify-between">
+        <Logo />
+        <Navigation />
+      </div>
     </div>
   );
 };
