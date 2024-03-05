@@ -3,7 +3,7 @@ import { Profile } from "../Profile/Profile";
 
 export const Navigation: React.FC = () => {
   return (
-    <div className="bg-white">
+    <div className="flex w-1/2 justify-between items-center">
       <NavigationButtons />
       <Profile />
     </div>
