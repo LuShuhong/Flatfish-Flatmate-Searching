@@ -1,3 +1,3 @@
 export const MainPage: React.FC = () => {
-  return <div className=""></div>;
+  return <div className="">hello world!</div>;
 };
