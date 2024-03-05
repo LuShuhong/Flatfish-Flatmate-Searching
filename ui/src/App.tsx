@@ -10,7 +10,6 @@ function App() {
       <div className="h-92%">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          {/* Other pages */}
           <Route path="/matches" element={<Matches />} />
         </Routes>
       </div>
