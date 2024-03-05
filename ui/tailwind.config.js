@@ -6,6 +6,7 @@ module.exports = {
       height: {
         navBarHeight: "8%",
         "90%": "83%",
+        "92%": "92%",
       },
       width: {
         profileImgWidth: "22%",
