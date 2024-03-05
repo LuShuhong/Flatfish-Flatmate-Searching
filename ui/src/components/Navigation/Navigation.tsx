@@ -1,11 +1,16 @@
 import { NavigationButtons } from "../NavigationButtons/NavigationButtons";
 import { Profile } from "../Profile/Profile";
 
-export const Navigation: React.FC = () => {
+interface Props {
+  profilePic: string;
+  name: string;
+}
+
+export const Navigation: React.FC<Props> = ({ profilePic, name }) => {
   return (
-    <div className="flex w-1/2 justify-between items-center">
+    <div className="flex w-1/2 h-full justify-between items-center">
       <NavigationButtons />
-      <Profile />
+      <Profile profilePic={profilePic} name={name} />
     </div>
   );
 };

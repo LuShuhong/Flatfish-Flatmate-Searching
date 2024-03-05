@@ -5,6 +5,15 @@ module.exports = {
     extend: {
       height: {
         navBarHeight: "8%",
+        "90%": "83%",
+      },
+      width: {
+        profileImgWidth: "22%",
+        "95%": "95%",
+      },
+      borderRadius: {
+        profileBR: "2rem",
+        "1/2": "50%",
       },
     },
   },
