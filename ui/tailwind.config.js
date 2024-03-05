@@ -17,7 +17,7 @@ module.exports = {
         "1/2": "50%",
       },
       backgroundImage: {
-        mediaCity: "url('/img/mainPageBg.jpeg')",
+        mediaCity: "url('/src/img/mainPageBg.jpeg')",
       },
     },
   },
