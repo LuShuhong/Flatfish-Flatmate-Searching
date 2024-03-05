@@ -1,10 +1,17 @@
-import { MainPage } from "./components/MainPage";
+import { MainPage } from "./pages/MainPage/MainPage";
+import { NavBar } from "./components/NavBar/NavBar";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <MainPage />
-      {/* Other pages */}
+      <NavBar />
+      <div className="">
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          {/* Other pages */}
+        </Routes>
+      </div>
     </div>
   );
 }
