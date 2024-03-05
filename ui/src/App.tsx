@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen bg-mediaCity">
       <NavBar />
       <div className="">
         <Routes>

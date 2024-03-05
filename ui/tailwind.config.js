@@ -15,6 +15,9 @@ module.exports = {
         profileBR: "2rem",
         "1/2": "50%",
       },
+      backgroundImage: {
+        mediaCity: "url('/img/mainPageBg.jpeg')",
+      },
     },
   },
   plugins: [],
