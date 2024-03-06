@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: flatfishdatabase
+  namespace: hugo-ngowthammatas
+spec:
+  serviceName: "cockroachdbflatfishservice"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cockroachdbflatfish
+  template:
+    metadata:
+      labels:
+        app: cockroachdbflatfish
+    spec:
+      containers:
+        - name: cockroachdb
+          image: cockroachdb/cockroach:v21.2.6
+          ports:
+            - containerPort: 26257 # CockroachDB SQL port
+            - containerPort: 8080 # CockroachDB Web UI port
+          command:
+            - "/cockroach/cockroach"
+          args:
+            - "start-single-node"
+            - "--advertise-addr=cockroachdb-0.cockroachdb"
+            - "--http-addr=0.0.0.0:8080"
+            - "--insecure" # Note: Use secure mode for production
+          volumeMounts:
+            - name: cockroachdb-storage
+              mountPath: /cockroach/cockroach-data
+  volumeClaimTemplates:
+    - metadata:
+        name: cockroachdb-storage
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cockroachdbflatfishservice
+  labels:
+    app: cockroachdbflatfishservice
+spec:
+  ports:
+    - port: 26257
+      targetPort: 26257
+      name: sql
+    - port: 8080
+      targetPort: 8080
+      name: ui
+  clusterIP: None
+  selector:
+    app: cockroachdbflatfish
