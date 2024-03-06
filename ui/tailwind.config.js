@@ -16,6 +16,9 @@ module.exports = {
         profileBR: "2rem",
         "1/2": "50%",
       },
+      backgroundColor: {
+        formElementColor: "#535150",
+      },
       backgroundImage: {
         bg1: "url('/src/img/mainBackground1.jpeg')",
         bg2: "url('/src/img/mainBackground2.jpeg')",
