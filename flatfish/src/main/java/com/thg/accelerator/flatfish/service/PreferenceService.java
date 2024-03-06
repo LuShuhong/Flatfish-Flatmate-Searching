@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class PreferenceService {
@@ -28,16 +29,18 @@ public class PreferenceService {
     }
 
     // TODO: Replace with vector similarity methods
-    public Map<UserEntity, Integer> getStronglyMatchingUsers(UserEntity targetUser) {
+    public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(Long userId) {
         List<UserEntity> allUsers = getAllUsers();
+        Optional<UserEntity> targetUser = usersRepo.findById(userId);
         HashMap<UserEntity, Integer> strongMatches = new HashMap<>();
 
-        for (UserEntity otherUser : allUsers) {
-            if (targetUser.getBudgetMin() <= otherUser.getBudgetMin() && targetUser.getBudgetMax() >= otherUser.getBudgetMax()) {
-                strongMatches.put(otherUser, 500);
+        if (targetUser.isPresent()) {
+            for (UserEntity otherUser : allUsers) {
+                if (targetUser.get().getBudgetMin() <= otherUser.getBudgetMin() && targetUser.get().getBudgetMax() >= otherUser.getBudgetMax()) {
+                    strongMatches.put(otherUser, 500);
+                }
             }
         }
-
-        return strongMatches;
+        return Optional.of(strongMatches);
     }
 }
