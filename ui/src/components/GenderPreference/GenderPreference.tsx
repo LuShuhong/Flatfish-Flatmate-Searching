@@ -1,4 +1,8 @@
-export const GenderPreference: React.FC = () => {
+interface Props {
+  handleGender: (val: "m" | "f" | "na") => void;
+}
+
+export const GenderPreference: React.FC<Props> = ({ handleGender }) => {
   return (
     <div className="flex flex-col w-1/3 pl-8 mt-2 mb-4">
       <div className="italic">Gender:</div>
@@ -8,8 +12,8 @@ export const GenderPreference: React.FC = () => {
           type="radio"
           id="male"
           className="h-1/2"
-          value="male"
           name="gender"
+          onClick={() => handleGender("m")}
         />
       </label>
       <label className="flex items-center">
@@ -18,8 +22,8 @@ export const GenderPreference: React.FC = () => {
           type="radio"
           id="male"
           className="h-1/2 checked:bg-formElementColor"
-          value="female"
           name="gender"
+          onClick={() => handleGender("f")}
         />
       </label>
       <label className="flex items-center">
@@ -28,8 +32,8 @@ export const GenderPreference: React.FC = () => {
           type="radio"
           id="male"
           className="h-1/2 checked:bg-formElementColor"
-          value="no preference"
           name="gender"
+          onClick={() => handleGender("na")}
         />
       </label>
     </div>

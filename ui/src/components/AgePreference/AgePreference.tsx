@@ -1,4 +1,9 @@
-export const AgePreference: React.FC = () => {
+interface Props {
+  ageRange: [min: number, max: number];
+  handleAge: (val: number, index: 0 | 1) => void;
+}
+
+export const AgePreference: React.FC<Props> = ({ ageRange, handleAge }) => {
   return (
     <div className="flex flex-col pl-8 mb-4">
       <div>
@@ -8,7 +13,8 @@ export const AgePreference: React.FC = () => {
           className="ageSlider"
           min={16}
           max={80}
-          value={16}
+          value={ageRange[0]}
+          onInput={(e) => handleAge(e.currentTarget.valueAsNumber, 0)}
         />
       </div>
       <div>
@@ -18,7 +24,8 @@ export const AgePreference: React.FC = () => {
           className="ageSlider"
           min={16}
           max={80}
-          value={80}
+          value={ageRange[1]}
+          onInput={(e) => handleAge(e.currentTarget.valueAsNumber, 1)}
         />
       </div>
     </div>
