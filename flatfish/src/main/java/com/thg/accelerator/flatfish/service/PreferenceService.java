@@ -1,8 +1,6 @@
 package com.thg.accelerator.flatfish.service;
 
 import com.thg.accelerator.flatfish.repositories.entities.UserEntity;
-import com.thg.accelerator.flatfish.repositories.entity.PreferenceEntity;
-import com.thg.accelerator.flatfish.repositories.entity.UserEntity;
 import com.thg.accelerator.flatfish.repositories.repos.PreferencesRepo;
 import com.thg.accelerator.flatfish.repositories.repos.UserLocationsRepo;
 import com.thg.accelerator.flatfish.repositories.repos.UsersRepo;
@@ -26,16 +24,17 @@ public class PreferenceService {
 
 
     public List<UserEntity> getAllUsers() {
-        return UsersRepo.findAll();
+        return usersRepo.findAll();
     }
 
-    public Map<UserEntity, Integer> getStronglyMatchingUsers(PreferenceEntity targetUser) {
+    // TODO: Replace with vector similarity methods
+    public Map<UserEntity, Integer> getStronglyMatchingUsers(UserEntity targetUser) {
         List<UserEntity> allUsers = getAllUsers();
         HashMap<UserEntity, Integer> strongMatches = new HashMap<>();
 
-        for (UserEntity user : allUsers) {
-            if (targetUser.getBudgetMin() <= user.getPreferenceEntity().getBudgetMin() && targetUser.getBudgetMax() >= user.getPreferenceEntity().getBudgetMax()) {
-                strongMatches.put(user, 500);
+        for (UserEntity otherUser : allUsers) {
+            if (targetUser.getBudgetMin() <= otherUser.getBudgetMin() && targetUser.getBudgetMax() >= otherUser.getBudgetMax()) {
+                strongMatches.put(otherUser, 500);
             }
         }
 

@@ -1,6 +1,6 @@
 package com.thg.accelerator.flatfish.repositories.repos;
 
-import com.thg.accelerator.flatfish.repositories.entity.PreferenceEntity;
+import com.thg.accelerator.flatfish.repositories.entities.PreferenceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

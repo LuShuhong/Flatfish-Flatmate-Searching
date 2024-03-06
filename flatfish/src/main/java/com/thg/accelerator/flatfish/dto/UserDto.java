@@ -1,8 +1,6 @@
 package com.thg.accelerator.flatfish.dto;
 
 import com.thg.accelerator.flatfish.repositories.entities.UserLocationsEntity;
-import com.thg.accelerator.flatfish.repositories.entity.PreferenceEntity;
-import com.thg.accelerator.flatfish.repositories.entity.UserLocationsEntity;
 import lombok.*;
 
 import java.util.List;
@@ -25,9 +23,17 @@ public class UserDto {
     private Gender gender;
     private List<UserLocationsEntity> locationsEntities;
 
-    public UserDto(String name, String email, String description, long budgetMin, long budgetMax, long ageMin, long ageMax, Gender gender, List<String> locationStrings) {
+    public UserDto(String name, String email, String description, long budgetMin, long budgetMax, long ageMin, long ageMax, Gender gender, List<UserLocationsEntity> locationsEntities) {
 
         this.name = name;
+        this.email = email;
+        this.description = description;
+        this.budgetMin = budgetMin;
+        this.budgetMax = budgetMax;
+        this.ageMin = ageMin;
+        this.ageMax = ageMax;
+        this.gender = gender;
+        this.locationsEntities = locationsEntities;
 
     }
 }
