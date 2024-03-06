@@ -1,4 +1,4 @@
-package com.thg.accelerator.flatfish.dto;
+package com.thg.accelerator.flatfish.repositories.entities;
 
 public enum Gender {
     MALE,

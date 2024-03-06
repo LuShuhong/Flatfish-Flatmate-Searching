@@ -1,5 +1,6 @@
 package com.thg.accelerator.flatfish.dto;
 
+import com.thg.accelerator.flatfish.repositories.entities.Gender;
 import com.thg.accelerator.flatfish.repositories.entities.UserLocationsEntity;
 import lombok.*;
 
