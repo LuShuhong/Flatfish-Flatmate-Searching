@@ -17,7 +17,10 @@ module.exports = {
         "1/2": "50%",
       },
       backgroundImage: {
-        mediaCity: "url('/img/mainPageBg.jpeg')",
+        bg1: "url('/src/img/mainBackground1.jpeg')",
+        bg2: "url('/src/img/mainBackground2.jpeg')",
+        bg3: "url('/src/img/mainBackground3.webp')",
+        bg4: "url('/src/img/mainBackground4.jpeg')",
       },
       colors: {
         bgTan: "#D7CEC7",
