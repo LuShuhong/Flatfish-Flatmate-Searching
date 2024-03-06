@@ -12,13 +12,18 @@ const MIN_BUDGET: number = 16,
   MAX_BUDGET: number = 80;
 
 export const InputFields: React.FC = () => {
-  // put request
   const [preferences, setPreferences] = useState<Preference>({
     gender: "na",
     ageRange: [MIN_AGE, MAX_AGE],
     budgetRange: [MIN_BUDGET, MAX_BUDGET],
     location: "",
   });
+
+  const handleMatch = (): void => {
+    // put request
+    // trigger relocation to matches page
+  };
+
   const handleGender = (val: "m" | "f" | "na"): void => {
     setPreferences((p) => {
       const copy = { ...p };
@@ -61,7 +66,7 @@ export const InputFields: React.FC = () => {
         handleLocation={handleLocation}
       />
       <div className="flex h-1/6 w-70% pl-8">
-        <MatchButton />
+        <MatchButton handleMatch={handleMatch} />
       </div>
     </div>
   );
