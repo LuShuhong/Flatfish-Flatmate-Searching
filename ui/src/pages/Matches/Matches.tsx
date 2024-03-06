@@ -1,5 +1,5 @@
 import { Person } from "../../person";
-import data from "/Users/sreshthamahmud/flatfish/ui/src/data.json";
+import data from "../../data.json";
 import "./Matches.css";
 import { useState } from "react";
 import { MatchesDialog } from "../../components/MatchesDialog/MatchesDialog";
