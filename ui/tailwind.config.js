@@ -26,6 +26,9 @@ module.exports = {
         bg3: "url('/src/img/mainBackground3.webp')",
         bg4: "url('/src/img/mainBackground4.jpeg')",
       },
+      colors: {
+        bgTan: "#D7CEC7",
+      },
     },
   },
   plugins: [],

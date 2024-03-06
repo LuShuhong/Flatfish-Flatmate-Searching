@@ -1,0 +1,44 @@
+[
+  {
+    "name": "stephanie",
+    "age": "21",
+    "job_title": "graduate software engineer",
+    "instagram": "@hello.io"
+  },
+  {
+    "name": "john",
+    "age": "25",
+    "job_title": "graduate marketer",
+    "instagram": "@snake.ww"
+  },
+  {
+    "name": "batiatus",
+    "age": "30",
+    "job_title": "tavern wench",
+    "instagram": "@wench.henchy"
+  },
+  {
+    "name": "penicillin",
+    "age": "500",
+    "job_title": "graduate",
+    "instagram": "@egypt"
+  },
+  {
+    "name": "tutankamun",
+    "age": "40",
+    "job_title": "basketball player",
+    "instagram": "@icon"
+  },
+  {
+    "name": "jesus",
+    "age": "2024",
+    "job_title": "son of god",
+    "instagram": "@jesus"
+  },
+  {
+    "name": "jesus",
+    "age": "2024",
+    "job_title": "son of god",
+    "instagram": "@jesus"
+  }
+]
