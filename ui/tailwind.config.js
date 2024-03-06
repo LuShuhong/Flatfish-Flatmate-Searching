@@ -29,6 +29,9 @@ module.exports = {
       colors: {
         bgTan: "#D7CEC7",
       },
+      fontFamily: {
+        abril: ["Abril Fatface"],
+      },
     },
   },
   plugins: [],

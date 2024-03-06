@@ -41,7 +41,6 @@ export const Matches: React.FC = () => {
           openDialog={openDialog}
           setOpenDialog={setOpenDialog}
           selectedPerson={selectedPerson}
-          setSelectedPerson={setSelectedPerson}
         />
       )}
     </>
