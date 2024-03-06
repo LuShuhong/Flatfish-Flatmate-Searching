@@ -1,5 +1,6 @@
 import { MainPage } from "./pages/MainPage/MainPage";
 import { NavBar } from "./components/NavBar/NavBar";
+import { Matches } from "./pages/Matches/Matches";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       <div className="h-92%">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          {/* Other pages */}
+          <Route path="/matches" element={<Matches />} />
         </Routes>
       </div>
     </div>
