@@ -11,10 +11,14 @@ module.exports = {
       width: {
         profileImgWidth: "22%",
         "95%": "95%",
+        "70%": "70%",
       },
       borderRadius: {
         profileBR: "2rem",
         "1/2": "50%",
+      },
+      backgroundColor: {
+        formElementColor: "#535150",
       },
       backgroundImage: {
         bg1: "url('/src/img/mainBackground1.jpeg')",
