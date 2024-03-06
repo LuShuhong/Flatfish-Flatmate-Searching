@@ -11,18 +11,17 @@ const MIN_AGE: number = 16,
 const MIN_BUDGET: number = 16,
   MAX_BUDGET: number = 80;
 
-export const InputFields: React.FC = () => {
+interface Props {
+  handleMatch: () => void;
+}
+
+export const InputFields: React.FC<Props> = ({ handleMatch }) => {
   const [preferences, setPreferences] = useState<Preference>({
     gender: "na",
     ageRange: [MIN_AGE, MAX_AGE],
     budgetRange: [MIN_BUDGET, MAX_BUDGET],
     location: "",
   });
-
-  const handleMatch = (): void => {
-    // put request
-    // trigger relocation to matches page
-  };
 
   const handleGender = (val: "m" | "f" | "na"): void => {
     setPreferences((p) => {

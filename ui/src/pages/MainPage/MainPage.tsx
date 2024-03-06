@@ -1,9 +1,13 @@
 import { MainPageCard } from "../../components/MainPageCard/MainPageCard";
 
-export const MainPage: React.FC = () => {
+interface Props {
+  handleMatch: () => void;
+}
+
+export const MainPage: React.FC<Props> = ({ handleMatch }) => {
   return (
     <div className="flex items-center justify-center w-full h-full">
-      <MainPageCard />
+      <MainPageCard handleMatch={handleMatch} />
     </div>
   );
 };
