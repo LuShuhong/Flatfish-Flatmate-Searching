@@ -1,6 +1,6 @@
 export const AgePreference: React.FC = () => {
   return (
-    <div className="flex flex-col justify-center h-1/5 pl-8 mb-2">
+    <div className="flex flex-col pl-8 mb-4">
       <div>
         <div className="italic">Min age</div>
         <input

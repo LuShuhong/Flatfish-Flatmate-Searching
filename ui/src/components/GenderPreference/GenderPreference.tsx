@@ -1,9 +1,9 @@
 export const GenderPreference: React.FC = () => {
   return (
-    <div className="flex flex-col justify-center h-1/5 w-1/3 pl-8 mb-1">
+    <div className="flex flex-col w-1/3 pl-8 mt-2 mb-4">
       <div className="italic">Gender:</div>
       <label className="flex items-center">
-        <span className="flex-1 text-sm">&emsp; male</span>
+        <span className="flex-1 text-sm ml-4">male</span>
         <input
           type="radio"
           id="male"
@@ -13,7 +13,7 @@ export const GenderPreference: React.FC = () => {
         />
       </label>
       <label className="flex items-center">
-        <span className="flex-1 text-sm">&emsp; female</span>
+        <span className="flex-1 text-sm ml-4">female</span>
         <input
           type="radio"
           id="male"
@@ -23,7 +23,7 @@ export const GenderPreference: React.FC = () => {
         />
       </label>
       <label className="flex items-center">
-        <span className="flex-1 text-sm">&emsp; no preference</span>
+        <span className="flex-1 text-sm ml-4">no preference</span>
         <input
           type="radio"
           id="male"

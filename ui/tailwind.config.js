@@ -11,6 +11,7 @@ module.exports = {
       width: {
         profileImgWidth: "22%",
         "95%": "95%",
+        "70%": "70%",
       },
       borderRadius: {
         profileBR: "2rem",

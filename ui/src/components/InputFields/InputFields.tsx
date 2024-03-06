@@ -11,7 +11,7 @@ export const InputFields: React.FC = () => {
       <AgePreference />
       <BudgetPreference />
       <LocationPreference />
-      <div className="flex items-center h-1/5 pl-8">
+      <div className="flex h-1/6 w-70% pl-8">
         <MatchButton />
       </div>
     </div>
