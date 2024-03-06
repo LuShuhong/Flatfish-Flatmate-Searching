@@ -15,9 +15,9 @@ export const SlideShow: React.FC = () => {
   useEffect(() => {
     setTimeout(transition, 5000);
   });
-  console.log(imgNum);
+
   return (
-    <div className="flex justify-center items-center w-2/5 h-5/6 m-2 bg-white bg-opacity-10 rounded-xl overflow-hidden">
+    <div className="flex justify-center items-center w-2/5 h-5/6 m-2 bg-white bg-opacity-10 rounded-xl">
       {imgNum === 0 ? (
         <div className="bg-bg1 bg-contain bg-no-repeat bg-center h-full w-full"></div>
       ) : imgNum === 1 ? (
