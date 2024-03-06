@@ -1,14 +1,15 @@
 package com.thg.accelerator.flatfish.repositories.entity;
 
+import com.thg.accelerator.flatfish.dto.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @Table(name = "preferences")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +21,7 @@ public class PreferenceEntity {
     private double budgetMax;
     private double ageMin;
     private double ageMax;
-    private String gender;
+    private Gender gender;
 
     @OneToOne
     @MapsId

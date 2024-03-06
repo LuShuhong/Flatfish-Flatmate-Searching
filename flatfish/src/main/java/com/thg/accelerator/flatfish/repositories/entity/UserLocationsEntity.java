@@ -3,9 +3,9 @@ package com.thg.accelerator.flatfish.repositories.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @Table(name = "task_items")
 @ToString
 @AllArgsConstructor // for transformer

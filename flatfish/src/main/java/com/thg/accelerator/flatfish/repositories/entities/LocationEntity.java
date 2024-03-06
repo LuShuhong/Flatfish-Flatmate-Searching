@@ -1,4 +1,4 @@
-package com.thg.accelerator.flatfish.repositories.entity;
+package com.thg.accelerator.flatfish.repositories.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
