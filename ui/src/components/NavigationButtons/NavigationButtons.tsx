@@ -1,11 +1,24 @@
+import { Link } from "react-router-dom";
+
 export const NavigationButtons: React.FC = () => {
   return (
-    <div className="flex justify-between items-center w-1/2 h-full text-xl text-white">
-      <div className="hover:scale-110 duration-200 cursor-pointer">
-        My Matches
+    <div className="flex justify-between items-center w-1/2 h-full text-sm text-white">
+      <div className="flex items-center justify-center h-full duration-200 cursor-pointer hover:scale-110 hover:mt-3">
+        <Link to="/" className="p-2">
+          Home
+        </Link>
       </div>
-      <div className="hover:scale-110 duration-200 cursor-pointer">Saved</div>
-      <div className="hover:scale-110 duration-200 cursor-pointer">Option</div>
+      <div className="flex items-center justify-center h-full hover:scale-110 duration-200 cursor-pointer hover:mt-3">
+        <Link to="/matches" className="p-2">
+          My Matches
+        </Link>
+      </div>
+      <div className="flex items-center justify-center h-full hover:scale-110 duration-200 cursor-pointer hover:mt-3">
+        Saved
+      </div>
+      <div className="flex items-center justify-center h-full hover:scale-110 duration-200 cursor-pointer hover:mt-3">
+        Option
+      </div>
     </div>
   );
 };
