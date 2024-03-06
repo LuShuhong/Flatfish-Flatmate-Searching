@@ -1,24 +1,29 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { NavigationButton } from "../NavigationButton/NavigationButton";
 
 export const NavigationButtons: React.FC = () => {
+  const [page, setPage] = useState<string>("Home");
+  const navButtons: string[] = [
+    "Home",
+    "My Profile",
+    "My Matches",
+    "Saved Matches",
+  ];
+  const routing: string[] = ["/", "/", "/matches", "/"];
+  const handlePageChange = (newPage: string): void => {
+    setPage(() => newPage);
+  };
   return (
-    <div className="flex justify-between items-center w-1/2 h-full text-sm text-white">
-      <div className="flex items-center justify-center h-full duration-200 cursor-pointer hover:scale-110 hover:mt-3">
-        <Link to="/" className="p-2">
-          Home
-        </Link>
-      </div>
-      <div className="flex items-center justify-center h-full hover:scale-110 duration-200 cursor-pointer hover:mt-3">
-        <Link to="/matches" className="p-2">
-          My Matches
-        </Link>
-      </div>
-      <div className="flex items-center justify-center h-full hover:scale-110 duration-200 cursor-pointer hover:mt-3">
-        Saved
-      </div>
-      <div className="flex items-center justify-center h-full hover:scale-110 duration-200 cursor-pointer hover:mt-3">
-        Option
-      </div>
+    <div className="flex justify-between items-center w-7/12 h-full text-sm text-white">
+      {navButtons.map((pageName: string, index: number) => (
+        <NavigationButton
+          pageName={pageName}
+          curPage={page}
+          handlePageChange={handlePageChange}
+          routeTo={routing[index]}
+          key={index}
+        />
+      ))}
     </div>
   );
 };
