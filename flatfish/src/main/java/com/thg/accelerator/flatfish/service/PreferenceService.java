@@ -14,7 +14,10 @@ public class PreferenceService {
     @Autowired
     private UserLocationsRepo userLocationsRepo;
 
-    public PreferenceService(
 
-    )
+//    public getAllUsers() {
+//    }
+//    public getStronglyMatchingUsers() {
+//
+//    }
 }
