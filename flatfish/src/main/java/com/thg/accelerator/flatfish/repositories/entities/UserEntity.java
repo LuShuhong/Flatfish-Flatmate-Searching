@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Users", schema = "test")
+@Table(name = "Users")
 @SecondaryTables({
         @SecondaryTable(name = "Preferences"),
         @SecondaryTable(name = "UserLocations")

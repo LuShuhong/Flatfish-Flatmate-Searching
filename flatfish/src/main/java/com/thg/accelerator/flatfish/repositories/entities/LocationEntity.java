@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "locations", schema = "test")
+@Table(name = "locations")
 @AllArgsConstructor
 @NoArgsConstructor
 public class LocationEntity {
