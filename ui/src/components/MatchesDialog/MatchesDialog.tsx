@@ -1,7 +1,8 @@
 import { Person } from "../../person";
 import "./MatchesDialog.css";
-import { FaHeart } from "react-icons/fa6";
+import { SaveButton } from "../SaveButton/SaveButton";
 import image from "/Users/sreshthamahmud/flatfish/ui/src/img/personimg.jpeg";
+
 interface Props {
   openDialog: boolean;
   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,9 +35,7 @@ export const MatchesDialog: React.FC<Props> = ({
         <p>job title: {selectedPerson.job_title}</p>
         <p>instagram: {selectedPerson.instagram}</p>
         <div className="flex justify-end w-full p-2">
-          <button className="hover:duration-200 cursor-pointer">
-            <FaHeart />
-          </button>
+          <SaveButton selectedPerson={selectedPerson} />
         </div>
       </div>
     </>

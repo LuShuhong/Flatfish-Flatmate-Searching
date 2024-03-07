@@ -1,6 +1,7 @@
 import { MainPage } from "./pages/MainPage/MainPage";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Matches } from "./pages/Matches/Matches";
+import { Saved } from "./pages/Saved/Saved";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/matches" element={<Matches />} />
+          <Route path="/saved" element={<Saved />} />
         </Routes>
       </div>
     </div>
