@@ -11,8 +11,8 @@ export const AgePreference: React.FC<Props> = ({ ageRange, handleAge }) => {
         <input
           type="range"
           className="ageSlider"
-          min={16}
-          max={80}
+          min={18}
+          max={100}
           value={ageRange[0]}
           onInput={(e) => handleAge(e.currentTarget.valueAsNumber, 0)}
         />
@@ -22,8 +22,8 @@ export const AgePreference: React.FC<Props> = ({ ageRange, handleAge }) => {
         <input
           type="range"
           className="ageSlider"
-          min={16}
-          max={80}
+          min={18}
+          max={100}
           value={ageRange[1]}
           onInput={(e) => handleAge(e.currentTarget.valueAsNumber, 1)}
         />
