@@ -2,7 +2,7 @@ package com.thg.accelerator.flatfish.transformer;
 
 
 import com.thg.accelerator.flatfish.dto.UserDto;
-import com.thg.accelerator.flatfish.repositories.entities.UserEntity;
+import com.thg.accelerator.flatfish.entities.UserEntity;
 
 public class Transformer {
     public static UserDto transformUserEntityToDto(UserEntity userEntity) {
