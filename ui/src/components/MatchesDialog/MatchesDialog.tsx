@@ -1,4 +1,4 @@
-import { Person } from "../../person";
+import { Person } from "../../util/person";
 import "./MatchesDialog.css";
 import { SaveButton } from "../SaveButton/SaveButton";
 import image from "/Users/sreshthamahmud/flatfish/ui/src/img/personimg.jpeg";

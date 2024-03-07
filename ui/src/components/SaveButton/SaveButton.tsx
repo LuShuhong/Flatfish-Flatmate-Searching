@@ -1,6 +1,6 @@
 import { FaHeart } from "react-icons/fa6";
 import { useState } from "react";
-import { Person } from "../../person";
+import { Person } from "../../util/person";
 
 interface Props {
   selectedPerson: Person;

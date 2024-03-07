@@ -1,4 +1,4 @@
-import { Person } from "../../person";
+import { Person } from "../../util/person";
 import data from "../../data.json";
 import "./Matches.css";
 import { useState } from "react";
