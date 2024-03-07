@@ -6,10 +6,10 @@ import { MatchButton } from "../MatchButton/MatchButton";
 import { useState } from "react";
 import { Preference } from "../../util/Preference";
 
-const MIN_AGE: number = 16,
-  MAX_AGE: number = 80;
-const MIN_BUDGET: number = 16,
-  MAX_BUDGET: number = 80;
+const MIN_AGE: number = 18,
+  MAX_AGE: number = 100;
+const MIN_BUDGET: number = 18,
+  MAX_BUDGET: number = 100;
 
 interface Props {
   handleMatch: () => void;
@@ -27,16 +27,20 @@ export const InputFields: React.FC<Props> = ({ handleMatch }) => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.gender = val;
+      console.log(copy);
       return copy;
     });
   };
+
   const handleAge = (val: number, index: 0 | 1): void => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.ageRange[index] = val;
+      console.log(copy);
       return copy;
     });
   };
+
   const handleBudget = (val: number, index: 0 | 1): void => {
     setPreferences((p) => {
       const copy = { ...p };
