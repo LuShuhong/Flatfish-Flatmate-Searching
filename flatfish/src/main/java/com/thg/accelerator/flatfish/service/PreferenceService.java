@@ -1,23 +1,53 @@
 package com.thg.accelerator.flatfish.service;
 
-import com.thg.accelerator.flatfish.repositories.repos.PreferenceRepo;
-import com.thg.accelerator.flatfish.repositories.repos.UserLocationsRepo;
-import lombok.AllArgsConstructor;
+import com.thg.accelerator.flatfish.entities.PreferenceEntity;
+import com.thg.accelerator.flatfish.entities.UserEntity;
+import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
+import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
+import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PreferenceService {
     @Autowired
-    private PreferenceRepo preferenceRepo;
+    private PreferencesRepo preferencesRepo;
 
     @Autowired
     private UserLocationsRepo userLocationsRepo;
 
+    @Autowired
+    private UsersRepo usersRepo;
 
-//    public getAllUsers() {
-//    }
-//    public getStronglyMatchingUsers() {
-//
-//    }
+
+    public List<UserEntity> getAllUsers() {
+        return usersRepo.findAll();
+    }
+
+    public List<PreferenceEntity> getAllPreferences() {
+        return preferencesRepo.findAll();
+    }
+    public void addUser(UserEntity userEntity) {
+        usersRepo.save(userEntity);
+    }
+
+    // TODO: Replace with vector similarity methods
+    public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(Long userId) {
+        List<UserEntity> allUsers = getAllUsers();
+        Optional<UserEntity> targetUser = usersRepo.findById(userId);
+        HashMap<UserEntity, Integer> strongMatches = new HashMap<>();
+
+        if (targetUser.isPresent()) {
+            for (UserEntity otherUser : allUsers) {
+                if (targetUser.get().getBudgetMin() <= otherUser.getBudgetMin() && targetUser.get().getBudgetMax() >= otherUser.getBudgetMax()) {
+                    strongMatches.put(otherUser, 500);
+                }
+            }
+        }
+        return Optional.of(strongMatches);
+    }
 }

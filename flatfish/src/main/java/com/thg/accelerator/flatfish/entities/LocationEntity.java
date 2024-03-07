@@ -1,4 +1,4 @@
-package com.thg.accelerator.flatfish.repositories.entity;
+package com.thg.accelerator.flatfish.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,9 +8,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @Table(name = "locations")
 @AllArgsConstructor
 @NoArgsConstructor
