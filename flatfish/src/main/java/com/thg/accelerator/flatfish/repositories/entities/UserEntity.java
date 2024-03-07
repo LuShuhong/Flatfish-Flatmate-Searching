@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Users")
+@Table(name = "Users", schema = "test")
 @SecondaryTables({
         @SecondaryTable(name = "Preferences"),
         @SecondaryTable(name = "UserLocations")
@@ -22,7 +22,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UserId")
+    @Column(name = "user_id")
     Long userId;
 
     @Column(name = "Name")

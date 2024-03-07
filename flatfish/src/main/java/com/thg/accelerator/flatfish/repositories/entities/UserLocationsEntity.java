@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "UserLocations")
+@Table(name = "UserLocations", schema = "test")
 public class UserLocationsEntity {
 
     @Id
@@ -19,7 +19,7 @@ public class UserLocationsEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "UserId", referencedColumnName = "UserId")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserEntity userEntity;
 
     @ManyToOne
