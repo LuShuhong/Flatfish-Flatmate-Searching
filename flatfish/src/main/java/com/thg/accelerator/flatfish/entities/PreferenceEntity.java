@@ -1,4 +1,4 @@
-package com.thg.accelerator.flatfish.repositories.entities;
+package com.thg.accelerator.flatfish.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +16,8 @@ public class PreferenceEntity {
     @Id
     private Long preferenceId; // this ID matches userId because 1to1 relationship
 
+    @Column(name="user_id", insertable=false, updatable=false)
+    private Long userId;
     private double budgetMin;
     private double budgetMax;
     private double ageMin;
@@ -24,6 +26,6 @@ public class PreferenceEntity {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 }

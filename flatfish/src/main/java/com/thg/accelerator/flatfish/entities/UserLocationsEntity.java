@@ -1,4 +1,4 @@
-package com.thg.accelerator.flatfish.repositories.entities;
+package com.thg.accelerator.flatfish.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ public class UserLocationsEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "UserId", referencedColumnName = "UserId")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserEntity userEntity;
 
     @ManyToOne
