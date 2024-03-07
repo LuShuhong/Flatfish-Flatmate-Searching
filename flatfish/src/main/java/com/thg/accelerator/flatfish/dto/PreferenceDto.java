@@ -1,4 +1,4 @@
-package com.thg.accelerator.flatfish.controllers.dto;
+package com.thg.accelerator.flatfish.dto;
 
 import lombok.*;
 
