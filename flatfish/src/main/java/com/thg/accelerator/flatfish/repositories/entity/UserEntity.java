@@ -5,9 +5,9 @@ import lombok.*;
 
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @Table(name = "users")
 @ToString
 @AllArgsConstructor // for transformer
@@ -16,8 +16,10 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
+    private String userDescription;
     // to add PasswordHash
 
     @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL)

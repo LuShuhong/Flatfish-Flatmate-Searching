@@ -1,6 +1,5 @@
-package com.thg.accelerator.flatfish.repositories.entity;
+package com.thg.accelerator.flatfish.repositories.entities;
 
-import com.thg.accelerator.flatfish.dto.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
