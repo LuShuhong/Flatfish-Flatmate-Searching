@@ -2,13 +2,12 @@ package com.thg.accelerator.flatfish.controllers;
 
 
 import com.thg.accelerator.flatfish.dto.UserDto;
+import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.service.PreferenceService;
 import com.thg.accelerator.flatfish.transformer.Transformer;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,5 +34,13 @@ public class Controller {
     @GetMapping("/users")
     public List<UserEntity> getAllUsers() {
         return preferenceService.getAllUsers();
+    }
+
+    @GetMapping("/preferences")
+    public List<PreferenceEntity> getAllPreferences() {return preferenceService.getAllPreferences();}
+
+    @PostMapping
+    public void addUser(@RequestBody final UserEntity userEntity) {
+        preferenceService.addUser(userEntity);
     }
 }
