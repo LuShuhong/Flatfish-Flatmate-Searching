@@ -1,4 +1,4 @@
-package com.thg.accelerator.flatfish.repositories.entities;
+package com.thg.accelerator.flatfish.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UserId")
+    @Column(name = "user_id")
     Long userId;
 
     @Column(name = "Name")

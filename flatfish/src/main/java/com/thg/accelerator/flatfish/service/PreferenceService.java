@@ -1,15 +1,15 @@
 package com.thg.accelerator.flatfish.service;
 
-import com.thg.accelerator.flatfish.repositories.entities.UserEntity;
-import com.thg.accelerator.flatfish.repositories.repos.PreferencesRepo;
-import com.thg.accelerator.flatfish.repositories.repos.UserLocationsRepo;
-import com.thg.accelerator.flatfish.repositories.repos.UsersRepo;
+import com.thg.accelerator.flatfish.entities.PreferenceEntity;
+import com.thg.accelerator.flatfish.entities.UserEntity;
+import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
+import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
+import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -26,6 +26,13 @@ public class PreferenceService {
 
     public List<UserEntity> getAllUsers() {
         return usersRepo.findAll();
+    }
+
+    public List<PreferenceEntity> getAllPreferences() {
+        return preferencesRepo.findAll();
+    }
+    public void addUser(UserEntity userEntity) {
+        usersRepo.save(userEntity);
     }
 
     // TODO: Replace with vector similarity methods
