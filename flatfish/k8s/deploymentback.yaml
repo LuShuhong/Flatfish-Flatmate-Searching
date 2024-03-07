@@ -24,7 +24,7 @@ spec:
         #        - args:
         #            - --config=/config/config.yaml
         #            - --loglevel=debug
-        - name: todolist-hugo
+        - name: flatfish-backend
           image: ghcr.io/thg-accelerator/flatfish/flatfish-backend:v1.0.0
           imagePullPolicy: IfNotPresent
           ports:
