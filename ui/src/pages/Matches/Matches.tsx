@@ -1,7 +1,7 @@
 import { Person } from "../../util/person";
 import data from "../../data.json";
 import "./Matches.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MatchesDialog } from "../../components/MatchesDialog/MatchesDialog";
 import { Preference } from "../../util/Preference";
 import { getProfiles } from "../../requests/getRequests";
@@ -19,8 +19,21 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
     setOpenDialog(true);
     setSelectedPerson(person);
   };
-  let matchingProfiles: Profile[] = [];
-  //getProfiles("http://localhost:8080/api/v1", matchingProfiles);
+  const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  useEffect(() => {
+    getProfiles(
+      `http://localhost:8080/api/v1/matches?
+    preferenceId=${preferences.preferenceId}
+    &gender=${preferences.gender},
+    &ageMin=${preferences.ageRange[0]}
+    &ageMax=${preferences.ageRange[1]}
+    &budgetMin=${preferences.budgetRange[0]}
+    &budgetMax=${preferences.budgetRange[1]}`,
+      setMatchedProfiles
+    );
+  }, []);
+
+  console.log(matchedProfiles + "hi");
 
   return (
     <div className="flex items-center justify-center w-full h-full">

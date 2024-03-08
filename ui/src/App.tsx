@@ -22,15 +22,15 @@ function App() {
     navigate("/matches");
   };
   // After OAuth
-  post("http://localhost:8080/api/v1", {
-    userId: "dfdffddfds",
-    name: "jason",
-    jobTitle: "homeless",
-    description: "still homeless",
-    email: "jason@gmail.com",
-    userGender: "male",
-    userInsta: "...",
-  });
+  // post("http://localhost:8080/api/v1", {
+  //   userId: "dfdffddfds",
+  //   name: "jason",
+  //   jobTitle: "homeless",
+  //   description: "still homeless",
+  //   email: "jason@gmail.com",
+  //   userGender: "male",
+  //   userInsta: "...",
+  // });
   return (
     <div className="h-screen w-screen bg-gradient-to-tr from-[#D7CEC7] to-[#D7CEC7]">
       <NavBar curPage={curPage} handlePageChange={handlePageChange} />
