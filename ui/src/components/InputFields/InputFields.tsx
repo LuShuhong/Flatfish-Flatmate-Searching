@@ -19,16 +19,20 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.gender = val;
+      console.log(copy);
       return copy;
     });
   };
+
   const handleAge = (val: number, index: 0 | 1): void => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.ageRange[index] = val;
+      console.log(copy);
       return copy;
     });
   };
+
   const handleBudget = (val: number, index: 0 | 1): void => {
     setPreferences((p) => {
       const copy = { ...p };

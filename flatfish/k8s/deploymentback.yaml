@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: flatfish-backend
+  name: flatfish-backend-deploy
+  namespace: hugo-ngowthammatas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flatfish-backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: flatfish-backend
+    spec:
+      containers:
+        #        - args:
+        #            - --config=/config/config.yaml
+        #            - --loglevel=debug
+        - name: flatfish-backend
+          image: ghcr.io/thg-accelerator/flatfish/flatfish-backend:v1.0.5
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: ghcr-creds
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
