@@ -36,7 +36,7 @@ public class PreferenceService {
     }
 
     // TODO: Replace with vector similarity methods
-    public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(Long userId) {
+    public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(String userId) {
         List<UserEntity> allUsers = getAllUsers();
         Optional<UserEntity> targetUser = usersRepo.findById(userId);
         HashMap<UserEntity, Integer> strongMatches = new HashMap<>();

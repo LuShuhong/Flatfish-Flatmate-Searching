@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 public class UserDto {
 
-    private Long userId;
+    private String userId;
     private String name;
     private String email;
     private String description;

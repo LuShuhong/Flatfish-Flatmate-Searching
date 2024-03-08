@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PreferencesRepo extends JpaRepository<PreferenceEntity, Long> {
+public interface PreferencesRepo extends JpaRepository<PreferenceEntity, String> {
 }

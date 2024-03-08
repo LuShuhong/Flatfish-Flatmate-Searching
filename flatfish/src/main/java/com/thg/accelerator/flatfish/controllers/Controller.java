@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RequestMapping("/api/v1")
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 public class Controller {
     private final PreferenceService preferenceService;
 
@@ -23,7 +24,7 @@ public class Controller {
     }
 
     @GetMapping("/match/find?strategy=strong")
-    public ResponseEntity<HashMap<UserDto, Integer>> getStrongMatches(Long userId) {
+    public ResponseEntity<HashMap<UserDto, Integer>> getStrongMatches(String userId) {
         HashMap<UserEntity, Integer> input = preferenceService.getStronglyMatchingUsers(userId).get();
         HashMap<UserDto, Integer> output = new HashMap<>();
         input.forEach((entry, value) -> output.put(Transformer.transformUserEntityToDto(entry), value));
