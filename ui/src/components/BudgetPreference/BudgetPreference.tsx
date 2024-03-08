@@ -13,8 +13,8 @@ export const BudgetPreference: React.FC<Props> = ({
         <div className="italic">Min budget</div>
         <input
           type="range"
-          min={16}
-          max={80}
+          min={100}
+          max={1000}
           value={budgetRange[0]}
           onInput={(e) => handleBudget(e.currentTarget.valueAsNumber, 0)}
         />
@@ -23,8 +23,8 @@ export const BudgetPreference: React.FC<Props> = ({
         <div className="italic">Max budget</div>
         <input
           type="range"
-          min={16}
-          max={80}
+          min={100}
+          max={1000}
           value={budgetRange[1]}
           onInput={(e) => handleBudget(e.currentTarget.valueAsNumber, 1)}
         />
