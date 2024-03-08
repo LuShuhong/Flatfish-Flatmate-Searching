@@ -23,6 +23,15 @@ public class Controller {
         this.preferenceService = preferenceService;
     }
 
+    @GetMapping("/matches")
+    public List<UserDto> getMatchingProfiles(@RequestParam String preferenceId) {
+        return preferenceService
+                .getMatchingProfiles(preferenceId)
+                .stream()
+                .map(Transformer :: transformUserEntityToDto)
+                .toList();
+    }
+
     @GetMapping("/match/find?strategy=strong")
     public ResponseEntity<HashMap<UserDto, Integer>> getStrongMatches(String userId) {
         HashMap<UserEntity, Integer> input = preferenceService.getStronglyMatchingUsers(userId).get();

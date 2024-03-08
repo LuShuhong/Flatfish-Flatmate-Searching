@@ -23,7 +23,9 @@ public class PreferenceService {
     @Autowired
     private UsersRepo usersRepo;
 
-
+    public List<UserEntity> getMatchingProfiles(String preferenceId) {
+        return usersRepo.findAll();
+    }
     public List<UserEntity> getAllUsers() {
         return usersRepo.findAll();
     }
