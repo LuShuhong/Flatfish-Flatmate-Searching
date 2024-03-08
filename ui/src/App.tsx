@@ -20,12 +20,13 @@ function App() {
   };
   // After OAuth
   post("http://localhost:8080/api/v1", {
-    userId: uuidv4(),
+    userId: "dfdffddfds",
     name: "jason",
     jobTitle: "homeless",
     description: "still homeless",
     email: "jason@gmail.com",
-    instagram: "...",
+    userGender: "male",
+    userInsta: "...",
   });
   return (
     <div className="h-screen w-screen bg-gradient-to-tr from-[#D7CEC7] to-[#D7CEC7]">

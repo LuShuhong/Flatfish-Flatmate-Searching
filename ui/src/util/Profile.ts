@@ -4,5 +4,6 @@ export interface Profile {
   jobTitle: string;
   description: string;
   email: string;
-  instagram: string;
+  userGender: string;
+  userInsta: string;
 }
