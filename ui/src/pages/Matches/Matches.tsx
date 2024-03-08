@@ -33,7 +33,7 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
     );
   }, []);
 
-  console.log(matchedProfiles + "hi");
+  console.log(matchedProfiles);
 
   return (
     <div className="flex items-center justify-center w-full h-full">
