@@ -33,6 +33,12 @@ public class UserEntity {
     @Column(name = "Description")
     private String description;
 
+    @Column(name = "UserGender")
+    private String userGender;
+
+    @Column(name = "UserInsta")
+    private String userInsta;
+
     @Column(name = "BudgetMin", table = "Preferences")
     private long budgetMin;
 
