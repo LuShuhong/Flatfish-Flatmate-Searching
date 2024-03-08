@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RequestMapping("/api/v1")
@@ -24,9 +25,9 @@ public class Controller {
     }
 
     @GetMapping("/matches")
-    public List<UserDto> getMatchingProfiles(@RequestParam String preferenceId) {
+    public List<UserDto> getMatchingProfiles(@RequestParam Map<String, String> preferences) {
         return preferenceService
-                .getMatchingProfiles(preferenceId)
+                .getMatchingProfiles(preferences)
                 .stream()
                 .map(Transformer :: transformUserEntityToDto)
                 .toList();

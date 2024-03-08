@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,7 +24,7 @@ public class PreferenceService {
     @Autowired
     private UsersRepo usersRepo;
 
-    public List<UserEntity> getMatchingProfiles(String preferenceId) {
+    public List<UserEntity> getMatchingProfiles(Map<String, String> preferences) {
         return usersRepo.findAll();
     }
     public List<UserEntity> getAllUsers() {
