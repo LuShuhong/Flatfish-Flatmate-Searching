@@ -1,10 +1,17 @@
 import { Person } from "../../util/person";
 import data from "../../data.json";
 import "./Matches.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MatchesDialog } from "../../components/MatchesDialog/MatchesDialog";
+import { Preference } from "../../util/Preference";
+import { getProfiles } from "../../requests/getRequests";
+import { Profile } from "../../util/Profile";
 
-export const Matches: React.FC = () => {
+interface Props {
+  preferences: Preference;
+}
+
+export const Matches: React.FC<Props> = ({ preferences }) => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
   // will need a useeffect when fetching all the data from matches list
@@ -12,6 +19,21 @@ export const Matches: React.FC = () => {
     setOpenDialog(true);
     setSelectedPerson(person);
   };
+  const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  useEffect(() => {
+    getProfiles(
+      `http://localhost:8080/api/v1/matches?
+    preferenceId=${preferences.preferenceId}
+    &gender=${preferences.gender},
+    &ageMin=${preferences.ageRange[0]}
+    &ageMax=${preferences.ageRange[1]}
+    &budgetMin=${preferences.budgetRange[0]}
+    &budgetMax=${preferences.budgetRange[1]}`,
+      setMatchedProfiles
+    );
+  }, []);
+
+  console.log(matchedProfiles);
 
   return (
     <div className="flex items-center justify-center w-full h-full">

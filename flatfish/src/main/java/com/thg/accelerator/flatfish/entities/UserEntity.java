@@ -21,9 +21,8 @@ import java.util.List;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    Long userId;
+    private String userId;
 
     @Column(name = "Name")
     private String name;
@@ -33,6 +32,12 @@ public class UserEntity {
 
     @Column(name = "Description")
     private String description;
+
+    @Column(name = "UserGender")
+    private String userGender;
+
+    @Column(name = "UserInsta")
+    private String userInsta;
 
     @Column(name = "BudgetMin", table = "Preferences")
     private long budgetMin;

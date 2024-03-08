@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,7 +24,9 @@ public class PreferenceService {
     @Autowired
     private UsersRepo usersRepo;
 
-
+    public List<UserEntity> getMatchingProfiles(Map<String, String> preferences) {
+        return usersRepo.findAll();
+    }
     public List<UserEntity> getAllUsers() {
         return usersRepo.findAll();
     }
@@ -36,7 +39,7 @@ public class PreferenceService {
     }
 
     // TODO: Replace with vector similarity methods
-    public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(Long userId) {
+    public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(String userId) {
         List<UserEntity> allUsers = getAllUsers();
         Optional<UserEntity> targetUser = usersRepo.findById(userId);
         HashMap<UserEntity, Integer> strongMatches = new HashMap<>();
