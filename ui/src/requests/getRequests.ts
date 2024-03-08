@@ -1,10 +1,7 @@
-import { Preference } from "../util/Preference";
+import { Profile } from "../util/Profile";
 
-export const get = (url: string) => {
+export const getProfiles = (url: string, variable: Profile[]): void => {
   fetch(url)
     .then((resp) => resp.json())
-    .then((data) => {
-      return data;
-    });
-  console.log("hit");
+    .then((data) => (variable = data));
 };

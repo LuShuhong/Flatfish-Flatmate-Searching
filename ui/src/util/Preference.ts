@@ -1,5 +1,5 @@
 export interface Preference {
-  id?: number;
+  preferenceId?: string;
   gender: "m" | "f" | "na";
   ageRange: [min: number, max: number];
   budgetRange: [min: number, max: number];

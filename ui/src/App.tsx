@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { post } from "./requests/postRequests";
 import { v4 as uuidv4 } from "uuid";
 import { Preference } from "./util/Preference";
+import { defaultPreferences } from "./util/defaultPreferences";
 
 function App() {
   const [curPage, setCurPage] = useState<string>("Home");
@@ -14,8 +15,9 @@ function App() {
   const handlePageChange = (newPage: string): void => {
     setCurPage(() => newPage);
   };
-  const getPreferences = (preferences: Preference): void => {
-    // put request
+  let preferences: Preference = defaultPreferences;
+  const getPreferences = (p: Preference): void => {
+    preferences = p;
     setCurPage(() => "My Matches");
     navigate("/matches");
   };
@@ -38,7 +40,10 @@ function App() {
             path="/"
             element={<MainPage getPreferences={getPreferences} />}
           />
-          <Route path="/matches" element={<Matches />} />
+          <Route
+            path="/matches"
+            element={<Matches preferences={preferences} />}
+          />
           <Route path="/saved" element={<Saved />} />
         </Routes>
       </div>

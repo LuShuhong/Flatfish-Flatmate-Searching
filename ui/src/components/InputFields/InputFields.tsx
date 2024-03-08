@@ -5,23 +5,15 @@ import { LocationPreference } from "../LocationPreference/LocationPreference";
 import { MatchButton } from "../MatchButton/MatchButton";
 import { useState } from "react";
 import { Preference } from "../../util/Preference";
-
-const MIN_AGE: number = 16,
-  MAX_AGE: number = 80;
-const MIN_BUDGET: number = 16,
-  MAX_BUDGET: number = 80;
+import { defaultPreferences } from "../../util/defaultPreferences";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
 }
 
 export const InputFields: React.FC<Props> = ({ getPreferences }) => {
-  const [preferences, setPreferences] = useState<Preference>({
-    gender: "na",
-    ageRange: [MIN_AGE, MAX_AGE],
-    budgetRange: [MIN_BUDGET, MAX_BUDGET],
-    location: "",
-  });
+  const [preferences, setPreferences] =
+    useState<Preference>(defaultPreferences);
 
   const handleGender = (val: "m" | "f" | "na"): void => {
     setPreferences((p) => {
