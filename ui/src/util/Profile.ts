@@ -1,6 +1,8 @@
 export interface Profile {
-  id: number;
+  userId: string;
   name: string;
+  jobTitle: string;
   description: string;
   email: string;
+  instagram: string;
 }

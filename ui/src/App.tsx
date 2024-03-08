@@ -4,6 +4,8 @@ import { Matches } from "./pages/Matches/Matches";
 import { Saved } from "./pages/Saved/Saved";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import { post } from "./requests/postRequests";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [curPage, setCurPage] = useState<string>("Home");
@@ -16,6 +18,15 @@ function App() {
     setCurPage(() => "My Matches");
     navigate("/matches");
   };
+  // After OAuth
+  post("http://localhost:8080/api/v1", {
+    userId: uuidv4(),
+    name: "jason",
+    jobTitle: "homeless",
+    description: "still homeless",
+    email: "jason@gmail.com",
+    instagram: "...",
+  });
   return (
     <div className="h-screen w-screen bg-gradient-to-tr from-[#D7CEC7] to-[#D7CEC7]">
       <NavBar curPage={curPage} handlePageChange={handlePageChange} />
