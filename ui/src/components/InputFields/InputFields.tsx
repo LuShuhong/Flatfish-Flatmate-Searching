@@ -12,10 +12,10 @@ const MIN_BUDGET: number = 16,
   MAX_BUDGET: number = 80;
 
 interface Props {
-  handleMatch: () => void;
+  getPreferences: (preferences: Preference) => void;
 }
 
-export const InputFields: React.FC<Props> = ({ handleMatch }) => {
+export const InputFields: React.FC<Props> = ({ getPreferences }) => {
   const [preferences, setPreferences] = useState<Preference>({
     gender: "na",
     ageRange: [MIN_AGE, MAX_AGE],
@@ -50,6 +50,9 @@ export const InputFields: React.FC<Props> = ({ handleMatch }) => {
       copy.location = val;
       return copy;
     });
+  };
+  const handleMatch = (): void => {
+    getPreferences(preferences);
   };
 
   return (

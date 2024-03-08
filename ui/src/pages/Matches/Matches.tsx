@@ -3,6 +3,8 @@ import data from "../../data.json";
 import "./Matches.css";
 import { useState } from "react";
 import { MatchesDialog } from "../../components/MatchesDialog/MatchesDialog";
+import { Preference } from "../../util/Preference";
+import { get } from "../../requests/getRequests";
 
 export const Matches: React.FC = () => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -12,6 +14,7 @@ export const Matches: React.FC = () => {
     setOpenDialog(true);
     setSelectedPerson(person);
   };
+  const preferences = get("http://localhost:8080/api/v1");
 
   return (
     <div className="flex items-center justify-center w-full h-full">

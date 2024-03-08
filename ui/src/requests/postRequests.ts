@@ -8,5 +8,4 @@ export const post = (url: string, body: Profile) => {
     },
     body: JSON.stringify(body),
   });
-  console.log("hit");
 };
