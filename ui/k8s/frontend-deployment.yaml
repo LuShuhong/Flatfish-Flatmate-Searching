@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: flatfish-frontend
+  name: flatfish-frontend-deploy
+  namespace: hugo-ngowthammatas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flatfish-frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: flatfish-frontend
+    spec:
+      imagePullSecrets:
+        - name: ghcr-creds
+      containers:
+        - image: ghcr.io/thg-accelerator/flatfish/flatfish-frontend:v1.0.6
+          name: flatfish-frontend
+          ports:
+            - containerPort: 80
+          resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flatfish-frontend-service
+spec:
+  type: ClusterIP
+  selector:
+    app: flatfish-frontend
+  ports:
+    - port: 80
+      targetPort: 80
