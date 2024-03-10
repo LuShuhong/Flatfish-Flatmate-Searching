@@ -1,17 +1,93 @@
-.card-ctn {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
+
+* {
+  box-sizing: border-box;
 }
 
-.card {
-  flex: 0 0 auto;
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  /* overflow: hidden; */
+  font-family: "Bree Serif", serif;
+}
+
+.nav {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  font-family: "Bree Serif";
+  font-size: 15px;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+.nav > div {
+  display: flex;
+  gap: 50px;
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Change overflow property */
+}
+
+.slider-wrapper {
+  width: max-content;
+  padding: 0 150px;
+  height: 100%;
+  /* display: flex; */
+  align-items: center;
+  gap: 100px;
+}
+
+.slide {
+  width: 500px;
+  height: 500px;
+  background: gray;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.marker-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  height: 100vh;
+}
+
+.marker {
+  position: relative;
+  width: 2px;
+  height: 100%;
+  background: #000;
+}
+
+.marker:after {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 50px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
   background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-right: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: opacity 0.5s, transform 0.5s;
+  border: 2px solid #000;
+  border-radius: 100%;
+}
+
+.active-slide {
+  position: absolute;
+  top: 60px;
+  left: 40px;
+  font-family: "Bree Serif";
+  font-size: 15px;
 }

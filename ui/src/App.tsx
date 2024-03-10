@@ -18,7 +18,7 @@ function App() {
   };
   return (
     <div className="h-screen w-screen bg-gradient-to-tr from-[#D7CEC7] to-[#D7CEC7]">
-      <NavBar curPage={curPage} handlePageChange={handlePageChange} />
+      {/* <NavBar curPage={curPage} handlePageChange={handlePageChange} /> */}
       <div className="h-92%">
         <Routes>
           <Route path="/" element={<MainPage handleMatch={handleMatch} />} />
