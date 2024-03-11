@@ -6,6 +6,11 @@ import { MatchButton } from "../MatchButton/MatchButton";
 import { useState } from "react";
 import { Preference } from "../../util/Preference";
 import { defaultPreferences } from "../../util/defaultPreferences";
+import {
+  ageIsValid,
+  budgetIsValid,
+  locationIsValid,
+} from "../../util/validPreferenceChecker";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
@@ -42,11 +47,20 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.location = val;
+      console.log(val);
       return copy;
     });
   };
   const handleMatch = (): void => {
-    getPreferences(preferences);
+    if (!ageIsValid(preferences.ageRange)) {
+      alert("Maximum age must be bigger than minimum age");
+    } else if (!budgetIsValid(preferences.budgetRange)) {
+      alert("Maximum budget must be bigger than minimum budget");
+    } else if (!locationIsValid(preferences.location)) {
+      alert("Please select a location");
+    } else {
+      getPreferences(preferences);
+    }
   };
 
   return (
