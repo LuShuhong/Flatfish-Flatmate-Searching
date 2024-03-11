@@ -15,11 +15,10 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
   const [preferences, setPreferences] =
     useState<Preference>(defaultPreferences);
 
-  const handleGender = (val: "m" | "f" | "na"): void => {
+  const handleGender = (val: "m" | "f" | "none"): void => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.gender = val;
-      console.log(copy);
       return copy;
     });
   };
