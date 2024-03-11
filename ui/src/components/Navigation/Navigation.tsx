@@ -2,7 +2,7 @@ import { NavigationButtons } from "../NavigationButtons/NavigationButtons";
 import { Profile } from "../Profile/Profile";
 import { useState } from "react";
 import MenuIcon from "../MenuIcon/MenuIcon";
-import Xmark from "../XmarkIcon/Xmark";
+// import Xmark from "../XmarkIcon/Xmark";
 
 interface Props {
   curPage: string;
@@ -19,13 +19,12 @@ export const Navigation: React.FC<Props> = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-
     <>
-    <div className="flex justify-end">
+      <div className="flex justify-end">
         {!isMenuOpen && (
           <div className="lg:hidden mr-10">
             <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              <MenuIcon />
+              {/* <MenuIcon /> */}
             </button>
           </div>
         )}
@@ -42,22 +41,20 @@ export const Navigation: React.FC<Props> = ({
         {isMenuOpen && (
           <div className="lg:hidden flex mr-8 ps-3">
             <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              <Xmark />
+              {/* <Xmark /> */}
             </button>
           </div>
         )}
       </div>
 
-
-    <div className="hidden lg:flex w-1/2 h-full justify-center items-center">
-      
+      <div className="hidden lg:flex w-1/2 h-full justify-center items-center">
         <NavigationButtons
           curPage={curPage}
           handlePageChange={handlePageChange}
         />
 
-      <Profile profilePic={profilePic} name={name} />
-    </div>
+        <Profile profilePic={profilePic} name={name} />
+      </div>
     </>
   );
 };
