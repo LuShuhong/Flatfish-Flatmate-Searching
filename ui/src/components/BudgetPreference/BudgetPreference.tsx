@@ -21,7 +21,7 @@ export const BudgetPreference: React.FC<Props> = ({
             value={budgetRange[0]}
             onInput={(e) => handleBudget(e.currentTarget.valueAsNumber, 0)}
           />
-          <div className="">{budgetRange[0]}</div>
+          <div className="">£ {budgetRange[0]}</div>
         </div>
       </div>
       <div>
@@ -34,7 +34,7 @@ export const BudgetPreference: React.FC<Props> = ({
             value={budgetRange[1]}
             onInput={(e) => handleBudget(e.currentTarget.valueAsNumber, 1)}
           />{" "}
-          <div className="">{budgetRange[1]}</div>
+          <div className="">£ {budgetRange[1]}</div>
         </div>
       </div>
     </div>
