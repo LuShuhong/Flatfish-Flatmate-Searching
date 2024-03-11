@@ -1,5 +1,5 @@
-import { MainPageCard } from "../../components/MainPageCard/MainPageCard";
 import { Preference } from "../../util/interfaces/Preference";
+import { PreferenceInput } from "../../components/PreferenceInput/PreferenceInput";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
@@ -7,8 +7,8 @@ interface Props {
 
 export const MainPage: React.FC<Props> = ({ getPreferences }) => {
   return (
-    <div className="flex items-center justify-center w-full h-full">
-      <MainPageCard getPreferences={getPreferences} />
+    <div className="flex justify-center items-center w-full h-full">
+      <PreferenceInput getPreferences={getPreferences} />
     </div>
   );
 };

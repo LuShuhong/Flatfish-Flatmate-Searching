@@ -30,9 +30,9 @@ function App() {
   //   userInsta: "...",
   // });
   return (
-    <div className="h-screen w-screen bg-gradient-to-tr from-[#D7CEC7] to-[#D7CEC7]">
+    <div className="h-screen w-screen bg-[#C6E2FF]">
       <NavBar curPage={curPage} handlePageChange={handlePageChange} />
-      <div className="h-92%">
+      <div className="h-70%">
         <Routes>
           <Route
             path="/"

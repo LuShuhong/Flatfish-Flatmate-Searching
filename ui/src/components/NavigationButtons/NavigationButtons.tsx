@@ -17,7 +17,7 @@ export const NavigationButtons: React.FC<Props> = ({
   ];
   const routing: string[] = ["/", "/", "/matches", "/"];
   return (
-    <div className="flex justify-between items-center w-7/12 h-full text-sm text-white">
+    <div className="flex justify-between items-center w-7/12 h-full text-sm">
       {navButtons.map((pageName: string, index: number) => (
         <NavigationButton
           pageName={pageName}

@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        navBarHeight: "8%",
+        "18%": "18%",
+        "70%": "70%",
         "90%": "83%",
         "92%": "92%",
       },

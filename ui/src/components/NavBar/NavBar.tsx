@@ -13,7 +13,7 @@ export const NavBar: React.FC<Props> = ({ curPage, handlePageChange }) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full h-navBarHeight bg-gradient-to-tr from-[#76323F] to-[#5c0705]">
+    <div className="flex items-center justify-center w-full h-18% bg-transparent">
       <div className="flex w-95% h-full justify-between items-center">
         <Logo />
         <Navigation

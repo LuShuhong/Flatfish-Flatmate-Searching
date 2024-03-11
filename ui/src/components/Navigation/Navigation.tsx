@@ -22,9 +22,8 @@ export const Navigation: React.FC<Props> = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-
     <>
-    <div className="flex justify-end">
+      <div className="flex justify-end">
         {!isMenuOpen && (
           <div className="lg:hidden mr-10">
             <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -51,20 +50,17 @@ export const Navigation: React.FC<Props> = ({
         )}
       </div>
 
-
-    <div className="hidden lg:flex w-1/2 h-full justify-center items-center">
-      
+      <div className="hidden lg:flex w-1/2 h-full justify-center items-center">
         <NavigationButtons
           curPage={curPage}
           handlePageChange={handlePageChange}
         />
 
-      <Profile profilePic={profilePic} name={name} />
-      <LoginButton></LoginButton>
-      <LogoutButton></LogoutButton>
-      <UserProfile></UserProfile>
-      
-    </div>
+        <Profile profilePic={profilePic} name={name} />
+        <LoginButton />
+        <LogoutButton />
+        <UserProfile />
+      </div>
     </>
   );
 };
