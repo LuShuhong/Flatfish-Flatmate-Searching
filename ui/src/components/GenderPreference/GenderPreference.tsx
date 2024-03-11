@@ -8,8 +8,8 @@ interface Props {
 export const GenderPreference: React.FC<Props> = ({ handleGender }) => {
   return (
     <div className="flex flex-col w-full mb-4">
-      <div className="flex justify-center italic">Gender:</div>
-      <div className="flex justify-evenly">
+      <div className="flex italic">Gender:</div>
+      <div className="flex justify-between">
         {Object.entries(genders).map(([gender, genderCode]) => (
           <GenderOption
             key={genderCode}

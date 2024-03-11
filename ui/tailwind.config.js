@@ -11,6 +11,7 @@ module.exports = {
       },
       width: {
         profileImgWidth: "22%",
+        "30%": "30%",
         "95%": "95%",
         "70%": "70%",
       },
