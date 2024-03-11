@@ -3,6 +3,9 @@ import { Profile } from "../Profile/Profile";
 import { useState } from "react";
 import MenuIcon from "../MenuIcon/MenuIcon";
 import Xmark from "../XmarkIcon/Xmark";
+import LoginButton from "../LoginButton/LoginButton";
+import LogoutButton from "../LogoutButton/LogoutButton";
+import UserProfile from "../UserProfile/UserProfile";
 
 interface Props {
   curPage: string;
@@ -57,6 +60,10 @@ export const Navigation: React.FC<Props> = ({
         />
 
       <Profile profilePic={profilePic} name={name} />
+      <LoginButton></LoginButton>
+      <LogoutButton></LogoutButton>
+      <UserProfile></UserProfile>
+      
     </div>
     </>
   );
