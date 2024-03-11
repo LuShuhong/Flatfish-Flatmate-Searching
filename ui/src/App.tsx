@@ -4,8 +4,8 @@ import { Matches } from "./pages/Matches/Matches";
 import { Saved } from "./pages/Saved/Saved";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Preference } from "./util/Preference";
-import { defaultPreferences } from "./util/defaultPreferences";
+import { Preference } from "./util/interfaces/Preference";
+import { defaultPreferences } from "./util/constants/defaultPreferences";
 
 function App() {
   const [curPage, setCurPage] = useState<string>("Home");

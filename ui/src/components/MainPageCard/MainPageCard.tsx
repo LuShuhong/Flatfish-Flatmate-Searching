@@ -1,4 +1,4 @@
-import { Preference } from "../../util/Preference";
+import { Preference } from "../../util/interfaces/Preference";
 import { PreferenceInput } from "../PreferenceInput/PreferenceInput";
 import { SlideShow } from "../SlideShow/SlideShow";
 

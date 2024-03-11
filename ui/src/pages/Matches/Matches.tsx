@@ -3,9 +3,9 @@ import data from "../../data.json";
 import "./Matches.css";
 import { useEffect, useState } from "react";
 import { MatchesDialog } from "../../components/MatchesDialog/MatchesDialog";
-import { Preference } from "../../util/Preference";
+import { Preference } from "../../util/interfaces/Preference";
 import { getProfiles } from "../../requests/getRequests";
-import { Profile } from "../../util/Profile";
+import { Profile } from "../../util/interfaces/Profile";
 
 interface Props {
   preferences: Preference;

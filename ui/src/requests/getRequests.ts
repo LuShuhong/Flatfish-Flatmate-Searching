@@ -1,4 +1,4 @@
-import { Profile } from "../util/Profile";
+import { Profile } from "../util/interfaces/Profile";
 
 export const getProfiles = (
   url: string,

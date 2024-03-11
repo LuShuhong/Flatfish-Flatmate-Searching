@@ -1,3 +1,5 @@
+import { MIN_AGE, MAX_AGE } from "../../util/constants/age";
+
 interface Props {
   ageRange: [min: number, max: number];
   handleAge: (val: number, index: 0 | 1) => void;
@@ -11,8 +13,8 @@ export const AgePreference: React.FC<Props> = ({ ageRange, handleAge }) => {
         <input
           type="range"
           className="ageSlider"
-          min={16}
-          max={100}
+          min={MIN_AGE}
+          max={MAX_AGE}
           value={ageRange[0]}
           onInput={(e) => handleAge(e.currentTarget.valueAsNumber, 0)}
         />
@@ -22,8 +24,8 @@ export const AgePreference: React.FC<Props> = ({ ageRange, handleAge }) => {
         <input
           type="range"
           className="ageSlider"
-          min={16}
-          max={100}
+          min={MIN_AGE}
+          max={MAX_AGE}
           value={ageRange[1]}
           onInput={(e) => handleAge(e.currentTarget.valueAsNumber, 1)}
         />

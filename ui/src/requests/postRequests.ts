@@ -1,4 +1,4 @@
-import { Profile } from "../util/Profile";
+import { Profile } from "../util/interfaces/Profile";
 
 export const post = (url: string, body: Profile) => {
   fetch(url, {

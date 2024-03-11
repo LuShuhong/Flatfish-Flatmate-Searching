@@ -4,8 +4,8 @@ import { BudgetPreference } from "../BudgetPreference/BudgetPreference";
 import { LocationPreference } from "../LocationPreference/LocationPreference";
 import { MatchButton } from "../MatchButton/MatchButton";
 import { useState } from "react";
-import { Preference } from "../../util/Preference";
-import { defaultPreferences } from "../../util/defaultPreferences";
+import { Preference } from "../../util/interfaces/Preference";
+import { defaultPreferences } from "../../util/constants/defaultPreferences";
 import {
   ageIsValid,
   budgetIsValid,
@@ -47,7 +47,6 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.location = val;
-      console.log(val);
       return copy;
     });
   };
