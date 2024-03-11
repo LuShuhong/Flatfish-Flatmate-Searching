@@ -4,8 +4,13 @@ import { BudgetPreference } from "../BudgetPreference/BudgetPreference";
 import { LocationPreference } from "../LocationPreference/LocationPreference";
 import { MatchButton } from "../MatchButton/MatchButton";
 import { useState } from "react";
-import { Preference } from "../../util/Preference";
-import { defaultPreferences } from "../../util/defaultPreferences";
+import { Preference } from "../../util/interfaces/Preference";
+import { defaultPreferences } from "../../util/constants/defaultPreferences";
+import {
+  ageIsValid,
+  budgetIsValid,
+  locationIsValid,
+} from "../../util/validPreferenceChecker";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
@@ -15,11 +20,10 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
   const [preferences, setPreferences] =
     useState<Preference>(defaultPreferences);
 
-  const handleGender = (val: "m" | "f" | "na"): void => {
+  const handleGender = (val: "m" | "f" | "none"): void => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.gender = val;
-      console.log(copy);
       return copy;
     });
   };
@@ -28,7 +32,6 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.ageRange[index] = val;
-      console.log(copy);
       return copy;
     });
   };
@@ -48,7 +51,15 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
     });
   };
   const handleMatch = (): void => {
-    getPreferences(preferences);
+    if (!ageIsValid(preferences.ageRange)) {
+      alert("Maximum age must be bigger than minimum age");
+    } else if (!budgetIsValid(preferences.budgetRange)) {
+      alert("Maximum budget must be bigger than minimum budget");
+    } else if (!locationIsValid(preferences.location)) {
+      alert("Please select a location");
+    } else {
+      getPreferences(preferences);
+    }
   };
 
   return (

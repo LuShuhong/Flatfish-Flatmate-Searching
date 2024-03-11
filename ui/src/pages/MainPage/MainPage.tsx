@@ -1,5 +1,5 @@
 import { MainPageCard } from "../../components/MainPageCard/MainPageCard";
-import { Preference } from "../../util/Preference";
+import { Preference } from "../../util/interfaces/Preference";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;

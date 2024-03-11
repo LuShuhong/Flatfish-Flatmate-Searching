@@ -1,5 +1,5 @@
 interface Props {
-  handleGender: (val: "m" | "f" | "na") => void;
+  handleGender: (val: "m" | "f" | "none") => void;
 }
 
 export const GenderPreference: React.FC<Props> = ({ handleGender }) => {
@@ -33,7 +33,8 @@ export const GenderPreference: React.FC<Props> = ({ handleGender }) => {
           id="male"
           className="h-1/2 checked:bg-formElementColor"
           name="gender"
-          onClick={() => handleGender("na")}
+          onClick={() => handleGender("none")}
+          defaultChecked
         />
       </label>
     </div>

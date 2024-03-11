@@ -3,7 +3,7 @@ interface Props {
   handleLocation: (val: string) => void;
 }
 
-const locations = ["Deansgate", "Piccadily Station", "Oxford Road"];
+const locations = ["Select", "Deansgate", "Piccadily Station", "Oxford Road"];
 
 export const LocationPreference: React.FC<Props> = ({
   location,
@@ -14,7 +14,7 @@ export const LocationPreference: React.FC<Props> = ({
       <div className="flex w-70%">
         <span className="flex-1 italic">Location:</span>
         <select
-          className="border-2 w-9/12 border-2 w-9/12 rounded-md shadow-sm bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-300"
+          className="border-2 w-9/12 rounded-md shadow-sm bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-300"
           value={location}
           onChange={(e) => handleLocation(e.target.value)}
         >

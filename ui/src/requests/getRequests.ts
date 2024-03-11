@@ -1,4 +1,4 @@
-import { Profile } from "../util/Profile";
+import { Profile } from "../util/interfaces/Profile";
 
 export const getProfiles = (
   url: string,
@@ -6,6 +6,11 @@ export const getProfiles = (
 ): void => {
   fetch(url)
     .then((resp) => resp.json())
-    .then((data) => setter(() => data))
+    .then((data) =>
+      setter(() => {
+        console.log(data);
+        return data;
+      })
+    )
     .catch((error) => console.log(error));
 };

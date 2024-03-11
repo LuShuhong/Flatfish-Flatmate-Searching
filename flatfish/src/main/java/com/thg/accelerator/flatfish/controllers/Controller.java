@@ -1,6 +1,7 @@
 package com.thg.accelerator.flatfish.controllers;
 
 
+import com.sun.java.accessibility.util.Translator;
 import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
@@ -31,6 +32,7 @@ public class Controller {
                 .stream()
                 .map(Transformer :: transformUserEntityToDto)
                 .toList();
+
     }
 
     @GetMapping("/match/find?strategy=strong")

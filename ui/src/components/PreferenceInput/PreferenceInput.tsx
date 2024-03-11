@@ -1,4 +1,4 @@
-import { Preference } from "../../util/Preference";
+import { Preference } from "../../util/interfaces/Preference";
 import { InputFields } from "../InputFields/InputFields";
 
 interface Props {
