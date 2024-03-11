@@ -21,8 +21,8 @@ public class PreferenceService {
     @Autowired
     private UsersRepo usersRepo;
 
-    public List<String> getMatchingProfiles(Map<String, String> preferences) {
-        /* accessing the data from the getRequest:
+    public List<UserEntity> getMatchingProfiles(Map<String, String> preferences) {
+        /* access the data from the getRequest:
         preferences.get("preferenceId")
         preferences.get("gender")
         preferences.get("ageMin")
@@ -30,7 +30,9 @@ public class PreferenceService {
         preferences.get("budgetMin")
         preferences.get("budgetMax")
         */
-        return Arrays.asList(preferences.get("preferenceId"), preferences.get("gender"), preferences.get("ageMin"));
+
+        // matching algorithm...
+        return usersRepo.findAll();
     }
     public List<UserEntity> getAllUsers() {
         return usersRepo.findAll();
