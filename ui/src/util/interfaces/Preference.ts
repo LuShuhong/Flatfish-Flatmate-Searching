@@ -1,6 +1,6 @@
 export interface Preference {
-  id?: number;
-  gender: "m" | "f" | "na";
+  preferenceId?: string;
+  gender: "m" | "f" | "none";
   ageRange: [min: number, max: number];
   budgetRange: [min: number, max: number];
   location: string;

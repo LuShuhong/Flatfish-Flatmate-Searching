@@ -4,30 +4,26 @@ import { BudgetPreference } from "../BudgetPreference/BudgetPreference";
 import { LocationPreference } from "../LocationPreference/LocationPreference";
 import { MatchButton } from "../MatchButton/MatchButton";
 import { useState } from "react";
-import { Preference } from "../../util/Preference";
-
-const MIN_AGE: number = 18,
-  MAX_AGE: number = 100;
-const MIN_BUDGET: number = 18,
-  MAX_BUDGET: number = 100;
+import { Preference } from "../../util/interfaces/Preference";
+import { defaultPreferences } from "../../util/constants/defaultPreferences";
+import {
+  ageIsValid,
+  budgetIsValid,
+  locationIsValid,
+} from "../../util/validPreferenceChecker";
 
 interface Props {
-  handleMatch: () => void;
+  getPreferences: (preferences: Preference) => void;
 }
 
-export const InputFields: React.FC<Props> = ({ handleMatch }) => {
-  const [preferences, setPreferences] = useState<Preference>({
-    gender: "na",
-    ageRange: [MIN_AGE, MAX_AGE],
-    budgetRange: [MIN_BUDGET, MAX_BUDGET],
-    location: "",
-  });
+export const InputFields: React.FC<Props> = ({ getPreferences }) => {
+  const [preferences, setPreferences] =
+    useState<Preference>(defaultPreferences);
 
-  const handleGender = (val: "m" | "f" | "na"): void => {
+  const handleGender = (val: "m" | "f" | "none"): void => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.gender = val;
-      console.log(copy);
       return copy;
     });
   };
@@ -36,7 +32,6 @@ export const InputFields: React.FC<Props> = ({ handleMatch }) => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.ageRange[index] = val;
-      console.log(copy);
       return copy;
     });
   };
@@ -54,6 +49,17 @@ export const InputFields: React.FC<Props> = ({ handleMatch }) => {
       copy.location = val;
       return copy;
     });
+  };
+  const handleMatch = (): void => {
+    if (!ageIsValid(preferences.ageRange)) {
+      alert("Maximum age must be bigger than minimum age");
+    } else if (!budgetIsValid(preferences.budgetRange)) {
+      alert("Maximum budget must be bigger than minimum budget");
+    } else if (!locationIsValid(preferences.location)) {
+      alert("Please select a location");
+    } else {
+      getPreferences(preferences);
+    }
   };
 
   return (

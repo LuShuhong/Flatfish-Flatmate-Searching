@@ -1,13 +1,13 @@
 import { FaHeart } from "react-icons/fa6";
 import { useState } from "react";
-import { Person } from "../../util/person";
+import { Profile } from "../../util/interfaces/Profile";
 
 interface Props {
-  selectedPerson: Person;
+  selectedPerson: Profile;
 }
 export const SaveButton: React.FC<Props> = ({ selectedPerson }) => {
   // i want a list of saved people. when the heart is clicked, it saves the list to the database then also have a saved page of people that you can horizontal scroll through
-  const [saved, setSaved] = useState<Person[]>([]);
+  const [saved, setSaved] = useState<Profile[]>([]);
 
   const handleSave = () => {
     setSaved((prevState) => [...prevState, selectedPerson]);

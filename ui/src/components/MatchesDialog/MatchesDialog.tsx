@@ -1,12 +1,11 @@
-import { Person } from "../../util/person";
 import "./MatchesDialog.css";
-// import { SaveButton } from "../SaveButton/SaveButton";
 import image from "../../img/personimg.jpeg";
+import { Profile } from "../../util/interfaces/Profile";
 
 interface Props {
   openDialog: boolean;
   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedPerson: Person;
+  selectedPerson: Profile;
 }
 
 export const MatchesDialog: React.FC<Props> = ({
@@ -32,8 +31,8 @@ export const MatchesDialog: React.FC<Props> = ({
         </h1>
         <img src={image} alt="default person" className=" rounded-xl" />
         <p>age: {selectedPerson.age}</p>
-        <p>job title: {selectedPerson.job_title}</p>
-        <p>instagram: {selectedPerson.instagram}</p>
+        <p>job title: {selectedPerson.jobTitle}</p>
+        <p>instagram: {selectedPerson.userInsta}</p>
         {/* <div className="flex justify-end w-full p-2">
           <SaveButton selectedPerson={selectedPerson} />
         </div> */}

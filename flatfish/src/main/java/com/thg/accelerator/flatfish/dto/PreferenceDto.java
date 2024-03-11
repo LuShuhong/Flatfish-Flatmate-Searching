@@ -11,7 +11,7 @@ import java.util.List;
 @ToString
 
 public class PreferenceDto {
-    private Long preferenceId;
+    private String preferenceId;
     private double budgetMin;
     private double budgetMax;
     private double ageMin;
