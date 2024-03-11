@@ -28,7 +28,6 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.ageRange[index] = val;
-      console.log(copy);
       return copy;
     });
   };

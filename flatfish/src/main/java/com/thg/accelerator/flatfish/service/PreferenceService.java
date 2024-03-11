@@ -8,10 +8,7 @@ import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PreferenceService {
@@ -24,8 +21,16 @@ public class PreferenceService {
     @Autowired
     private UsersRepo usersRepo;
 
-    public List<UserEntity> getMatchingProfiles(Map<String, String> preferences) {
-        return usersRepo.findAll();
+    public List<String> getMatchingProfiles(Map<String, String> preferences) {
+        /* accessing the data from the getRequest:
+        preferences.get("preferenceId")
+        preferences.get("gender")
+        preferences.get("ageMin")
+        preferences.get("ageMax")
+        preferences.get("budgetMin")
+        preferences.get("budgetMax")
+        */
+        return Arrays.asList(preferences.get("preferenceId"), preferences.get("gender"), preferences.get("ageMin"));
     }
     public List<UserEntity> getAllUsers() {
         return usersRepo.findAll();

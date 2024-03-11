@@ -14,7 +14,6 @@ interface Props {
 export const Matches: React.FC<Props> = ({ preferences }) => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
-  // will need a useeffect when fetching all the data from matches list
   const handleClick = (person: Person) => {
     setOpenDialog(true);
     setSelectedPerson(person);
@@ -32,8 +31,6 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
       setMatchedProfiles
     );
   }, []);
-
-  console.log(matchedProfiles);
 
   return (
     <div className="flex items-center justify-center w-full h-full">

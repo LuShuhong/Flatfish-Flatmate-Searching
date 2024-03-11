@@ -25,12 +25,10 @@ public class Controller {
     }
 
     @GetMapping("/matches")
-    public List<UserDto> getMatchingProfiles(@RequestParam Map<String, String> preferences) {
+    public List<String> getMatchingProfiles(@RequestParam Map<String, String> preferences) {
         return preferenceService
-                .getMatchingProfiles(preferences)
-                .stream()
-                .map(Transformer :: transformUserEntityToDto)
-                .toList();
+                .getMatchingProfiles(preferences);
+
     }
 
     @GetMapping("/match/find?strategy=strong")
