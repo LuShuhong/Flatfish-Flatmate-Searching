@@ -8,12 +8,14 @@ module.exports = {
         "70%": "70%",
         "90%": "83%",
         "92%": "92%",
+        "1/8": "12.5%",
       },
       width: {
         profileImgWidth: "22%",
         "30%": "30%",
         "95%": "95%",
         "70%": "70%",
+        "60%": "60%",
       },
       borderRadius: {
         profileBR: "2rem",
@@ -36,6 +38,7 @@ module.exports = {
       },
       boxShadow: {
         matchButton: "0 0.2rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",
+        defaultButton: "0 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",
       },
     },
   },

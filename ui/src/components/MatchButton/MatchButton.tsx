@@ -5,7 +5,7 @@ interface Props {
 export const MatchButton: React.FC<Props> = ({ handleMatch }) => {
   return (
     <button
-      className="rounded-2xl bg-[#9BBFBB] w-full h-1/2 hover:text-xl shadow-matchButton"
+      className="rounded-xl bg-[#9BBFBB] w-60% h-full hover:text-xl shadow-matchButton"
       onClick={() => handleMatch()}
     >
       Match
