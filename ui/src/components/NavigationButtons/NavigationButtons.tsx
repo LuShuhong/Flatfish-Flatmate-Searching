@@ -1,4 +1,5 @@
 import { NavigationButton } from "../NavigationButton/NavigationButton";
+import { pages } from "../../util/constants/pages";
 
 interface Props {
   curPage: string;
@@ -9,22 +10,15 @@ export const NavigationButtons: React.FC<Props> = ({
   curPage,
   handlePageChange,
 }) => {
-  const navButtons: string[] = [
-    "Home",
-    "My Profile",
-    "My Matches",
-    "Saved Matches",
-  ];
-  const routing: string[] = ["/", "/", "/matches", "/"];
   return (
     <div className="flex justify-between items-center w-7/12 h-full text-sm">
-      {navButtons.map((pageName: string, index: number) => (
+      {Object.entries(pages).map(([page, route]) => (
         <NavigationButton
-          pageName={pageName}
+          pageName={page}
           curPage={curPage}
           handlePageChange={handlePageChange}
-          routeTo={routing[index]}
-          key={index}
+          routeTo={route}
+          key={page}
         />
       ))}
     </div>
