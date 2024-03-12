@@ -1,10 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
-<<<<<<< HEAD
-const LoginButton: React.FC = () => {
-=======
 export const LoginButton: React.FC = () => {
->>>>>>> dev
   const { loginWithRedirect } = useAuth0();
 
   return (
@@ -16,8 +12,3 @@ export const LoginButton: React.FC = () => {
     </button>
   );
 };
-<<<<<<< HEAD
-
-export default LoginButton;
-=======
->>>>>>> dev

@@ -1,4 +1,3 @@
-import { Profile } from "../../util/interfaces/Profile";
 import person from "../../img/funcat.jpeg";
 interface Props {
   userId: string;
