@@ -1,4 +1,4 @@
-import { MainPage } from "./pages/MainPage/MainPage";
+import { HomePage } from "./pages/HomePage/HomePage";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Matches } from "./pages/Matches/Matches";
 import { Saved } from "./pages/Saved/Saved";
@@ -36,7 +36,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<MainPage getPreferences={getPreferences} />}
+            element={<HomePage getPreferences={getPreferences} />}
           />
           <Route
             path="/matches"
