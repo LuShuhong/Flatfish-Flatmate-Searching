@@ -1,0 +1,80 @@
+package com.thg.accelerator.flatfish.service;
+
+import com.thg.accelerator.flatfish.entities.PreferenceEntity;
+import com.thg.accelerator.flatfish.entities.UserEntity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+//probably add relevance sorting?
+public class ProfileMatcher {
+
+    //need changing threshold
+    public final int threshold = 99999999;
+    private final PreferenceService preferenceService;
+
+    public ProfileMatcher(PreferenceService preferenceService) {
+        this.preferenceService = preferenceService;
+    }
+
+    public List<UserEntity> matchProfiles(String ageMinStr, String ageMaxStr, String budgetMinStr, String budgetMaxStr, String gender){
+        List<PreferenceEntity> allPreferences = preferenceService.getAllPreferences();
+
+        double ageMin = Double.parseDouble(ageMinStr);
+        double ageMax = Double.parseDouble(ageMaxStr);
+        double budgetMin = Double.parseDouble(budgetMinStr);
+        double budgetMax = Double.parseDouble(budgetMaxStr);
+
+        List<UserEntity> dealBreakerMatches =  allPreferences.stream()
+                .filter(pref -> pref.getAgeMin() <= ageMin)
+                .filter(pref -> pref.getAgeMax() >= ageMax)
+                .filter(pref -> pref.getBudgetMin() <= budgetMin )
+                .filter(pref -> pref.getBudgetMax() >= budgetMax )
+                .map(PreferenceEntity :: getUserEntity)
+                .toList();
+
+        if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
+            dealBreakerMatches = dealBreakerMatches.stream()
+                    .filter(user -> user.getGender()
+                            //if Gender enum is removed, toString can be removed
+                            .toString()
+                            .equalsIgnoreCase(gender))
+                    .toList();
+        }
+
+        List<UserEntity> matchedProfiles = new ArrayList<>();
+        double[] userVector = preferenceToVector(ageMin, ageMax, budgetMin, budgetMax);
+
+        for(UserEntity user: dealBreakerMatches) {
+            double[] candidateVector = preferenceToVector(user.getAgeMin(), user.getAgeMax(), user.getBudgetMin(), user.getBudgetMax());
+            double distance = calculateEuclideanDistance(userVector, candidateVector);
+
+            if (distance < threshold) {
+                matchedProfiles.add(user);
+            }
+        }
+
+        //want to sort before return?
+        return matchedProfiles;
+    }
+
+    private double calculateEuclideanDistance(double[] vectorA, double[] vectorB) {
+        double sum = 0;
+        for(int i = 0; i < vectorA.length; i++) {
+            sum += Math.pow(vectorA[i] - vectorB[i], 2);
+        }
+        return Math.sqrt(sum);
+    }
+
+
+    //depending on if more filters used, refine the preferenceToVector
+    private double[] preferenceToVector(double ageMin, double ageMax, double budgetMin, double budgetMax) {
+
+        return new double[]{
+                (ageMin+ageMax) /2.0,
+                (budgetMin+budgetMax) /2.0
+        };
+    }
+
+
+}
