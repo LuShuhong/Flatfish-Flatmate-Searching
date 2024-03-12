@@ -3,8 +3,9 @@ package com.thg.accelerator.flatfish.dto;
 import com.thg.accelerator.flatfish.entities.Gender;
 import com.thg.accelerator.flatfish.entities.UserLocationsEntity;
 import lombok.*;
-
 import java.util.List;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -12,17 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class UserDto {
-
-    private String userId;
-    private String name;
+    @Email()
     private String email;
+    private String name;
     private String description;
     private String userGender;
     private String userInsta;
-    private long budgetMin;
-    private long budgetMax;
-    private long ageMin;
-    private long ageMax;
-    private Gender gender;
-    private List<UserLocationsEntity> locationsEntities;
 }

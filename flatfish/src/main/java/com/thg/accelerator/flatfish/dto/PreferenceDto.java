@@ -9,7 +9,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @ToString
-
 public class PreferenceDto {
     private String preferenceId;
     private double budgetMin;
@@ -18,5 +17,5 @@ public class PreferenceDto {
     private double ageMax;
     private Gender gender;
     private boolean smoker;
-    private List<Long> preferredAreaIds;
+//    private List<Long> preferredAreaIds;
 }
