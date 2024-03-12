@@ -152,89 +152,93 @@
 //   );
 // };
 
-import React, { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import image1 from "../../img/mainBackground1.jpeg";
-import image2 from "../../img/mainBackground2.jpeg";
-import image3 from "../../img/mainBackground3.webp";
-import image4 from "../../img/mainBackground4.jpeg";
-import image5 from "../../img/personimg.jpeg";
-import image6 from "../../img/O-O.jpeg";
-import image7 from "../../img/cat.jpeg";
-import image8 from "../../img/funcat.jpeg";
-import image9 from "../../img/jell.jpeg";
-import image10 from "../../img/wetcat.jpeg";
-import "../Saved/Saved.css";
-gsap.registerPlugin(ScrollTrigger);
+// import React, { useEffect, useRef, useState } from "react";
+// import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+// import image1 from "../../img/mainBackground1.jpeg";
+// import image2 from "../../img/mainBackground2.jpeg";
+// import image3 from "../../img/mainBackground3.webp";
+// import image4 from "../../img/mainBackground4.jpeg";
+// import image5 from "../../img/personimg.jpeg";
+// import image6 from "../../img/O-O.jpeg";
+// import image7 from "../../img/cat.jpeg";
+// import image8 from "../../img/funcat.jpeg";
+// import image9 from "../../img/jell.jpeg";
+// import image10 from "../../img/wetcat.jpeg";
+// import "../Saved/Saved.css";
+// gsap.registerPlugin(ScrollTrigger);
+// export const Saved: React.FC = () => {
+//   const main = useRef<any>();
+
+//   useEffect(() => {
+//     const slides = gsap.utils.toArray<any>(".slide");
+//     slides.forEach((slide) => {
+//       gsap.to(slide, {
+//         x: 150,
+//         scrollTrigger: {
+//           trigger: slide,
+//           start: "top top",
+//           end: "bottom 90%",
+//           scrub: true,
+//           markers: true,
+//         },
+//       });
+//     });
+//   }, []); // Run only once after the component mounts
+
+//   return (
+//     <>
+//       <div className="nav">
+//         <div>
+//           <div>Codegrid</div>
+//           <div>One block at a time</div>
+//         </div>
+//         <div>est 2024</div>
+//       </div>
+//       {/* <div className="marker-wrapper">
+//         <div className="marker">
+//           <div className="grab"></div>
+//         </div>
+//         <div className="active-slide">1/10</div>
+//       </div> */}
+//       <div className="slider">
+//         <div className="slider-wrapper flex-center column">
+//           <div className="slide">
+//             <img src={image1} alt="first image" />
+//           </div>
+//           <div className="slide">
+//             <img src={image2} alt="second image" />
+//           </div>
+//           <div className="slide">
+//             <img src={image3} alt="third image" />
+//           </div>
+//           {/* <div className="slide">
+//             <img src={image4} alt="fourth image" />
+//           </div>
+//           <div className="slide">
+//             <img src={image5} alt="fifth image" />
+//           </div>
+//           <div className="slide">
+//             <img src={image6} alt="fifth image" />
+//           </div>
+//           <div className="slide">
+//             <img src={image7} alt="fifth image" />
+//           </div>
+//           <div className="slide">
+//             <img src={image8} alt="fifth image" />
+//           </div>
+//           <div className="slide">
+//             <img src={image9} alt="fifth image" />
+//           </div>
+//           <div className="slide">
+//             <img src={image10} alt="fifth image" /> */}
+//           {/* </div> */}
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
 export const Saved: React.FC = () => {
-  const main = useRef<any>();
-
-  useEffect(() => {
-    const slides = gsap.utils.toArray<any>(".slide");
-    slides.forEach((slide) => {
-      gsap.to(slide, {
-        x: 150,
-        scrollTrigger: {
-          trigger: slide,
-          start: "top top",
-          end: "bottom 90%",
-          scrub: true,
-          markers: true,
-        },
-      });
-    });
-  }, []); // Run only once after the component mounts
-
-  return (
-    <>
-      <div className="nav">
-        <div>
-          <div>Codegrid</div>
-          <div>One block at a time</div>
-        </div>
-        <div>est 2024</div>
-      </div>
-      {/* <div className="marker-wrapper">
-        <div className="marker">
-          <div className="grab"></div>
-        </div>
-        <div className="active-slide">1/10</div>
-      </div> */}
-      <div className="slider">
-        <div className="slider-wrapper flex-center column">
-          <div className="slide">
-            <img src={image1} alt="first image" />
-          </div>
-          <div className="slide">
-            <img src={image2} alt="second image" />
-          </div>
-          <div className="slide">
-            <img src={image3} alt="third image" />
-          </div>
-          {/* <div className="slide">
-            <img src={image4} alt="fourth image" />
-          </div>
-          <div className="slide">
-            <img src={image5} alt="fifth image" />
-          </div>
-          <div className="slide">
-            <img src={image6} alt="fifth image" />
-          </div>
-          <div className="slide">
-            <img src={image7} alt="fifth image" />
-          </div>
-          <div className="slide">
-            <img src={image8} alt="fifth image" />
-          </div>
-          <div className="slide">
-            <img src={image9} alt="fifth image" />
-          </div>
-          <div className="slide">
-            <img src={image10} alt="fifth image" /> */}
-          {/* </div> */}
-        </div>
-      </div>
-    </>
-  );
+  return <div></div>;
 };

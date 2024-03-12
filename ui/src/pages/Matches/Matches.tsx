@@ -31,37 +31,43 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center w-full h-full">
-      <div className="flex justify-center items-center w-full h-5/6 bg-black bg-opacity-70">
-        <div className="flip-card-container flex flex-wrap bg-tan justify-center">
-          {matchedProfiles.map((profile: Profile, index: number) => (
-            <div
-              className="flip-card w-64 h-40 rounded-lg m-2 p-3"
-              key={index}
-              onClick={() => {
-                handleClick(profile);
-              }}
-            >
-              <div className="flip-card-inner">
-                <div className="flip-card-front"></div>
-                <div className="flip-card-back flex flex-col justify-center">
-                  <h2>{profile.name}</h2>
-                  <p>Age: {profile.age}</p>
-                  <p>Job: {profile.jobTitle}</p>
-                  <p>Instagram: {profile.userInsta}</p>
+    <>
+      <div className="font-roboto-condensed bg-sea-green w-30 h-40">
+        DM Serif Display
+      </div>
+      <div className=""></div>
+      <div className="flex items-center justify-center w-full h-full">
+        <div className="flex justify-center items-center w-full h-5/6 bg-black bg-opacity-70">
+          <div className="flip-card-container flex flex-wrap bg-tan justify-center">
+            {matchedProfiles.map((profile: Profile, index: number) => (
+              <div
+                className="flip-card w-64 h-40 rounded-lg m-2 p-3"
+                key={index}
+                onClick={() => {
+                  handleClick(profile);
+                }}
+              >
+                <div className="flip-card-inner">
+                  <div className="flip-card-front"></div>
+                  <div className="flip-card-back flex flex-col justify-center">
+                    <h2>{profile.name}</h2>
+                    <p>Age: {profile.age}</p>
+                    <p>Job: {profile.jobTitle}</p>
+                    <p>Instagram: {profile.userInsta}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          {openDialog && selectedPerson && (
+            <MatchesDialog
+              openDialog={openDialog}
+              setOpenDialog={setOpenDialog}
+              selectedPerson={selectedPerson}
+            />
+          )}
         </div>
-        {openDialog && selectedPerson && (
-          <MatchesDialog
-            openDialog={openDialog}
-            setOpenDialog={setOpenDialog}
-            selectedPerson={selectedPerson}
-          />
-        )}
       </div>
-    </div>
+    </>
   );
 };

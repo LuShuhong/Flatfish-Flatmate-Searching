@@ -3,6 +3,11 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        "serif-display": ["DM Serif Display", "serif"],
+        "playfair-display": ["Playfair Display", "serif"],
+        "roboto-condensed": ["Roboto Condensed", "sans serif"],
+      },
       height: {
         navBarHeight: "8%",
         "90%": "83%",
@@ -26,11 +31,13 @@ module.exports = {
         bg3: "url('/src/img/mainBackground3.webp')",
         bg4: "url('/src/img/mainBackground4.jpeg')",
       },
-      colors: {
-        bgTan: "#D7CEC7",
-      },
-      fontFamily: {
-        abril: ["Abril Fatface"],
+      backgroundColor: {
+        "sea-green": "#9BBFBB",
+        "pastel-blue": "#C6E2FF",
+        "light-tan": "#FEEEDE",
+        "grey-darker": "#D9D9D9",
+        "grey-lighter": "#E5E5E5",
+        "lighter-grean": "#DBDED2",
       },
     },
   },
