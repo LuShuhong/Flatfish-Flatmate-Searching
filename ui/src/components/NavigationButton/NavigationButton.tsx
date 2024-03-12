@@ -14,7 +14,7 @@ export const NavigationButton: React.FC<Props> = ({
   routeTo,
 }) => {
   return (
-    <div className="flex justify-center h-full duration-200 cursor-pointer hover:scale-110 hover:mt-3 items-center">
+    <div className="flex justify-center h-full duration-200 cursor-pointer hover:scale-110 hover:mt-3 items-center font-serif-display">
       <Link
         to={routeTo}
         className={`p-3 ${
