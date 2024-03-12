@@ -74,7 +74,7 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
         location={preferences.location}
         handleLocation={handleLocation}
       />
-      <div className="flex h-1/6 w-70% pl-8">
+      <div className="flex h-1/4 w-70%">
         <MatchButton handleMatch={handleMatch} />
       </div>
     </div>

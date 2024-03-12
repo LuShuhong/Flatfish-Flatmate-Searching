@@ -34,6 +34,9 @@ module.exports = {
       fontFamily: {
         abril: ["Abril Fatface"],
       },
+      boxShadow: {
+        matchButton: "0 0.2rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",
+      },
     },
   },
   plugins: [],
