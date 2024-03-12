@@ -1,11 +1,10 @@
 package com.thg.accelerator.flatfish.controllers;
 
 
-import com.sun.java.accessibility.util.Translator;
 import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
-import com.thg.accelerator.flatfish.service.PreferenceService;
+import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.Transformer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,15 +18,15 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
 public class Controller {
-    private final PreferenceService preferenceService;
+    private final UserService userService;
 
-    Controller(PreferenceService preferenceService) {
-        this.preferenceService = preferenceService;
+    Controller(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/matches")
     public List<UserDto> getMatchingProfiles(@RequestParam Map<String, String> preferences) {
-        return preferenceService
+        return userService
                 .getMatchingProfiles(preferences)
                 .stream()
                 .map(Transformer :: transformUserEntityToDto)
@@ -37,7 +36,7 @@ public class Controller {
 
     @GetMapping("/match/find?strategy=strong")
     public ResponseEntity<HashMap<UserDto, Integer>> getStrongMatches(String userId) {
-        HashMap<UserEntity, Integer> input = preferenceService.getStronglyMatchingUsers(userId).get();
+        HashMap<UserEntity, Integer> input = userService.getStronglyMatchingUsers(userId).get();
         HashMap<UserDto, Integer> output = new HashMap<>();
         input.forEach((entry, value) -> output.put(Transformer.transformUserEntityToDto(entry), value));
 
@@ -46,14 +45,14 @@ public class Controller {
 
     @GetMapping("/users")
     public List<UserEntity> getAllUsers() {
-        return preferenceService.getAllUsers();
+        return userService.getAllUsers();
     }
 
     @GetMapping("/preferences")
-    public List<PreferenceEntity> getAllPreferences() {return preferenceService.getAllPreferences();}
+    public List<PreferenceEntity> getAllPreferences() {return userService.getAllPreferences();}
 
     @PostMapping
     public void addUser(@RequestBody final UserEntity userEntity) {
-        preferenceService.addUser(userEntity);
+        userService.addUser(userEntity);
     }
 }
