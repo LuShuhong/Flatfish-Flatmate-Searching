@@ -13,26 +13,19 @@ public class ProfileMatcher {
 
     //need changing threshold
     public final int threshold = 99999999;
-    private final PreferenceService preferenceService;
 
-    public ProfileMatcher(PreferenceService preferenceService) {
-        this.preferenceService = preferenceService;
-    }
-
-    public List<UserEntity> matchProfiles(String ageMinStr, String ageMaxStr, String budgetMinStr, String budgetMaxStr, String gender){
-        List<PreferenceEntity> allPreferences = preferenceService.getAllPreferences();
+    public List<UserEntity> matchProfiles(List<UserEntity> allUsers, String ageMinStr, String ageMaxStr, String budgetMinStr, String budgetMaxStr, String gender){
 
         double ageMin = Double.parseDouble(ageMinStr);
         double ageMax = Double.parseDouble(ageMaxStr);
         double budgetMin = Double.parseDouble(budgetMinStr);
         double budgetMax = Double.parseDouble(budgetMaxStr);
 
-        List<UserEntity> dealBreakerMatches =  allPreferences.stream()
-                .filter(pref -> pref.getAgeMin() <= ageMin)
-                .filter(pref -> pref.getAgeMax() >= ageMax)
-                .filter(pref -> pref.getBudgetMin() <= budgetMin )
-                .filter(pref -> pref.getBudgetMax() >= budgetMax )
-                .map(PreferenceEntity :: getUserEntity)
+        List<UserEntity> dealBreakerMatches =  allUsers.stream()
+                .filter(pref -> pref.getAgeMax() >= ageMin)
+                .filter(pref -> pref.getAgeMin() <= ageMax)
+                .filter(pref -> pref.getBudgetMax() >= budgetMin )
+                .filter(pref -> pref.getBudgetMin() <= budgetMax )
                 .toList();
 
         if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {

@@ -40,8 +40,10 @@ public class PreferenceService {
         String budgetMax = preferences.get("budgetMax");
         String gender = preferences.get("gender");
 
+        List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
-        return profileMatcher.matchProfiles(ageMin,ageMax,budgetMin,budgetMax, gender);
+        return profileMatcher.matchProfiles(allUsers,ageMin,ageMax,budgetMin,budgetMax, gender);
+//        return allUsers;
     }
     public List<UserEntity> getAllUsers() {
         return usersRepo.findAll();
