@@ -9,6 +9,7 @@ import { Preference } from "./util/interfaces/Preference";
 import { defaultPreferences } from "./util/constants/defaultPreferences";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Profile } from "./util/interfaces/Profile";
+import { MyProfile } from "./pages/MyProfile/MyProfile";
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
@@ -54,6 +55,7 @@ function App() {
             path="/home"
             element={<HomePage getPreferences={getPreferences} />}
           />
+          <Route path="/profile" element={<MyProfile />} />
           <Route
             path="/matches"
             element={<Matches preferences={preferences} />}
