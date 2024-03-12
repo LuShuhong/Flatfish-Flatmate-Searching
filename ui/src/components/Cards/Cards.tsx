@@ -12,7 +12,7 @@ interface Props {
 }
 export const Cards: React.FC<Props> = ({ name, age }) => {
   return (
-    <div className="flex justify-start flex-col card-ctn bg-light-tan rounded-3xl h-5/6 w-1/4 m-10 p-4 shadow-md min-w-80">
+    <div className="flex justify-start flex-col bg-light-tan rounded-3xl h-5/6 w-1/4 m-10 p-4 shadow-md min-w-96">
       <div className="text-center bg-light-tan mt-10">
         <img
           src={person}
