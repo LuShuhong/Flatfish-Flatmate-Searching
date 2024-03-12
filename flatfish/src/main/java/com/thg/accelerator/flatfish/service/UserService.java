@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class PreferenceService {
+public class UserService {
     @Autowired
     private PreferencesRepo preferencesRepo;
 

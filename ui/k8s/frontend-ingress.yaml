@@ -41,20 +41,20 @@ spec:
     - host: flatfish-frontend.pq46c.icekube.ics.cloud
       http:
         paths:
-          - path: /(.*)
+          - path: /
             pathType: ImplementationSpecific
             backend:
               service:
                 name: flatfish-frontend-service
                 port:
                   number: 80
-    - host: flatfish-backend.pq46c.icekube.ics.cloud
-      http:
-        paths:
-          - path: /api/v1/(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: cockroachdbflatfishservice
-                port:
-                  number: 8080
+    # - host: flatfish-backend.pq46c.icekube.ics.cloud
+    #   http:
+    #     paths:
+    #       - path: /api/v1/(.*)
+    #         pathType: ImplementationSpecific
+    #         backend:
+    #           service:
+    #             name: cockroachdbflatfishservice
+    #             port:
+    #               number: 8080
