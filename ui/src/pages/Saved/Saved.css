@@ -2,6 +2,7 @@
 
 * {
   box-sizing: border-box;
+  background-color: #e5e5e5;
 }
 
 html,
@@ -9,7 +10,6 @@ body {
   width: 100vw;
   height: 100vh;
   /* overflow: hidden; */
-  font-family: "Bree Serif", serif;
 }
 
 .nav {

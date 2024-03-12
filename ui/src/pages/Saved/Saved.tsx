@@ -2,6 +2,8 @@
 // import data from "../../data.json"; // Import data from JSON file
 // import { Person } from "../../util/person";
 
+import { Cards } from "../../components/Cards/Cards";
+
 // export const Saved: React.FC = () => {
 //   return (
 //     <>
@@ -238,7 +240,25 @@
 //     </>
 //   );
 // };
+import "../Saved/Saved.css";
+import data from "../../data.json";
+import { Profile } from "../../util/interfaces/Profile";
 
 export const Saved: React.FC = () => {
-  return <div></div>;
+  return (
+    <div className="flex justify-center align-center h-full w-full">
+      {data.map((savedPerson: Profile, index: number) => (
+        <Cards
+          userId={savedPerson.userId}
+          name={savedPerson.name}
+          age={savedPerson.age} // Parse age as a number
+          jobTitle={savedPerson.jobTitle}
+          description={savedPerson.description}
+          email={savedPerson.email}
+          userGender={savedPerson.userGender}
+          userInsta={savedPerson.userInsta}
+        />
+      ))}
+    </div>
+  );
 };

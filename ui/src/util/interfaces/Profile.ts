@@ -1,7 +1,7 @@
 export interface Profile {
   userId: string;
   name: string;
-  age: number;
+  age: string;
   jobTitle: string;
   description: string;
   email: string;

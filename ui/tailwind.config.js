@@ -34,7 +34,7 @@ module.exports = {
       backgroundColor: {
         "sea-green": "#9BBFBB",
         "pastel-blue": "#C6E2FF",
-        "light-tan": "#FEEEDE",
+        "light-tan": "#D7CEC7",
         "grey-darker": "#D9D9D9",
         "grey-lighter": "#E5E5E5",
         "lighter-grean": "#DBDED2",
