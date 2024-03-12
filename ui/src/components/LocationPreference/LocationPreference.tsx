@@ -10,11 +10,11 @@ export const LocationPreference: React.FC<Props> = ({
   handleLocation,
 }) => {
   return (
-    <div className="flex flex-col pl-8 mb-4">
-      <div className="flex w-70%">
+    <div className="flex flex-col mb-4">
+      <div className="flex w-full">
         <span className="flex-1 italic">Location:</span>
         <select
-          className="border-2 w-9/12 rounded-md shadow-sm bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-300"
+          className="border-2 w-9/12 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-300"
           value={location}
           onChange={(e) => handleLocation(e.target.value)}
         >

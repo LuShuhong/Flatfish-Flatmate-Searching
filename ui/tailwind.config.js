@@ -4,14 +4,20 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        navBarHeight: "8%",
+        "18%": "18%",
+        "70%": "70%",
         "90%": "83%",
         "92%": "92%",
+        "1/8": "12.5%",
       },
       width: {
         profileImgWidth: "22%",
+        "30%": "30%",
+        "40%": "40%",
+        "45%": "45%",
         "95%": "95%",
         "70%": "70%",
+        "60%": "60%",
       },
       borderRadius: {
         profileBR: "2rem",
@@ -20,17 +26,16 @@ module.exports = {
       backgroundColor: {
         formElementColor: "#535150",
       },
-      backgroundImage: {
-        bg1: "url('/src/img/mainBackground1.jpeg')",
-        bg2: "url('/src/img/mainBackground2.jpeg')",
-        bg3: "url('/src/img/mainBackground3.webp')",
-        bg4: "url('/src/img/mainBackground4.jpeg')",
-      },
+      backgroundImage: {},
       colors: {
         bgTan: "#D7CEC7",
       },
       fontFamily: {
         abril: ["Abril Fatface"],
+      },
+      boxShadow: {
+        matchButton: "0 0.2rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",
+        defaultButton: "0 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",
       },
     },
   },
