@@ -2,10 +2,12 @@ package com.thg.accelerator.flatfish.service;
 
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 //probably add relevance sorting?
 public class ProfileMatcher {
 
