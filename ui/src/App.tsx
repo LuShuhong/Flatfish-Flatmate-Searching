@@ -1,3 +1,4 @@
+import { LandingPage } from "./pages/LandingPage/LandingPage";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Matches } from "./pages/Matches/Matches";
@@ -34,8 +35,9 @@ function App() {
       <NavBar curPage={curPage} handlePageChange={handlePageChange} />
       <div className="h-70%">
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route
-            path="/"
+            path="/home"
             element={<HomePage getPreferences={getPreferences} />}
           />
           <Route
