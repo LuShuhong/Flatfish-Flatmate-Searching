@@ -2,7 +2,6 @@ import { NavigationButtons } from "../NavigationButtons/NavigationButtons";
 import { useState } from "react";
 import MenuIcon from "../MenuIcon/MenuIcon";
 import Xmark from "../XmarkIcon/Xmark";
-import LogoutButton from "../LogoutButton/LogoutButton";
 import { Profile } from "../../util/interfaces/Profile";
 import { ProfileContainer } from "../ProfileContainer/ProfileContainer";
 
@@ -47,13 +46,12 @@ export const Navigation: React.FC<Props> = ({
         )}
       </div>
 
-      <div className="hidden lg:flex w-1/2 h-full justify-center items-center">
+      <div className="hidden lg:flex w-45% h-full items-center justify-between">
         <NavigationButtons
           curPage={curPage}
           handlePageChange={handlePageChange}
         />
         <ProfileContainer profilePic={user.picture} name={user.name} />
-        <LogoutButton />
       </div>
     </>
   );

@@ -11,7 +11,7 @@ export const NavigationButtons: React.FC<Props> = ({
   handlePageChange,
 }) => {
   return (
-    <div className="flex justify-between items-center w-7/12 h-full text-sm">
+    <div className="flex justify-between items-center w-2/3 h-full text-xs">
       {Object.entries(pages).map(([page, route]) => (
         <NavigationButton
           pageName={page}
