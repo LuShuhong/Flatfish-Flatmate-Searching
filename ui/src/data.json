@@ -2,6 +2,7 @@
   {
     "userId": "stephanie@gmail.com",
     "name": "stephanie",
+    "picture": "url",
     "age": "21",
     "jobTitle": "graduate software engineer",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas",
@@ -12,6 +13,7 @@
   {
     "userId": "john@gmail.com",
     "name": "john",
+    "picture": "url",
     "age": "25",
     "jobTitle": "graduate marketer",
     "description": "          malesuada orci eu viverra posuere. Etiam est libero, interdum quis dui",
@@ -22,6 +24,7 @@
   {
     "userId": "batiatus@hotmail.com",
     "name": "batiatus",
+    "picture": "url",
     "age": "30",
     "jobTitle": "tavern wench",
     "description": "          at, condimentum dapibus enim. Nullam tincidunt imperdiet ex ut",
@@ -32,6 +35,7 @@
   {
     "userId": "hi@yahoo.mail",
     "name": "penicillin",
+    "picture": "url",
     "age": "50",
     "jobTitle": "graduate",
     "description": "          iaculis. Nulla facilisi. Curabitur sodales ultricies justo, sit amet",
@@ -42,6 +46,7 @@
   {
     "userId": "pharoah@gmail.com",
     "name": "tutankamun",
+    "picture": "url",
     "age": "40",
     "jobTitle": "basketball player",
     "description": "          sollicitudin est malesuada vel. Donec dapibus sagittis ante, in",
@@ -52,6 +57,7 @@
   {
     "userId": "sonofGod@msn.com",
     "name": "jesus",
+    "picture": "url",
     "age": "20",
     "jobTitle": "son of god",
     "description": "          pulvinar tellus congue eu. Nunc blandit sapien mi, sit amet",
@@ -62,6 +68,7 @@
   {
     "userId": "sonofGod@msn.com",
     "name": "jesus",
+    "picture": "url",
     "age": "20",
     "jobTitle": "son of god",
     "description": "          ullamcorper est tempus sed.",

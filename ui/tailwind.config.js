@@ -9,14 +9,20 @@ module.exports = {
         "roboto-condensed": ["Roboto Condensed", "sans serif"],
       },
       height: {
-        navBarHeight: "8%",
+        "18%": "18%",
+        "70%": "70%",
         "90%": "83%",
         "92%": "92%",
+        "1/8": "12.5%",
       },
       width: {
         profileImgWidth: "22%",
+        "30%": "30%",
+        "40%": "40%",
+        "45%": "45%",
         "95%": "95%",
         "70%": "70%",
+        "60%": "60%",
       },
       borderRadius: {
         profileBR: "2rem",
@@ -38,6 +44,10 @@ module.exports = {
         "grey-darker": "#D9D9D9",
         "grey-lighter": "#E5E5E5",
         "lighter-grean": "#DBDED2",
+      },
+      boxShadow: {
+        matchButton: "0 0.2rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",
+        defaultButton: "0 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",
       },
     },
   },
