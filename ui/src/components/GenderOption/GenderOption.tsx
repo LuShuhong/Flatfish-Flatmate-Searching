@@ -1,11 +1,13 @@
 interface Props {
   gender: string;
+  curGender: "m" | "f" | "none";
   genderCode: "m" | "f" | "none";
   handleGender: (val: "m" | "f" | "none") => void;
 }
 
 export const GenderOption: React.FC<Props> = ({
   gender,
+  curGender,
   genderCode,
   handleGender,
 }) => {
@@ -17,7 +19,7 @@ export const GenderOption: React.FC<Props> = ({
         className=""
         name="gender"
         onClick={() => handleGender(genderCode)}
-        checked
+        checked={curGender === genderCode ? true : false}
       />
     </label>
   );

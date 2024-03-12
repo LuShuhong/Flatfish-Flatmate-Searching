@@ -65,7 +65,10 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
 
   return (
     <div className="w-full h-4/5">
-      <GenderPreference handleGender={handleGender} />
+      <GenderPreference
+        curGender={preferences.gender}
+        handleGender={handleGender}
+      />
       <AgePreference ageRange={preferences.ageRange} handleAge={handleAge} />
       <BudgetPreference
         budgetRange={preferences.budgetRange}
