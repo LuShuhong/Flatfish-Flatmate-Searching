@@ -27,7 +27,7 @@ export const Navigation: React.FC<Props> = ({
         {!isMenuOpen && (
           <div className="lg:hidden mr-10">
             <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {/* <MenuIcon /> */}
+              <MenuIcon />
             </button>
           </div>
         )}
@@ -44,7 +44,7 @@ export const Navigation: React.FC<Props> = ({
         {isMenuOpen && (
           <div className="lg:hidden flex mr-8 ps-3">
             <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {/* <Xmark /> */}
+              <Xmark />
             </button>
           </div>
         )}
