@@ -2,9 +2,7 @@ import { NavigationButtons } from "../NavigationButtons/NavigationButtons";
 import { useState } from "react";
 import MenuIcon from "../MenuIcon/MenuIcon";
 import Xmark from "../XmarkIcon/Xmark";
-import LoginButton from "../LoginButton/LoginButton";
 import LogoutButton from "../LogoutButton/LogoutButton";
-import UserProfile from "../UserProfile/UserProfile";
 import { Profile } from "../../util/interfaces/Profile";
 import { ProfileContainer } from "../ProfileContainer/ProfileContainer";
 
@@ -56,9 +54,8 @@ export const Navigation: React.FC<Props> = ({
         />
 
         <ProfileContainer profilePic={user.picture} name={user.name} />
-        <LoginButton />
         <LogoutButton />
-        <UserProfile />
+        {/* <UserProfile /> */}
       </div>
     </>
   );

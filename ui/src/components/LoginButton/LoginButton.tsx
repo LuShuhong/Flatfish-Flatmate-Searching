@@ -1,9 +1,14 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
-const LoginButton = () => {
+export const LoginButton: React.FC = () => {
   const { loginWithRedirect } = useAuth0();
 
-  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+  return (
+    <button
+      onClick={() => loginWithRedirect()}
+      className="bg-[#9BBFBB] rounded-md h-1/6 w-2/5 shadow-defaultButton"
+    >
+      Log In
+    </button>
+  );
 };
-
-export default LoginButton;
