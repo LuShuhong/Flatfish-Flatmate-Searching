@@ -1,6 +1,7 @@
 package com.thg.accelerator.flatfish.controllers;
 
 
+import com.sun.java.accessibility.util.Translator;
 import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
@@ -8,11 +9,13 @@ import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.Transformer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequestMapping("/api/v1")
 @RestController
@@ -20,18 +23,19 @@ import java.util.Optional;
 public class Controller {
     private final UserService userService;
 
-    Controller(UserService userService) {
+    public Controller(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/matches")
-    public List<UserDto> getMatchingProfiles(@RequestParam Map<String, String> preferences) {
+    public ResponseEntity<List<UserDto>> getMatchingProfiles(@RequestParam Map<String, String> preferences) {
         return userService
                 .getMatchingProfiles(preferences)
-                .stream()
-                .map(Transformer :: transformUserEntityToDto)
-                .toList();
-
+                .map(tasks -> tasks.stream()
+                        .map(Transformer::transformUserEntityToDto)
+                        .collect(Collectors.toList()))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/match/find?strategy=strong")
@@ -44,15 +48,38 @@ public class Controller {
     }
 
     @GetMapping("/users")
-    public List<UserEntity> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        return userService
+                .getAllUsers()
+                .map(user -> user.stream()
+                        .map(Transformer::transformUserEntityToDto)
+                        .collect(Collectors.toList()))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable String id) {
+        return userService.getUserById(id)
+                .map(Transformer::transformUserEntityToDto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/preferences")
-    public List<PreferenceEntity> getAllPreferences() {return userService.getAllPreferences();}
+    public ResponseEntity<List<PreferenceEntity>> getAllPreferences() {
+        return ResponseEntity.of(Optional.of(userService.getAllPreferences()));
+    }
 
     @PostMapping
-    public void addUser(@RequestBody final UserEntity userEntity) {
-        userService.addUser(userEntity);
+    public ResponseEntity<UserDto> addUser(@RequestBody final UserDto userDto) {
+        userService.addUser(Transformer.transformUserDtoToEntity(userDto));
+
+        var location = MvcUriComponentsBuilder
+                .fromMethodName(Controller.class, "getUserById", userDto.getUserId())
+                .buildAndExpand(userDto.getUserId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(userDto);
     }
 }
