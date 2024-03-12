@@ -7,8 +7,15 @@ import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Preference } from "./util/interfaces/Preference";
 import { defaultPreferences } from "./util/constants/defaultPreferences";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Profile } from "./util/interfaces/Profile";
 
 function App() {
+  const { user, isAuthenticated } = useAuth0();
+  const curUser: Partial<Profile> = {
+    name: user?.name,
+    picture: user?.picture,
+  };
   const [curPage, setCurPage] = useState<string>("Home");
   const navigate = useNavigate();
   const handlePageChange = (newPage: string): void => {
@@ -32,7 +39,12 @@ function App() {
   // });
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
-      <NavBar curPage={curPage} handlePageChange={handlePageChange} />
+      <NavBar
+        curPage={curPage}
+        handlePageChange={handlePageChange}
+        user={curUser}
+        authenticated={isAuthenticated}
+      />
       <div className="h-70%">
         <Routes>
           <Route path="/" element={<LandingPage />} />

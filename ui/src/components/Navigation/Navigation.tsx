@@ -1,24 +1,23 @@
 import { NavigationButtons } from "../NavigationButtons/NavigationButtons";
-import { Profile } from "../Profile/Profile";
 import { useState } from "react";
 import MenuIcon from "../MenuIcon/MenuIcon";
 import Xmark from "../XmarkIcon/Xmark";
 import LoginButton from "../LoginButton/LoginButton";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import UserProfile from "../UserProfile/UserProfile";
+import { Profile } from "../../util/interfaces/Profile";
+import { ProfileContainer } from "../ProfileContainer/ProfileContainer";
 
 interface Props {
   curPage: string;
   handlePageChange: (newPage: string) => void;
-  profilePic: string;
-  name: string;
+  user: Partial<Profile>;
 }
 
 export const Navigation: React.FC<Props> = ({
   curPage,
   handlePageChange,
-  profilePic,
-  name,
+  user,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
@@ -56,7 +55,7 @@ export const Navigation: React.FC<Props> = ({
           handlePageChange={handlePageChange}
         />
 
-        <Profile profilePic={profilePic} name={name} />
+        <ProfileContainer profilePic={user.picture} name={user.name} />
         <LoginButton />
         <LogoutButton />
         <UserProfile />
