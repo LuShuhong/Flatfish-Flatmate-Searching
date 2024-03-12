@@ -23,6 +23,7 @@ public class PreferenceEntity {
     private double ageMin;
     private double ageMax;
     private Gender gender;
+    private boolean smoker;
 
     @OneToOne
     @MapsId
