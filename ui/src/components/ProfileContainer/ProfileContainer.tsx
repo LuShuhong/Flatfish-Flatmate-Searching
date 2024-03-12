@@ -4,6 +4,12 @@ interface Props {
 }
 
 export const ProfileContainer: React.FC<Props> = ({ profilePic, name }) => {
+  if (name?.includes("@")) {
+    name = name.slice(0, name.indexOf("@"));
+  }
+  if (name?.includes(".")) {
+    name = name.slice(0, name.indexOf("."));
+  }
   return (
     <div className="flex items-center h-5/6 w-1/3 rounded-profileBR">
       <img

@@ -52,10 +52,8 @@ export const Navigation: React.FC<Props> = ({
           curPage={curPage}
           handlePageChange={handlePageChange}
         />
-
         <ProfileContainer profilePic={user.picture} name={user.name} />
         <LogoutButton />
-        {/* <UserProfile /> */}
       </div>
     </>
   );

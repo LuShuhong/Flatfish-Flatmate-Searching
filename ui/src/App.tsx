@@ -15,6 +15,8 @@ function App() {
   const curUser: Partial<Profile> = {
     name: user?.name,
     picture: user?.picture,
+    userGender: user?.gender,
+    email: user?.email,
   };
   const [curPage, setCurPage] = useState<string>("Home");
   const navigate = useNavigate();
