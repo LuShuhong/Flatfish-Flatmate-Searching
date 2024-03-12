@@ -15,6 +15,7 @@ export const AgePreference: React.FC<Props> = ({ ageRange, handleAge }) => {
         handleFunction={handleAge}
         range={[MIN_AGE, MAX_AGE]}
         index={0}
+        prefix=""
       />
       <SliderOption
         sliderName="Maximum age"
@@ -22,6 +23,7 @@ export const AgePreference: React.FC<Props> = ({ ageRange, handleAge }) => {
         handleFunction={handleAge}
         range={[MIN_AGE, MAX_AGE]}
         index={1}
+        prefix=""
       />
     </div>
   );

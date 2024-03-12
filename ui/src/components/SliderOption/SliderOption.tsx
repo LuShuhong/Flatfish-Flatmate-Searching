@@ -4,6 +4,7 @@ interface Props {
   range: [min: number, max: number];
   index: 0 | 1;
   handleFunction: (val: number, index: 0 | 1) => void;
+  prefix: string;
 }
 
 export const SliderOption: React.FC<Props> = ({
@@ -12,6 +13,7 @@ export const SliderOption: React.FC<Props> = ({
   range,
   index,
   handleFunction,
+  prefix,
 }) => {
   return (
     <div>
@@ -25,7 +27,10 @@ export const SliderOption: React.FC<Props> = ({
           value={value}
           onInput={(e) => handleFunction(e.currentTarget.valueAsNumber, index)}
         />
-        <div className="">{value}</div>
+        <div className="">
+          {prefix}
+          {value}
+        </div>
       </div>
     </div>
   );
