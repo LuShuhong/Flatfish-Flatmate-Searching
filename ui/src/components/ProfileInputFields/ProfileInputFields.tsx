@@ -4,6 +4,7 @@ import { BirthdayInput } from "../BirthdayInput/BirthdayInput";
 import { AgeInput } from "../AgeInput/AgeInput";
 import { GenderInput } from "../GenderInput/GenderInput";
 import { InstagramInput } from "../InstagramInput/InstagramInput";
+import { SaveProfileButton } from "../SaveProfileButton/SaveProfileButton";
 
 export const ProfileInputFields: React.FC = () => {
   return (
@@ -16,6 +17,9 @@ export const ProfileInputFields: React.FC = () => {
         <GenderInput />
       </div>
       <InstagramInput />
+      <div className="flex items-center justify-center w-97.5% h-1/5">
+        <SaveProfileButton />
+      </div>
     </div>
   );
 };
