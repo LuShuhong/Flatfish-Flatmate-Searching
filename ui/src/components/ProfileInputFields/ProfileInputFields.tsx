@@ -35,6 +35,13 @@ export const ProfileInputFields: React.FC<Props> = ({ user }) => {
       return copy;
     });
   };
+  const handleUserGender = (val: string): void => {
+    setUserDetails((details) => {
+      const copy = { ...details };
+      copy.userGender = val;
+      return copy;
+    });
+  };
   return (
     <div className="h-4/5 w-full">
       <NameInputs
@@ -48,7 +55,10 @@ export const ProfileInputFields: React.FC<Props> = ({ user }) => {
           handleUserBirthdate={handleUserBirthdate}
         />
         <AgeInput />
-        <GenderInput gender={userDetails.userGender} />
+        <GenderInput
+          gender={userDetails.userGender}
+          handleUserGender={handleUserGender}
+        />
       </div>
       <InstagramInput />
       <div className="flex items-center justify-center w-97.5% h-1/5">
