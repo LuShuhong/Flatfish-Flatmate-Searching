@@ -32,7 +32,7 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
 
   return (
     <div className="flex items-center justify-center w-full h-full">
-      <div className="flex justify-center items-center w-full h-5/6 bg-black bg-opacity-70">
+      <div className="flex justify-center items-center w-full h-5/6">
         <div className="flip-card-container flex flex-wrap bg-tan justify-center">
           {matchedProfiles.map((profile: Profile, index: number) => (
             <div

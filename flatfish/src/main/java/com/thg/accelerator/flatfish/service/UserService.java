@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class PreferenceService {
+public class UserService {
     @Autowired
     private PreferencesRepo preferencesRepo;
 
@@ -24,7 +24,7 @@ public class PreferenceService {
     @Autowired
     private ProfileMatcher profileMatcher;
 
-    public List<UserEntity> getMatchingProfiles(Map<String, String> preferences) {
+    public Optional<List<UserEntity>> getMatchingProfiles(Map<String, String> preferences) {
         /* access the data from the getRequest:
         preferences.get("preferenceId")
         preferences.get("gender")
@@ -42,11 +42,15 @@ public class PreferenceService {
 
         List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
-        return profileMatcher.matchProfiles(allUsers,ageMin,ageMax,budgetMin,budgetMax, gender);
+        return Optional.of(profileMatcher.matchProfiles(allUsers,ageMin,ageMax,budgetMin,budgetMax, gender));
 //        return allUsers;
     }
-    public List<UserEntity> getAllUsers() {
-        return usersRepo.findAll();
+    public Optional<List<UserEntity>> getAllUsers() {
+        return Optional.of(usersRepo.findAll().stream().toList());
+    }
+
+    public Optional<UserEntity> getUserById(String id) {
+        return usersRepo.findById(id);
     }
 
     public List<PreferenceEntity> getAllPreferences() {
@@ -58,7 +62,7 @@ public class PreferenceService {
 
     // TODO: Replace with vector similarity methods
     public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(String userId) {
-        List<UserEntity> allUsers = getAllUsers();
+        List<UserEntity> allUsers = getAllUsers().get();
         Optional<UserEntity> targetUser = usersRepo.findById(userId);
         HashMap<UserEntity, Integer> strongMatches = new HashMap<>();
 

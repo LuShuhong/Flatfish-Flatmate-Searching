@@ -1,4 +1,5 @@
 import { MIN_BUDGET, MAX_BUDGET } from "../../util/constants/budget";
+import { SliderOption } from "../SliderOption/SliderOption";
 
 interface Props {
   budgetRange: [min: number, max: number];
@@ -10,33 +11,23 @@ export const BudgetPreference: React.FC<Props> = ({
   handleBudget,
 }) => {
   return (
-    <div className="flex flex-col pl-8 mb-4">
-      <div>
-        <div className="italic">Minimum weekly budget</div>
-        <div className="flex items-center justify-between w-8/12">
-          <input
-            type="range"
-            min={MIN_BUDGET}
-            max={MAX_BUDGET}
-            value={budgetRange[0]}
-            onInput={(e) => handleBudget(e.currentTarget.valueAsNumber, 0)}
-          />
-          <div className="">£ {budgetRange[0]}</div>
-        </div>
-      </div>
-      <div>
-        <div className="italic">Maximum weekly budget</div>
-        <div className="flex items-center justify-between w-8/12">
-          <input
-            type="range"
-            min={MIN_BUDGET}
-            max={MAX_BUDGET}
-            value={budgetRange[1]}
-            onInput={(e) => handleBudget(e.currentTarget.valueAsNumber, 1)}
-          />{" "}
-          <div className="">£ {budgetRange[1]}</div>
-        </div>
-      </div>
+    <div className="flex flex-col mb-4">
+      <SliderOption
+        sliderName="Minimum weekly budget"
+        value={budgetRange[0]}
+        range={[MIN_BUDGET, MAX_BUDGET]}
+        index={0}
+        handleFunction={handleBudget}
+        prefix="£"
+      />
+      <SliderOption
+        sliderName="Maximum weekly budget"
+        value={budgetRange[1]}
+        range={[MIN_BUDGET, MAX_BUDGET]}
+        index={1}
+        handleFunction={handleBudget}
+        prefix="£"
+      />
     </div>
   );
 };
