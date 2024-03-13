@@ -20,7 +20,7 @@ export const ProfileContainer: React.FC<Props> = ({ profilePic, name }) => {
           alt={name}
           className="h-10 w-10 rounded-1/2 flex justify-center items-center"
         ></img>
-        <div className="ml-2 text-xs">{name}</div>
+        <div className="ml-2 text-xs font-serif-display">{name}</div>
       </div>
       <LogoutButton />
     </div>

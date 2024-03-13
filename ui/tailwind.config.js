@@ -3,6 +3,11 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        "serif-display": ["DM Serif Display", "serif"],
+        "playfair-display": ["Playfair Display", "serif"],
+        "roboto-condensed": ["Roboto Condensed", "sans serif"],
+      },
       height: {
         "18%": "18%",
         "55%": "55%",
@@ -28,12 +33,19 @@ module.exports = {
       backgroundColor: {
         formElementColor: "#535150",
       },
-      backgroundImage: {},
-      colors: {
-        bgTan: "#D7CEC7",
+      backgroundImage: {
+        // bg1: "url('/src/img/mainBackground1.jpeg')",
+        // bg2: "url('/src/img/mainBackground2.jpeg')",
+        // bg3: "url('/src/img/mainBackground3.webp')",
+        // bg4: "url('/src/img/mainBackground4.jpeg')",
       },
-      fontFamily: {
-        abril: ["Abril Fatface"],
+      backgroundColor: {
+        "sea-green": "#9BBFBB",
+        "pastel-blue": "#C6E2FF",
+        "light-tan": "#D7CEC7",
+        "grey-darker": "#D9D9D9",
+        "grey-lighter": "#E5E5E5",
+        "lighter-grean": "#DBDED2",
       },
       boxShadow: {
         matchButton: "0 0.2rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",
