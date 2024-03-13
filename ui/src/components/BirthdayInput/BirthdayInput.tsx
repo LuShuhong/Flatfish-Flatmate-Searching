@@ -1,6 +1,6 @@
 export const BirthdayInput: React.FC = () => {
   return (
-    <div className="h-1/5 w-1/2">
+    <div className="w-40%">
       <label className="flex flex-col text-xs w-full">
         birthday
         <input
