@@ -10,12 +10,12 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class PreferenceDto {
-    private String preferenceId;
+    private String userId;
     private double budgetMin;
     private double budgetMax;
     private double ageMin;
     private double ageMax;
     private Gender gender;
     private boolean smoker;
-//    private List<Long> preferredAreaIds;
+    private List<Long> preferredAreaIds;
 }

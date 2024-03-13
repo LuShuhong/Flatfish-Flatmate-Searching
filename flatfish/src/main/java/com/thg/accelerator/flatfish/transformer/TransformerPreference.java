@@ -17,11 +17,11 @@ public class TransformerPreference {
     public TransformerPreference(){}
 
     public PreferenceEntity transformPrefDtoToEntity(PreferenceDto preferenceDto) {
-        UserEntity userEntity = usersRepo.findById(preferenceDto.getPreferenceId())
+        UserEntity userEntity = usersRepo.findById(preferenceDto.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("UserEntity not found"));
 
         return new PreferenceEntity(
-                preferenceDto.getPreferenceId(),
+                preferenceDto.getUserId(),
                 preferenceDto.getBudgetMin(),
                 preferenceDto.getBudgetMax(),
                 preferenceDto.getAgeMin(),
