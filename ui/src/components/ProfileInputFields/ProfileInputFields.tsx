@@ -14,9 +14,19 @@ interface Props {
 
 export const ProfileInputFields: React.FC<Props> = ({ user }) => {
   const [userDetails, setUserDetails] = useState<Partial<Profile>>(user);
+  const handleFirstName = (val: string): void => {
+    setUserDetails((details) => {
+      const copy = { ...details };
+      copy.name = val;
+      return copy;
+    });
+  };
   return (
     <div className="h-4/5 w-full">
-      <NameInputs username={userDetails.name} />
+      <NameInputs
+        username={userDetails.name}
+        handleFirstName={handleFirstName}
+      />
       <EmailInput email={userDetails.email} />
       <div className="flex justify-between w-97.5%">
         <BirthdayInput birthday={userDetails.birthday} />
