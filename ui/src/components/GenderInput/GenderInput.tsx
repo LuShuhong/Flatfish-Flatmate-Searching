@@ -1,4 +1,8 @@
-export const GenderInput: React.FC = () => {
+interface Props {
+  gender: string | undefined;
+}
+
+export const GenderInput: React.FC<Props> = ({ gender }) => {
   return (
     <div className="w-30%">
       <label className="flex flex-col text-xs w-full">
@@ -6,6 +10,7 @@ export const GenderInput: React.FC = () => {
         <input
           type="text"
           className="p-agePadding text-sm bg-[#E5E5E5] border border-gray-400 rounded-xl mt-1"
+          value={gender}
         />
       </label>
     </div>

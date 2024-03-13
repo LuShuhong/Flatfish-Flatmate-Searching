@@ -18,6 +18,7 @@ function App() {
     picture: user?.picture,
     userGender: user?.gender,
     email: user?.email,
+    birthday: user?.birthdate,
   };
   const [curPage, setCurPage] = useState<string>("Home");
   const navigate = useNavigate();
