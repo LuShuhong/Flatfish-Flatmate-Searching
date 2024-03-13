@@ -5,7 +5,7 @@ interface Props {
 export const NameInput: React.FC<Props> = ({ fieldName }) => {
   return (
     <div className="w-1/2 h-full text-xs">
-      <label className="">
+      <label className="text-xs w-full">
         {fieldName}
         <input
           type="text"
