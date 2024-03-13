@@ -11,6 +11,7 @@ import {
   budgetIsValid,
   locationIsValid,
 } from "../../util/validPreferenceChecker";
+import { SetDefaultButton } from "../SetDefaultButton/SetDefaultButton";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
@@ -63,8 +64,11 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
   };
 
   return (
-    <div className="w-full h-4/5 rounded-bl-xl rounded-br-xl">
-      <GenderPreference handleGender={handleGender} />
+    <div className="w-full h-4/5">
+      <GenderPreference
+        curGender={preferences.gender}
+        handleGender={handleGender}
+      />
       <AgePreference ageRange={preferences.ageRange} handleAge={handleAge} />
       <BudgetPreference
         budgetRange={preferences.budgetRange}
@@ -74,8 +78,9 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
         location={preferences.location}
         handleLocation={handleLocation}
       />
-      <div className="flex h-1/6 w-70% pl-8">
+      <div className="flex items-center justify-between h-1/8 w-full">
         <MatchButton handleMatch={handleMatch} />
+        <SetDefaultButton />
       </div>
     </div>
   );

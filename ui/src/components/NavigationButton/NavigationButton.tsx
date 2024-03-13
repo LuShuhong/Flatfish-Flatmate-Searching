@@ -14,15 +14,11 @@ export const NavigationButton: React.FC<Props> = ({
   routeTo,
 }) => {
   return (
-    <div
-      className={`flex justify-center h-full duration-200 cursor-pointer hover:scale-110 hover:mt-3 ${
-        curPage === pageName ? "items-end" : "items-center"
-      }`}
-    >
+    <div className="flex justify-center h-full duration-200 cursor-pointer hover:scale-110 hover:mt-3 items-center font-serif-display">
       <Link
         to={routeTo}
         className={`p-3 ${
-          curPage === pageName ? "bg-[#D7CEC7] rounded-t-2xl" : ""
+          curPage === pageName ? "bg-[#E5E5E5] rounded-2xl" : ""
         }`}
         onClick={() => handlePageChange(pageName)}
       >

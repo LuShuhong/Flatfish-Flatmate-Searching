@@ -21,7 +21,10 @@ public class UserService {
     @Autowired
     private UsersRepo usersRepo;
 
-    public List<UserEntity> getMatchingProfiles(Map<String, String> preferences) {
+    @Autowired
+    private ProfileMatcher profileMatcher;
+
+    public Optional<List<UserEntity>> getMatchingProfiles(Map<String, String> preferences) {
         /* access the data from the getRequest:
         preferences.get("preferenceId")
         preferences.get("gender")
@@ -31,11 +34,23 @@ public class UserService {
         preferences.get("budgetMax")
         */
 
+        String ageMin = preferences.get("ageMin");
+        String ageMax = preferences.get("ageMax");
+        String budgetMin = preferences.get("budgetMin");
+        String budgetMax = preferences.get("budgetMax");
+        String gender = preferences.get("gender");
+
+        List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
-        return usersRepo.findAll();
+        return Optional.of(profileMatcher.matchProfiles(allUsers,ageMin,ageMax,budgetMin,budgetMax, gender));
+//        return allUsers;
     }
-    public List<UserEntity> getAllUsers() {
-        return usersRepo.findAll();
+    public Optional<List<UserEntity>> getAllUsers() {
+        return Optional.of(usersRepo.findAll().stream().toList());
+    }
+
+    public Optional<UserEntity> getUserById(String id) {
+        return usersRepo.findById(id);
     }
 
     public List<PreferenceEntity> getAllPreferences() {
@@ -47,7 +62,7 @@ public class UserService {
 
     // TODO: Replace with vector similarity methods
     public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(String userId) {
-        List<UserEntity> allUsers = getAllUsers();
+        List<UserEntity> allUsers = getAllUsers().get();
         Optional<UserEntity> targetUser = usersRepo.findById(userId);
         HashMap<UserEntity, Integer> strongMatches = new HashMap<>();
 

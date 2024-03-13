@@ -1,4 +1,5 @@
-import { MainPage } from "./pages/MainPage/MainPage";
+import { LandingPage } from "./pages/LandingPage/LandingPage";
+import { HomePage } from "./pages/HomePage/HomePage";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Matches } from "./pages/Matches/Matches";
 import { Saved } from "./pages/Saved/Saved";
@@ -6,8 +7,17 @@ import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Preference } from "./util/interfaces/Preference";
 import { defaultPreferences } from "./util/constants/defaultPreferences";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Profile } from "./util/interfaces/Profile";
 
 function App() {
+  const { user, isAuthenticated } = useAuth0();
+  const curUser: Partial<Profile> = {
+    name: user?.name,
+    picture: user?.picture,
+    userGender: user?.gender,
+    email: user?.email,
+  };
   const [curPage, setCurPage] = useState<string>("Home");
   const navigate = useNavigate();
   const handlePageChange = (newPage: string): void => {
@@ -30,13 +40,19 @@ function App() {
   //   userInsta: "...",
   // });
   return (
-    <div className="h-screen w-screen bg-gradient-to-tr from-[#D7CEC7] to-[#D7CEC7]">
-      <NavBar curPage={curPage} handlePageChange={handlePageChange} />
-      <div className="h-92%">
+    <div className="h-screen w-screen bg-[#C6E2FF]">
+      <NavBar
+        curPage={curPage}
+        handlePageChange={handlePageChange}
+        user={curUser}
+        authenticated={isAuthenticated}
+      />
+      <div className="h-70%">
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route
-            path="/"
-            element={<MainPage getPreferences={getPreferences} />}
+            path="/home"
+            element={<HomePage getPreferences={getPreferences} />}
           />
           <Route
             path="/matches"

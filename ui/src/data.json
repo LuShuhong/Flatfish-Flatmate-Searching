@@ -1,44 +1,79 @@
 [
   {
+    "userId": "stephanie@gmail.com",
     "name": "stephanie",
+    "picture": "url",
     "age": "21",
-    "job_title": "graduate software engineer",
-    "instagram": "@hello.io"
+    "jobTitle": "graduate software engineer",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas",
+    "email": "stephanie@gmail.com",
+    "userGender": "female",
+    "userInsta": "@hello.io"
   },
   {
+    "userId": "john@gmail.com",
     "name": "john",
+    "picture": "url",
     "age": "25",
-    "job_title": "graduate marketer",
-    "instagram": "@snake.ww"
+    "jobTitle": "graduate marketer",
+    "description": "          malesuada orci eu viverra posuere. Etiam est libero, interdum quis dui",
+    "email": "john@gmail.com",
+    "userGender": "male",
+    "userInsta": "@snake.ww"
   },
   {
+    "userId": "batiatus@hotmail.com",
     "name": "batiatus",
+    "picture": "url",
     "age": "30",
-    "job_title": "tavern wench",
-    "instagram": "@wench.henchy"
+    "jobTitle": "tavern wench",
+    "description": "          at, condimentum dapibus enim. Nullam tincidunt imperdiet ex ut",
+    "email": "batiatus@hotmail.com",
+    "userGender": "n/a",
+    "userInsta": "@wench.henchy"
   },
   {
+    "userId": "hi@yahoo.mail",
     "name": "penicillin",
-    "age": "500",
-    "job_title": "graduate",
-    "instagram": "@egypt"
+    "picture": "url",
+    "age": "50",
+    "jobTitle": "graduate",
+    "description": "          iaculis. Nulla facilisi. Curabitur sodales ultricies justo, sit amet",
+    "email": "hi@yahoo.mail",
+    "userGender": "medicine",
+    "userInsta": "@egypt"
   },
   {
+    "userId": "pharoah@gmail.com",
     "name": "tutankamun",
+    "picture": "url",
     "age": "40",
-    "job_title": "basketball player",
-    "instagram": "@icon"
+    "jobTitle": "basketball player",
+    "description": "          sollicitudin est malesuada vel. Donec dapibus sagittis ante, in",
+    "email": "pharoah@gmail.com",
+    "userGender": "male",
+    "userInsta": "@icon"
   },
   {
+    "userId": "sonofGod@msn.com",
     "name": "jesus",
-    "age": "2024",
-    "job_title": "son of god",
-    "instagram": "@jesus"
+    "picture": "url",
+    "age": "20",
+    "jobTitle": "son of god",
+    "description": "          pulvinar tellus congue eu. Nunc blandit sapien mi, sit amet",
+    "email": "sonofGod@msn.com",
+    "userGender": "male",
+    "userInsta": "@jesus"
   },
   {
+    "userId": "sonofGod@msn.com",
     "name": "jesus",
-    "age": "2024",
-    "job_title": "son of god",
-    "instagram": "@jesus"
+    "picture": "url",
+    "age": "20",
+    "jobTitle": "son of god",
+    "description": "          ullamcorper est tempus sed.",
+    "email": "sonofGod@msn.com",
+    "userGender": "male",
+    "userInsta": "@jesus"
   }
 ]
