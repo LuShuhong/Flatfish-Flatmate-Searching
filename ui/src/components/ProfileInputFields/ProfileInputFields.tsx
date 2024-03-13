@@ -28,6 +28,13 @@ export const ProfileInputFields: React.FC<Props> = ({ user }) => {
       return copy;
     });
   };
+  const handleUserBirthdate = (val: string): void => {
+    setUserDetails((details) => {
+      const copy = { ...details };
+      copy.birthday = val;
+      return copy;
+    });
+  };
   return (
     <div className="h-4/5 w-full">
       <NameInputs
@@ -36,7 +43,10 @@ export const ProfileInputFields: React.FC<Props> = ({ user }) => {
       />
       <EmailInput email={userDetails.email} handleUserEmail={handleUserEmail} />
       <div className="flex justify-between w-97.5%">
-        <BirthdayInput birthday={userDetails.birthday} />
+        <BirthdayInput
+          birthday={userDetails.birthday}
+          handleUserBirthdate={handleUserBirthdate}
+        />
         <AgeInput />
         <GenderInput gender={userDetails.userGender} />
       </div>
