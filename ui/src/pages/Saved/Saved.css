@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
+
+* {
+  box-sizing: border-box;
+  /* background-color: #e5e5e5; */
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.card-ctn {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent cards from wrapping to the next line */
+  overflow-x: auto; /* Enable horizontal scroll */
+  gap: 20px; /* Gap between cards */
+  max-width: 100%;
+  max-height: 100vh;
+  scroll-snap-type: x mandatory;
+}
+
+.card-ctn::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
+}
+
+.card {
+  flex: 0 0 calc(33.333% - 20px); /* Set the width of each card */
+  min-width: 250px; /* Set the minimum width of each card */
+  scroll-snap-align: start;
+}
