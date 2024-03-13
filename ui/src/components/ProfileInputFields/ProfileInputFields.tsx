@@ -42,6 +42,13 @@ export const ProfileInputFields: React.FC<Props> = ({ user }) => {
       return copy;
     });
   };
+  const handleUserInstagram = (val: string): void => {
+    setUserDetails((details) => {
+      const copy = { ...details };
+      copy.userInsta = val;
+      return copy;
+    });
+  };
   return (
     <div className="h-4/5 w-full">
       <NameInputs
@@ -60,7 +67,10 @@ export const ProfileInputFields: React.FC<Props> = ({ user }) => {
           handleUserGender={handleUserGender}
         />
       </div>
-      <InstagramInput />
+      <InstagramInput
+        instagram={userDetails.userInsta}
+        handleUserInstagram={handleUserInstagram}
+      />
       <div className="flex items-center justify-center w-97.5% h-1/5">
         <SaveProfileButton />
       </div>
