@@ -32,10 +32,10 @@ module.exports = {
         formElementColor: "#535150",
       },
       backgroundImage: {
-        bg1: "url('/src/img/mainBackground1.jpeg')",
-        bg2: "url('/src/img/mainBackground2.jpeg')",
-        bg3: "url('/src/img/mainBackground3.webp')",
-        bg4: "url('/src/img/mainBackground4.jpeg')",
+        // bg1: "url('/src/img/mainBackground1.jpeg')",
+        // bg2: "url('/src/img/mainBackground2.jpeg')",
+        // bg3: "url('/src/img/mainBackground3.webp')",
+        // bg4: "url('/src/img/mainBackground4.jpeg')",
       },
       backgroundColor: {
         "sea-green": "#9BBFBB",

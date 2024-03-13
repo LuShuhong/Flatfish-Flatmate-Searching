@@ -16,7 +16,6 @@ body {
   flex-wrap: nowrap; /* Prevent cards from wrapping to the next line */
   overflow-x: auto; /* Enable horizontal scroll */
   gap: 20px; /* Gap between cards */
-  padding: 20px; /* Optional padding for better spacing */
   max-width: 100%;
   max-height: 100vh;
   scroll-snap-type: x mandatory;

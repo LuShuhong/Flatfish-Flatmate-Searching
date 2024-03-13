@@ -11,20 +11,20 @@ interface Props {
 }
 export const Cards: React.FC<Props> = ({ name, age }) => {
   return (
-    <div className="flex justify-start flex-col bg-light-tan rounded-3xl h-5/6 w-1/4 m-10 p-4 shadow-md min-w-96">
-      <div className="text-center bg-light-tan mt-10">
+    <div className="flex justify-start flex-col bg-[#FEEEDE] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
+      <div className="text-center bg-[#FEEEDE] mt-10">
         <img
           src={person}
           className="rounded-full h-24 w-24 object-cover mx-auto"
           alt="Profile"
         />
-        <h1 className="bg-light-tan font-serif-display text-4xl mt-5 mb-3">
+        <h1 className="bg-[#FEEEDE] font-serif-display text-4xl mt-5 mb-3">
           {name}
         </h1>
-        <h2 className="font-playfair-display text-xl bg-light-tan mb-3">
+        <h2 className="font-playfair-display text-xl bg-[#FEEEDE] mb-3">
           {age}
         </h2>
-        <p className="fonto-roboto-condensed bg-light-tan text-center">
+        <p className="fonto-roboto-condensed bg-[#FEEEDE] text-center">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
           malesuada orci eu viverra posuere. Etiam est libero, interdum quis dui
           at, condimentum dapibus enim. Nullam tincidunt imperdiet ex ut
