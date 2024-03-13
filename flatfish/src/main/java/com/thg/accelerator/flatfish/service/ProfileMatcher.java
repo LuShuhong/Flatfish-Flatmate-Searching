@@ -14,44 +14,44 @@ public class ProfileMatcher {
     //need changing threshold
     public final int threshold = 99999999;
 
-    public List<UserEntity> matchProfiles(List<UserEntity> allUsers, String ageMinStr, String ageMaxStr, String budgetMinStr, String budgetMaxStr, String gender){
-
-        double ageMin = Double.parseDouble(ageMinStr);
-        double ageMax = Double.parseDouble(ageMaxStr);
-        double budgetMin = Double.parseDouble(budgetMinStr);
-        double budgetMax = Double.parseDouble(budgetMaxStr);
-
-        List<UserEntity> dealBreakerMatches =  allUsers.stream()
-                .filter(pref -> pref.getAgeMax() >= ageMin)
-                .filter(pref -> pref.getAgeMin() <= ageMax)
-                .filter(pref -> pref.getBudgetMax() >= budgetMin )
-                .filter(pref -> pref.getBudgetMin() <= budgetMax )
-                .toList();
-
-        if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
-            dealBreakerMatches = dealBreakerMatches.stream()
-                    .filter(user -> user.getGender()
-                            //if Gender enum is removed, toString can be removed
-                            .toString()
-                            .equalsIgnoreCase(gender))
-                    .toList();
-        }
-
-        List<UserEntity> matchedProfiles = new ArrayList<>();
-        double[] userVector = preferenceToVector(ageMin, ageMax, budgetMin, budgetMax);
-
-        for(UserEntity user: dealBreakerMatches) {
-            double[] candidateVector = preferenceToVector(user.getAgeMin(), user.getAgeMax(), user.getBudgetMin(), user.getBudgetMax());
-            double distance = calculateEuclideanDistance(userVector, candidateVector);
-
-            if (distance < threshold) {
-                matchedProfiles.add(user);
-            }
-        }
-
-        //want to sort before return?
-        return matchedProfiles;
-    }
+//    public List<UserEntity> matchProfiles(List<UserEntity> allUsers, String ageMinStr, String ageMaxStr, String budgetMinStr, String budgetMaxStr, String gender){
+//
+//        double ageMin = Double.parseDouble(ageMinStr);
+//        double ageMax = Double.parseDouble(ageMaxStr);
+//        double budgetMin = Double.parseDouble(budgetMinStr);
+//        double budgetMax = Double.parseDouble(budgetMaxStr);
+//
+//        List<UserEntity> dealBreakerMatches =  allUsers.stream()
+//                .filter(pref -> pref.getAgeMax() >= ageMin)
+//                .filter(pref -> pref.getAgeMin() <= ageMax)
+//                .filter(pref -> pref.getBudgetMax() >= budgetMin )
+//                .filter(pref -> pref.getBudgetMin() <= budgetMax )
+//                .toList();
+//
+//        if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
+//            dealBreakerMatches = dealBreakerMatches.stream()
+//                    .filter(user -> user.getGender()
+//                            //if Gender enum is removed, toString can be removed
+//                            .toString()
+//                            .equalsIgnoreCase(gender))
+//                    .toList();
+//        }
+//
+//        List<UserEntity> matchedProfiles = new ArrayList<>();
+//        double[] userVector = preferenceToVector(ageMin, ageMax, budgetMin, budgetMax);
+//
+//        for(UserEntity user: dealBreakerMatches) {
+//            double[] candidateVector = preferenceToVector(user.getAgeMin(), user.getAgeMax(), user.getBudgetMin(), user.getBudgetMax());
+//            double distance = calculateEuclideanDistance(userVector, candidateVector);
+//
+//            if (distance < threshold) {
+//                matchedProfiles.add(user);
+//            }
+//        }
+//
+//        //want to sort before return?
+//        return matchedProfiles;
+//    }
 
     private double calculateEuclideanDistance(double[] vectorA, double[] vectorB) {
         double sum = 0;

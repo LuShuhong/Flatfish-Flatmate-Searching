@@ -42,8 +42,8 @@ public class UserService {
 
         List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
-        return Optional.of(profileMatcher.matchProfiles(allUsers,ageMin,ageMax,budgetMin,budgetMax, gender));
-//        return allUsers;
+//        return Optional.of(profileMatcher.matchProfiles(allUsers,ageMin,ageMax,budgetMin,budgetMax, gender));
+        return Optional.of(allUsers);
     }
     public Optional<List<UserEntity>> getAllUsers() {
         return Optional.of(usersRepo.findAll().stream().toList());

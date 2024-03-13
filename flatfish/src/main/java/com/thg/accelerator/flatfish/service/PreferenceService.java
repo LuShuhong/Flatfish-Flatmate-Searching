@@ -79,7 +79,17 @@ public class PreferenceService {
 
     public void createPreference(PreferenceDto preferenceDto) {
         if (!preferenceDto.getUserId().isEmpty()) {
+//            UserEntity userEntity = ;
             preferencesRepo.save((transformerPreference.transformPrefDtoToEntity(preferenceDto)));
+
+//            preferenceDto.getPreferredAreaIds().forEach(areaId -> {
+//                LocationEntity location = locationRepo.findById(areaId)
+//                        .orElseThrow(() -> new RuntimeException("Location not found"));
+//                UserLocationsEntity userLocation = new UserLocationsEntity();
+//                userLocation.setUserEntity(preferenceEntity.getUserEntity());
+//                userLocation.setLocationEntity(location);
+//                userLocationRepo.save(userLocation);
+//            });
         }
     }
 
