@@ -9,9 +9,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @ToString
-
 public class PreferenceDto {
-    private String preferenceId;
+    private String userId;
     private double budgetMin;
     private double budgetMax;
     private double ageMin;

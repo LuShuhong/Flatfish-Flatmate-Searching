@@ -1,8 +1,10 @@
 package com.thg.accelerator.flatfish;
 import com.thg.accelerator.flatfish.controllers.Controller;
 import com.thg.accelerator.flatfish.dto.UserDto;
+import com.thg.accelerator.flatfish.service.PreferenceService;
 import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.Transformer;
+import com.thg.accelerator.flatfish.transformer.TransformerPreference;
 import org.apache.catalina.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -20,12 +22,15 @@ public class ControllerTest {
 
     Controller controller;
     UserService mockUserService;
+    PreferenceService mockPreferenceService;
+    Transformer transformer;
+    TransformerPreference transformerPreference;
 
 
     @BeforeEach
     public void setup() {
         this.mockUserService = mock(UserService.class);
-        this.controller = new Controller(mockUserService);
+        this.controller = new Controller(mockUserService, mockPreferenceService, transformer);
     }
 
     @Test
