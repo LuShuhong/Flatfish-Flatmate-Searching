@@ -5,11 +5,16 @@ import { AgeInput } from "../AgeInput/AgeInput";
 import { GenderInput } from "../GenderInput/GenderInput";
 import { InstagramInput } from "../InstagramInput/InstagramInput";
 import { SaveProfileButton } from "../SaveProfileButton/SaveProfileButton";
+import { Profile } from "../../util/interfaces/Profile";
 
-export const ProfileInputFields: React.FC = () => {
+interface Props {
+  user: Partial<Profile>;
+}
+
+export const ProfileInputFields: React.FC<Props> = ({ user }) => {
   return (
     <div className="h-4/5 w-full">
-      <NameInputs />
+      <NameInputs username={user.name} />
       <EmailInput />
       <div className="flex justify-between w-97.5%">
         <BirthdayInput />

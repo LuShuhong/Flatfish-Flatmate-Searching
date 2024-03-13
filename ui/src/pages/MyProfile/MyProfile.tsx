@@ -1,9 +1,14 @@
 import { ProfileInput } from "../../components/ProfileInput/ProfileInput";
+import { Profile } from "../../util/interfaces/Profile";
 
-export const MyProfile: React.FC = () => {
+interface Props {
+  user: Partial<Profile>;
+}
+
+export const MyProfile: React.FC<Props> = ({ user }) => {
   return (
     <div className="flex justify-center items-center w-full h-full">
-      <ProfileInput />
+      <ProfileInput user={user} />
     </div>
   );
 };

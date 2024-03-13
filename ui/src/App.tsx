@@ -55,7 +55,7 @@ function App() {
             path="/home"
             element={<HomePage getPreferences={getPreferences} />}
           />
-          <Route path="/profile" element={<MyProfile />} />
+          <Route path="/profile" element={<MyProfile user={curUser} />} />
           <Route
             path="/matches"
             element={<Matches preferences={preferences} />}
