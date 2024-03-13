@@ -10,7 +10,7 @@ import { defaultPreferences } from "./util/constants/defaultPreferences";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Profile } from "./util/interfaces/Profile";
 import { MyProfile } from "./pages/MyProfile/MyProfile";
-import { getCurDate } from "./util/curDateCalculator";
+import { convertDateToString } from "./util/dateConverter";
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
@@ -19,7 +19,7 @@ function App() {
     picture: user?.picture,
     userGender: user?.gender,
     email: user?.email,
-    birthday: getCurDate(),
+    birthday: convertDateToString(new Date()),
   };
   const [curPage, setCurPage] = useState<string>("Home");
   const navigate = useNavigate();

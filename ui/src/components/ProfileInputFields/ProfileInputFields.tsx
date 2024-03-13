@@ -6,6 +6,7 @@ import { GenderInput } from "../GenderInput/GenderInput";
 import { InstagramInput } from "../InstagramInput/InstagramInput";
 import { SaveProfileButton } from "../SaveProfileButton/SaveProfileButton";
 import { Profile } from "../../util/interfaces/Profile";
+import { getAge } from "../../util/ageCalculator";
 import { useState } from "react";
 
 interface Props {
@@ -58,10 +59,12 @@ export const ProfileInputFields: React.FC<Props> = ({ user }) => {
       <EmailInput email={userDetails.email} handleUserEmail={handleUserEmail} />
       <div className="flex justify-between w-97.5%">
         <BirthdayInput
-          birthday={userDetails.birthday}
+          birthday={userDetails.birthday ? userDetails.birthday : ""}
           handleUserBirthdate={handleUserBirthdate}
         />
-        <AgeInput />
+        <AgeInput
+          age={userDetails.birthday ? getAge(userDetails.birthday) : 0}
+        />
         <GenderInput
           gender={userDetails.userGender}
           handleUserGender={handleUserGender}
