@@ -15,6 +15,7 @@ module.exports = {
         profileImgWidth: "22%",
         "30%": "30%",
         "40%": "40%",
+        "43%": "43%",
         "45%": "45%",
         "95%": "95%",
         "97.5%": "97.5%",
@@ -38,6 +39,9 @@ module.exports = {
       boxShadow: {
         matchButton: "0 0.2rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",
         defaultButton: "0 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",
+      },
+      padding: {
+        agePadding: "0.67rem",
       },
     },
   },
