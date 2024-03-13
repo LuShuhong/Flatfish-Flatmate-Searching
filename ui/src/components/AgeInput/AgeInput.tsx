@@ -15,7 +15,7 @@ export const AgeInput: React.FC<Props> = ({ age }) => {
           min={MIN_AGE}
           max={MAX_AGE}
           value={age}
-          readOnly
+          disabled
         />
       </label>
     </div>
