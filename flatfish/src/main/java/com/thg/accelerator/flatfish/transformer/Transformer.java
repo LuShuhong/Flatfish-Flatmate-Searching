@@ -3,7 +3,9 @@ package com.thg.accelerator.flatfish.transformer;
 
 import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.UserEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Transformer {
     public static UserDto transformUserEntityToDto(UserEntity userEntity) {
         return new UserDto(
@@ -11,16 +13,18 @@ public class Transformer {
                 userEntity.getUserId(),
                 userEntity.getDescription(),
                 userEntity.getUserGender(),
-                userEntity.getUserInsta());
+                userEntity.getUserInsta(),
+                userEntity.isSmoker());
     }
 
     public static UserEntity transformUserDtoToEntity(UserDto userDto) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setUserId(userDto.getEmail()); // Using email as userId
+        userEntity.setUserId(userDto.getUserId()); // Using email as userId
         userEntity.setName(userDto.getName());
         userEntity.setDescription(userDto.getDescription());
         userEntity.setUserGender(userDto.getUserGender());
         userEntity.setUserInsta(userDto.getUserInsta());
+        userEntity.isSmoker();
 
         return userEntity;
     }

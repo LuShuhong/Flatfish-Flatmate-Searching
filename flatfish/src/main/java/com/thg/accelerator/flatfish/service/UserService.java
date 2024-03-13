@@ -61,18 +61,18 @@ public class UserService {
     }
 
     // TODO: Replace with vector similarity methods
-    public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(String userId) {
-        List<UserEntity> allUsers = getAllUsers().get();
-        Optional<UserEntity> targetUser = usersRepo.findById(userId);
-        HashMap<UserEntity, Integer> strongMatches = new HashMap<>();
-
-        if (targetUser.isPresent()) {
-            for (UserEntity otherUser : allUsers) {
-                if (targetUser.get().getBudgetMin() <= otherUser.getBudgetMin() && targetUser.get().getBudgetMax() >= otherUser.getBudgetMax()) {
-                    strongMatches.put(otherUser, 500);
-                }
-            }
-        }
-        return Optional.of(strongMatches);
-    }
+//    public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(String userId) {
+//        List<UserEntity> allUsers = getAllUsers().get();
+//        Optional<UserEntity> targetUser = usersRepo.findById(userId);
+//        HashMap<UserEntity, Integer> strongMatches = new HashMap<>();
+//
+//        if (targetUser.isPresent()) {
+//            for (UserEntity otherUser : allUsers) {
+//                if (targetUser.get().getBudgetMin() <= otherUser.getBudgetMin() && targetUser.get().getBudgetMax() >= otherUser.getBudgetMax()) {
+//                    strongMatches.put(otherUser, 500);
+//                }
+//            }
+//        }
+//        return Optional.of(strongMatches);
+//    }
 }

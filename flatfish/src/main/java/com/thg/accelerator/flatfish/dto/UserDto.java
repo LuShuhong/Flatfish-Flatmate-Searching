@@ -11,9 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class UserDto {
-    private String email;
+    private String userId; // email
     private String name;
     private String description;
     private String userGender;
     private String userInsta;
+    private boolean smoker;
 }

@@ -39,6 +39,9 @@ public class UserEntity {
     @Column(name = "UserInsta")
     private String userInsta;
 
+    @Column(name = "IsASmoker")
+    private boolean smoker;
+
     @OneToMany(mappedBy = "userEntity")
     private List<UserLocationsEntity> locationEntities;
 
