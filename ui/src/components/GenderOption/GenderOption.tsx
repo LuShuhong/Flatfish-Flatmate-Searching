@@ -19,7 +19,7 @@ export const GenderOption: React.FC<Props> = ({
         className=""
         name="gender"
         onClick={() => handleGender(genderCode)}
-        checked={curGender === genderCode ? true : false}
+        defaultChecked={curGender === genderCode ? true : false}
       />
     </label>
   );

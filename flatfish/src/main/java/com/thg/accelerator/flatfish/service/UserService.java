@@ -42,8 +42,8 @@ public class UserService {
 
         List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
-        return Optional.of(profileMatcher.matchProfiles(allUsers,ageMin,ageMax,budgetMin,budgetMax, gender));
-//        return allUsers;
+//        return Optional.of(profileMatcher.matchProfiles(allUsers,ageMin,ageMax,budgetMin,budgetMax, gender));
+        return Optional.of(allUsers);
     }
     public Optional<List<UserEntity>> getAllUsers() {
         return Optional.of(usersRepo.findAll().stream().toList());
@@ -61,18 +61,18 @@ public class UserService {
     }
 
     // TODO: Replace with vector similarity methods
-    public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(String userId) {
-        List<UserEntity> allUsers = getAllUsers().get();
-        Optional<UserEntity> targetUser = usersRepo.findById(userId);
-        HashMap<UserEntity, Integer> strongMatches = new HashMap<>();
-
-        if (targetUser.isPresent()) {
-            for (UserEntity otherUser : allUsers) {
-                if (targetUser.get().getBudgetMin() <= otherUser.getBudgetMin() && targetUser.get().getBudgetMax() >= otherUser.getBudgetMax()) {
-                    strongMatches.put(otherUser, 500);
-                }
-            }
-        }
-        return Optional.of(strongMatches);
-    }
+//    public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(String userId) {
+//        List<UserEntity> allUsers = getAllUsers().get();
+//        Optional<UserEntity> targetUser = usersRepo.findById(userId);
+//        HashMap<UserEntity, Integer> strongMatches = new HashMap<>();
+//
+//        if (targetUser.isPresent()) {
+//            for (UserEntity otherUser : allUsers) {
+//                if (targetUser.get().getBudgetMin() <= otherUser.getBudgetMin() && targetUser.get().getBudgetMax() >= otherUser.getBudgetMax()) {
+//                    strongMatches.put(otherUser, 500);
+//                }
+//            }
+//        }
+//        return Optional.of(strongMatches);
+//    }
 }

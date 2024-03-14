@@ -2,11 +2,15 @@ package com.thg.accelerator.flatfish.controllers;
 
 
 import com.sun.java.accessibility.util.Translator;
+import com.thg.accelerator.flatfish.dto.PreferenceDto;
 import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
+import com.thg.accelerator.flatfish.exception.ResourceNotFoundException;
+import com.thg.accelerator.flatfish.service.PreferenceService;
 import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.Transformer;
+import com.thg.accelerator.flatfish.transformer.TransformerPreference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -23,8 +27,19 @@ import java.util.stream.Collectors;
 public class Controller {
     private final UserService userService;
 
-    public Controller(UserService userService) {
+    private final PreferenceService preferenceService;
+
+    private final Transformer transformer;
+
+//    private final TransformerPreference transformerPreference;
+
+    public Controller(UserService userService,
+                      PreferenceService preferenceService,
+                      Transformer transformer) {
         this.userService = userService;
+        this.preferenceService = preferenceService;
+        this.transformer = transformer;
+//        this.transformerPreference = transformerPreference;
     }
 
     @GetMapping("/matches")
@@ -38,14 +53,14 @@ public class Controller {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/match/find?strategy=strong")
-    public ResponseEntity<HashMap<UserDto, Integer>> getStrongMatches(String userId) {
-        HashMap<UserEntity, Integer> input = userService.getStronglyMatchingUsers(userId).get();
-        HashMap<UserDto, Integer> output = new HashMap<>();
-        input.forEach((entry, value) -> output.put(Transformer.transformUserEntityToDto(entry), value));
-
-        return ResponseEntity.of(Optional.of(output));
-    }
+//    @GetMapping("/match/find?strategy=strong")
+//    public ResponseEntity<HashMap<UserDto, Integer>> getStrongMatches(String userId) {
+//        HashMap<UserEntity, Integer> input = userService.getStronglyMatchingUsers(userId).get();
+//        HashMap<UserDto, Integer> output = new HashMap<>();
+//        input.forEach((entry, value) -> output.put(Transformer.transformUserEntityToDto(entry), value));
+//
+//        return ResponseEntity.of(Optional.of(output));
+//    }
 
     @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getAllUsers() {
@@ -73,7 +88,7 @@ public class Controller {
 
     @PostMapping
     public ResponseEntity<UserDto> addUser(@RequestBody final UserDto userDto) {
-        userService.addUser(Transformer.transformUserDtoToEntity(userDto));
+        userService.addUser(transformer.transformUserDtoToEntity(userDto));
 
         var location = MvcUriComponentsBuilder
                 .fromMethodName(Controller.class, "getUserById", userDto.getUserId())
@@ -81,5 +96,29 @@ public class Controller {
                 .toUri();
 
         return ResponseEntity.created(location).body(userDto);
+    }
+
+    @PostMapping("/profile")
+    public ResponseEntity<PreferenceDto> createPreference(@RequestBody final PreferenceDto preferenceDto) {
+        preferenceService.createPreference(preferenceDto);
+
+        var location = MvcUriComponentsBuilder
+                .fromMethodName(Controller.class, "getUserById", preferenceDto.getUserId())
+                .buildAndExpand(preferenceDto.getUserId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(preferenceDto);
+    }
+
+    @PutMapping("/profile")
+    public ResponseEntity<PreferenceDto> updatePreference(@PathVariable final String userId, @RequestBody final PreferenceDto preferenceDto) {
+        try {
+            PreferenceDto updatedPreferenceDto = preferenceService.updatePreferenceAndLocations(userId, preferenceDto);
+            return ResponseEntity.ok(updatedPreferenceDto);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

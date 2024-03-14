@@ -8,7 +8,8 @@
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas",
     "email": "stephanie@gmail.com",
     "userGender": "female",
-    "userInsta": "@hello.io"
+    "userInsta": "@hello.io",
+    "birthday": ""
   },
   {
     "userId": "john@gmail.com",
@@ -19,7 +20,8 @@
     "description": "          malesuada orci eu viverra posuere. Etiam est libero, interdum quis dui",
     "email": "john@gmail.com",
     "userGender": "male",
-    "userInsta": "@snake.ww"
+    "userInsta": "@snake.ww",
+    "birthday": ""
   },
   {
     "userId": "batiatus@hotmail.com",
@@ -30,7 +32,8 @@
     "description": "          at, condimentum dapibus enim. Nullam tincidunt imperdiet ex ut",
     "email": "batiatus@hotmail.com",
     "userGender": "n/a",
-    "userInsta": "@wench.henchy"
+    "userInsta": "@wench.henchy",
+    "birthday": ""
   },
   {
     "userId": "hi@yahoo.mail",
@@ -41,7 +44,8 @@
     "description": "          iaculis. Nulla facilisi. Curabitur sodales ultricies justo, sit amet",
     "email": "hi@yahoo.mail",
     "userGender": "medicine",
-    "userInsta": "@egypt"
+    "userInsta": "@egypt",
+    "birthday": ""
   },
   {
     "userId": "pharoah@gmail.com",
@@ -52,7 +56,8 @@
     "description": "          sollicitudin est malesuada vel. Donec dapibus sagittis ante, in",
     "email": "pharoah@gmail.com",
     "userGender": "male",
-    "userInsta": "@icon"
+    "userInsta": "@icon",
+    "birthday": ""
   },
   {
     "userId": "sonofGod@msn.com",
@@ -63,7 +68,8 @@
     "description": "          pulvinar tellus congue eu. Nunc blandit sapien mi, sit amet",
     "email": "sonofGod@msn.com",
     "userGender": "male",
-    "userInsta": "@jesus"
+    "userInsta": "@jesus",
+    "birthday": ""
   },
   {
     "userId": "sonofGod@msn.com",
@@ -74,6 +80,7 @@
     "description": "          ullamcorper est tempus sed.",
     "email": "sonofGod@msn.com",
     "userGender": "male",
-    "userInsta": "@jesus"
+    "userInsta": "@jesus",
+    "birthday": ""
   }
 ]
