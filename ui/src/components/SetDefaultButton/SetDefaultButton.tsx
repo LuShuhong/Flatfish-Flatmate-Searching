@@ -1,7 +1,14 @@
-export const SetDefaultButton: React.FC = () => {
+interface Props {
+  handleSetDefault: () => void;
+}
+
+export const SetDefaultButton: React.FC<Props> = ({ handleSetDefault }) => {
   return (
-    <div className="flex items-center justify-center w-1/4 h-1/2 bg-[#D9D9D9] rounded-lg cursor-pointer shadow-defaultButton">
+    <button
+      className="flex items-center justify-center w-1/4 h-1/2 bg-[#D9D9D9] rounded-lg cursor-pointer shadow-defaultButton"
+      onClick={() => handleSetDefault()}
+    >
       Set Default
-    </div>
+    </button>
   );
 };

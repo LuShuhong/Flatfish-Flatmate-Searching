@@ -2,8 +2,8 @@ import { GenderOption } from "../GenderOption/GenderOption";
 import { genders } from "../../util/constants/genders";
 
 interface Props {
-  curGender: "m" | "f" | "none";
-  handleGender: (val: "m" | "f" | "none") => void;
+  curGender: "MALE" | "FEMALE" | "UNSPECIFIED";
+  handleGender: (val: "MALE" | "FEMALE" | "UNSPECIFIED") => void;
 }
 
 export const GenderPreference: React.FC<Props> = ({

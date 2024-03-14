@@ -12,16 +12,18 @@ import {
   locationIsValid,
 } from "../../util/validPreferenceChecker";
 import { SetDefaultButton } from "../SetDefaultButton/SetDefaultButton";
+import { post } from "../../requests/postRequests";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
+  email: string | undefined;
 }
 
-export const InputFields: React.FC<Props> = ({ getPreferences }) => {
+export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
   const [preferences, setPreferences] =
     useState<Preference>(defaultPreferences);
 
-  const handleGender = (val: "m" | "f" | "none"): void => {
+  const handleGender = (val: "MALE" | "FEMALE" | "UNSPECIFIED"): void => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.gender = val;
@@ -63,6 +65,24 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
     }
   };
 
+  const handleSetDefault = (): void => {
+    if (!ageIsValid(preferences.ageRange)) {
+      alert("Maximum age must be bigger than minimum age");
+    } else if (!budgetIsValid(preferences.budgetRange)) {
+      alert("Maximum budget must be bigger than minimum budget");
+    } else if (!locationIsValid(preferences.location)) {
+      alert("Please select a location");
+    } else {
+      post("http://localhost:8080/api/v1/preferences", {
+        userId: email ? email : "",
+        gender: preferences.gender,
+        ageRange: preferences.ageRange,
+        budgetRange: preferences.budgetRange,
+        location: "test1",
+      });
+    }
+  };
+
   return (
     <div className="w-full h-4/5">
       <GenderPreference
@@ -80,7 +100,7 @@ export const InputFields: React.FC<Props> = ({ getPreferences }) => {
       />
       <div className="flex items-center justify-between h-1/8 w-full">
         <MatchButton handleMatch={handleMatch} />
-        <SetDefaultButton />
+        <SetDefaultButton handleSetDefault={handleSetDefault} />
       </div>
     </div>
   );

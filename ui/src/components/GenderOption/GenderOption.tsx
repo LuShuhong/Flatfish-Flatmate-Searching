@@ -1,8 +1,8 @@
 interface Props {
   gender: string;
-  curGender: "m" | "f" | "none";
-  genderCode: "m" | "f" | "none";
-  handleGender: (val: "m" | "f" | "none") => void;
+  curGender: "MALE" | "FEMALE" | "UNSPECIFIED";
+  genderCode: "MALE" | "FEMALE" | "UNSPECIFIED";
+  handleGender: (val: "MALE" | "FEMALE" | "UNSPECIFIED") => void;
 }
 
 export const GenderOption: React.FC<Props> = ({

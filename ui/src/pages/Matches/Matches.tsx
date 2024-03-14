@@ -22,7 +22,7 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
 
   useEffect(() => {
     getProfiles(
-      `http://localhost:8080/api/v1/matches?preferenceId=${preferences.preferenceId}&gender=${preferences.gender}&ageMin=${preferences.ageRange[0]}&ageMax=${preferences.ageRange[1]}&budgetMin=${preferences.budgetRange[0]}&budgetMax=${preferences.budgetRange[1]}`,
+      `http://localhost:8080/api/v1/matches?preferenceId=${preferences.userId}&gender=${preferences.gender}&ageMin=${preferences.ageRange[0]}&ageMax=${preferences.ageRange[1]}&budgetMin=${preferences.budgetRange[0]}&budgetMax=${preferences.budgetRange[1]}`,
       setMatchedProfiles
     );
   }, []);
