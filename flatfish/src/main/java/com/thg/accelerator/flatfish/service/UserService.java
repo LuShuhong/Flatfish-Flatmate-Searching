@@ -40,11 +40,21 @@ public class UserService {
         String budgetMax = preferences.get("budgetMax");
         String gender = preferences.get("gender");
 
-        List<UserEntity> allUsers = usersRepo.findAll();
+        List<PreferenceEntity> allUserPreferences = preferencesRepo.findAll();
+
         // matching algorithm...
-//        return Optional.of(profileMatcher.matchProfiles(allUsers,ageMin,ageMax,budgetMin,budgetMax, gender));
-        return Optional.of(allUsers);
+        List<String> matchingProfileIds = profileMatcher.matchProfiles(allUserPreferences, ageMin, ageMax, budgetMin, budgetMax, gender);
+
+        List<UserEntity> matchingUsersList = new ArrayList<>();
+        for (String id : matchingProfileIds) {
+            Optional<UserEntity> optionalMatchingUser = usersRepo.findById(id);
+
+            optionalMatchingUser.ifPresent(matchingUsersList::add);
+        }
+
+        return Optional.of(matchingUsersList);
     }
+
     public Optional<List<UserEntity>> getAllUsers() {
         return Optional.of(usersRepo.findAll().stream().toList());
     }
