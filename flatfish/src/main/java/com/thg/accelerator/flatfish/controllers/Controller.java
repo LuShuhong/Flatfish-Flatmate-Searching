@@ -83,7 +83,7 @@ public class Controller {
 
     @GetMapping("/preferences")
     public ResponseEntity<List<PreferenceEntity>> getAllPreferences() {
-        return ResponseEntity.of(Optional.of(userService.getAllPreferences()));
+        return ResponseEntity.of(Optional.of(preferenceService.getAllPreferences()));
     }
 
     @PostMapping
