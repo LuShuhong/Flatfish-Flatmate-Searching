@@ -1,4 +1,6 @@
+import React from "react";
 import person from "../../img/funcat.jpeg";
+
 interface Props {
   userId: string;
   name: string;
@@ -9,7 +11,7 @@ interface Props {
   userGender: string;
   userInsta: string;
 }
-export const Cards: React.FC<Props> = ({ name, age }) => {
+export const SavedCards: React.FC<Props> = ({ name, age }) => {
   return (
     <div className="flex justify-start flex-col bg-[#FEEEDE] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
       <div className="text-center bg-[#FEEEDE] mt-10">

@@ -33,9 +33,6 @@ export const MatchesDialog: React.FC<Props> = ({
         <p>age: {selectedPerson.age}</p>
         <p>job title: {selectedPerson.jobTitle}</p>
         <p>instagram: {selectedPerson.userInsta}</p>
-        {/* <div className="flex justify-end w-full p-2">
-          <SaveButton selectedPerson={selectedPerson} />
-        </div> */}
       </div>
     </>
   ) : null;
