@@ -98,7 +98,7 @@ public class Controller {
         return ResponseEntity.created(location).body(userDto);
     }
 
-    @PostMapping("/profile")
+    @PostMapping("/preferences")
     public ResponseEntity<PreferenceDto> createPreference(@RequestBody final PreferenceDto preferenceDto) {
         preferenceService.createPreference(preferenceDto);
 

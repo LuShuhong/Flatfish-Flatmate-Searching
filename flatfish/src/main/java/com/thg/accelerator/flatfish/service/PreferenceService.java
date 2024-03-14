@@ -3,7 +3,6 @@ package com.thg.accelerator.flatfish.service;
 import com.thg.accelerator.flatfish.dto.PreferenceDto;
 import com.thg.accelerator.flatfish.entities.LocationEntity;
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
-import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.entities.UserLocationsEntity;
 import com.thg.accelerator.flatfish.exception.ResourceNotFoundException;
 import com.thg.accelerator.flatfish.repositories.LocationRepo;
@@ -11,7 +10,6 @@ import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
 import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import com.thg.accelerator.flatfish.transformer.TransformerPreference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -79,7 +77,6 @@ public class PreferenceService {
 
     public void createPreference(PreferenceDto preferenceDto) {
         if (!preferenceDto.getUserId().isEmpty()) {
-//            UserEntity userEntity = ;
             preferencesRepo.save((transformerPreference.transformPrefDtoToEntity(preferenceDto)));
 
 //            preferenceDto.getPreferredAreaIds().forEach(areaId -> {
