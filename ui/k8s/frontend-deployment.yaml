@@ -21,7 +21,7 @@ spec:
       imagePullSecrets:
         - name: ghcr-creds
       containers:
-        - image: ghcr.io/thg-accelerator/thg-flatfish/flatfish-frontend:v4.0.0
+        - image: ghcr.io/thg-accelerator/thg-flatfish/flatfish-frontend:v5.0.0
           name: flatfish-frontend
           ports:
             - containerPort: 80

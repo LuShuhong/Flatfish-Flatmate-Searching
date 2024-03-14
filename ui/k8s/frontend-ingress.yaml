@@ -48,6 +48,46 @@ spec:
                 name: flatfish-frontend-service
                 port:
                   number: 80
+    - host: flatfish-frontend.pq46c.icekube.ics.cloud
+      http:
+        paths:
+          - path: /home
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: flatfish-frontend-service
+                port:
+                  number: 80
+    - host: flatfish-frontend.pq46c.icekube.ics.cloud
+      http:
+        paths:
+          - path: /matches
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: flatfish-frontend-service
+                port:
+                  number: 80
+    - host: flatfish-frontend.pq46c.icekube.ics.cloud
+      http:
+        paths:
+          - path: /saved
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: flatfish-frontend-service
+                port:
+                  number: 80
+    - host: flatfish-frontend.pq46c.icekube.ics.cloud
+      http:
+        paths:
+          - path: /profile
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: flatfish-frontend-service
+                port:
+                  number: 80
     # - host: flatfish-backend.pq46c.icekube.ics.cloud
     #   http:
     #     paths:
