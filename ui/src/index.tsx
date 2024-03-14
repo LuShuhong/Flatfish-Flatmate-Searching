@@ -16,7 +16,7 @@ root.render(
         domain="dev-lzo7qonm14nqgkbj.uk.auth0.com"
         clientId="SXSr4nFnjSIAPCOSDVVjOstuGx0un6EN"
         authorizationParams={{
-          redirect_uri: "http://localhost:3000/home",
+          redirect_uri: "http://flatfish-frontend.pq46c.icekube.ics.cloud/home",
         }}
       >
         <App />
