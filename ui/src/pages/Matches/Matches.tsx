@@ -4,6 +4,11 @@ import { MatchesDialog } from "../../components/MatchesDialog/MatchesDialog";
 import { Preference } from "../../util/interfaces/Preference";
 import { getProfiles } from "../../requests/getRequests";
 import { Profile } from "../../util/interfaces/Profile";
+import data from "../../data.json";
+import React from "react";
+// import { MatchesCard } from "../../components/Cards/MatchesCard";
+import { SavedCards } from "../../components/Cards/SavedCards";
+import { MatchesCard } from "../../components/Cards/MatchesCard";
 
 interface Props {
   preferences: Preference;
@@ -12,13 +17,8 @@ interface Props {
 export const Matches: React.FC<Props> = ({ preferences }) => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
-
-  const handleClick = (profile: Profile) => {
-    setOpenDialog(true);
-    setSelectedPerson(profile);
-  };
-
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   useEffect(() => {
     getProfiles(
@@ -27,38 +27,79 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
     );
   }, []);
 
+  const handleClick = (data: Profile) => {
+    setOpenDialog(true);
+    setSelectedPerson(data);
+  };
+
+  const handleShuffle = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
+  };
+
   return (
     <div className="flex items-center justify-center w-full h-full">
-      <div className="flex justify-center items-center w-full h-5/6">
+      {/* {data.map((data: Profile, index: number) => (
+        <>
+          <div key={index} onClick={() => handleClick(data)}>
+            <MatchesCard
+              name={data.name}
+              age={data.age}
+              jobTitle={data.jobTitle}
+              userInsta={data.userInsta}
+            />
+          </div>
+        </>
+      ))} */}
+      {/* <div className="flex justify-center items-center w-full h-5/6">
         <div className="flip-card-container flex flex-wrap bg-tan justify-center">
-          {matchedProfiles.map((profile: Profile, index: number) => (
+          {data.map((data: Profile, index: number) => (
             <div
               className="flip-card w-64 h-40 rounded-lg m-2 p-3"
               key={index}
               onClick={() => {
-                handleClick(profile);
+                handleClick(data);
               }}
             >
               <div className="flip-card-inner">
                 <div className="flip-card-front"></div>
                 <div className="flip-card-back flex flex-col justify-center">
-                  <h2>{profile.name}</h2>
-                  <p>Age: {profile.age}</p>
-                  <p>Job: {profile.jobTitle}</p>
-                  <p>Instagram: {profile.userInsta}</p>
+                  <h2>{data.name}</h2>
+                  <p>Age: {data.age}</p>
+                  <p>Job: {data.jobTitle}</p>
+                  <p>Instagram: {data.userInsta}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
+      </div> */}
+      <div className="flex justify-center h-full flex-col items-center">
+        <MatchesCard
+          name={data[currentIndex].name}
+          age={data[currentIndex].age}
+          jobTitle={data[currentIndex].jobTitle}
+          userInsta={data[currentIndex].userInsta}
+          userId={data[currentIndex].userId}
+          description={data[currentIndex].description}
+          email={data[currentIndex].email}
+          userGender={data[currentIndex].userGender}
+        />
+        <button
+          onClick={() => {
+            handleShuffle();
+          }}
+        >
+          shuffle
+        </button>
       </div>
-      {openDialog && selectedPerson && (
+
+      {/* {openDialog && selectedPerson && (
         <MatchesDialog
           openDialog={openDialog}
           setOpenDialog={setOpenDialog}
           selectedPerson={selectedPerson}
         />
-      )}
+      )} */}
     </div>
   );
 };
