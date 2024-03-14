@@ -8,6 +8,7 @@ import data from "../../data.json";
 import React from "react";
 // import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { SavedCards } from "../../components/Cards/SavedCards";
+import { MatchesCard } from "../../components/Cards/MatchesCard";
 
 interface Props {
   preferences: Preference;
@@ -72,8 +73,8 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
           ))}
         </div>
       </div> */}
-      <div>
-        <SavedCards
+      <div className="flex justify-center h-full flex-col items-center">
+        <MatchesCard
           name={data[currentIndex].name}
           age={data[currentIndex].age}
           jobTitle={data[currentIndex].jobTitle}
@@ -83,14 +84,14 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
           email={data[currentIndex].email}
           userGender={data[currentIndex].userGender}
         />
+        <button
+          onClick={() => {
+            handleShuffle();
+          }}
+        >
+          shuffle
+        </button>
       </div>
-      <button
-        onClick={() => {
-          handleShuffle();
-        }}
-      >
-        shuffle
-      </button>
 
       {/* {openDialog && selectedPerson && (
         <MatchesDialog
