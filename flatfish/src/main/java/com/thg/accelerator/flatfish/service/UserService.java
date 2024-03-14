@@ -63,9 +63,6 @@ public class UserService {
         return usersRepo.findById(id);
     }
 
-    public List<PreferenceEntity> getAllPreferences() {
-        return preferencesRepo.findAll();
-    }
     public void addUser(UserEntity userEntity) {
         usersRepo.save(userEntity);
     }
