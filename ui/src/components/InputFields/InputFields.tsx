@@ -27,6 +27,7 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.gender = val;
+      console.log(val);
       return copy;
     });
   };

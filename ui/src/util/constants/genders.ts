@@ -1,11 +1,11 @@
 interface GenderTypes {
-  male: "m";
-  female: "f";
-  "no preference": "none";
+  male: "MALE";
+  female: "FEMALE";
+  "no preference": "UNSPECIFIED";
 }
 
 export const genders: GenderTypes = {
-  male: "m",
-  female: "f",
-  "no preference": "none",
+  male: "MALE",
+  female: "FEMALE",
+  "no preference": "UNSPECIFIED",
 };
