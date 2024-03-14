@@ -1,4 +1,6 @@
+import React from "react";
 import person from "../../img/funcat.jpeg";
+
 interface Props {
   userId: string;
   name: string;
@@ -9,22 +11,22 @@ interface Props {
   userGender: string;
   userInsta: string;
 }
-export const Cards: React.FC<Props> = ({ name, age }) => {
+export const SavedCards: React.FC<Props> = ({ name, age }) => {
   return (
-    <div className="flex justify-start flex-col bg-[#FEEEDE] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
-      <div className="text-center bg-[#FEEEDE] mt-10">
+    <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
+      <div className="text-center bg-[#E5E5E5] mt-10">
         <img
           src={person}
           className="rounded-full h-24 w-24 object-cover mx-auto"
           alt="Profile"
         />
-        <h1 className="bg-[#FEEEDE] font-serif-display text-4xl mt-5 mb-3">
+        <h1 className="bg-[#E5E5E5] font-serif-display text-4xl mt-5 mb-3">
           {name}
         </h1>
-        <h2 className="font-playfair-display text-xl bg-[#FEEEDE] mb-3">
+        <h2 className="font-playfair-display text-xl bg-[#E5E5E5] mb-3">
           {age}
         </h2>
-        <p className="fonto-roboto-condensed bg-[#FEEEDE] text-center">
+        <p className="fonto-roboto-condensed bg-[#E5E5E5] text-center">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
           malesuada orci eu viverra posuere. Etiam est libero, interdum quis dui
           at, condimentum dapibus enim. Nullam tincidunt imperdiet ex ut
