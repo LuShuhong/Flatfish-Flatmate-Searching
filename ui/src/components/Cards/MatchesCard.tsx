@@ -16,7 +16,7 @@ export const MatchesCard: React.FC<Props> = ({ name, age, jobTitle }) => {
     <>
       <div className="flex bg-sea-green justify-center align-center w-5/6 h-5/6 rounded-xl shadow-md">
         <div className="p-5">
-          <img src={person} alt="catpic" className="rounded-xl" />
+          <img src={person} alt="img of person" className="rounded-xl" />
         </div>
         <div className="items-center p-8">
           <h1 className="font-serif-display text-5xl">{name}</h1>

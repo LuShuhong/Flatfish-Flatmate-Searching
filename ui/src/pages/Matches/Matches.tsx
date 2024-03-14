@@ -1,12 +1,12 @@
 import "./Matches.css";
 import { useState } from "react";
-// import { MatchesDialog } from "../../components/MatchesDialog/MatchesDialog";
 import { Preference } from "../../util/interfaces/Preference";
+// import { getProfiles } from "../../requests/getRequests";
+// import { Profile } from "../../util/interfaces/Profile";
 // import { getProfiles } from "../../requests/getRequests";
 // import { Profile } from "../../util/interfaces/Profile";
 import data from "../../data.json";
 import React from "react";
-// import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
 
@@ -18,6 +18,9 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
   // const [openDialog, setOpenDialog] = useState<boolean>(false);
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
   // const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  // const [openDialog, setOpenDialog] = useState<boolean>(false);
+  // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
+  // const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   // useEffect(() => {
@@ -26,7 +29,17 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
   //     setMatchedProfiles
   //   );
   // }, []);
+  // useEffect(() => {
+  //   getProfiles(
+  //     `http://localhost:8080/api/v1/matches?preferenceId=${preferences.preferenceId}&gender=${preferences.gender}&ageMin=${preferences.ageRange[0]}&ageMax=${preferences.ageRange[1]}&budgetMin=${preferences.budgetRange[0]}&budgetMax=${preferences.budgetRange[1]}`,
+  //     setMatchedProfiles
+  //   );
+  // }, []);
 
+  // const handleClick = (data: Profile) => {
+  //   setOpenDialog(true);
+  //   setSelectedPerson(data);
+  // };
   // const handleClick = (data: Profile) => {
   //   setOpenDialog(true);
   //   setSelectedPerson(data);
@@ -49,8 +62,9 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
           email={data[currentIndex].email}
           userGender={data[currentIndex].userGender}
         />
-        <div className="flex p-3">
+        <div className="flex justfy-center p-3">
           <button
+            className=""
             onClick={() => {
               handleShuffle();
             }}
