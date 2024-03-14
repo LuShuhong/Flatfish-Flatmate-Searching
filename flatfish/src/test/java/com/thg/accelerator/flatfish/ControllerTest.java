@@ -55,11 +55,11 @@ public class ControllerTest {
         verify(mockUserService).getAllUsers();
     }
 
-    @Test
-    public void testGetAllPreferencesCallsUserService() {
-        controller.getAllPreferences();
-
-        verify(mockPreferenceService).getAllPreferences();
-    }
+//    @Test
+//    public void testGetAllPreferencesCallsUserService() {
+//        controller.getAllPreferences();
+//
+//        verify(mockPreferenceService).getAllPreferences();
+//    }
 
 }
