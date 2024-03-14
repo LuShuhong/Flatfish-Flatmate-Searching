@@ -1,12 +1,10 @@
 import "./Matches.css";
 import { useState } from "react";
-// import { MatchesDialog } from "../../components/MatchesDialog/MatchesDialog";
 import { Preference } from "../../util/interfaces/Preference";
 // import { getProfiles } from "../../requests/getRequests";
 // import { Profile } from "../../util/interfaces/Profile";
 import data from "../../data.json";
 import React from "react";
-// import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
 
@@ -49,8 +47,9 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
           email={data[currentIndex].email}
           userGender={data[currentIndex].userGender}
         />
-        <div className="flex p-3">
+        <div className="flex justfy-center p-3">
           <button
+            className=""
             onClick={() => {
               handleShuffle();
             }}
