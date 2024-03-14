@@ -13,18 +13,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PreferenceEntity {
-//    @Id
-//    private String preferenceId; // this ID matches userId because 1to1 relationship
-
     @Id
+    private String preferenceId; // this ID matches userId because 1to1 relationship
+
     @Column(name="user_id", insertable=false, updatable=false)
     private String userId;
     private double budgetMin;
     private double budgetMax;
     private double ageMin;
     private double ageMax;
-    private String gender;
-    private boolean smoker;
+    private Gender gender;
 
     @OneToOne
     @MapsId
