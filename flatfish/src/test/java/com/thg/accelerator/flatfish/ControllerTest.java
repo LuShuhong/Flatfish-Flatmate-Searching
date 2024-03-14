@@ -59,7 +59,7 @@ public class ControllerTest {
     public void testGetAllPreferencesCallsUserService() {
         controller.getAllPreferences();
 
-        verify(mockUserService).getAllPreferences();
+        verify(mockPreferenceService).getAllPreferences();
     }
 
 }

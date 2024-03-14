@@ -15,7 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PreferenceService {
@@ -42,55 +46,66 @@ public class PreferenceService {
         this.transformerPreference = transformerPreference;
     }
 
+    public List<PreferenceEntity> getAllPreferences() {
+        return preferencesRepo.findAll();
+    }
+
     @Transactional
     public PreferenceDto updatePreferenceAndLocations(String userId, PreferenceDto updatedPreferenceDto) {
-        // Fetch the existing PreferenceEntity
+        // Fetch the existing PreferenceEntity and associated UserLocationsEntity
         PreferenceEntity preferenceEntity = preferencesRepo.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Preference for user ID " + userId + " not found"));
+                .orElseThrow(() -> new RuntimeException("Preference not found"));
 
-        // Update basic preference details
-        preferenceEntity.setBudgetMin(updatedPreferenceDto.getBudgetMin());
-        preferenceEntity.setBudgetMax(updatedPreferenceDto.getBudgetMax());
-        preferenceEntity.setAgeMin(updatedPreferenceDto.getAgeMin());
-        preferenceEntity.setAgeMax(updatedPreferenceDto.getAgeMax());
-        preferenceEntity.setGender(updatedPreferenceDto.getGender().toString());
-        preferenceEntity.setSmoker(updatedPreferenceDto.isSmoker());
+        List<UserLocationsEntity> currentLocations = userLocationRepo.findByUserEntityUserId(userId);
+        Set<Long> currentLocationIds = currentLocations.stream()
+                .map(location -> location.getLocationEntity().getLocationId())
+                .collect(Collectors.toSet());
 
-        // Process preferred locations
-        // First, remove existing UserLocations associated with this user
-        userLocationRepo.deleteByUserEntityUserId(userId);
+        Set<Long> updatedLocationIds = new HashSet<>(updatedPreferenceDto.getPreferredAreaIds());
 
-        // Then, add new UserLocations based on updatedPreferenceDto
-        updatedPreferenceDto.getPreferredAreaIds().forEach(areaId -> {
-            LocationEntity location = locationRepo.findById(areaId)
+        // Remove locations no longer preferred
+        currentLocations.stream()
+                .filter(location -> !updatedLocationIds.contains(location.getLocationEntity().getLocationId()))
+                .forEach(userLocationRepo::delete);
+
+        // Add new locations
+        updatedLocationIds.removeAll(currentLocationIds); // This leaves only new IDs in updatedLocationIds
+        for (Long newLocationId : updatedLocationIds) {
+            LocationEntity newLocation = locationRepo.findById(newLocationId)
                     .orElseThrow(() -> new RuntimeException("Location not found"));
-            UserLocationsEntity userLocation = new UserLocationsEntity();
-            userLocation.setUserEntity(preferenceEntity.getUserEntity());
-            userLocation.setLocationEntity(location);
-            userLocationRepo.save(userLocation);
-        });
+            UserLocationsEntity newUserLocation = new UserLocationsEntity();
+            newUserLocation.setUserEntity(preferenceEntity.getUserEntity());
+            newUserLocation.setLocationEntity(newLocation);
+            userLocationRepo.save(newUserLocation);
+        }
 
-        // Save the updated preferences
+        // Update the PreferenceEntity as necessary
+        // (Similar to your existing logic for setting other fields)
         preferencesRepo.save(preferenceEntity);
-
-        // Return the updated PreferenceDto
         return transformerPreference.transformPrefEntityToDto(preferenceEntity);
     }
 
+    @Transactional
     public void createPreference(PreferenceDto preferenceDto) {
-        if (!preferenceDto.getUserId().isEmpty()) {
-//            UserEntity userEntity = ;
-            preferencesRepo.save((transformerPreference.transformPrefDtoToEntity(preferenceDto)));
+        // Ensure the user exists
+        UserEntity userEntity = userRepo.findById(preferenceDto.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-//            preferenceDto.getPreferredAreaIds().forEach(areaId -> {
-//                LocationEntity location = locationRepo.findById(areaId)
-//                        .orElseThrow(() -> new RuntimeException("Location not found"));
-//                UserLocationsEntity userLocation = new UserLocationsEntity();
-//                userLocation.setUserEntity(preferenceEntity.getUserEntity());
-//                userLocation.setLocationEntity(location);
-//                userLocationRepo.save(userLocation);
-//            });
-        }
+        // Assuming transformPrefDtoToEntity properly sets the UserEntity
+        PreferenceEntity newPreferenceEntity = transformerPreference.transformPrefDtoToEntity(preferenceDto);
+        newPreferenceEntity.setUserEntity(userEntity); // Ensure the user entity is set in the preference
+
+        preferencesRepo.save(newPreferenceEntity);
+
+        // Process preferred locations
+        preferenceDto.getPreferredAreaIds().forEach(areaId -> {
+            LocationEntity location = locationRepo.findById(areaId)
+                    .orElseThrow(() -> new RuntimeException("Location not found"));
+            UserLocationsEntity userLocation = new UserLocationsEntity();
+            userLocation.setUserEntity(userEntity); // Use the fetched/validated user entity
+            userLocation.setLocationEntity(location);
+            userLocationRepo.save(userLocation);
+        });
     }
 
     // TODO: GET preference at customizable age range
