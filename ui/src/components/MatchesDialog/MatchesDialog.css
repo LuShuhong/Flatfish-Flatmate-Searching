@@ -1,0 +1,33 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #6a5e67;
+  width: 30%; /* Increase the width as desired */
+  max-height: 80%;
+  color: white;
+  box-shadow: 0.3rem 0.3rem 0.8rem 0.5rem rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+  z-index: 2;
+  transition: 2s;
+  padding: 20px;
+}
+.container img {
+  width: 100%; /* Ensure the image takes up the full width of the container */
+  max-height: 300px; /* Adjust the max-height as needed */
+  object-fit: cover; /* Ensure the image covers the entire width while maintaining aspect ratio */
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
