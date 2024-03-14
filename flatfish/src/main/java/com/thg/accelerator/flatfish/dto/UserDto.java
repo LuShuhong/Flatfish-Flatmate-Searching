@@ -13,6 +13,7 @@ import java.util.List;
 public class UserDto {
     private String userId; // email
     private String name;
+    private int age;
     private String description;
     private String userGender;
     private String userInsta;

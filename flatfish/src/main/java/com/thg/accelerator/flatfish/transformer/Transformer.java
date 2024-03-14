@@ -9,8 +9,9 @@ import org.springframework.stereotype.Component;
 public class Transformer {
     public static UserDto transformUserEntityToDto(UserEntity userEntity) {
         return new UserDto(
-                userEntity.getName(),
                 userEntity.getUserId(),
+                userEntity.getName(),
+                userEntity.getAge(),
                 userEntity.getDescription(),
                 userEntity.getUserGender(),
                 userEntity.getUserInsta(),
@@ -19,12 +20,13 @@ public class Transformer {
 
     public static UserEntity transformUserDtoToEntity(UserDto userDto) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setUserId(userDto.getUserId()); // Using email as userId
+        userEntity.setUserId(userDto.getUserId());
         userEntity.setName(userDto.getName());
+        userEntity.setAge(userDto.getAge());
         userEntity.setDescription(userDto.getDescription());
         userEntity.setUserGender(userDto.getUserGender());
         userEntity.setUserInsta(userDto.getUserInsta());
-        userEntity.isSmoker();
+        userEntity.setSmoker(userDto.isSmoker());
 
         return userEntity;
     }
