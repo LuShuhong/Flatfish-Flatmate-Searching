@@ -39,7 +39,7 @@ public class UserService {
         return Optional.of(usersRepo.findAll());
     }
     public Optional<List<UserEntity>> getAllUsers() {
-        return Optional.of(usersRepo.findAll().stream().toList());
+        return Optional.of(usersRepo.findAll());
     }
 
     public Optional<List<PreferenceEntity>> getAllPreferences() {

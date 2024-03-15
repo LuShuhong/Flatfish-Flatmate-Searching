@@ -5,6 +5,7 @@ import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.Transformer;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -47,20 +48,6 @@ public class Controller {
 
     @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getAllUsers() {
-        return userService
-                .getAllUsers()
-                .map(user -> user.stream()
-                        .map(Transformer::transformUserEntityToDto)
-                        .collect(Collectors.toList()))
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    /*
-    * Please! Do NOT make this method return a PreferenceEntity!
-    * */
-    @GetMapping("/preferences")
-    public ResponseEntity<List<UserDto>> getUserPreferences() {
         return userService
                 .getAllUsers()
                 .map(user -> user.stream()
