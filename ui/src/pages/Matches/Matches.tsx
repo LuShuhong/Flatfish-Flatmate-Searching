@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Preference } from "../../util/interfaces/Preference";
 import { getProfiles } from "../../requests/getRequests";
 import { Profile } from "../../util/interfaces/Profile";
-import data from "../../data.json";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
@@ -20,32 +19,30 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
 
   useEffect(() => {
     getProfiles(
-      `http://localhost:8080/api/v1/matches?preferenceId=${preferences.preferenceId}&gender=${preferences.gender}&ageMin=${preferences.ageRange[0]}&ageMax=${preferences.ageRange[1]}&budgetMin=${preferences.budgetRange[0]}&budgetMax=${preferences.budgetRange[1]}`,
+      `http://localhost:8080/api/v1/matches?userId=${preferences.userId}&gender=${preferences.gender}&ageMin=${preferences.ageRange[0]}&ageMax=${preferences.ageRange[1]}&budgetMin=${preferences.budgetRange[0]}&budgetMax=${preferences.budgetRange[1]}`,
       setMatchedProfiles
     );
   }, []);
-  // const handleClick = (data: Profile) => {
-  //   setOpenDialog(true);
-  //   setSelectedPerson(data);
-  // };
 
   const handleShuffle = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % matchedProfiles.length);
   };
 
   return (
     <div className="flex items-center justify-center w-full h-full">
       <div className="flex justify-center h-full flex-col items-center">
-        <MatchesCard
-          name={matchedProfiles[currentIndex].name}
-          age={data[currentIndex].age}
-          jobTitle={data[currentIndex].jobTitle}
-          userInsta={data[currentIndex].userInsta}
-          userId={data[currentIndex].userId}
-          description={data[currentIndex].description}
-          email={data[currentIndex].email}
-          userGender={data[currentIndex].userGender}
-        />
+        {matchedProfiles.length && (
+          <MatchesCard
+            name={matchedProfiles[currentIndex].name}
+            age={matchedProfiles[currentIndex].age}
+            jobTitle={matchedProfiles[currentIndex].jobTitle}
+            userInsta={matchedProfiles[currentIndex].userInsta}
+            userId={matchedProfiles[currentIndex].userId}
+            description={matchedProfiles[currentIndex].description}
+            email={matchedProfiles[currentIndex].email}
+            userGender={matchedProfiles[currentIndex].userGender}
+          />
+        )}
         <div className="flex justfy-center p-3">
           <button
             className=""
