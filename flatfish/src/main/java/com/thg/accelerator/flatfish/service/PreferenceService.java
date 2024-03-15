@@ -1,8 +1,10 @@
 package com.thg.accelerator.flatfish.service;
 
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
+import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
+import com.thg.accelerator.flatfish.repositories.SavedProfileRepo;
 import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class PreferenceService {
 
     @Autowired
     private UsersRepo usersRepo;
+
+    @Autowired
+    private SavedProfileRepo savedProfileRepo;
 
     public List<UserEntity> getMatchingProfiles(Map<String, String> preferences) {
         /* access the data from the getRequest:
@@ -60,4 +65,8 @@ public class PreferenceService {
         }
         return Optional.of(strongMatches);
     }
+
+//    public List<SavedProfileEntity> getAllSavedProfiles(){
+//        return savedProfileRepo.findAll();
+//    }
 }

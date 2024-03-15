@@ -4,6 +4,7 @@ package com.thg.accelerator.flatfish.controllers;
 import com.sun.java.accessibility.util.Translator;
 import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
+import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.service.PreferenceService;
 import com.thg.accelerator.flatfish.transformer.Transformer;
@@ -56,4 +57,10 @@ public class Controller {
     public void addUser(@RequestBody final UserEntity userEntity) {
         preferenceService.addUser(userEntity);
     }
+
+
+//    @GetMapping("/savedprofiles")
+//    public List<SavedProfileEntity> getAllSaved() {
+//        return preferenceService.getAllSavedProfiles();
+//    }
 }
