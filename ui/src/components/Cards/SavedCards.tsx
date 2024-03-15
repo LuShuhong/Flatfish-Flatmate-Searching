@@ -2,14 +2,14 @@ import React from "react";
 import person from "../../img/funcat.jpeg";
 
 interface Props {
-  userId: string;
   name: string;
   age: string;
   jobTitle: string;
   description: string;
   email: string;
-  userGender: string;
-  userInsta: string;
+  gender: string;
+  instagram: string;
+  smoker: boolean;
 }
 
 export const SavedCards: React.FC<Props> = ({ name, age }) => {

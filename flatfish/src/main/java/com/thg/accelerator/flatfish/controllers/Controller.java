@@ -5,6 +5,7 @@ import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.Transformer;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -64,20 +65,6 @@ public class Controller {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    /*
-    * Please! Do NOT make this method return a PreferenceEntity!
-    * */
-    @GetMapping("/preferences")
-    public ResponseEntity<List<UserDto>> getUserPreferences() {
-        return userService
-                .getAllUsers()
-                .map(user -> user.stream()
-                        .map(Transformer::transformUserEntityToDto)
-                        .collect(Collectors.toList()))
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
     @PostMapping
     public ResponseEntity<UserDto> addUser(@RequestBody final UserDto userDto) {
         userService.addUser(Transformer.transformUserDtoToEntity(userDto));
@@ -95,4 +82,17 @@ public class Controller {
 //    public List<SavedProfileEntity> getAllSaved() {
 //        return preferenceService.getAllSavedProfiles();
 //    }
+
+    @PutMapping("/update/preference/{id}")
+    public ResponseEntity<UserDto> addPreference(@PathVariable("id") String id,
+            @RequestBody final UserDto userDto) {
+        userService.updatePreference(id, Transformer.transformUserDtoToEntity(userDto));
+
+        try {
+            return ResponseEntity.ok(userDto);
+            // Need custom exception
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

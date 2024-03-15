@@ -16,10 +16,11 @@ public class UserDto {
 
     private String userId;
     private String name;
-    private String email;
+    private String birthday;
+    private long age;
     private String description;
     private String userGender;
-    private String userInsta;
+    private String instagram;
     private long budgetMin;
     private long budgetMax;
     private long ageMin;
