@@ -4,6 +4,7 @@ import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
 import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -47,6 +48,16 @@ public class UserService {
 
     public void addUser(UserEntity userEntity) {
         usersRepo.save(userEntity);
+    }
+
+    public void updatePreference(String id, UserEntity userEntity) {
+        UserEntity user = usersRepo.findById(id).get();
+        user.setBudgetMin(userEntity.getBudgetMin());
+        user.setBudgetMax(userEntity.getBudgetMax());
+        user.setAgeMin(userEntity.getAgeMin());
+        user.setAgeMax(userEntity.getAgeMax());
+        user.setGender(userEntity.getGender());
+        usersRepo.save(user);
     }
 
     public void addPreferences(PreferenceEntity preferenceEntity) {

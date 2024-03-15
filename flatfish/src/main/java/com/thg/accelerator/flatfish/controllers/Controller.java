@@ -75,7 +75,20 @@ public class Controller {
         userService.addUser(Transformer.transformUserDtoToEntity(userDto));
 
         var location = MvcUriComponentsBuilder
-                .fromMethodName(Controller.class, "getUserById", userDto.getUserId())
+                .fromMethodName(Controller.class, "getUserId", userDto.getUserId())
+                .buildAndExpand(userDto.getUserId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(userDto);
+    }
+
+    @PutMapping("/update/preference/{id}")
+    public ResponseEntity<UserDto> addPreference(@PathVariable("id") String id,
+            @RequestBody final UserDto userDto) {
+        userService.updatePreference(id, Transformer.transformUserDtoToEntity(userDto));
+
+        var location = MvcUriComponentsBuilder
+                .fromMethodName(Controller.class, "getUserId", userDto.getUserId())
                 .buildAndExpand(userDto.getUserId())
                 .toUri();
 
