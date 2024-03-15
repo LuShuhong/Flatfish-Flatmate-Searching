@@ -42,9 +42,6 @@ public class UserEntity {
     @Column(name = "Instagram")
     private String instagram;
 
-    @Column(name= "Smoker")
-    private boolean smoker;
-
     @Column(name = "BudgetMin", table = "Preferences")
     private long budgetMin;
 

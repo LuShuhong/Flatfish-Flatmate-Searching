@@ -7,14 +7,14 @@ import com.thg.accelerator.flatfish.entities.UserEntity;
 public class Transformer {
     public static UserDto transformUserEntityToDto(UserEntity userEntity) {
         return new UserDto(userEntity.getUserId(), userEntity.getName(), userEntity.getBirthday(), userEntity.getAge(),
-                userEntity.getDescription(), userEntity.getUserGender(), userEntity.getInstagram(), userEntity.isSmoker(),
+                userEntity.getDescription(), userEntity.getUserGender(), userEntity.getInstagram(),
                 userEntity.getBudgetMin(), userEntity.getBudgetMax(), userEntity.getAgeMin(),
                 userEntity.getAgeMax(), userEntity.getGender(), userEntity.getLocationEntities());
     }
 
     public static UserEntity transformUserDtoToEntity(UserDto userDto) {
         return new UserEntity(userDto.getUserId(), userDto.getName(), userDto.getBirthday(), userDto.getAge(),
-                userDto.getDescription(), userDto.getUserGender(), userDto.getInstagram(), userDto.isSmoker(),
+                userDto.getDescription(), userDto.getUserGender(), userDto.getInstagram(),
                 userDto.getBudgetMin(), userDto.getBudgetMax(), userDto.getAgeMin(),
                 userDto.getAgeMax(), userDto.getGender(), userDto.getLocationsEntities());
     }

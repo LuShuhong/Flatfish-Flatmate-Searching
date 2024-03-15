@@ -20,7 +20,6 @@ public class UserDto {
     private String description;
     private String userGender;
     private String instagram;
-    private boolean smoker;
     private long budgetMin;
     private long budgetMax;
     private long ageMin;
