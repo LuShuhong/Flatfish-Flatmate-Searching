@@ -23,7 +23,6 @@ export const ProfileInputFields: React.FC<Props> = ({
     updateProfile({ birthday: val });
     updateProfile({ age: getAge(val).toString() });
   };
-
   const handleUserGender = (val: string): void =>
     updateProfile({ userGender: val });
   const handleUserInstagram = (val: string): void =>
