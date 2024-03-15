@@ -41,11 +41,11 @@ export const Matches: React.FC<Props> = ({ preferences }) => {
             name={matchedProfiles[currentIndex].name}
             age={data[currentIndex].age}
             jobTitle={data[currentIndex].jobTitle}
-            userInsta={data[currentIndex].userInsta}
-            userId={data[currentIndex].userId}
+            instagram={data[currentIndex].instagram}
             description={data[currentIndex].description}
             email={data[currentIndex].email}
-            userGender={data[currentIndex].userGender}
+            gender={data[currentIndex].gender}
+            smoker={data[currentIndex].smoker}
           />
         )}
         <div className="flex justfy-center p-3">

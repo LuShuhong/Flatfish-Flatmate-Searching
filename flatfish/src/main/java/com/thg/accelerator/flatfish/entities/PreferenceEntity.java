@@ -19,7 +19,7 @@ public class PreferenceEntity {
     private String preferenceId; // this ID matches userId because 1to1 relationship
 
     @Column(name="user_id", insertable=false, updatable=false)
-    private String userId;
+    private String email;
     private double budgetMin;
     private double budgetMax;
     private double ageMin;

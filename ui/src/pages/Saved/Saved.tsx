@@ -12,14 +12,14 @@ export const Saved: React.FC = () => {
           <>
             <div className="flex justify-center align-center h-full w-full">
               <SavedCards
-                userId={savedProfile.userId}
                 name={savedProfile.name}
                 age={savedProfile.age} // Parse age as a number
                 jobTitle={savedProfile.jobTitle}
                 description={savedProfile.description}
                 email={savedProfile.email}
-                userGender={savedProfile.userGender}
-                userInsta={savedProfile.userInsta}
+                gender={savedProfile.gender}
+                instagram={savedProfile.instagram}
+                smoker={savedProfile.smoker}
               />
             </div>
           </>

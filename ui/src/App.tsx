@@ -18,7 +18,7 @@ function App() {
   const [curUser, setCurUser] = useState<Partial<Profile>>({
     name: user?.name,
     picture: user?.picture,
-    userGender: user?.gender,
+    gender: user?.gender,
     email: user?.email,
     birthday: convertDateToString(new Date()),
   });

@@ -24,9 +24,9 @@ export const ProfileInputFields: React.FC<Props> = ({
     updateProfile({ age: getAge(val).toString() });
   };
   const handleUserGender = (val: string): void =>
-    updateProfile({ userGender: val });
+    updateProfile({ gender: val });
   const handleUserInstagram = (val: string): void =>
-    updateProfile({ userInsta: val });
+    updateProfile({ instagram: val });
 
   const handleSaveProfile = () => {
     // post request
@@ -42,13 +42,10 @@ export const ProfileInputFields: React.FC<Props> = ({
           handleUserBirthdate={handleUserBirthdate}
         />
         <AgeInput age={user.birthday ? getAge(user.birthday) : 0} />
-        <GenderInput
-          gender={user.userGender}
-          handleUserGender={handleUserGender}
-        />
+        <GenderInput gender={user.gender} handleUserGender={handleUserGender} />
       </div>
       <InstagramInput
-        instagram={user.userInsta}
+        instagram={user.instagram}
         handleUserInstagram={handleUserInstagram}
       />
       <div className="flex items-center justify-center w-97.5% h-1/5">
