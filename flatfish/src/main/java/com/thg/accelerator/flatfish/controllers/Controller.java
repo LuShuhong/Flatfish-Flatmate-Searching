@@ -56,6 +56,14 @@ public class Controller {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserDto> getUserById(String userId) {
+        return userService.getUserById(userId)
+                .map(Transformer::transformUserEntityToDto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     /*
     * Please! Do NOT make this method return a PreferenceEntity!
     * */

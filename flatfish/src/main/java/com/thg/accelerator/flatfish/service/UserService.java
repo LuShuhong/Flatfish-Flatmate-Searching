@@ -8,6 +8,7 @@ import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.*;
 
 @Service
@@ -36,6 +37,10 @@ public class UserService {
     }
     public Optional<List<UserEntity>> getAllUsers() {
         return Optional.of(usersRepo.findAll().stream().toList());
+    }
+
+    public Optional<UserEntity> getUserById(String userId) {
+        return usersRepo.findById(userId);
     }
 
     public Optional<List<PreferenceEntity>> getAllPreferences() {
