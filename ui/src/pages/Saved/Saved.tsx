@@ -1,4 +1,4 @@
-import "../Saved/Saved.css";
+import "./Saved.css";
 import data from "../../data.json";
 import { Profile } from "../../util/interfaces/Profile";
 import { SavedCards } from "../../components/Cards/SavedCards";
