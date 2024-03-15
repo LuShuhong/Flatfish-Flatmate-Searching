@@ -12,7 +12,7 @@ import {
   locationIsValid,
 } from "../../util/validPreferenceChecker";
 import { SetDefaultButton } from "../SetDefaultButton/SetDefaultButton";
-import { postPreference } from "../../requests/postRequests";
+import { post } from "../../requests/postRequests";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
@@ -74,7 +74,7 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
     } else if (!locationIsValid(preferences.location)) {
       alert("Please select a location");
     } else {
-      postPreference("http://localhost:8080/api/v1/preferences", {
+      post("http://localhost:8080/api/v1/preferences", {
         preferenceId: email ? email : "",
         budgetMin: preferences.budgetRange[0],
         budgetMax: preferences.budgetRange[1],
