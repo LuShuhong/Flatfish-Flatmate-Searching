@@ -6,15 +6,15 @@ import com.thg.accelerator.flatfish.entities.UserEntity;
 
 public class Transformer {
     public static UserDto transformUserEntityToDto(UserEntity userEntity) {
-        return new UserDto(userEntity.getEmail(), userEntity.getName(), userEntity.getBirthday(), userEntity.getAge(),
-                userEntity.getDescription(), userEntity.getUserGender(), userEntity.getInstagram(),
+        return new UserDto(userEntity.getUserId(), userEntity.getName(), userEntity.getBirthday(), userEntity.getAge(),
+                userEntity.getDescription(), userEntity.getUserGender(), userEntity.getInstagram(), userEntity.isSmoker(),
                 userEntity.getBudgetMin(), userEntity.getBudgetMax(), userEntity.getAgeMin(),
                 userEntity.getAgeMax(), userEntity.getGender(), userEntity.getLocationEntities());
     }
 
     public static UserEntity transformUserDtoToEntity(UserDto userDto) {
-        return new UserEntity(userDto.getEmail(), userDto.getName(), userDto.getBirthday(), userDto.getAge(),
-                userDto.getDescription(), userDto.getUserGender(), userDto.getInstagram(),
+        return new UserEntity(userDto.getUserId(), userDto.getName(), userDto.getBirthday(), userDto.getAge(),
+                userDto.getDescription(), userDto.getUserGender(), userDto.getInstagram(), userDto.isSmoker(),
                 userDto.getBudgetMin(), userDto.getBudgetMax(), userDto.getAgeMin(),
                 userDto.getAgeMax(), userDto.getGender(), userDto.getLocationsEntities());
     }

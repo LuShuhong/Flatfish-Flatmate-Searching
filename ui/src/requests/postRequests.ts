@@ -1,7 +1,7 @@
 import { Preference } from "../util/interfaces/Preference";
 import { PostBody } from "../util/interfaces/PostBody";
 
-export const post = (url: string, body: Preference) => {
+export const postPreference = (url: string, body: Preference) => {
   const postBody: PostBody = {
     userId: body.userId,
     budgetMin: body.budgetRange[0],

@@ -17,5 +17,6 @@ public class PreferenceDto {
     private double ageMin;
     private double ageMax;
     private Gender gender;
+    private boolean smoker;
     private List<Long> preferredAreaIds;
 }

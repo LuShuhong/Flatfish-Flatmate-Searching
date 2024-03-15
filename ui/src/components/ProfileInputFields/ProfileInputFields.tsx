@@ -28,10 +28,7 @@ export const ProfileInputFields: React.FC<Props> = ({
   const handleUserInstagram = (val: string): void =>
     updateProfile({ instagram: val });
 
-  const handleSaveProfile = () => {
-    // post request
-    console.log("save");
-  };
+  const handleSaveProfile = () => {};
   return (
     <div className="h-4/5 w-full">
       <NameInputs username={user.name} handleFirstName={handleFirstName} />

@@ -22,7 +22,7 @@ public class UserEntity {
 
     @Id
     @Column(name = "user_id")
-    private String email;
+    private String userId;
 
     @Column(name = "Name")
     private String name;
@@ -41,6 +41,9 @@ public class UserEntity {
 
     @Column(name = "Instagram")
     private String instagram;
+
+    @Column(name= "Smoker")
+    private boolean smoker;
 
     @Column(name = "BudgetMin", table = "Preferences")
     private long budgetMin;

@@ -13,13 +13,14 @@ import java.util.List;
 @ToString
 public class UserDto {
 
-    private String email;
+    private String userId;
     private String name;
     private String birthday;
     private long age;
     private String description;
     private String userGender;
     private String instagram;
+    private boolean smoker;
     private long budgetMin;
     private long budgetMax;
     private long ageMin;

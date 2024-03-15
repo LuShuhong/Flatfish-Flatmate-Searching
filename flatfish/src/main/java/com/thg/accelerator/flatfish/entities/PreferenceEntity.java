@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -19,12 +17,13 @@ public class PreferenceEntity {
     private String preferenceId; // this ID matches userId because 1to1 relationship
 
     @Column(name="user_id", insertable=false, updatable=false)
-    private String email;
+    private String userId;
     private double budgetMin;
     private double budgetMax;
     private double ageMin;
     private double ageMax;
     private Gender gender;
+    private boolean smoker;
 
     @OneToOne
     @MapsId

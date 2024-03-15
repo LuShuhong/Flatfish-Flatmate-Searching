@@ -52,8 +52,13 @@ public class Controller {
     @GetMapping("/preferences")
     public List<PreferenceEntity> getAllPreferences() {return preferenceService.getAllPreferences();}
 
-    @PostMapping
+    @PostMapping("/users")
     public void addUser(@RequestBody final UserEntity userEntity) {
         preferenceService.addUser(userEntity);
+    }
+
+    @PostMapping("/preferences")
+    public void addPreferences(@RequestBody final PreferenceEntity preferenceEntity) {
+        preferenceService.addPreferences(preferenceEntity);
     }
 }

@@ -48,6 +48,10 @@ public class PreferenceService {
         usersRepo.save(userEntity);
     }
 
+    public void addPreferences(PreferenceEntity preferenceEntity) {
+        preferencesRepo.save(preferenceEntity);
+    }
+
     // TODO: Replace with vector similarity methods
     public Optional<HashMap<UserEntity, Integer>> getStronglyMatchingUsers(String userId) {
         List<UserEntity> allUsers = getAllUsers();
