@@ -1,5 +1,5 @@
 export interface PostBody {
-  userId: string;
+  preferenceId: string;
   budgetMin: number;
   budgetMax: number;
   ageMin: number;

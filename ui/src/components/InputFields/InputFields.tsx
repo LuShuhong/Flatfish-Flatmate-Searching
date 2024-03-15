@@ -75,10 +75,13 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
       alert("Please select a location");
     } else {
       postPreference("http://localhost:8080/api/v1/preferences", {
-        userId: email ? email : "",
+        preferenceId: email ? email : "",
+        budgetMin: preferences.budgetRange[0],
+        budgetMax: preferences.budgetRange[1],
+        ageMin: preferences.ageRange[0],
+        ageMax: preferences.ageRange[1],
         gender: preferences.gender,
-        ageRange: preferences.ageRange,
-        budgetRange: preferences.budgetRange,
+        smoker: false,
         location: "test1",
       });
     }
