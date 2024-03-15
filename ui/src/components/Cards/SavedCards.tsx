@@ -11,6 +11,7 @@ interface Props {
   userGender: string;
   userInsta: string;
 }
+
 export const SavedCards: React.FC<Props> = ({ name, age }) => {
   return (
     <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
