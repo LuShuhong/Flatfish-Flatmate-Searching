@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 85%;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: rgb(83, 81, 80);
+  height: 0.15rem;
+}
+
+input[type="range"]::-moz-range-track {
+  background-color: rgb(83, 81, 80);
+  height: 0.15rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -4.4px;
+  height: 0.7rem;
+  width: 0.7rem;
+  background-color: rgb(64, 62, 60);
+  border-radius: 50%;
+}

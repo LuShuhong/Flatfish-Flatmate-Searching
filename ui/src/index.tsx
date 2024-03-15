@@ -1,15 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Auth0Provider
+        domain="dev-lzo7qonm14nqgkbj.uk.auth0.com"
+        clientId="SXSr4nFnjSIAPCOSDVVjOstuGx0un6EN"
+        authorizationParams={{
+          redirect_uri: "https://flatfish-frontend.pq46c.icekube.ics.cloud/home",
+        }}
+      >
+        <App />
+      </Auth0Provider>
+    </Router>
   </React.StrictMode>
 );
 
