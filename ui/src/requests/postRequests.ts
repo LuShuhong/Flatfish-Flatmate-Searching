@@ -1,23 +1,12 @@
-import { Preference } from "../util/interfaces/Preference";
 import { PostBody } from "../util/interfaces/PostBody";
 
-export const post = (url: string, body: Preference) => {
-  const postBody: PostBody = {
-    userId: body.userId,
-    budgetMin: body.budgetRange[0],
-    budgetMax: body.budgetRange[1],
-    ageMin: body.ageRange[0],
-    ageMax: body.ageRange[1],
-    gender: body.gender,
-    smoker: true,
-    location: body.location,
-  };
+export const post = (url: string, body: PostBody) => {
   fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(postBody),
+    body: JSON.stringify(body),
   })
     .then(() => console.log("success"))
     .catch((error) => console.log(error));

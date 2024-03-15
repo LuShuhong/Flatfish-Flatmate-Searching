@@ -14,14 +14,17 @@ import { convertDateToString } from "./util/dateConverter";
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
-  const curUser: Partial<Profile> = {
+  const [curPage, setCurPage] = useState<string>("Home");
+  const [curUser, setCurUser] = useState<Partial<Profile>>({
     name: user?.name,
     picture: user?.picture,
-    userGender: user?.gender,
+    gender: user?.gender,
     email: user?.email,
     birthday: convertDateToString(new Date()),
-  };
-  const [curPage, setCurPage] = useState<string>("Home");
+  });
+  const updateProfile = (updatedField: Partial<Profile>): void =>
+    setCurUser((u) => ({ ...u, ...updatedField }));
+
   const navigate = useNavigate();
   const handlePageChange = (newPage: string): void => {
     setCurPage(() => newPage);
@@ -49,7 +52,10 @@ function App() {
               <HomePage getPreferences={getPreferences} email={curUser.email} />
             }
           />
-          <Route path="/profile" element={<MyProfile user={curUser} />} />
+          <Route
+            path="/profile"
+            element={<MyProfile user={curUser} updateProfile={updateProfile} />}
+          />
           <Route
             path="/matches"
             element={<Matches preferences={preferences} />}

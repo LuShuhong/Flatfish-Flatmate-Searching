@@ -27,8 +27,11 @@ public class UserEntity {
     @Column(name = "Name")
     private String name;
 
-    @Column(name = "Email")
-    private String email;
+    @Column(name = "Birthday")
+    private String birthday;
+
+    @Column(name = "Age")
+    private long age;
 
     @Column(name = "Description")
     private String description;
@@ -36,8 +39,8 @@ public class UserEntity {
     @Column(name = "UserGender")
     private String userGender;
 
-    @Column(name = "UserInsta")
-    private String userInsta;
+    @Column(name = "Instagram")
+    private String instagram;
 
     @Column(name = "BudgetMin", table = "Preferences")
     private long budgetMin;
