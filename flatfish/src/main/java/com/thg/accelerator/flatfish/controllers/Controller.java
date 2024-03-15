@@ -57,12 +57,20 @@ public class Controller {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserDto> getUserById(String userId) {
+        return userService.getUserById(userId)
+                .map(Transformer::transformUserEntityToDto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public ResponseEntity<UserDto> addUser(@RequestBody final UserDto userDto) {
         userService.addUser(Transformer.transformUserDtoToEntity(userDto));
 
         var location = MvcUriComponentsBuilder
-                .fromMethodName(Controller.class, "getUserId", userDto.getUserId())
+                .fromMethodName(Controller.class, "getUserById", userDto.getUserId())
                 .buildAndExpand(userDto.getUserId())
                 .toUri();
 
@@ -74,11 +82,11 @@ public class Controller {
             @RequestBody final UserDto userDto) {
         userService.updatePreference(id, Transformer.transformUserDtoToEntity(userDto));
 
-        var location = MvcUriComponentsBuilder
-                .fromMethodName(Controller.class, "getUserId", userDto.getUserId())
-                .buildAndExpand(userDto.getUserId())
-                .toUri();
-
-        return ResponseEntity.created(location).body(userDto);
+        try {
+            return ResponseEntity.ok(userDto);
+            // Need custom exception
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

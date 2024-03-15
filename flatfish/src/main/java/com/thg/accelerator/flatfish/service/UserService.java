@@ -4,13 +4,9 @@ import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
 import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 import java.util.*;
 
 
@@ -42,6 +38,10 @@ public class UserService {
         return Optional.of(usersRepo.findAll());
     }
 
+    public Optional<UserEntity> getUserById(String userId) {
+        return usersRepo.findById(userId);
+    }
+
     public Optional<List<PreferenceEntity>> getAllPreferences() {
         return Optional.of(preferencesRepo.findAll());
     }
@@ -58,10 +58,6 @@ public class UserService {
         user.setAgeMax(userEntity.getAgeMax());
         user.setGender(userEntity.getGender());
         usersRepo.save(user);
-    }
-
-    public void addPreferences(PreferenceEntity preferenceEntity) {
-        preferencesRepo.save(preferenceEntity);
     }
 
     // TODO: Replace with vector similarity methods
