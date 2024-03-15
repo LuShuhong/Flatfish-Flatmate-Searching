@@ -19,14 +19,20 @@ export const ProfileInputFields: React.FC<Props> = ({
 }) => {
   const handleFirstName = (val: string): void => updateProfile({ name: val });
   const handleUserEmail = (val: string): void => updateProfile({ email: val });
-  const handleUserBirthdate = (val: string): void =>
+  const handleUserBirthdate = (val: string): void => {
     updateProfile({ birthday: val });
+    updateProfile({ age: getAge(val).toString() });
+  };
+
   const handleUserGender = (val: string): void =>
     updateProfile({ userGender: val });
   const handleUserInstagram = (val: string): void =>
     updateProfile({ userInsta: val });
 
-  const handleSaveProfile = () => {};
+  const handleSaveProfile = () => {
+    // post request
+    console.log("save");
+  };
   return (
     <div className="h-4/5 w-full">
       <NameInputs username={user.name} handleFirstName={handleFirstName} />
