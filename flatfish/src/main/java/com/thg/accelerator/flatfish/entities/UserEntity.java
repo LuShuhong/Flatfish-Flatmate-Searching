@@ -17,7 +17,7 @@ import java.util.List;
 @SecondaryTables({
         @SecondaryTable(name = "Preferences"),
         @SecondaryTable(name = "UserLocations"),
-        @SecondaryTable(name = "SavedProfiles")
+//        @SecondaryTable(name = "saved_profiles")
 })
 public class UserEntity {
 
@@ -60,7 +60,7 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "userEntity")
     private List<UserLocationsEntity> locationEntities;
-
+//
     @OneToMany(mappedBy = "userEntity")
     private List<SavedProfileEntity> savedProfilesEntitiesList;
 

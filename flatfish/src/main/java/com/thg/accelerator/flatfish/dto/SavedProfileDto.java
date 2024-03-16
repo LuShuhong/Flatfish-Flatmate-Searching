@@ -8,13 +8,16 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class SavedProfileDto {
+    private String SavedProfileId;
+    private String userId;
 
-    private String savedUserId;
-    private String name;
-    private String age;
-    private Gender gender;
-    private String description;
-    private String email;
-    private String userGender;
-    private String userInsta;
+
+//    private String savedUserId;
+//    private String name;
+//    private String age;
+//    private String gender;
+//    private String description;
+//    private String email;
+//    private String userGender;
+//    private String userInsta;
 }
