@@ -26,4 +26,3 @@ public class UserLocationsEntity {
     @JoinColumn(name = "LocationId", referencedColumnName = "LocationId")
     private LocationEntity locationEntity;
 }
-

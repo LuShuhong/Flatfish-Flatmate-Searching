@@ -18,15 +18,6 @@ public class SavedProfileEntity {
     private String savedUserId;
 
     // a key(userid of the person doing the saving), a list of userid saved profiles
-//    private String savedUserId;
-//    private String name;
-//    private String age;
-//    private Gender gender;
-////    private String jobTitle;
-//    private String description;
-//    private String email;
-//    private String userGender;
-//    private String userInsta;
 
     @ManyToOne
     @MapsId

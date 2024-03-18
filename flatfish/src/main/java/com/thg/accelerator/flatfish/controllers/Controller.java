@@ -7,6 +7,7 @@ import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.service.SavedProfileService;
 import com.thg.accelerator.flatfish.service.UserService;
+import com.thg.accelerator.flatfish.transformer.SavedProfileTransformer;
 import com.thg.accelerator.flatfish.transformer.Transformer;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ import static java.util.Arrays.stream;
 @CrossOrigin(origins="http://localhost:3000")
 public class Controller {
     private final UserService userService;
-    private SavedProfileService savedProfileService;
+    private final SavedProfileService savedProfileService;
 
 
     Controller(UserService userService, SavedProfileService savedProfileService) {
@@ -102,7 +103,7 @@ public class Controller {
         return savedProfileService
                 .getAllSavedProfiles()
                 .map(profile -> profile.stream()
-                        .map(Transformer::transformSavedProfileEntityToDto)
+                        .map(SavedProfileTransformer::transformSavedProfileEntityToDto)
                         .collect(Collectors.toList()))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
