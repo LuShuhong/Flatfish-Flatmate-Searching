@@ -57,6 +57,7 @@ public class UserEntity {
     @Column(name = "Gender", table = "Preferences")
     private Gender gender;
 
+    @Column
     @OneToMany(mappedBy = "userEntity")
     private List<SavedProfileEntity> savedProfilesEntitiesList;
 

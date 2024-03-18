@@ -35,7 +35,7 @@ public class Transformer {
         return new UserDto(userEntity.getUserId(), userEntity.getName(), userEntity.getBirthday(), userEntity.getAge(),
                 userEntity.getDescription(), userEntity.getUserGender(), userEntity.getInstagram(),
                 userEntity.getBudgetMin(), userEntity.getBudgetMax(), userEntity.getAgeMin(),
-                userEntity.getAgeMax(), userEntity.getGender(), userEntity.getSavedProfilesEntitiesList(), locationPreferences);
+                userEntity.getAgeMax(), userEntity.getGender(), locationPreferences);
     }
 
     public static UserEntity transformUserDtoToEntity(UserDto userDto) {
