@@ -28,9 +28,10 @@ public class SavedProfileService {
     public void saveAProfile(String userId, SavedProfileEntity savedProfileEntity) {
         // Find the user by ID
         Optional<UserEntity> userEntityOptional = usersRepo.findById(userId);
+
         if (userEntityOptional.isPresent()) {
             UserEntity userEntity = userEntityOptional.get();
-            savedProfileEntity.setUserEntity(userEntity); // Set the user for the saved profile
+            savedProfileEntity.setSavingUser(userEntity);; // Set the user for the saved profile
             savedRepo.save(savedProfileEntity);
         } else {
             // Handle case where user is not found

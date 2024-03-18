@@ -14,13 +14,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SavedProfileEntity {
     @Id
-    @Column(name="saved_user_id", insertable = false, updatable = false)
-    private String savedUserId;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private UserEntity userEntity;
+    @JoinColumn(name="saving_user_id", nullable = false)
+    private UserEntity savingUser;
+
+    @ManyToOne
+    @JoinColumn(name = "saved_user_id", nullable = false)
+    private UserEntity savedUser;
 
 }
 // many to one relationship with user entity

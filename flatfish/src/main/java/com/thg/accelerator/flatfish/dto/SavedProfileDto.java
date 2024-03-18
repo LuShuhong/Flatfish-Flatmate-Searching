@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class SavedProfileDto {
+    private Long Id;
     private String SavedProfileId;
     private String userId;
 

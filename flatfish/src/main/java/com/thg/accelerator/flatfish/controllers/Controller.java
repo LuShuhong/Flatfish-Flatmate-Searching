@@ -5,6 +5,7 @@ import com.thg.accelerator.flatfish.dto.SavedProfileDto;
 import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
+import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import com.thg.accelerator.flatfish.service.SavedProfileService;
 import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.SavedProfileTransformer;
@@ -29,11 +30,13 @@ import static java.util.Arrays.stream;
 public class Controller {
     private final UserService userService;
     private final SavedProfileService savedProfileService;
+    private final UsersRepo usersRepo;
 
 
-    Controller(UserService userService, SavedProfileService savedProfileService) {
+    Controller(UserService userService, SavedProfileService savedProfileService, UsersRepo usersRepo) {
         this.userService = userService;
         this.savedProfileService = savedProfileService;
+        this.usersRepo = usersRepo;
     }
 
     @GetMapping("/matches")
@@ -68,8 +71,8 @@ public class Controller {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> getUserById(String userId) {
-        return userService.getUserById(userId)
+    public ResponseEntity<UserDto> getUserById(@PathVariable String id) {
+        return userService.getUserById(id)
                 .map(Transformer::transformUserEntityToDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -102,7 +105,7 @@ public class Controller {
 
     @PostMapping("/savedprofiles")
     public ResponseEntity<SavedProfileDto> addSavedProfile(@RequestBody SavedProfileDto savedProfileDto) {
-        savedProfileService.saveAProfile(savedProfileDto.getUserId(), SavedProfileTransformer.transformSavedProfileDtoToEntity(savedProfileDto));
+        savedProfileService.saveAProfile(savedProfileDto.getUserId(), SavedProfileTransformer.transformSavedProfileDtoToEntity(savedProfileDto, usersRepo));
         URI location = MvcUriComponentsBuilder.fromMethodName(Controller.class, "getUserById", savedProfileDto.getUserId())
                 .buildAndExpand(savedProfileDto.getUserId())
                 .toUri();

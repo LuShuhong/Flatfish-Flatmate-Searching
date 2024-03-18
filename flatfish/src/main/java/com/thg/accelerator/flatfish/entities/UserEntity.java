@@ -57,8 +57,7 @@ public class UserEntity {
     @Column(name = "Gender", table = "Preferences")
     private Gender gender;
 
-    @Column
-    @OneToMany(mappedBy = "userEntity")
+    @OneToMany(mappedBy = "savedUser") // Update mappedBy attribute to reference savedUser
     private List<SavedProfileEntity> savedProfilesEntitiesList;
 
     @Column(name = "first_choice_location_id", table = "Preferences")
