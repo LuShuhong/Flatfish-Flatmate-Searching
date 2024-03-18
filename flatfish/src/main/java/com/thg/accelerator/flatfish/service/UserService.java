@@ -1,10 +1,15 @@
 package com.thg.accelerator.flatfish.service;
+// <<<<<<< HEAD
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
 import com.thg.accelerator.flatfish.repositories.SavedProfileRepo;
 import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
+// =======
+// import com.thg.accelerator.flatfish.entities.UserEntity;
+// import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
+// >>>>>>> dev
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +21,6 @@ import java.util.*;
 public class UserService {
     @Autowired
     private PreferencesRepo preferencesRepo;
-
-    @Autowired
-    private UserLocationsRepo userLocationsRepo;
 
     @Autowired
     private UsersRepo usersRepo;
@@ -34,6 +36,7 @@ public class UserService {
         */
 
         // matching algorithm...
+        //return Optional.of(usersRepo.findAll());
         return Optional.of(usersRepo.findAll());
     }
     public Optional<List<UserEntity>> getAllUsers() {
@@ -42,10 +45,6 @@ public class UserService {
 
     public Optional<UserEntity> getUserById(String userId) {
         return usersRepo.findById(userId);
-    }
-
-    public Optional<List<PreferenceEntity>> getAllPreferences() {
-        return Optional.of(preferencesRepo.findAll());
     }
 
     public void addUser(UserEntity userEntity) {

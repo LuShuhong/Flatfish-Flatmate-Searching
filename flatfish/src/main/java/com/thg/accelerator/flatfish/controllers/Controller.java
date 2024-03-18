@@ -40,7 +40,7 @@ public class Controller {
     }
 
     @GetMapping("/matches")
-    public ResponseEntity<List<UserDto>> getMatchingProfiles(@RequestParam Map<String, String> preferences) {
+    public ResponseEntity<List<UserDto>> getMatchingProfiles(Map<String, String> preferences) {
         return userService
                 .getMatchingProfiles(preferences)
                 .map(tasks -> tasks.stream()

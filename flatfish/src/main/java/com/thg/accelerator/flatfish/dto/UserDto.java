@@ -5,8 +5,6 @@ import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserLocationsEntity;
 import lombok.*;
 
-import java.util.List;
-
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -30,5 +28,7 @@ public class UserDto {
     private List<SavedProfileEntity> savedProfileEntities;
 
 //    private List<UserLocationsEntity> locationsEntities;
-    private List<String> locationPreferences;
+    private String location1;
+    private String location2;
+    private String location3;
 }

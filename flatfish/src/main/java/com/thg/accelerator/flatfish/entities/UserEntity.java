@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -15,8 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "Users")
 @SecondaryTables({
-        @SecondaryTable(name = "Preferences", pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_id")),
-//        @SecondaryTable(name = "UserPreferredLocations")
+        @SecondaryTable(name = "Preferences")
 })
 public class UserEntity {
 
@@ -57,17 +54,19 @@ public class UserEntity {
     @Column(name = "Gender", table = "Preferences")
     private Gender gender;
 
+<<<<<<< HEAD
     @OneToMany(mappedBy = "savedUser") // Update mappedBy attribute to reference savedUser
     private List<SavedProfileEntity> savedProfilesEntitiesList;
+=======
+    @Column(name = "Location1", table = "Preferences")
+    private String location1;
+>>>>>>> dev
 
-    @Column(name = "first_choice_location_id", table = "Preferences")
-    private Long locationEntityFirstChoiceId;
+    @Column(name = "Location2", table = "Preferences")
+    private String location2;
 
-    @Column(name = "second_choice_location_id", table = "Preferences")
-    private Long locationEntitySecondChoiceId;
-
-    @Column(name = "third_choice_location_id", table = "Preferences")
-    private Long locationEntityThirdChoiceId;
+    @Column(name = "Location3", table = "Preferences")
+    private String location3;
 
 
 
