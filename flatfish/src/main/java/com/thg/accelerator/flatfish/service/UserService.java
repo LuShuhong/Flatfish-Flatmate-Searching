@@ -32,6 +32,7 @@ public class UserService {
         */
 
         // matching algorithm...
+        //return Optional.of(usersRepo.findAll());
         return Optional.of(usersRepo.findAll());
     }
     public Optional<List<UserEntity>> getAllUsers() {
@@ -40,10 +41,6 @@ public class UserService {
 
     public Optional<UserEntity> getUserById(String userId) {
         return usersRepo.findById(userId);
-    }
-
-    public Optional<List<PreferenceEntity>> getAllPreferences() {
-        return Optional.of(preferencesRepo.findAll());
     }
 
     public void addUser(UserEntity userEntity) {

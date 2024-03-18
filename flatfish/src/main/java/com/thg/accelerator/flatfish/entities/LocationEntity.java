@@ -22,7 +22,7 @@ public class LocationEntity {
 
 //    @OneToMany(mappedBy = "locationEntity")
 //    private List<UserLocationsEntity> userLocations;
-
+//
 //    @OneToMany(mappedBy = "locationEntity")
 //    private List<UserEntity> preferredLocationsInUserEntity;
 }
