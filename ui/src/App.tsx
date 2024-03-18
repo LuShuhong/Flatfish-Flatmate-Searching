@@ -16,13 +16,15 @@ function App() {
   const { user, isAuthenticated } = useAuth0();
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
-  const [curUser, setCurUser] = useState<Partial<Profile>>({
+  const initialDetails: Partial<Profile> = {
     name: user?.name,
     picture: user?.picture,
     gender: user?.gender,
     email: user?.email,
     birthday: convertDateToString(new Date()),
-  });
+  };
+  const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
+
   const updateProfile = (updatedField: Partial<Profile>): void =>
     setCurUser((u) => ({ ...u, ...updatedField }));
 
@@ -58,7 +60,10 @@ function App() {
           <Route
             path="/home"
             element={
-              <HomePage getPreferences={getPreferences} email={curUser.email} />
+              <HomePage
+                getPreferences={getPreferences}
+                email={curUser?.email}
+              />
             }
           />
           <Route
