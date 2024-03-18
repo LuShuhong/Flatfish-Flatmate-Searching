@@ -29,18 +29,17 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
 
   const handleGender = (val: "MALE" | "FEMALE" | "UNSPECIFIED"): void =>
     updatePreferences({ gender: val });
+
   const handleAge = (val: number, index: 0 | 1): void => {
     const curAgeRange = preferences.ageRange;
     curAgeRange[index] = val;
     updatePreferences({ ageRange: curAgeRange });
   };
-  const handleBudget = (val: number, index: 0 | 1): void => {
 
-    setPreferences((p) => {
-      const copy = { ...p };
-      copy.budgetRange[index] = val;
-      return copy;
-    });
+  const handleBudget = (val: number, index: 0 | 1): void => {
+    const curBudgetRange = preferences.budgetRange;
+    curBudgetRange[index] = val;
+    updatePreferences({ budgetRange: curBudgetRange });
   };
 
   const handleLocation = (val: string) => {
@@ -50,16 +49,9 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
     } else if (newLocationList.length < 3 && !newLocationList.includes(val)) {
       newLocationList.push(val);
     }
-    setPreferences({ ...preferences, location: newLocationList });
-    console.log(preferences.location);
+    updatePreferences({ location: newLocationList });
+    console.log(preferences);
   };
-
-
-    const curBudgetRange = preferences.budgetRange;
-    curBudgetRange[index] = val;
-    updatePreferences({ budgetRange: curBudgetRange });
-  };
-  const handleLocation = (val: string) => updatePreferences({ location: val });
 
   const handleMatch = (): void => {
     if (!ageIsValid(preferences.ageRange)) {
