@@ -23,37 +23,22 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
   const [preferences, setPreferences] =
     useState<Preference>(defaultPreferences);
 
-  const handleGender = (val: "MALE" | "FEMALE" | "UNSPECIFIED"): void => {
-    setPreferences((p) => {
-      const copy = { ...p };
-      copy.gender = val;
-      console.log(val);
-      return copy;
-    });
-  };
+  const updatePreferences = (updatedField: Partial<Preference>): void =>
+    setPreferences((p) => ({ ...p, ...updatedField }));
 
+  const handleGender = (val: "MALE" | "FEMALE" | "UNSPECIFIED"): void =>
+    updatePreferences({ gender: val });
   const handleAge = (val: number, index: 0 | 1): void => {
-    setPreferences((p) => {
-      const copy = { ...p };
-      copy.ageRange[index] = val;
-      return copy;
-    });
+    const curAgeRange = preferences.ageRange;
+    curAgeRange[index] = val;
+    updatePreferences({ ageRange: curAgeRange });
   };
-
   const handleBudget = (val: number, index: 0 | 1): void => {
-    setPreferences((p) => {
-      const copy = { ...p };
-      copy.budgetRange[index] = val;
-      return copy;
-    });
+    const curBudgetRange = preferences.budgetRange;
+    curBudgetRange[index] = val;
+    updatePreferences({ budgetRange: curBudgetRange });
   };
-  const handleLocation = (val: string) => {
-    setPreferences((p) => {
-      const copy = { ...p };
-      copy.location = val;
-      return copy;
-    });
-  };
+  const handleLocation = (val: string) => updatePreferences({ location: val });
   const handleMatch = (): void => {
     if (!ageIsValid(preferences.ageRange)) {
       alert("Maximum age must be bigger than minimum age");

@@ -1,11 +1,10 @@
-import { Profile } from "../../util/interfaces/Profile";
 import { Logo } from "../Logo/Logo";
 import { Navigation } from "../Navigation/Navigation";
 
 interface Props {
   curPage: string;
   handlePageChange: (newPage: string) => void;
-  user: Partial<Profile>;
+  user: any;
   authenticated: boolean;
 }
 
