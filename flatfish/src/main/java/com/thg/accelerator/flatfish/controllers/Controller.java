@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +80,7 @@ public class Controller {
         userService.addUser(Transformer.transformUserDtoToEntity(userDto));
 
         var location = MvcUriComponentsBuilder
-                .fromMethodName(Controller.class, "getProfileById", userDto.getUserId())
+                .fromMethodName(Controller.class, "getUserById", userDto.getUserId())
                 .buildAndExpand(userDto.getUserId())
                 .toUri();
 
@@ -98,6 +99,16 @@ public class Controller {
 //                .toUri();
 //        return ResponseEntity.created(location).body(savedProfileDto);
 //    }
+
+    @PostMapping("/savedprofiles")
+    public ResponseEntity<SavedProfileDto> addSavedProfile(@RequestBody SavedProfileDto savedProfileDto) {
+        savedProfileService.saveAProfile(savedProfileDto.getUserId(), SavedProfileTransformer.transformSavedProfileDtoToEntity(savedProfileDto));
+        URI location = MvcUriComponentsBuilder.fromMethodName(Controller.class, "getUserById", savedProfileDto.getUserId())
+                .buildAndExpand(savedProfileDto.getUserId())
+                .toUri();
+        return ResponseEntity.created(location).body(savedProfileDto);
+    }
+
     @GetMapping("/savedprofiles")
     public ResponseEntity<List<SavedProfileDto>> getAllSavedProfiles(){
         return savedProfileService

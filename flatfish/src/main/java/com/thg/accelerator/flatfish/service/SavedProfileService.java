@@ -3,33 +3,42 @@ package com.thg.accelerator.flatfish.service;
 import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.SavedProfileRepo;
+import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-
-// i need: delete, post and get
-// start with get , then post then delete
 @Service
 public class SavedProfileService {
-    @Autowired
-    private SavedProfileRepo savedRepo;
+    private final SavedProfileRepo savedRepo;
+    private final UsersRepo usersRepo;
 
-    //get all
-    public Optional<List<SavedProfileEntity>> getAllSavedProfiles(){
+    @Autowired
+    public SavedProfileService(SavedProfileRepo savedRepo, UsersRepo usersRepo) {
+        this.savedRepo = savedRepo;
+        this.usersRepo= usersRepo;
+    }
+
+    public Optional<List<SavedProfileEntity>> getAllSavedProfiles() {
         return Optional.of(savedRepo.findAll());
     }
 
-    //post request
-    public void saveAProfile(SavedProfileEntity savedProfileEntity){
-         savedRepo.save(savedProfileEntity);
+    public void saveAProfile(String userId, SavedProfileEntity savedProfileEntity) {
+        // Find the user by ID
+        Optional<UserEntity> userEntityOptional = usersRepo.findById(userId);
+        if (userEntityOptional.isPresent()) {
+            UserEntity userEntity = userEntityOptional.get();
+            savedProfileEntity.setUserEntity(userEntity); // Set the user for the saved profile
+            savedRepo.save(savedProfileEntity);
+        } else {
+            // Handle case where user is not found
+            throw new IllegalArgumentException("User with ID " + userId + " not found");
+        }
     }
 
     public Optional<SavedProfileEntity> getProfileById(String savedProfileId) {
         return savedRepo.findById(savedProfileId);
     }
-
 }
-
