@@ -8,52 +8,56 @@ import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
 
 interface Props {
-  preferences: Preference;
+  profiles: Profile[];
 }
 
-export const Matches: React.FC<Props> = ({ preferences }) => {
+export const Matches: React.FC<Props> = ({ profiles }) => {
   // const [openDialog, setOpenDialog] = useState<boolean>(false);
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  useEffect(() => {
-    getProfiles(
-      `http://localhost:8080/api/v1/matches?userId=${preferences.userId}&gender=${preferences.gender}&ageMin=${preferences.ageRange[0]}&ageMax=${preferences.ageRange[1]}&budgetMin=${preferences.budgetRange[0]}&budgetMax=${preferences.budgetRange[1]}`,
-      setMatchedProfiles
-    );
-  }, []);
+  // useEffect(() => {
+  //   getProfiles(
+  //     `http://localhost:8080/api/v1/matches?userId=${profiles.userId}&gender=${profiles.gender}&ageMin=${profiles.ageRange[0]}&ageMax=${profiles.ageRange[1]}&budgetMin=${profiles.budgetRange[0]}&budgetMax=${profiles.budgetRange[1]}`,
+  //     setMatchedProfiles
+  //   );
+  // }, []);
 
   const handleShuffle = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % matchedProfiles.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
   };
 
   return (
     <div className="flex items-center justify-center w-full h-full">
-      <div className="flex justify-center h-full flex-col items-center">
-        {matchedProfiles.length && (
-          <MatchesCard
-            name={matchedProfiles[currentIndex].name}
-            age={matchedProfiles[currentIndex].age}
-            jobTitle={matchedProfiles[currentIndex].jobTitle}
-            instagram={matchedProfiles[currentIndex].instagram}
-            description={matchedProfiles[currentIndex].description}
-            email={matchedProfiles[currentIndex].email}
-            gender={matchedProfiles[currentIndex].gender}
-            smoker={matchedProfiles[currentIndex].smoker}
-          />
-        )}
-        <div className="flex justfy-center p-3">
-          <button
-            className=""
-            onClick={() => {
-              handleShuffle();
-            }}
-          >
-            <ShuffleButton />
-          </button>
+      {profiles.length ? (
+        <div className="flex justify-center h-full flex-col items-center">
+          {profiles.length && (
+            <MatchesCard
+              name={profiles[currentIndex].name}
+              age={profiles[currentIndex].age}
+              jobTitle={profiles[currentIndex].jobTitle}
+              instagram={profiles[currentIndex].instagram}
+              description={profiles[currentIndex].description}
+              email={profiles[currentIndex].email}
+              gender={profiles[currentIndex].gender}
+              smoker={profiles[currentIndex].smoker}
+            />
+          )}
+          <div className="flex justfy-center p-3">
+            <button
+              className=""
+              onClick={() => {
+                handleShuffle();
+              }}
+            >
+              <ShuffleButton />
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="">no matches</div>
+      )}
     </div>
   );
 };
