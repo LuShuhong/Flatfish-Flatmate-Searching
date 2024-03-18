@@ -25,6 +25,9 @@ public class UserService {
     @Autowired
     private UsersRepo usersRepo;
 
+    @Autowired
+    private ProfileMatcher profileMatcher;
+
     public Optional<List<UserEntity>> getMatchingProfiles(Map<String, String> preferences) {
         /* access the data from the getRequest:
         preferences.get("preferenceId")
@@ -35,10 +38,18 @@ public class UserService {
         preferences.get("budgetMax")
         */
 
+        String ageMin = preferences.get("ageMin");
+        String ageMax = preferences.get("ageMax");
+        String budgetMin = preferences.get("budgetMin");
+        String budgetMax = preferences.get("budgetMax");
+        String gender = preferences.get("gender");
+
+        List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
         //return Optional.of(usersRepo.findAll());
-        return Optional.of(usersRepo.findAll());
+        return Optional.of(profileMatcher.matchProfiles(allUsers, ageMin, ageMax, budgetMin, budgetMax, gender));
     }
+
     public Optional<List<UserEntity>> getAllUsers() {
         return Optional.of(usersRepo.findAll());
     }
