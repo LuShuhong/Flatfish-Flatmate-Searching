@@ -20,6 +20,9 @@ public class LocationEntity {
     private Long locationId;
     private String locationName;
 
-    @OneToMany(mappedBy = "locationEntity")
-    private List<UserLocationsEntity> userLocations;
+//    @OneToMany(mappedBy = "locationEntity")
+//    private List<UserLocationsEntity> userLocations;
+
+//    @OneToMany(mappedBy = "locationEntity")
+//    private List<UserEntity> preferredLocationsInUserEntity;
 }

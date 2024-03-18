@@ -26,6 +26,9 @@ public class UserDto {
     private long ageMin;
     private long ageMax;
     private Gender gender;
-    private List<UserLocationsEntity> locationsEntities;
+
     private List<SavedProfileEntity> savedProfileEntities;
+
+//    private List<UserLocationsEntity> locationsEntities;
+    private List<String> locationPreferences;
 }
