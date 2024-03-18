@@ -13,9 +13,9 @@ export const GenderInput: React.FC<Props> = ({ gender, handleUserGender }) => {
           defaultValue={gender}
           onChange={(e) => handleUserGender(e.target.value)}
         >
-          <option value="select">select</option>
-          <option value="m">male</option>
-          <option value="f">female</option>
+          <option value="SELECT">select</option>
+          <option value="MALE">male</option>
+          <option value="FEMALE">female</option>
         </select>
       </label>
     </div>

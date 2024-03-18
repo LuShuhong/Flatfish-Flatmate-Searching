@@ -24,6 +24,7 @@ function App() {
     birthday: convertDateToString(new Date()),
   };
   const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
+  console.log(initialDetails);
 
   const updateProfile = (updatedField: Partial<Profile>): void =>
     setCurUser((u) => ({ ...u, ...updatedField }));
