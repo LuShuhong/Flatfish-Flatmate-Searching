@@ -10,10 +10,5 @@ import java.util.List;
 
 @Repository
 public interface UsersRepo extends JpaRepository<UserEntity, String> {
-
-    @Query("SELECT u FROM UserEntity u WHERE u.locationEntityFirstChoiceId = :locationId")
-    List<UserEntity> findByFirstChoiceLocationId(@Param("locationId") Long locationId);
-
-    @Query("SELECT u FROM UserEntity u WHERE u.locationEntitySecondChoiceId = :locationId")
-    List<UserEntity> findBySecondChoiceLocationId(@Param("locationId") Long locationId);
+    
 }
