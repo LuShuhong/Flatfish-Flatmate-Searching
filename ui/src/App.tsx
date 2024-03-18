@@ -11,6 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Profile } from "./util/interfaces/Profile";
 import { MyProfile } from "./pages/MyProfile/MyProfile";
 import { convertDateToString } from "./util/dateConverter";
+import React from "react";
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
