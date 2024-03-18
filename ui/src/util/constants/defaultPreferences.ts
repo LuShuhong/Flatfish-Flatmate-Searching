@@ -7,5 +7,5 @@ export const defaultPreferences: Preference = {
   gender: "UNSPECIFIED",
   ageRange: [MIN_AGE, MAX_AGE],
   budgetRange: [MIN_BUDGET, MAX_BUDGET],
-  location: "Select",
+  location: [""],
 };
