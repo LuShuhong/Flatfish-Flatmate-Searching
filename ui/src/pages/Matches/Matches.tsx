@@ -1,7 +1,6 @@
 import "./Matches.css";
 import { useState } from "react";
 import { Profile } from "../../util/interfaces/Profile";
-import data from "../../data.json";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
@@ -19,7 +18,7 @@ export const Matches: React.FC<Props> = ({ profiles }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const handleShuffle = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
   };
 
   return (
