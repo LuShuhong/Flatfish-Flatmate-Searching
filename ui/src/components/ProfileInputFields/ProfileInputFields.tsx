@@ -33,6 +33,7 @@ export const ProfileInputFields: React.FC<Props> = ({
     post("http://localhost:8080/api/v1", {
       userId: user.email,
       name: user.name,
+      decription: "temp",
       birthday: user.birthday,
       age: user.age,
       userGender:
