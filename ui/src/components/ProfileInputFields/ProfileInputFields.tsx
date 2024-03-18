@@ -7,6 +7,7 @@ import { InstagramInput } from "../InstagramInput/InstagramInput";
 import { SaveProfileButton } from "../SaveProfileButton/SaveProfileButton";
 import { Profile } from "../../util/interfaces/Profile";
 import { getAge } from "../../util/ageCalculator";
+import { post } from "../../requests/postRequests";
 
 interface Props {
   user: Partial<Profile>;
@@ -28,7 +29,18 @@ export const ProfileInputFields: React.FC<Props> = ({
   const handleUserInstagram = (val: string): void =>
     updateProfile({ instagram: val });
 
-  const handleSaveProfile = () => {};
+  const handleSaveProfile = () => {
+    post("http://localhost:8080/api/v1", {
+      userId: user.email,
+      name: user.name,
+      decription: "temp",
+      birthday: user.birthday,
+      age: user.age,
+      userGender:
+        user.gender === "m" ? "MALE" : user.gender === "f" ? "FEMALE" : "none",
+      instagram: user.instagram,
+    });
+  };
   return (
     <div className="h-4/5 w-full">
       <NameInputs username={user.name} handleFirstName={handleFirstName} />

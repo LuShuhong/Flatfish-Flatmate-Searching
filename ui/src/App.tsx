@@ -6,22 +6,27 @@ import { Saved } from "./pages/Saved/Saved";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Preference } from "./util/interfaces/Preference";
-import { defaultPreferences } from "./util/constants/defaultPreferences";
+import { getProfiles } from "./requests/getRequests";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Profile } from "./util/interfaces/Profile";
 import { MyProfile } from "./pages/MyProfile/MyProfile";
 import { convertDateToString } from "./util/dateConverter";
+import React from "react";
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
   const [curPage, setCurPage] = useState<string>("Home");
-  const [curUser, setCurUser] = useState<Partial<Profile>>({
+  const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  const initialDetails: Partial<Profile> = {
     name: user?.name,
     picture: user?.picture,
     gender: user?.gender,
     email: user?.email,
     birthday: convertDateToString(new Date()),
-  });
+  };
+  const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
+  console.log(initialDetails);
+
   const updateProfile = (updatedField: Partial<Profile>): void =>
     setCurUser((u) => ({ ...u, ...updatedField }));
 
@@ -29,9 +34,17 @@ function App() {
   const handlePageChange = (newPage: string): void => {
     setCurPage(() => newPage);
   };
-  let preferences: Preference = defaultPreferences;
   const getPreferences = (p: Preference): void => {
-    preferences = p;
+    getProfiles(
+      `http://localhost:8080/api/v1/matches?
+      userId=${p.userId}&
+      gender=${p.gender}&
+      ageMin=${p.ageRange[0]}&
+      ageMax=${p.ageRange[1]}&
+      budgetMin=${p.budgetRange[0]}&
+      budgetMax=${p.budgetRange[1]}`,
+      setMatchedProfiles
+    );
     setCurPage(() => "My Matches");
     navigate("/matches");
   };
@@ -49,7 +62,10 @@ function App() {
           <Route
             path="/home"
             element={
-              <HomePage getPreferences={getPreferences} email={curUser.email} />
+              <HomePage
+                getPreferences={getPreferences}
+                email={curUser?.email}
+              />
             }
           />
           <Route
@@ -58,7 +74,7 @@ function App() {
           />
           <Route
             path="/matches"
-            element={<Matches preferences={preferences} />}
+            element={<Matches profiles={matchedProfiles} />}
           />
           <Route path="/saved" element={<Saved />} />
         </Routes>
