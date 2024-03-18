@@ -5,7 +5,7 @@ import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
 import com.thg.accelerator.flatfish.repositories.SavedProfileRepo;
-import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
+//import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
 // =======
 // import com.thg.accelerator.flatfish.entities.UserEntity;
 // import com.thg.accelerator.flatfish.repositories.PreferencesRepo;

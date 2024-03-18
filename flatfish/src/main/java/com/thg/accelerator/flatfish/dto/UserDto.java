@@ -2,8 +2,9 @@ package com.thg.accelerator.flatfish.dto;
 
 import com.thg.accelerator.flatfish.entities.Gender;
 import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
-import com.thg.accelerator.flatfish.entities.UserLocationsEntity;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter

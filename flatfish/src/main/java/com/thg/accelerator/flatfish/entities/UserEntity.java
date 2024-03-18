@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -54,13 +56,12 @@ public class UserEntity {
     @Column(name = "Gender", table = "Preferences")
     private Gender gender;
 
-<<<<<<< HEAD
     @OneToMany(mappedBy = "savedUser") // Update mappedBy attribute to reference savedUser
     private List<SavedProfileEntity> savedProfilesEntitiesList;
-=======
+
     @Column(name = "Location1", table = "Preferences")
     private String location1;
->>>>>>> dev
+
 
     @Column(name = "Location2", table = "Preferences")
     private String location2;
