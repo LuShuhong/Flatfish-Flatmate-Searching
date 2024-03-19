@@ -24,7 +24,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(UserDto request) {
         UserEntity user = Transformer.transformUserDtoToEntity(request);
-        user.setRole(request.getRole());
+        user.setRole(user.getRole());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = usersRepo.save(user);
         String token = jwtService.generateToken(user);
@@ -36,11 +36,11 @@ public class AuthenticationService {
         UserEntity request = Transformer.transformUserDtoToEntity(requestDto);
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
+                        request.getUserId(),
                         request.getPassword()
                 )
         );
-        UserEntity user = usersRepo.findById(request.getUsername()).orElseThrow();
+        UserEntity user = usersRepo.findById(request.getUserId()).orElseThrow();
         String token = jwtService.generateToken(user);
 
         return new AuthenticationResponse(token);
