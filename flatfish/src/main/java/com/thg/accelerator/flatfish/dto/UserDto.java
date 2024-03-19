@@ -1,6 +1,7 @@
 package com.thg.accelerator.flatfish.dto;
 
 import com.thg.accelerator.flatfish.entities.Gender;
+import com.thg.accelerator.flatfish.entities.Role;
 import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import lombok.*;
 
@@ -32,4 +33,6 @@ public class UserDto {
     private String location1;
     private String location2;
     private String location3;
+
+    private Role role;
 }
