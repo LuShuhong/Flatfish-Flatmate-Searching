@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SavedProfileRepo extends JpaRepository<SavedProfileEntity, String>{
-//    List<SavedProfileEntity> findBySavingUserUserId(String userId);
+
+public interface SavedProfileRepo extends JpaRepository<SavedProfileEntity, Long>{
+
 
 }

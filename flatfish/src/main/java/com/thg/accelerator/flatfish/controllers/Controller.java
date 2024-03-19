@@ -10,6 +10,7 @@ import com.thg.accelerator.flatfish.service.SavedProfileService;
 import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.SavedProfileTransformer;
 import com.thg.accelerator.flatfish.transformer.Transformer;
+import jakarta.websocket.server.PathParam;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class Controller {
     }
 
     @GetMapping("/matches")
-    public ResponseEntity<List<UserDto>> getMatchingProfiles(Map<String, String> preferences) {
+    public ResponseEntity<List<UserDto>> getMatchingProfiles(@RequestParam Map<String, String> preferences) {
         return userService
                 .getMatchingProfiles(preferences)
                 .map(tasks -> tasks.stream()
@@ -110,6 +111,18 @@ public class Controller {
                 .buildAndExpand(savedProfileDto.getUserId())
                 .toUri();
         return ResponseEntity.created(location).body(savedProfileDto);
+    }
+
+    @DeleteMapping("/savedprofiles/{savedProfileId}")
+    public ResponseEntity<SavedProfileDto> deleteSavedProfile(@PathVariable Long savedProfileId) {
+        try {
+            savedProfileService.deleteASavedProfile(savedProfileId);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @GetMapping("/savedprofiles")
