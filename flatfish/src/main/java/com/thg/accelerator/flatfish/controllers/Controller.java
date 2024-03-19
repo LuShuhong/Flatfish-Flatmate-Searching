@@ -112,6 +112,18 @@ public class Controller {
         return ResponseEntity.created(location).body(savedProfileDto);
     }
 
+    @DeleteMapping("/savedprofiles/{savedProfileId}")
+    public ResponseEntity<SavedProfileDto> deleteSavedProfile(@PathVariable Long savedProfileId) {
+        try {
+            savedProfileService.deleteASavedProfile(savedProfileId);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
     @GetMapping("/savedprofiles")
     public ResponseEntity<List<SavedProfileDto>> getAllSavedProfiles(){
         return savedProfileService

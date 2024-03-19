@@ -39,7 +39,17 @@ public class SavedProfileService {
         }
     }
 
-    public Optional<SavedProfileEntity> getProfileById(String savedProfileId) {
+    public Optional<SavedProfileEntity> getProfileById(Long savedProfileId) {
         return savedRepo.findById(savedProfileId);
+    }
+
+    public void deleteASavedProfile(Long id) {
+        Optional<SavedProfileEntity> savedProfileEntityOptional = savedRepo.findById(id);
+
+        if (savedProfileEntityOptional.isPresent()) {
+            savedRepo.delete(savedProfileEntityOptional.get());
+        } else {
+            throw new RuntimeException(String.format("Saved Profile with ID %d not found", id) );
+        }
     }
 }

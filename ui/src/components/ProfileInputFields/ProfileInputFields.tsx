@@ -9,6 +9,7 @@ import { Profile } from "../../util/interfaces/Profile";
 import { getAge } from "../../util/ageCalculator";
 import { post } from "../../requests/postRequests";
 import { useState } from "react";
+import React from "react";
 
 interface Props {
   user: Partial<Profile>;
