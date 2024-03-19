@@ -30,7 +30,6 @@ public class UserDto {
 
     private List<SavedProfileEntity> savedProfileEntities;
 
-//    private List<UserLocationsEntity> locationsEntities;
     private String location1;
     private String location2;
     private String location3;
