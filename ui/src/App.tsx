@@ -35,8 +35,10 @@ function App() {
     setCurPage(() => newPage);
   };
   const getPreferences = (p: Preference): void => {
+    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matches?
+    // http://localhost:8080/api/v1/matches?
     getProfiles(
-      `http://localhost:8080/api/v1/matches?
+      `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matches?
       userId=${p.userId}&
       gender=${p.gender}&
       ageMin=${p.ageRange[0]}&
