@@ -8,6 +8,7 @@ import { SaveProfileButton } from "../SaveProfileButton/SaveProfileButton";
 import { Profile } from "../../util/interfaces/Profile";
 import { getAge } from "../../util/ageCalculator";
 import { post } from "../../requests/postRequests";
+import { useState } from "react";
 
 interface Props {
   user: Partial<Profile>;
@@ -18,6 +19,7 @@ export const ProfileInputFields: React.FC<Props> = ({
   user,
   updateProfile,
 }) => {
+  const [deactivate, setDeactivate] = useState<boolean>(false);
   const handleFirstName = (val: string): void => updateProfile({ name: val });
   const handleUserEmail = (val: string): void => updateProfile({ email: val });
   const handleUserBirthdate = (val: string): void => {
@@ -30,6 +32,7 @@ export const ProfileInputFields: React.FC<Props> = ({
     updateProfile({ instagram: val });
 
   const handleSaveProfile = () => {
+    setDeactivate(() => true);
     post("http://localhost:8080/api/v1", {
       userId: user.email,
       name: user.name,
@@ -58,7 +61,10 @@ export const ProfileInputFields: React.FC<Props> = ({
         handleUserInstagram={handleUserInstagram}
       />
       <div className="flex items-center justify-center w-97.5% h-1/5">
-        <SaveProfileButton handleSaveProfile={handleSaveProfile} />
+        <SaveProfileButton
+          handleSaveProfile={handleSaveProfile}
+          status={deactivate}
+        />
       </div>
     </div>
   );

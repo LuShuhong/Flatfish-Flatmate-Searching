@@ -49,7 +49,6 @@ const MapComponent: React.FC = () => {
   }, [status]);
 
   return (
-    
     <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY || ""}>
       <Map
         className={"h-5/6 w-1/2 border-x-8 border-transparent ml-16"}
@@ -61,7 +60,7 @@ const MapComponent: React.FC = () => {
           <React.Fragment key={marker.id}>
             <AdvancedMarker
               position={marker.position}
-              ref={(ref) => {
+              ref={(ref: any) => {
                 markerRefs.current[marker.id] = ref;
               }}
               onClick={() => toggleInfoWindow(marker.id)}
@@ -81,7 +80,6 @@ const MapComponent: React.FC = () => {
         ))}
       </Map>
     </APIProvider>
-    
   );
 };
 export default MapComponent;

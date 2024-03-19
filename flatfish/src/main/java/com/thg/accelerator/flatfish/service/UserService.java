@@ -1,8 +1,6 @@
 package com.thg.accelerator.flatfish.service;
-import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
-import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +14,10 @@ public class UserService {
     private PreferencesRepo preferencesRepo;
 
     @Autowired
-    private UserLocationsRepo userLocationsRepo;
+    private UsersRepo usersRepo;
 
     @Autowired
-    private UsersRepo usersRepo;
+    private ProfileMatcher profileMatcher;
 
     public Optional<List<UserEntity>> getMatchingProfiles(Map<String, String> preferences) {
         /* access the data from the getRequest:
@@ -31,19 +29,24 @@ public class UserService {
         preferences.get("budgetMax")
         */
 
+        String ageMin = preferences.get("ageMin");
+        String ageMax = preferences.get("ageMax");
+        String budgetMin = preferences.get("budgetMin");
+        String budgetMax = preferences.get("budgetMax");
+        String gender = preferences.get("gender");
+
+        List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
-        return Optional.of(usersRepo.findAll());
+        //return Optional.of(usersRepo.findAll());
+        return Optional.of(profileMatcher.matchProfiles(allUsers, ageMin, ageMax, budgetMin, budgetMax, gender));
     }
+
     public Optional<List<UserEntity>> getAllUsers() {
         return Optional.of(usersRepo.findAll());
     }
 
     public Optional<UserEntity> getUserById(String userId) {
         return usersRepo.findById(userId);
-    }
-
-    public Optional<List<PreferenceEntity>> getAllPreferences() {
-        return Optional.of(preferencesRepo.findAll());
     }
 
     public void addUser(UserEntity userEntity) {

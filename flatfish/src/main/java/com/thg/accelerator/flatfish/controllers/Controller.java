@@ -27,7 +27,7 @@ public class Controller {
     }
 
     @GetMapping("/matches")
-    public ResponseEntity<List<UserDto>> getMatchingProfiles(@RequestParam Map<String, String> preferences) {
+    public ResponseEntity<List<UserDto>> getMatchingProfiles(Map<String, String> preferences) {
         return userService
                 .getMatchingProfiles(preferences)
                 .map(tasks -> tasks.stream()
@@ -58,8 +58,8 @@ public class Controller {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> getUserById(String userId) {
-        return userService.getUserById(userId)
+    public ResponseEntity<UserDto> getUserById(String id) {
+        return userService.getUserById(id)
                 .map(Transformer::transformUserEntityToDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
