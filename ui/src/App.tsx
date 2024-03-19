@@ -25,7 +25,6 @@ function App() {
     birthday: convertDateToString(new Date()),
   };
   const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
-  console.log(initialDetails);
 
   const updateProfile = (updatedField: Partial<Profile>): void =>
     setCurUser((u) => ({ ...u, ...updatedField }));
@@ -43,8 +42,9 @@ function App() {
     );
     setCurPage(() => "My Matches");
     navigate("/matches");
-    console.log("my matches" + matchedProfiles);
   };
+  
+  
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
       <NavBar
