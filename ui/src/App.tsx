@@ -38,7 +38,7 @@ function App() {
     // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matches?
     // http://localhost:8080/api/v1/matches?
     getProfiles(
-      `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matches?
+      `http://localhost:8080/api/v1/matches?
       userId=${p.userId}&
       gender=${p.gender}&
       ageMin=${p.ageRange[0]}&
