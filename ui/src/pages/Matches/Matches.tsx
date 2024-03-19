@@ -14,7 +14,7 @@ interface Props {
 export const Matches: React.FC<Props> = ({ profiles }) => {
   // const [openDialog, setOpenDialog] = useState<boolean>(false);
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
-  const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+ // const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   // useEffect(() => {
