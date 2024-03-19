@@ -7,6 +7,7 @@ import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import com.thg.accelerator.flatfish.transformer.Transformer;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,18 +23,18 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(UserDto request) {
-        UserEntity user = Transformer.transformUserDtoToEntity(request);
-        user.setRole(user.getRole());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public AuthenticationResponse register(UserEntity request) {
+        UserEntity user = new UserEntity();
+        user.setRole(request.getRole());
+        user.setUserId(request.getUserId());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user = usersRepo.save(user);
         String token = jwtService.generateToken(user);
 
         return new AuthenticationResponse(token);
     }
 
-    public AuthenticationResponse authenticate(UserDto requestDto) {
-        UserEntity request = Transformer.transformUserDtoToEntity(requestDto);
+    public AuthenticationResponse authenticate(UserEntity request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUserId(),

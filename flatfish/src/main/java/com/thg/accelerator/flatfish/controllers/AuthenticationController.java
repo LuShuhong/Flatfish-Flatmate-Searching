@@ -2,6 +2,7 @@ package com.thg.accelerator.flatfish.controllers;
 
 import com.thg.accelerator.flatfish.config.AuthenticationResponse;
 import com.thg.accelerator.flatfish.dto.UserDto;
+import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,12 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody UserDto userDto) {
-        return ResponseEntity.ok(authenticationService.register(userDto));
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody UserEntity request) {
+        return ResponseEntity.ok(authenticationService.register(request));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody UserDto userDto) {
-        return ResponseEntity.ok(authenticationService.authenticate(userDto));
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody UserEntity request) {
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 }
