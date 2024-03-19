@@ -14,6 +14,7 @@ import {
 import { SetDefaultButton } from "../SetDefaultButton/SetDefaultButton";
 import { post } from "../../requests/postRequests";
 import { LocationEntry } from "../LocationEntry/LocationEntry";
+import React from "react";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
@@ -29,18 +30,22 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
 
   const handleGender = (val: "MALE" | "FEMALE" | "UNSPECIFIED"): void =>
     updatePreferences({ gender: val });
+
   const handleAge = (val: number, index: 0 | 1): void => {
     const curAgeRange = preferences.ageRange;
     curAgeRange[index] = val;
     updatePreferences({ ageRange: curAgeRange });
   };
-  const handleBudget = (val: number, index: 0 | 1): void => {
 
+  const handleBudget = (val: number, index: 0 | 1): void => {
     setPreferences((p) => {
       const copy = { ...p };
       copy.budgetRange[index] = val;
       return copy;
     });
+    const curBudgetRange = preferences.budgetRange;
+    curBudgetRange[index] = val;
+    updatePreferences({ budgetRange: curBudgetRange });
   };
 
   const handleLocation = (val: string) => {
@@ -53,13 +58,6 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
     setPreferences({ ...preferences, location: newLocationList });
     console.log(preferences.location);
   };
-
-
-    const curBudgetRange = preferences.budgetRange;
-    curBudgetRange[index] = val;
-    updatePreferences({ budgetRange: curBudgetRange });
-  };
-  const handleLocation = (val: string) => updatePreferences({ location: val });
 
   const handleMatch = (): void => {
     if (!ageIsValid(preferences.ageRange)) {
