@@ -35,22 +35,22 @@ public class UserEntity {
     @Column(name = "Description")
     private String description;
 
-    @Column(name = "UserGender")
+    @Column(name = "User_Gender")
     private String userGender;
 
     @Column(name = "Instagram")
     private String instagram;
 
-    @Column(name = "BudgetMin", table = "Preferences")
+    @Column(name = "Budget_Min", table = "Preferences")
     private long budgetMin;
 
-    @Column(name = "BudgetMax", table = "Preferences")
+    @Column(name = "Budget_Max", table = "Preferences")
     private long budgetMax;
 
-    @Column(name = "AgeMin", table = "Preferences")
+    @Column(name = "Age_Min", table = "Preferences")
     private long ageMin;
 
-    @Column(name = "AgeMax", table = "Preferences")
+    @Column(name = "Age_Max", table = "Preferences")
     private long ageMax;
 
     @Column(name = "Gender", table = "Preferences")
