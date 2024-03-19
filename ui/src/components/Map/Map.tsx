@@ -49,7 +49,7 @@ const MapComponent: React.FC = () => {
   }, [status]);
 
   return (
-    <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY || ""}>
+    <APIProvider apiKey={"AIzaSyBB1B1ztcrr4wieOXSJAnN11dXTWI7mVuU"}>
       <Map
         className={"h-5/6 w-1/2 border-x-8 border-transparent ml-16"}
         defaultZoom={14}
