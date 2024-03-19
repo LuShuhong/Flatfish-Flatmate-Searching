@@ -136,8 +136,8 @@ public class ProfileMatcher {
 
     private List<UserEntity> getDealbreakerMatches(List<UserEntity> allUsers, double ageMin, double ageMax, double budgetMin, double budgetMax) {
         return allUsers.stream()
-                .filter(pref -> pref.getAgeMax() >= ageMin)
-                .filter(pref -> pref.getAgeMin() <= ageMax)
+                .filter(pref -> pref.getAge() >= ageMin)
+                .filter(pref -> pref.getAge() <= ageMax)
                 .filter(pref -> pref.getBudgetMax() >= budgetMin)
                 .filter(pref -> pref.getBudgetMin() <= budgetMax)
                 .toList();
