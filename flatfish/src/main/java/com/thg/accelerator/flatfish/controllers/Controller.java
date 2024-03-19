@@ -3,24 +3,19 @@ package com.thg.accelerator.flatfish.controllers;
 
 import com.thg.accelerator.flatfish.dto.SavedProfileDto;
 import com.thg.accelerator.flatfish.dto.UserDto;
-import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import com.thg.accelerator.flatfish.service.SavedProfileService;
 import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.SavedProfileTransformer;
 import com.thg.accelerator.flatfish.transformer.Transformer;
-import jakarta.websocket.server.PathParam;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
@@ -46,32 +41,35 @@ public class Controller {
     public ResponseEntity<List<UserDto>> getMatchingProfiles(@RequestParam Map<String, String> preferences) {
         return userService
                 .getMatchingProfiles(preferences)
-                .map(tasks -> tasks.stream()
-                        .map(Transformer::transformUserEntityToDto)
+            .map(tasks -> tasks.stream()
+            .map(Transformer::transformUserEntityToDto)
                         .collect(Collectors.toList()))
-                .map(ResponseEntity::ok)
+            .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
-    }
+}
 
-    @GetMapping("/matchuser")
-    public ResponseEntity<List<UserDto>> getMatchingProfilesWithoutPreferences(@RequestParam String userId) {
-        return userService
-                .getMatchingProfiles(userId)
-                .map(tasks -> tasks.stream()
-                        .map(Transformer::transformUserEntityToDto)
-                        .collect(Collectors.toList()))
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
 
-    @GetMapping("/match/find?strategy=strong")
-    public ResponseEntity<HashMap<UserDto, Integer>> getStrongMatches(String userId) {
-        HashMap<UserEntity, Integer> input = userService.getStronglyMatchingUsers(userId).get();
-        HashMap<UserDto, Integer> output = new HashMap<>();
-        input.forEach((entry, value) -> output.put(Transformer.transformUserEntityToDto(entry), value));
 
-        return ResponseEntity.of(Optional.of(output));
-    }
+
+//@GetMapping("/matchuser")
+//    public ResponseEntity<List<UserDto>> getMatchingProfilesWithoutPreferences(@RequestParam String userId) {
+//        return userService
+//                .getMatchingProfiles(userId)
+//                .map(tasks -> tasks.stream()
+//                        .map(Transformer::transformUserEntityToDto)
+//                        .collect(Collectors.toList()))
+//                .map(ResponseEntity::ok)
+//                .orElse(ResponseEntity.notFound().build());
+//    }
+
+//    @GetMapping("/match/find?strategy=strong")
+//    public ResponseEntity<HashMap<UserDto, Integer>> getStrongMatches(String userId) {
+//        HashMap<UserEntity, Integer> input = userService.getStronglyMatchingUsers(userId).get();
+//        HashMap<UserDto, Integer> output = new HashMap<>();
+//        input.forEach((entry, value) -> output.put(Transformer.transformUserEntityToDto(entry), value));
+//
+//        return ResponseEntity.of(Optional.of(output));
+//    }
 
     @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getAllUsers() {
