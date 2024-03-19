@@ -13,6 +13,8 @@ import {
 } from "../../util/validPreferenceChecker";
 import { SetDefaultButton } from "../SetDefaultButton/SetDefaultButton";
 import { post } from "../../requests/postRequests";
+import { LocationEntry } from "../LocationEntry/LocationEntry";
+import React from "react";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
@@ -23,21 +25,16 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
   const [preferences, setPreferences] =
     useState<Preference>(defaultPreferences);
 
-  const handleGender = (val: "MALE" | "FEMALE" | "UNSPECIFIED"): void => {
-    setPreferences((p) => {
-      const copy = { ...p };
-      copy.gender = val;
-      console.log(val);
-      return copy;
-    });
-  };
+  const updatePreferences = (updatedField: Partial<Preference>): void =>
+    setPreferences((p) => ({ ...p, ...updatedField }));
+
+  const handleGender = (val: "MALE" | "FEMALE" | "UNSPECIFIED"): void =>
+    updatePreferences({ gender: val });
 
   const handleAge = (val: number, index: 0 | 1): void => {
-    setPreferences((p) => {
-      const copy = { ...p };
-      copy.ageRange[index] = val;
-      return copy;
-    });
+    const curAgeRange = preferences.ageRange;
+    curAgeRange[index] = val;
+    updatePreferences({ ageRange: curAgeRange });
   };
 
   const handleBudget = (val: number, index: 0 | 1): void => {
@@ -46,20 +43,28 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
       copy.budgetRange[index] = val;
       return copy;
     });
+    const curBudgetRange = preferences.budgetRange;
+    curBudgetRange[index] = val;
+    updatePreferences({ budgetRange: curBudgetRange });
   };
+
   const handleLocation = (val: string) => {
-    setPreferences((p) => {
-      const copy = { ...p };
-      copy.location = val;
-      return copy;
-    });
+    let newLocationList: string[] = preferences.location;
+    if (newLocationList[0] === "") {
+      newLocationList = [val];
+    } else if (newLocationList.length < 3 && !newLocationList.includes(val)) {
+      newLocationList.push(val);
+    }
+    setPreferences({ ...preferences, location: newLocationList });
+    console.log(preferences.location);
   };
+
   const handleMatch = (): void => {
     if (!ageIsValid(preferences.ageRange)) {
       alert("Maximum age must be bigger than minimum age");
     } else if (!budgetIsValid(preferences.budgetRange)) {
       alert("Maximum budget must be bigger than minimum budget");
-    } else if (!locationIsValid(preferences.location)) {
+    } else if (!locationIsValid(preferences.location[0])) {
       alert("Please select a location");
     } else {
       getPreferences(preferences);
@@ -71,17 +76,30 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
       alert("Maximum age must be bigger than minimum age");
     } else if (!budgetIsValid(preferences.budgetRange)) {
       alert("Maximum budget must be bigger than minimum budget");
-    } else if (!locationIsValid(preferences.location)) {
+    } else if (!locationIsValid(preferences.location[0])) {
       alert("Please select a location");
     } else {
       post("http://localhost:8080/api/v1/preferences", {
-        userId: email ? email : "",
+        preferenceId: email ? email : "",
+        budgetMin: preferences.budgetRange[0],
+        budgetMax: preferences.budgetRange[1],
+        ageMin: preferences.ageRange[0],
+        ageMax: preferences.ageRange[1],
         gender: preferences.gender,
-        ageRange: preferences.ageRange,
-        budgetRange: preferences.budgetRange,
+        smoker: false,
         location: "test1",
       });
     }
+  };
+
+  const handleRemovePreference = (preferenceEntry: string): void => {
+    let newLocationList = preferences.location;
+    const index = newLocationList.indexOf(preferenceEntry);
+    if (index > -1) {
+      newLocationList.splice(index, 1);
+    }
+
+    setPreferences({ ...preferences, location: newLocationList });
   };
 
   return (
@@ -99,6 +117,16 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
         location={preferences.location}
         handleLocation={handleLocation}
       />
+      <div className="mb-5">
+        {preferences.location[0] === ""
+          ? ""
+          : preferences.location.map((loc) => (
+              <LocationEntry
+                handleRemovePreference={handleRemovePreference}
+                preferenceEntry={loc}
+              />
+            ))}
+      </div>
       <div className="flex items-center justify-between h-1/8 w-full">
         <MatchButton handleMatch={handleMatch} />
         <SetDefaultButton handleSetDefault={handleSetDefault} />

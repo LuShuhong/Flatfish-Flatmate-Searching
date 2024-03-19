@@ -23,6 +23,9 @@ public class PreferenceEntity {
     private double ageMin;
     private double ageMax;
     private Gender gender;
+    private String location1;
+    private String location2;
+    private String location3;
 
     @OneToOne
     @MapsId

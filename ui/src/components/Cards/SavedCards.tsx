@@ -2,15 +2,16 @@ import React from "react";
 import person from "../../img/funcat.jpeg";
 
 interface Props {
-  userId: string;
   name: string;
   age: string;
   jobTitle: string;
   description: string;
   email: string;
-  userGender: string;
-  userInsta: string;
+  gender: string;
+  instagram: string;
+  smoker: boolean;
 }
+
 export const SavedCards: React.FC<Props> = ({ name, age }) => {
   return (
     <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">

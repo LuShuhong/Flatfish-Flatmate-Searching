@@ -2,14 +2,14 @@ import React from "react";
 import "../../pages/Matches/Matches.css";
 import person from "../../img/wetcat.jpeg";
 interface Props {
-  userId: string;
   name: string;
   age: string;
   jobTitle: string;
   description: string;
   email: string;
-  userGender: string;
-  userInsta: string;
+  gender: string;
+  instagram: string;
+  smoker: boolean;
 }
 export const MatchesCard: React.FC<Props> = ({ name, age, jobTitle }) => {
   return (
