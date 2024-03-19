@@ -1,6 +1,15 @@
 package com.thg.accelerator.flatfish.service;
+// <<<<<<< HEAD
+import com.thg.accelerator.flatfish.entities.PreferenceEntity;
+import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
+import com.thg.accelerator.flatfish.repositories.SavedProfileRepo;
+//import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
+// =======
+// import com.thg.accelerator.flatfish.entities.UserEntity;
+// import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
+// >>>>>>> dev
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,4 +87,8 @@ public class UserService {
         }
         return Optional.of(strongMatches);
     }
+
+//    public List<SavedProfileEntity> getAllSavedProfiles(){
+//        return savedProfileRepo.findAll();
+//    }
 }

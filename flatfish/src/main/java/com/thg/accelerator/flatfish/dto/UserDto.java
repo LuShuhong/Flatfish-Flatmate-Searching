@@ -1,7 +1,10 @@
 package com.thg.accelerator.flatfish.dto;
 
 import com.thg.accelerator.flatfish.entities.Gender;
+import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +25,10 @@ public class UserDto {
     private long ageMin;
     private long ageMax;
     private Gender gender;
+
+    private List<SavedProfileEntity> savedProfileEntities;
+
+//    private List<UserLocationsEntity> locationsEntities;
     private String location1;
     private String location2;
     private String location3;

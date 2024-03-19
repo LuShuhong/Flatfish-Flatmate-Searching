@@ -1,5 +1,6 @@
 import { ProfileInput } from "../../components/ProfileInput/ProfileInput";
 import { Profile } from "../../util/interfaces/Profile";
+import React from "react";
 
 interface Props {
   user: Partial<Profile>;

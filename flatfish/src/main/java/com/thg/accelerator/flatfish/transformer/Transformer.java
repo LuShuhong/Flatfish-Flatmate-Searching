@@ -10,7 +10,7 @@ public class Transformer {
         return new UserDto(userEntity.getUserId(), userEntity.getName(), userEntity.getBirthday(), userEntity.getAge(),
                 userEntity.getDescription(), userEntity.getUserGender(), userEntity.getInstagram(),
                 userEntity.getBudgetMin(), userEntity.getBudgetMax(), userEntity.getAgeMin(),
-                userEntity.getAgeMax(), userEntity.getGender(), userEntity.getLocation1(), userEntity.getLocation2(),
+                userEntity.getAgeMax(), userEntity.getGender(),userEntity.getSavedProfilesEntitiesList(), userEntity.getLocation1(), userEntity.getLocation2(),
                 userEntity.getLocation3());
     }
 
@@ -18,7 +18,7 @@ public class Transformer {
         return new UserEntity(userDto.getUserId(), userDto.getName(), userDto.getBirthday(), userDto.getAge(),
                 userDto.getDescription(), userDto.getUserGender(), userDto.getInstagram(),
                 userDto.getBudgetMin(), userDto.getBudgetMax(), userDto.getAgeMin(),
-                userDto.getAgeMax(), userDto.getGender(), userDto.getLocation1(), userDto.getLocation2(),
+                userDto.getAgeMax(), userDto.getGender(),userDto.getSavedProfileEntities(), userDto.getLocation1(), userDto.getLocation2(),
                 userDto.getLocation3());
     }
 }
