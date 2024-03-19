@@ -28,6 +28,8 @@ import static java.util.Arrays.stream;
 @RequestMapping("/api/v1")
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
+//https://flatfish-frontend.pq46c.icekube.ics.cloud
+//http://localhost:3000
 public class Controller {
     private final UserService userService;
     private final SavedProfileService savedProfileService;
