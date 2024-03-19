@@ -41,16 +41,16 @@ public class UserEntity {
     @Column(name = "Instagram")
     private String instagram;
 
-    @Column(name = "Budget_Min", table = "Preferences")
+    @Column(name = "BudgetMin", table = "Preferences")
     private long budgetMin;
 
-    @Column(name = "Budget_Max", table = "Preferences")
+    @Column(name = "BudgetMax", table = "Preferences")
     private long budgetMax;
 
-    @Column(name = "Age_Min", table = "Preferences")
+    @Column(name = "AgeMin", table = "Preferences")
     private long ageMin;
 
-    @Column(name = "Age_Max", table = "Preferences")
+    @Column(name = "AgeMax", table = "Preferences")
     private long ageMax;
 
     @Column(name = "Gender", table = "Preferences")
