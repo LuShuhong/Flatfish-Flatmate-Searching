@@ -36,13 +36,7 @@ function App() {
   };
   const getPreferences = (p: Preference): void => {
     getProfiles(
-      `http://localhost:8080/api/v1/matches?
-      userId=${p.userId}&
-      gender=${p.gender}&
-      ageMin=${p.ageRange[0]}&
-      ageMax=${p.ageRange[1]}&
-      budgetMin=${p.budgetRange[0]}&
-      budgetMax=${p.budgetRange[1]}`,
+      `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}`,
       setMatchedProfiles
     );
     setCurPage(() => "My Matches");
