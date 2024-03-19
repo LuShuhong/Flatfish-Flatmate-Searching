@@ -4,29 +4,12 @@ import {
   Map,
   AdvancedMarker,
   InfoWindow,
-  Marker,
-  Pin,
   useApiLoadingStatus,
   APILoadingStatus,
 } from "@vis.gl/react-google-maps";
+import { markersData } from "./MarkerData";
 
 const MapComponent: React.FC = () => {
-  const markersData = [
-    {
-      id: "marker1",
-      position: { lat: 53.4746741, lng: -2.2529036 },
-      info: "Location Info 1",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a6/Deansgate_Square_%26_Elizabeth_Tower_Manchester_Winter_2020.jpg",
-    },
-    {
-      id: "marker2",
-      position: { lat: 53.47464, lng: -2.226 },
-      info: "Location Info 2",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Tower_Blocks_over_Knott_Mill%2C_geograph_6866152_by_David_Dixon.jpg/248px-Tower_Blocks_over_Knott_Mill%2C_geograph_6866152_by_David_Dixon.jpg",
-    },
-  ];
 
   const [selectedMarker, setSelectedMarker] = useState<string | null>(null);
   // Use `any` type for marker refs as a temporary solution
@@ -72,8 +55,7 @@ const MapComponent: React.FC = () => {
               >
                 {marker.info}
 
-                <p>This is an Info Window</p>
-                <img src={marker.imageUrl} />
+                <img className="h-48 w-48" src={marker.imageUrl} />
               </InfoWindow>
             )}
           </React.Fragment>
