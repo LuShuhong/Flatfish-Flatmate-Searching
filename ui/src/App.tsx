@@ -14,7 +14,12 @@ import { convertDateToString } from "./util/dateConverter";
 import React from "react";
 
 function App() {
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
+  const getToken = async () => {
+    const token = await getIdTokenClaims();
+    console.log(token);
+  };
+  getToken();
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
   const initialDetails: Partial<Profile> = {
