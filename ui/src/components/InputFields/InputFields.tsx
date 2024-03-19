@@ -38,11 +38,6 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
   };
 
   const handleBudget = (val: number, index: 0 | 1): void => {
-    setPreferences((p) => {
-      const copy = { ...p };
-      copy.budgetRange[index] = val;
-      return copy;
-    });
     const curBudgetRange = preferences.budgetRange;
     curBudgetRange[index] = val;
     updatePreferences({ budgetRange: curBudgetRange });
@@ -55,8 +50,8 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
     } else if (newLocationList.length < 3 && !newLocationList.includes(val)) {
       newLocationList.push(val);
     }
-    setPreferences({ ...preferences, location: newLocationList });
-    console.log(preferences.location);
+    updatePreferences({ location: newLocationList });
+    console.log(preferences);
   };
 
   const handleMatch = (): void => {
