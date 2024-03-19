@@ -49,73 +49,73 @@ public class ProfileMatcher {
         return matchedProfiles;
     }
 
-    public List<UserEntity> matchProfiles(List<UserEntity> allUsers, Long ageMinLong, Long ageMaxLong, Long budgetMinLong, Long budgetMaxLong, Gender userGender) {
-        double ageMin = (double) ageMinLong;
-        double ageMax = (double) ageMaxLong;
-        double budgetMin = (double) budgetMinLong;
-        double budgetMax = (double) budgetMaxLong;
-        String gender = userGender.toString().toLowerCase();
+//    public List<UserEntity> matchProfiles(List<UserEntity> allUsers, Long ageMinLong, Long ageMaxLong, Long budgetMinLong, Long budgetMaxLong, Gender userGender) {
+//        double ageMin = (double) ageMinLong;
+//        double ageMax = (double) ageMaxLong;
+//        double budgetMin = (double) budgetMinLong;
+//        double budgetMax = (double) budgetMaxLong;
+//        String gender = userGender.toString().toLowerCase();
+//
+//        List<UserEntity> dealBreakerMatches = getDealbreakerMatches(allUsers, ageMin, ageMax, budgetMin, budgetMax);
+//
+//        if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
+//            dealBreakerMatches = dealBreakerMatches.stream()
+//                    .filter(user -> user.getUserGender()
+//                            .equalsIgnoreCase(gender))
+//                    .toList();
+//        }
+//
+//        List<UserEntity> matchedProfiles = new ArrayList<>();
+//        double[] userVector = preferenceToVector(ageMin, ageMax, budgetMin, budgetMax);
+//
+//        for(UserEntity user: dealBreakerMatches) {
+//            double[] candidateVector = preferenceToVector(user.getAgeMin(), user.getAgeMax(), user.getBudgetMin(), user.getBudgetMax());
+//            double distance = calculateEuclideanDistance(userVector, candidateVector);
+//
+//            if (distance < threshold) {
+//                matchedProfiles.add(user);
+//            }
+//        }
+//
+//        //want to sort before return?
+//        return matchedProfiles;
+//    }
 
-        List<UserEntity> dealBreakerMatches = getDealbreakerMatches(allUsers, ageMin, ageMax, budgetMin, budgetMax);
-
-        if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
-            dealBreakerMatches = dealBreakerMatches.stream()
-                    .filter(user -> user.getUserGender()
-                            .equalsIgnoreCase(gender))
-                    .toList();
-        }
-
-        List<UserEntity> matchedProfiles = new ArrayList<>();
-        double[] userVector = preferenceToVector(ageMin, ageMax, budgetMin, budgetMax);
-
-        for(UserEntity user: dealBreakerMatches) {
-            double[] candidateVector = preferenceToVector(user.getAgeMin(), user.getAgeMax(), user.getBudgetMin(), user.getBudgetMax());
-            double distance = calculateEuclideanDistance(userVector, candidateVector);
-
-            if (distance < threshold) {
-                matchedProfiles.add(user);
-            }
-        }
-
-        //want to sort before return?
-        return matchedProfiles;
-    }
-
-    public Map<UserEntity, Double> matchProfilesWithScore(List<UserEntity> allUsers, String ageMinStr, String ageMaxStr, String budgetMinStr, String budgetMaxStr, String gender){
-
-        double ageMin = Double.parseDouble(ageMinStr);
-        double ageMax = Double.parseDouble(ageMaxStr);
-        double budgetMin = Double.parseDouble(budgetMinStr);
-        double budgetMax = Double.parseDouble(budgetMaxStr);
-
-        List<UserEntity> dealBreakerMatches = getDealbreakerMatches(allUsers, ageMin, ageMax, budgetMin, budgetMax);
-
-        if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
-            dealBreakerMatches = dealBreakerMatches.stream()
-                    .filter(user -> user.getUserGender()
-                            //if Gender enum is removed, toString can be removed
-                            .toString()
-                            .equalsIgnoreCase(gender))
-                    .toList();
-        }
-
-        Map<UserEntity, Double> matchedProfiles = new HashMap<>();
-        double[] userVector = preferenceToVector(ageMin, ageMax, budgetMin, budgetMax);
-
-        for(UserEntity user: dealBreakerMatches) {
-            double[] candidateVector = preferenceToVector(user.getAgeMin(), user.getAgeMax(), user.getBudgetMin(), user.getBudgetMax());
-            double distance = calculateEuclideanDistance(userVector, candidateVector);
-
-            if (distance < threshold) {
-                matchedProfiles.put(user, distance);
-            }
-        }
-
-        //want to sort before return?
-        return matchedProfiles;
-//        return allUsers;
-    }
-
+//    public Map<UserEntity, Double> matchProfilesWithScore(List<UserEntity> allUsers, String ageMinStr, String ageMaxStr, String budgetMinStr, String budgetMaxStr, String gender){
+//
+//        double ageMin = Double.parseDouble(ageMinStr);
+//        double ageMax = Double.parseDouble(ageMaxStr);
+//        double budgetMin = Double.parseDouble(budgetMinStr);
+//        double budgetMax = Double.parseDouble(budgetMaxStr);
+//
+//        List<UserEntity> dealBreakerMatches = getDealbreakerMatches(allUsers, ageMin, ageMax, budgetMin, budgetMax);
+//
+//        if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
+//            dealBreakerMatches = dealBreakerMatches.stream()
+//                    .filter(user -> user.getUserGender()
+//                            //if Gender enum is removed, toString can be removed
+//                            .toString()
+//                            .equalsIgnoreCase(gender))
+//                    .toList();
+//        }
+//
+//        Map<UserEntity, Double> matchedProfiles = new HashMap<>();
+//        double[] userVector = preferenceToVector(ageMin, ageMax, budgetMin, budgetMax);
+//
+//        for(UserEntity user: dealBreakerMatches) {
+//            double[] candidateVector = preferenceToVector(user.getAgeMin(), user.getAgeMax(), user.getBudgetMin(), user.getBudgetMax());
+//            double distance = calculateEuclideanDistance(userVector, candidateVector);
+//
+//            if (distance < threshold) {
+//                matchedProfiles.put(user, distance);
+//            }
+//        }
+//
+//        //want to sort before return?
+//        return matchedProfiles;
+////        return allUsers;
+//    }
+//
     private double calculateEuclideanDistance(double[] vectorA, double[] vectorB) {
         double sum = 0;
         for(int i = 0; i < vectorA.length; i++) {
