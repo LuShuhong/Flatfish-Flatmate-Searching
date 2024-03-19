@@ -5,6 +5,7 @@ import com.thg.accelerator.flatfish.dto.SavedProfileDto;
 import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.UserEntity;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
+import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.service.SavedProfileService;
 import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.SavedProfileTransformer;
@@ -145,6 +146,20 @@ public class Controller {
                         .collect(Collectors.toList()))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/savedprofiles/{savingUserId}")
+    public ResponseEntity<List<SavedProfileDto>> getAllSavedProfilesOfAUser(@PathVariable String savingUserId){
+        List<SavedProfileEntity> savedProfiles = savedProfileService.getAllSavedProfilesBySavingUser(savingUserId);
+
+        if (savedProfiles.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            List<SavedProfileDto> savedProfileDtos = savedProfiles.stream()
+                    .map(SavedProfileTransformer::transformSavedProfileEntityToDto)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(savedProfileDtos);
+        }
     }
 
     @PutMapping("/update/preference/{id}")

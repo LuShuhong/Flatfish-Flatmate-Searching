@@ -25,6 +25,10 @@ public class SavedProfileService {
         return Optional.of(savedRepo.findAll());
     }
 
+    public List<SavedProfileEntity> getAllSavedProfilesBySavingUser(String savingUserId) {
+        return savedRepo.findBySavingUserUserId(savingUserId);
+    }
+
     public void saveAProfile(String userId, SavedProfileEntity savedProfileEntity) {
         // Find the user by ID
         Optional<UserEntity> userEntityOptional = usersRepo.findById(userId);
