@@ -7,7 +7,7 @@ import com.thg.accelerator.flatfish.entities.UserEntity;
 public class Transformer {
     public static UserDto transformUserEntityToDto(UserEntity userEntity) {
 
-        return new UserDto(userEntity.getUserId(), userEntity.getName(), userEntity.getBirthday(), userEntity.getAge(),
+        return new UserDto(userEntity.getUserId(), userEntity.getName(), userEntity.getPassword(), userEntity.getBirthday(), userEntity.getAge(),
                 userEntity.getDescription(), userEntity.getUserGender(), userEntity.getInstagram(),
                 userEntity.getBudgetMin(), userEntity.getBudgetMax(), userEntity.getAgeMin(),
                 userEntity.getAgeMax(), userEntity.getGender(),userEntity.getSavedProfilesEntitiesList(), userEntity.getLocation1(), userEntity.getLocation2(),
@@ -19,7 +19,7 @@ public class Transformer {
                 userDto.getDescription(), userDto.getUserGender(), userDto.getInstagram(),
                 userDto.getBudgetMin(), userDto.getBudgetMax(), userDto.getAgeMin(),
                 userDto.getAgeMax(), userDto.getGender(),userDto.getSavedProfileEntities(), userDto.getLocation1(), userDto.getLocation2(),
-                userDto.getLocation3(), userDto.getRole());
+                userDto.getLocation3(), userDto.getRole(), userDto.getPassword());
     }
 }
 

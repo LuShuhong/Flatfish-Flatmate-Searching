@@ -1,5 +1,6 @@
 package com.thg.accelerator.flatfish.config;
 
+import com.thg.accelerator.flatfish.entities.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -15,6 +16,17 @@ import java.util.function.Function;
 public class JwtService {
 
     private static final String SECRET_KEY = "c7fdbab2bba0ac29ae12e07d684bbdc6e3909480f02fa3ebf102802514c93397";
+
+    public String generateToken(UserEntity user) {
+        String token = Jwts
+                .builder()
+                .subject(user.getUsername())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + 24*60*60*1000))
+                .signWith(getSigninKey())
+                .compact();
+        return token;
+    }
     public String extractUserId(String token) {
         return extractClaim(token, Claims::getSubject);
     }

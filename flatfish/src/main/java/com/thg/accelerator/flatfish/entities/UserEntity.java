@@ -76,6 +76,9 @@ public class UserEntity implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
+    @Column(name = "password")
+    private String password;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
@@ -83,7 +86,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
