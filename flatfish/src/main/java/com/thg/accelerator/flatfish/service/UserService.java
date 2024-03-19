@@ -46,29 +46,30 @@ public class UserService {
         String budgetMax = preferences.get("budgetMax");
         String gender = preferences.get("gender");
 
+
         List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
         //return Optional.of(usersRepo.findAll());
         return Optional.of(profileMatcher.matchProfiles(allUsers, ageMin, ageMax, budgetMin, budgetMax, gender));
     }
 
-    public Optional<List<UserEntity>> getMatchingProfiles(String userId) {
-        Optional<UserEntity> optionalUser = usersRepo.findById(userId);
-
-        if (optionalUser.isEmpty()) {
-            return Optional.empty();
-        } else {
-            List<UserEntity> allUsers = usersRepo.findAll();
-
-            return Optional.of(profileMatcher.matchProfiles(
-                    allUsers,
-                    optionalUser.get().getAgeMin(),
-                    optionalUser.get().getAgeMax(),
-                    optionalUser.get().getBudgetMin(),
-                    optionalUser.get().getBudgetMax(),
-                    optionalUser.get().getGender()));
-        }
-    }
+//    public Optional<List<UserEntity>> getMatchingProfiles(String userId) {
+//        Optional<UserEntity> optionalUser = usersRepo.findById(userId);
+//
+//        if (optionalUser.isEmpty()) {
+//            return Optional.empty();
+//        } else {
+//            List<UserEntity> allUsers = usersRepo.findAll();
+//
+//            return Optional.of(profileMatcher.matchProfiles(
+//                    allUsers,
+//                    optionalUser.get().getAgeMin(),
+//                    optionalUser.get().getAgeMax(),
+//                    optionalUser.get().getBudgetMin(),
+//                    optionalUser.get().getBudgetMax(),
+//                    optionalUser.get().getGender()));
+//        }
+//    }
 
     public Optional<List<UserEntity>> getAllUsers() {
         return Optional.of(usersRepo.findAll());

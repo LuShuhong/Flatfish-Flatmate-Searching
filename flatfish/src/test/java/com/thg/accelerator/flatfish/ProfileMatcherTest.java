@@ -39,32 +39,32 @@ public class ProfileMatcherTest {
         Assertions.assertEquals(alice, matches.get(0));
     }
 
-    @Disabled
-    @Test
-    public void testNoGenderPreferenceReturnsAllGenders() {
-        UserEntity alice = new UserEntity("1", "alice", "1, 1, 2001", 20, "desc", "FEMALE", "@Alice", 100, 1000, 20, 80, Gender.MALE, 1L, 2L, 3L);
-        UserEntity bob = new UserEntity("2", "bob", "9, 9, 1999", 30, "bobdesc", "MALE", "@Bob", 150, 900, 20, 80, Gender.FEMALE, 1L, 2L, 3L);
-        List<UserEntity> allUsers = List.of(alice, bob);
+//    @Disabled
+//    @Test
+//    public void testNoGenderPreferenceReturnsAllGenders() {
+//        UserEntity alice = new UserEntity("1", "alice", "1, 1, 2001", 20, "desc", "FEMALE", "@Alice", 100, 1000, 20, 80, Gender.MALE, 1L, 2L, 3L);
+//        UserEntity bob = new UserEntity("2", "bob", "9, 9, 1999", 30, "bobdesc", "MALE", "@Bob", 150, 900, 20, 80, Gender.FEMALE, 1L, 2L, 3L);
+//        List<UserEntity> allUsers = List.of(alice, bob);
+//
+//
+//        List<UserEntity> matches = profileMatcher.matchProfiles(allUsers, "35", "70", "200", "900", "");
+//
+//        Assertions.assertEquals(allUsers, matches);
+//    }
 
-
-        List<UserEntity> matches = profileMatcher.matchProfiles(allUsers, "35", "70", "200", "900", "");
-
-        Assertions.assertEquals(allUsers, matches);
-    }
-
-    @Disabled
-    @Test
-    public void testMatchProfileWithScoreReturnsSimilarProfile() {
-        UserEntity alice = new UserEntity("1", "alice", "1, 1, 2001", 20, "desc", "FEMALE", "@Alice", 100, 1000, 20, 80, Gender.MALE, 1L, 2L, 3L);
-        UserEntity bob = new UserEntity("2", "bob", "9, 9, 1999", 30, "bobdesc", "MALE", "@Bob", 150, 900, 20, 80, Gender.FEMALE, 1L, 2L, 3L);
-        List<UserEntity> allUsers = List.of(alice, bob);
-        Map<UserEntity, Double> userMap = new HashMap<>();
-        userMap.put(alice, 2.5);
-        userMap.put(bob, 25.124689052802225);
-
-
-        Map<UserEntity, Double> matches = profileMatcher.matchProfilesWithScore(allUsers, "35", "70", "200", "900", "");
-
-        Assertions.assertEquals(userMap, matches);
-    }
+//    @Disabled
+//    @Test
+//    public void testMatchProfileWithScoreReturnsSimilarProfile() {
+//        UserEntity alice = new UserEntity("1", "alice", "1, 1, 2001", 20, "desc", "FEMALE", "@Alice", 100, 1000, 20, 80, Gender.MALE, 1L, 2L, 3L);
+//        UserEntity bob = new UserEntity("2", "bob", "9, 9, 1999", 30, "bobdesc", "MALE", "@Bob", 150, 900, 20, 80, Gender.FEMALE, 1L, 2L, 3L);
+//        List<UserEntity> allUsers = List.of(alice, bob);
+//        Map<UserEntity, Double> userMap = new HashMap<>();
+//        userMap.put(alice, 2.5);
+//        userMap.put(bob, 25.124689052802225);
+//
+//
+//        Map<UserEntity, Double> matches = profileMatcher.matchProfilesWithScore(allUsers, "35", "70", "200", "900", "");
+//
+//        Assertions.assertEquals(userMap, matches);
+//    }
 }
