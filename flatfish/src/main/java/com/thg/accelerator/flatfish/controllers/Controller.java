@@ -1,6 +1,7 @@
 package com.thg.accelerator.flatfish.controllers;
 
 
+import com.thg.accelerator.flatfish.dto.SavedProfileDetailDto;
 import com.thg.accelerator.flatfish.dto.SavedProfileDto;
 import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.UserEntity;
@@ -148,17 +149,27 @@ public class Controller {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/savedprofiles/{savingUserId}")
-    public ResponseEntity<List<SavedProfileDto>> getAllSavedProfilesOfAUser(@PathVariable String savingUserId){
-        List<SavedProfileEntity> savedProfiles = savedProfileService.getAllSavedProfilesBySavingUser(savingUserId);
+//    @GetMapping("/savedprofiles/{savingUserId}")
+//    public ResponseEntity<List<SavedProfileDto>> getAllSavedProfilesOfAUser(@PathVariable String savingUserId){
+//        List<SavedProfileEntity> savedProfiles = savedProfileService.getAllSavedProfilesBySavingUser(savingUserId);
+//
+//        if (savedProfiles.isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        } else {
+//            List<SavedProfileDto> savedProfileDtos = savedProfiles.stream()
+//                    .map(SavedProfileTransformer::transformSavedProfileEntityToDto)
+//                    .collect(Collectors.toList());
+//            return ResponseEntity.ok(savedProfileDtos);
+//        }
+//    }
 
-        if (savedProfiles.isEmpty()) {
-            return ResponseEntity.notFound().build();
+    @GetMapping("/savedprofiles/{savingUserId}")
+    public ResponseEntity<List<SavedProfileDetailDto>> getAllDetailedSavedProfilesOfAUser(@PathVariable String savingUserId) {
+        List<SavedProfileDetailDto> savedProfilesDetails = savedProfileService.getAllSavedProfilesDetailsBySavingUser(savingUserId);
+        if (!savedProfilesDetails.isEmpty()) {
+            return ResponseEntity.ok(savedProfilesDetails);
         } else {
-            List<SavedProfileDto> savedProfileDtos = savedProfiles.stream()
-                    .map(SavedProfileTransformer::transformSavedProfileEntityToDto)
-                    .collect(Collectors.toList());
-            return ResponseEntity.ok(savedProfileDtos);
+            return ResponseEntity.notFound().build();
         }
     }
 
