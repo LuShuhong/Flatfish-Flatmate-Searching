@@ -86,6 +86,8 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
       });
     }
   };
+  // http://localhost:8080/api/v1/preferences
+  // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/preferences
 
   const handleRemovePreference = (preferenceEntry: string): void => {
     let newLocationList = preferences.location;

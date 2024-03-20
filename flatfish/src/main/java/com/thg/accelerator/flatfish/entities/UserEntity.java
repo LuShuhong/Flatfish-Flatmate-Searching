@@ -35,7 +35,7 @@ public class UserEntity {
     @Column(name = "Description")
     private String description;
 
-    @Column(name = "UserGender")
+    @Column(name = "User_Gender")
     private String userGender;
 
     @Column(name = "Instagram")

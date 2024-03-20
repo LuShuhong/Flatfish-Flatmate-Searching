@@ -25,7 +25,6 @@ function App() {
     birthday: convertDateToString(new Date()),
   };
   const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
-  console.log(initialDetails);
 
   const updateProfile = (updatedField: Partial<Profile>): void =>
     setCurUser((u) => ({ ...u, ...updatedField }));
@@ -35,20 +34,17 @@ function App() {
     setCurPage(() => newPage);
   };
   const getPreferences = (p: Preference): void => {
+    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matches?
+    // http://localhost:8080/api/v1/matches?
     getProfiles(
-      `http://localhost:8080/api/v1/matches?
-      userId=${p.userId}&
-      gender=${p.gender}&
-      ageMin=${p.ageRange[0]}&
-      ageMax=${p.ageRange[1]}&
-      budgetMin=${p.budgetRange[0]}&
-      budgetMax=${p.budgetRange[1]}`,
+      `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}`,
       setMatchedProfiles
     );
     setCurPage(() => "My Matches");
     navigate("/matches");
-    console.log("my matches" + matchedProfiles);
   };
+  
+  
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
       <NavBar

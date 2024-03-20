@@ -8,6 +8,7 @@ import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import com.thg.accelerator.flatfish.transformer.Transformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.thg.accelerator.flatfish.dto.SavedProfileDetailDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,18 +49,48 @@ public class SavedProfileService {
 //                .collect(Collectors.toList());
 //    }
 
-    public List<UserEntity> getSavedProfileById(String id){
-        List<SavedProfileEntity> savedProfiles = savedRepo.findBySavingUserUserId(id);
-        List<UserEntity> profileList = savedProfiles.stream()
-                .map(SavedProfileEntity::getSavedUser) // Assuming you have a method to get the saved profile from SavedProfileEntity
-                .map(UserEntity::getUserId)
-                .map(usersRepo::findById) // Assuming you have a method to find a profile by ID
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
-        return profileList.stream().collect(Collectors.toList());
+    // public List<UserEntity> getSavedProfileById(String id){
+    //     List<SavedProfileEntity> savedProfiles = savedRepo.findBySavingUserUserId(id);
+    //     List<UserEntity> profileList = savedProfiles.stream()
+    //             .map(SavedProfileEntity::getSavedUser) // Assuming you have a method to get the saved profile from SavedProfileEntity
+    //             .map(UserEntity::getUserId)
+    //             .map(usersRepo::findById) // Assuming you have a method to find a profile by ID
+    //             .filter(Optional::isPresent)
+    //             .map(Optional::get)
+    //             .collect(Collectors.toList());
+    //     return profileList.stream().collect(Collectors.toList());
+    // }
+
+    public List<SavedProfileEntity> getAllSavedProfilesBySavingUser(String savingUserId) {
+        return savedRepo.findBySavingUserUserId(savingUserId);
     }
 
+    public List<SavedProfileDetailDto> getAllSavedProfilesDetailsBySavingUser(String savingUserId) {
+        List<SavedProfileEntity> savedProfiles = savedRepo.findBySavingUserUserId(savingUserId);
+        return savedProfiles.stream()
+                .map(this::toSavedProfileDetailDto)
+                .collect(Collectors.toList());
+    }
+
+    private SavedProfileDetailDto toSavedProfileDetailDto(SavedProfileEntity savedProfile) {
+        UserEntity targetSavedUserEntity = savedProfile.getSavedUser(); // Assuming getSavedUser returns the user that was saved
+        SavedProfileDetailDto targetSavedUserDto = new SavedProfileDetailDto();
+        targetSavedUserDto.setName(targetSavedUserEntity.getName());
+        targetSavedUserDto.setAge(targetSavedUserEntity.getAge());
+        targetSavedUserDto.setDescription(targetSavedUserEntity.getDescription());
+        targetSavedUserDto.setUserGender(targetSavedUserEntity.getUserGender());
+        targetSavedUserDto.setInstagram(targetSavedUserEntity.getInstagram());
+        targetSavedUserDto.setBudgetMin(targetSavedUserEntity.getBudgetMin());
+        targetSavedUserDto.setBudgetMax(targetSavedUserEntity.getBudgetMax());
+        targetSavedUserDto.setAgeMin(targetSavedUserEntity.getAgeMin());
+        targetSavedUserDto.setAgeMax(targetSavedUserEntity.getAgeMax());
+        targetSavedUserDto.setPreferredGender(targetSavedUserEntity.getGender());
+        targetSavedUserDto.setLocation1(targetSavedUserEntity.getLocation1());
+        targetSavedUserDto.setLocation2(targetSavedUserEntity.getLocation2());
+        targetSavedUserDto.setLocation3(targetSavedUserEntity.getLocation3());
+
+        return targetSavedUserDto;
+    }
 
     public void saveAProfile(String userId, SavedProfileEntity savedProfileEntity) {
         // Find the user by ID

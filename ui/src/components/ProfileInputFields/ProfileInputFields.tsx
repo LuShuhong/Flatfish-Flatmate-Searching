@@ -34,6 +34,8 @@ export const ProfileInputFields: React.FC<Props> = ({
 
   const handleSaveProfile = () => {
     setDeactivate(() => true);
+    // http://localhost:8080/api/v1
+    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1
     post("http://localhost:8080/api/v1", {
       userId: user.email,
       name: user.name,
