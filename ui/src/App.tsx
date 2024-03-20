@@ -18,10 +18,6 @@ function App() {
   const [user, setUser] = useState<SignUpDetails>(defaultSignUpDetails);
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
-  const [curUser, setCurUser] = useState<Partial<Profile>>();
-
-  const updateProfile = (updatedField: Partial<Profile>): void =>
-    setCurUser((u) => ({ ...u, ...updatedField }));
 
   const navigate = useNavigate();
   const handlePageChange = (newPage: string): void => {
@@ -47,7 +43,6 @@ function App() {
         curPage={curPage}
         handlePageChange={handlePageChange}
         user={user}
-        loggedInId={user.userId}
       />
       <div className="h-70%">
         <Routes>
@@ -57,16 +52,10 @@ function App() {
           <Route
             path="/home"
             element={
-              <HomePage
-                getPreferences={getPreferences}
-                email={curUser?.email}
-              />
+              <HomePage getPreferences={getPreferences} email={user.userId} />
             }
           />
-          <Route
-            path="/profile"
-            element={<ProfilePage user={user} updateProfile={updateProfile} />}
-          />
+          <Route path="/profile" element={<ProfilePage user={user} />} />
           <Route
             path="/matches"
             element={<Matches profiles={matchedProfiles} />}

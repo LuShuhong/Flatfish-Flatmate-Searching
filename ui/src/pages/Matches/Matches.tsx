@@ -1,7 +1,5 @@
 import "./Matches.css";
-import { useEffect, useState } from "react";
-import { Preference } from "../../util/interfaces/Preference";
-import { getProfiles } from "../../requests/getRequests";
+import { useState } from "react";
 import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
