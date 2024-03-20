@@ -5,6 +5,7 @@ import { convertDateToString } from "../../util/dateConverter";
 import { SignUpFieldWarning } from "../../util/interfaces/SignUpFieldWarning";
 import { post } from "../../requests/postRequests";
 import { useNavigate } from "react-router-dom";
+import { defaultSignUpDetails } from "../../util/constants/defaultSignUpDetails";
 
 export const SignUpPage: React.FC = () => {
   const noWarnings: SignUpFieldWarning = {
@@ -17,19 +18,8 @@ export const SignUpPage: React.FC = () => {
   const [fieldWarning, setFieldWarning] =
     useState<SignUpFieldWarning>(noWarnings);
   const [userInDb, setUserInDb] = useState<boolean>(false);
-  const [signUpDetails, setSignUpDetails] = useState<SignUpDetails>({
-    userId: "",
-    password: "",
-    name: "",
-    birthday: convertDateToString(new Date()),
-    age: 0,
-    userGender: "SELECT",
-    picture:
-      "https://i.seadn.io/gae/IJpqaGRflNtIYcpzE4Y9g3Rerxnf5DQj6qL1qHqdFea8jG8P0imxVamF4Tzu-HSLD-adot6skRF_fcJncpmUymqNaNUEuELcvi5YEQ?auto=format&dpr=1&w=1000",
-    role: "USER",
-    description: "",
-    instagram: "",
-  });
+  const [signUpDetails, setSignUpDetails] =
+    useState<SignUpDetails>(defaultSignUpDetails);
   const navigate = useNavigate();
   const handleRegistration = (): void => {
     let warnings = 0;
