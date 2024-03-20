@@ -7,13 +7,21 @@ import { RegisterButton } from "../RegisterButton/RegisterButton";
 import { RedirectToLogin } from "../RedirectToLogin/RedirectToLogin";
 import { SignUpDetails } from "../../../../util/interfaces/SignUpDetails";
 import { getAge } from "../../../../util/ageCalculator";
+import { SignUpFieldWarning } from "../../../../util/interfaces/SignUpFieldWarning";
 
 interface Props {
   signUpDetails: SignUpDetails;
   updateField: (updatedField: Partial<SignUpDetails>) => void;
+  handleRegistration: () => void;
+  fieldWarning: SignUpFieldWarning;
 }
 
-export const SignUpForm: React.FC<Props> = ({ signUpDetails, updateField }) => {
+export const SignUpForm: React.FC<Props> = ({
+  signUpDetails,
+  updateField,
+  handleRegistration,
+  fieldWarning,
+}) => {
   const handleNameChange = (val: string): void => updateField({ name: val });
   const handleGenderChange = (val: "MALE" | "FEMALE" | "SELECT"): void =>
     updateField({ userGender: val });
@@ -39,6 +47,7 @@ export const SignUpForm: React.FC<Props> = ({ signUpDetails, updateField }) => {
             mandatory={true}
             value={signUpDetails.name}
             handleChange={handleNameChange}
+            warning={fieldWarning.name}
           />
         </div>
         <div className="w-1/3">
@@ -46,6 +55,7 @@ export const SignUpForm: React.FC<Props> = ({ signUpDetails, updateField }) => {
             fieldName="gender"
             value={signUpDetails.userGender}
             handleChange={handleGenderChange}
+            warning={fieldWarning.userGender}
           />
         </div>
       </div>
@@ -57,6 +67,7 @@ export const SignUpForm: React.FC<Props> = ({ signUpDetails, updateField }) => {
           mandatory={true}
           value={signUpDetails.userId}
           handleChange={handleEmailChange}
+          warning={fieldWarning.userId}
         />
       </div>
       <div className="flex h-1/8 w-full">
@@ -67,6 +78,7 @@ export const SignUpForm: React.FC<Props> = ({ signUpDetails, updateField }) => {
           mandatory={true}
           value={signUpDetails.password}
           handleChange={handlePasswordChange}
+          warning={fieldWarning.password}
         />
       </div>
       <div className="flex h-1/8 w-full">
@@ -74,6 +86,7 @@ export const SignUpForm: React.FC<Props> = ({ signUpDetails, updateField }) => {
           <Birthday
             value={signUpDetails.birthday}
             handleChange={handleBirthdayChange}
+            warning={fieldWarning.birthday}
           />
         </div>
         <div className="w-1/3">
@@ -88,6 +101,7 @@ export const SignUpForm: React.FC<Props> = ({ signUpDetails, updateField }) => {
           mandatory={false}
           value={signUpDetails.instagram}
           handleChange={handleInstagramChange}
+          warning={false}
         />
       </div>
       <div className="flex h-1/4 w-full">
@@ -98,7 +112,7 @@ export const SignUpForm: React.FC<Props> = ({ signUpDetails, updateField }) => {
       </div>
       <div className="flex justify-center h-1/8 w-full">
         <div className="flex items-center h-full w-60%">
-          <RegisterButton />
+          <RegisterButton handleRegistration={handleRegistration} />
         </div>
         <div className="h-full w-40%">
           <RedirectToLogin />

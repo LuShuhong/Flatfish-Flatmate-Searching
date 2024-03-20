@@ -1,13 +1,21 @@
 interface Props {
   value: string;
   handleChange: (val: string) => void;
+  warning: boolean;
 }
 
-export const Birthday: React.FC<Props> = ({ value, handleChange }) => {
+export const Birthday: React.FC<Props> = ({ value, handleChange, warning }) => {
   return (
     <label className="flex flex-col justify-center w-full h-full">
-      <div className="text-sm">
-        birthday<sup className="text-red-600">*</sup>
+      <div className="flex items-center">
+        <div className="text-sm">
+          birthday<sup className="text-red-600">*</sup>
+        </div>
+        {warning && (
+          <div className="text-xs text-red-700 ml-1">
+            This field is required
+          </div>
+        )}
       </div>
       <input
         type="date"

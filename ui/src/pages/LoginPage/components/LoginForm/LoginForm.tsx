@@ -36,6 +36,7 @@ export const LoginForm: React.FC<Props> = ({
             mandatory={true}
             value={loginDetails.userId}
             handleChange={handleEmailChange}
+            warning={false}
           />
         </div>
         <div className="w-full h-1/4">
@@ -46,6 +47,7 @@ export const LoginForm: React.FC<Props> = ({
             mandatory={true}
             value={loginDetails.password}
             handleChange={handlePasswordChange}
+            warning={false}
           />
         </div>
         {incorrectLoginDetails && (
