@@ -48,7 +48,12 @@ public class SavedProfileService {
         targetSavedUserDto.setInstagram(targetSavedUserEntity.getInstagram());
         targetSavedUserDto.setBudgetMin(targetSavedUserEntity.getBudgetMin());
         targetSavedUserDto.setBudgetMax(targetSavedUserEntity.getBudgetMax());
+        targetSavedUserDto.setAgeMin(targetSavedUserEntity.getAgeMin());
+        targetSavedUserDto.setAgeMax(targetSavedUserEntity.getAgeMax());
         targetSavedUserDto.setPreferredGender(targetSavedUserEntity.getGender());
+        targetSavedUserDto.setLocation1(targetSavedUserEntity.getLocation1());
+        targetSavedUserDto.setLocation2(targetSavedUserEntity.getLocation2());
+        targetSavedUserDto.setLocation3(targetSavedUserEntity.getLocation3());
 
         return targetSavedUserDto;
     }
