@@ -9,6 +9,7 @@ import com.thg.accelerator.flatfish.transformer.Transformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.thg.accelerator.flatfish.dto.SavedProfileDetailDto;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,10 +61,10 @@ public class SavedProfileService {
     //             .collect(Collectors.toList());
     //     return profileList.stream().collect(Collectors.toList());
     // }
-
-    public List<SavedProfileEntity> getAllSavedProfilesBySavingUser(String savingUserId) {
-        return savedRepo.findBySavingUserUserId(savingUserId);
-    }
+//
+//    public List<SavedProfileEntity> getAllSavedProfilesBySavingUser(String savingUserId) {
+//        return savedRepo.findBySavingUserUserId(savingUserId);
+//    }
 
     public List<SavedProfileDetailDto> getAllSavedProfilesDetailsBySavingUser(String savingUserId) {
         List<SavedProfileEntity> savedProfiles = savedRepo.findBySavingUserUserId(savingUserId);
@@ -92,7 +93,7 @@ public class SavedProfileService {
         return targetSavedUserDto;
     }
 
-    public void saveAProfile(String userId, SavedProfileEntity savedProfileEntity) {
+    public void saveAProfile(@PathVariable String userId, SavedProfileEntity savedProfileEntity) {
         // Find the user by ID
         Optional<UserEntity> userEntityOptional = usersRepo.findById(userId);
 
@@ -106,9 +107,9 @@ public class SavedProfileService {
         }
     }
 
-    public Optional<SavedProfileEntity> getProfileById(Long savedProfileId) {
-        return savedRepo.findById(savedProfileId);
-    }
+//    public Optional<SavedProfileEntity> getProfileById(Long savedProfileId) {
+//        return savedRepo.findById(savedProfileId);
+//    }
 
     public void deleteASavedProfile(Long id) {
         Optional<SavedProfileEntity> savedProfileEntityOptional = savedRepo.findById(id);
