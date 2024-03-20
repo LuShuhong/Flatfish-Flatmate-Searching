@@ -27,8 +27,6 @@ public class ProfileMatcher {
         if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
             dealBreakerMatches = dealBreakerMatches.stream()
                     .filter(user -> user.getUserGender()
-                            //if Gender enum is removed, toString can be removed
-                            .toString()
                             .equalsIgnoreCase(gender))
                     .toList();
         }

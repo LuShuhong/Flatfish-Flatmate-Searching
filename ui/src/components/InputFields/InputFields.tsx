@@ -82,7 +82,7 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
         ageMax: preferences.ageRange[1],
         gender: preferences.gender,
         smoker: false,
-        location: "test1",
+        location: preferences.location[0],
       });
     }
   };
@@ -98,6 +98,8 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
 
     setPreferences({ ...preferences, location: newLocationList });
   };
+
+  console.log(preferences);
 
   return (
     <div className="w-full h-4/5">
