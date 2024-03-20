@@ -1,5 +1,6 @@
 import { Preference } from "../../util/interfaces/Preference";
 import { InputFields } from "../InputFields/InputFields";
+import React from "react";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;

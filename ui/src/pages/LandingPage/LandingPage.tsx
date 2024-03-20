@@ -1,4 +1,5 @@
 import { LoginButton } from "../../components/LoginButton/LoginButton";
+import React from "react";
 
 export const LandingPage: React.FC = () => {
   return (
