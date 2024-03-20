@@ -3,35 +3,42 @@ import { HomePage } from "./pages/HomePage/HomePage";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Matches } from "./pages/Matches/Matches";
 import { Saved } from "./pages/Saved/Saved";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Preference } from "./util/interfaces/Preference";
 import { getProfiles } from "./requests/getRequests";
-import { useAuth0 } from "@auth0/auth0-react";
 import { Profile } from "./util/interfaces/Profile";
-import { MyProfile } from "./pages/MyProfile/MyProfile";
-import { convertDateToString } from "./util/dateConverter";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { SignUpDetails } from "./util/interfaces/SignUpDetails";
+import { convertDateToString } from "./util/dateConverter";
 
 function App() {
   const [loggedInId, setLoggedInId] = useState<string>("");
+  const [user, setUser] = useState<SignUpDetails>({
+    userId: "",
+    password: "",
+    name: "",
+    birthday: convertDateToString(new Date()),
+    age: 0,
+    userGender: "SELECT",
+    picture: "",
+    role: "USER",
+    description: "",
+    instagram: "",
+  });
+  useEffect(() => {
+    if (loggedInId) {
+      fetch(`http://localhost:8080/api/v1/users/${loggedInId}`)
+        .then((resp) => resp.json())
+        .then((data) => setUser(() => data));
+    }
+  }, []);
   console.log(loggedInId);
-  const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
-  const getToken = async (): Promise<string | undefined> => {
-    const token = await getIdTokenClaims();
-    return token?.__raw;
-  };
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
-  const initialDetails: Partial<Profile> = {
-    name: user?.name,
-    picture: user?.picture,
-    gender: user?.gender,
-    email: user?.email,
-    birthday: convertDateToString(new Date()),
-  };
-  const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
+  const [curUser, setCurUser] = useState<Partial<Profile>>();
 
   const updateProfile = (updatedField: Partial<Profile>): void =>
     setCurUser((u) => ({ ...u, ...updatedField }));
@@ -61,7 +68,7 @@ function App() {
         curPage={curPage}
         handlePageChange={handlePageChange}
         user={curUser}
-        authenticated={isAuthenticated}
+        loggedInId={loggedInId}
       />
       <div className="h-70%">
         <Routes>
@@ -82,7 +89,7 @@ function App() {
           />
           <Route
             path="/profile"
-            element={<MyProfile user={curUser} updateProfile={updateProfile} />}
+            element={<ProfilePage user={user} updateProfile={updateProfile} />}
           />
           <Route
             path="/matches"
