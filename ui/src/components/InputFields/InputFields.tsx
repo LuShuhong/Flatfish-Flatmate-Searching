@@ -15,6 +15,9 @@ import { SetDefaultButton } from "../SetDefaultButton/SetDefaultButton";
 import { post } from "../../requests/postRequests";
 import { LocationEntry } from "../LocationEntry/LocationEntry";
 import React from "react";
+import { DoubleSlider } from "../DoubleSlider/DoubleSlider";
+import { MAX_AGE, MIN_AGE } from "../../util/constants/age";
+import { MAX_BUDGET, MIN_BUDGET } from "../../util/constants/budget";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
@@ -31,16 +34,28 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
   const handleGender = (val: "MALE" | "FEMALE" | "UNSPECIFIED"): void =>
     updatePreferences({ gender: val });
 
-  const handleAge = (val: number, index: 0 | 1): void => {
-    const curAgeRange = preferences.ageRange;
-    curAgeRange[index] = val;
+  // const handleAge = (val: number, index: 0 | 1): void => {
+  //   const curAgeRange = preferences.ageRange;
+  //   curAgeRange[index] = val;
+  //   updatePreferences({ ageRange: curAgeRange });
+  // };
+
+  const handleAge = (val: [min: number, max: number]): void => {
+    const curAgeRange = val;
     updatePreferences({ ageRange: curAgeRange });
+    console.log(preferences.ageRange);
   };
 
-  const handleBudget = (val: number, index: 0 | 1): void => {
-    const curBudgetRange = preferences.budgetRange;
-    curBudgetRange[index] = val;
+  // const handleBudget = (val: number, index: 0 | 1): void => {
+  //   const curBudgetRange = preferences.budgetRange;
+  //   curBudgetRange[index] = val;
+  //   updatePreferences({ budgetRange: curBudgetRange });
+  // };
+
+  const handleBudget = (val: [min: number, max: number]): void => {
+    const curBudgetRange = val;
     updatePreferences({ budgetRange: curBudgetRange });
+    console.log(preferences.budgetRange);
   };
 
   const handleLocation = (val: string) => {
@@ -105,10 +120,23 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
         curGender={preferences.gender}
         handleGender={handleGender}
       />
-      <AgePreference ageRange={preferences.ageRange} handleAge={handleAge} />
-      <BudgetPreference
+      <DoubleSlider
+        range={[MIN_AGE, MAX_AGE]}
+        handleFunction={handleAge}
+        sliderName="Set Age Range"
+        sliderProperty="Age"
+        thumbNames={["Age minimum", "Age maximum"]}
+      />
+      {/* <BudgetPreference
         budgetRange={preferences.budgetRange}
         handleBudget={handleBudget}
+      /> */}
+      <DoubleSlider
+        range={[MIN_BUDGET, MAX_BUDGET]}
+        handleFunction={handleBudget}
+        sliderName="Set Budget Range"
+        sliderProperty="Budget"
+        thumbNames={["Budget minimum", "Budget maximum"]}
       />
       <LocationPreference
         location={preferences.location}
