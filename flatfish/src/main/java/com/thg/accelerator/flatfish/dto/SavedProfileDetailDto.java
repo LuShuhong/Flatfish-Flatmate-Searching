@@ -10,12 +10,12 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
+@NoArgsConstructor // for service
 @ToString
-public class UserDto {
-
-    private String userId;
+public class SavedProfileDetailDto {
+//    private String userId;
     private String name;
-    private String birthday;
+//    private String birthday;
     private long age;
     private String description;
     private String userGender;
@@ -24,11 +24,11 @@ public class UserDto {
     private long budgetMax;
     private long ageMin;
     private long ageMax;
-    private Gender gender;
+    private Gender preferredGender;
 
 //    private List<SavedProfileEntity> savedProfileEntities;
 
-//    private List<UserLocationsEntity> locationsEntities;
+    //    private List<UserLocationsEntity> locationsEntities;
     private String location1;
     private String location2;
     private String location3;

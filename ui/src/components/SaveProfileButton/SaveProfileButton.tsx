@@ -1,4 +1,5 @@
 import { IoMdCheckmark } from "react-icons/io";
+import React from "react";
 
 interface Props {
   handleSaveProfile: () => void;
