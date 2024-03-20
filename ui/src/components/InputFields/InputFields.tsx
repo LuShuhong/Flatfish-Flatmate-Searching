@@ -1,6 +1,4 @@
 import { GenderPreference } from "../GenderPreference/GenderPreference";
-import { AgePreference } from "../AgePreference/AgePreference";
-import { BudgetPreference } from "../BudgetPreference/BudgetPreference";
 import { LocationPreference } from "../LocationPreference/LocationPreference";
 import { MatchButton } from "../MatchButton/MatchButton";
 import { useState } from "react";

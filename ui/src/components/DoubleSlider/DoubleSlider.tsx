@@ -1,6 +1,5 @@
 import React from "react";
 import { Slider, Typography } from "@mui/material";
-import { MAX_AGE, MIN_AGE } from "../../util/constants/age";
 
 interface Props {
   handleFunction: (val: [min: number, max: number]) => void;
