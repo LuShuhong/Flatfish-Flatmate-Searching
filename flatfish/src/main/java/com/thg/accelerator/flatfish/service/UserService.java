@@ -13,6 +13,8 @@ import com.thg.accelerator.flatfish.repositories.SavedProfileRepo;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.*;
 
@@ -43,12 +45,34 @@ public class UserService {
         String budgetMin = preferences.get("budgetMin");
         String budgetMax = preferences.get("budgetMax");
         String gender = preferences.get("gender");
+        String location1 = preferences.get("location1");
+        String location2 = preferences.get("location2");
+        String location3 = preferences.get("location3");
+
 
         List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
         //return Optional.of(usersRepo.findAll());
-        return Optional.of(profileMatcher.matchProfiles(allUsers, ageMin, ageMax, budgetMin, budgetMax, gender));
+        return Optional.of(profileMatcher.matchProfiles(allUsers, ageMin, ageMax, budgetMin, budgetMax, gender,location1,location2,location3));
     }
+
+//    public Optional<List<UserEntity>> getMatchingProfiles(String userId) {
+//        Optional<UserEntity> optionalUser = usersRepo.findById(userId);
+//
+//        if (optionalUser.isEmpty()) {
+//            return Optional.empty();
+//        } else {
+//            List<UserEntity> allUsers = usersRepo.findAll();
+//
+//            return Optional.of(profileMatcher.matchProfiles(
+//                    allUsers,
+//                    optionalUser.get().getAgeMin(),
+//                    optionalUser.get().getAgeMax(),
+//                    optionalUser.get().getBudgetMin(),
+//                    optionalUser.get().getBudgetMax(),
+//                    optionalUser.get().getGender()));
+//        }
+//    }
 
     public Optional<List<UserEntity>> getAllUsers() {
         return Optional.of(usersRepo.findAll());

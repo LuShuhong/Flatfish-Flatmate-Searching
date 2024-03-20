@@ -6,9 +6,11 @@ import com.thg.accelerator.flatfish.repositories.SavedProfileRepo;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.thg.accelerator.flatfish.dto.SavedProfileDetailDto;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SavedProfileService {
@@ -23,6 +25,37 @@ public class SavedProfileService {
 
     public Optional<List<SavedProfileEntity>> getAllSavedProfiles() {
         return Optional.of(savedRepo.findAll());
+    }
+
+    public List<SavedProfileEntity> getAllSavedProfilesBySavingUser(String savingUserId) {
+        return savedRepo.findBySavingUserUserId(savingUserId);
+    }
+
+    public List<SavedProfileDetailDto> getAllSavedProfilesDetailsBySavingUser(String savingUserId) {
+        List<SavedProfileEntity> savedProfiles = savedRepo.findBySavingUserUserId(savingUserId);
+        return savedProfiles.stream()
+                .map(this::toSavedProfileDetailDto)
+                .collect(Collectors.toList());
+    }
+
+    private SavedProfileDetailDto toSavedProfileDetailDto(SavedProfileEntity savedProfile) {
+        UserEntity targetSavedUserEntity = savedProfile.getSavedUser(); // Assuming getSavedUser returns the user that was saved
+        SavedProfileDetailDto targetSavedUserDto = new SavedProfileDetailDto();
+        targetSavedUserDto.setName(targetSavedUserEntity.getName());
+        targetSavedUserDto.setAge(targetSavedUserEntity.getAge());
+        targetSavedUserDto.setDescription(targetSavedUserEntity.getDescription());
+        targetSavedUserDto.setUserGender(targetSavedUserEntity.getUserGender());
+        targetSavedUserDto.setInstagram(targetSavedUserEntity.getInstagram());
+        targetSavedUserDto.setBudgetMin(targetSavedUserEntity.getBudgetMin());
+        targetSavedUserDto.setBudgetMax(targetSavedUserEntity.getBudgetMax());
+        targetSavedUserDto.setAgeMin(targetSavedUserEntity.getAgeMin());
+        targetSavedUserDto.setAgeMax(targetSavedUserEntity.getAgeMax());
+        targetSavedUserDto.setPreferredGender(targetSavedUserEntity.getGender());
+        targetSavedUserDto.setLocation1(targetSavedUserEntity.getLocation1());
+        targetSavedUserDto.setLocation2(targetSavedUserEntity.getLocation2());
+        targetSavedUserDto.setLocation3(targetSavedUserEntity.getLocation3());
+
+        return targetSavedUserDto;
     }
 
     public void saveAProfile(String userId, SavedProfileEntity savedProfileEntity) {

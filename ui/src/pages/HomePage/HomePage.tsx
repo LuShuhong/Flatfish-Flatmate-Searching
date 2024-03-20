@@ -8,6 +8,7 @@ interface Props {
 }
 
 export const HomePage: React.FC<Props> = ({ getPreferences, email }) => {
+  
   return (
     <div className="flex justify-center items-center w-full h-full">
       <PreferenceInput getPreferences={getPreferences} email={email} />
