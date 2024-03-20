@@ -14,12 +14,10 @@ export const Saved: React.FC = () => {
               <SavedCards
                 name={savedProfile.name}
                 age={savedProfile.age} // Parse age as a number
-                jobTitle={savedProfile.jobTitle}
                 description={savedProfile.description}
-                email={savedProfile.email}
+                email={savedProfile.userId}
                 gender={savedProfile.gender}
                 instagram={savedProfile.instagram}
-                smoker={savedProfile.smoker}
               />
             </div>
           </>

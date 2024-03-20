@@ -4,12 +4,10 @@ import person from "../../img/funcat.jpeg";
 interface Props {
   name: string;
   age: string;
-  jobTitle: string;
   description: string;
   email: string;
   gender: string;
   instagram: string;
-  smoker: boolean;
 }
 
 export const SavedCards: React.FC<Props> = ({ name, age }) => {
@@ -37,7 +35,6 @@ export const SavedCards: React.FC<Props> = ({ name, age }) => {
           ullamcorper est tempus sed.
         </p>
         <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
-          {" "}
           instagram
         </button>
       </div>

@@ -10,4 +10,5 @@ export const post = (url: string, body: PostBody | object) => {
   })
     .then(() => console.log("success"))
     .catch((error) => console.log(error));
+  console.log("done");
 };

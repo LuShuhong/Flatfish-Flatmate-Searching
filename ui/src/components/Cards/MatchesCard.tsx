@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../pages/Matches/Matches.css";
-import person from "../../img/wetcat.jpeg";
+import person from "../../img/O-O.jpeg";
+// import { post } from "../../requests/postRequests";
+import { Profile } from "../../util/interfaces/Profile";
+import { postrq } from "../../requests/savedPostRequest";
 interface Props {
-  name: string;
-  age: string;
-  jobTitle: string;
-  description: string;
-  email: string;
-  gender: string;
-  instagram: string;
-  smoker: boolean;
+  profile: Profile;
+  userEmail: any;
+  curUserId: any;
 }
-export const MatchesCard: React.FC<Props> = ({ name, age, jobTitle }) => {
+export const MatchesCard: React.FC<Props> = ({
+  userEmail,
+  profile,
+  curUserId,
+}) => {
+  console.log(curUserId);
+  console.log(userEmail);
+
+  const onClick = () => {
+    postrq("http://localhost:8080/api/v1/savedprofiles", userEmail, curUserId);
+  };
+
   return (
     <>
       <div className="flex bg-sea-green justify-center align-center w-5/6 h-5/6 rounded-xl shadow-md">
@@ -19,9 +28,9 @@ export const MatchesCard: React.FC<Props> = ({ name, age, jobTitle }) => {
           <img src={person} alt="img of person" className="rounded-xl" />
         </div>
         <div className="items-center p-8">
-          <h1 className="font-serif-display text-5xl">{name}</h1>
-          <h2 className="font-playfair-display text-lg">{age}</h2>
-          <h2 className="font-playfair-display text-lg">{jobTitle}</h2>
+          <h1 className="font-serif-display text-5xl">{profile.name}</h1>
+          <h1 className="font-serif-display text-5xl">{profile.userId}</h1>
+          <h2 className="font-playfair-display text-lg">{profile.age}</h2>
           <p className="font-roboto-condensed text-lg">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
             malesuada orci eu viverra posuere. Etiam est libero, interdum quis
@@ -32,6 +41,7 @@ export const MatchesCard: React.FC<Props> = ({ name, age, jobTitle }) => {
             ullamcorper est tempus sed.
           </p>
         </div>
+        <button onClick={() => onClick()}>save</button>
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import { Logo } from "../Logo/Logo";
 import { Navigation } from "../Navigation/Navigation";
+import React from "react";
 
 interface Props {
   curPage: string;

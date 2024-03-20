@@ -4,6 +4,7 @@ import MenuIcon from "../MenuIcon/MenuIcon";
 import Xmark from "../XmarkIcon/Xmark";
 import { Profile } from "../../util/interfaces/Profile";
 import { ProfileContainer } from "../ProfileContainer/ProfileContainer";
+import React from "react";
 
 interface Props {
   curPage: string;
@@ -51,7 +52,7 @@ export const Navigation: React.FC<Props> = ({
           curPage={curPage}
           handlePageChange={handlePageChange}
         />
-        <ProfileContainer profilePic={user.picture} name={user.name} />
+        <ProfileContainer name={user.name} profilePic={undefined} />
       </div>
     </>
   );

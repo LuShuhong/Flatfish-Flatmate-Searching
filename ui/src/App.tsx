@@ -25,6 +25,12 @@ function App() {
     birthday: convertDateToString(new Date()),
   };
   const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
+  // matchedProfiles.forEach((profile) => {
+  //   console.log("Name:", profile.name);
+  //   console.log("Age:", profile.age);
+  //   console.log("email", profile.userId);
+  //   // Add more attributes as needed
+  // });
 
   const updateProfile = (updatedField: Partial<Profile>): void =>
     setCurUser((u) => ({ ...u, ...updatedField }));
@@ -43,8 +49,7 @@ function App() {
     setCurPage(() => "My Matches");
     navigate("/matches");
   };
-  
-  
+
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
       <NavBar
@@ -71,7 +76,12 @@ function App() {
           />
           <Route
             path="/matches"
-            element={<Matches profiles={matchedProfiles} />}
+            element={
+              <Matches
+                profiles={matchedProfiles}
+                userEmail={initialDetails.email}
+              />
+            }
           />
           <Route path="/saved" element={<Saved />} />
         </Routes>

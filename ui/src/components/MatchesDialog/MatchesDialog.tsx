@@ -1,6 +1,7 @@
 import "./MatchesDialog.css";
 import image from "../../img/personimg.jpeg";
 import { Profile } from "../../util/interfaces/Profile";
+import React from "react";
 
 interface Props {
   openDialog: boolean;
@@ -31,7 +32,6 @@ export const MatchesDialog: React.FC<Props> = ({
         </h1>
         <img src={image} alt="default person" className=" rounded-xl" />
         <p>age: {selectedPerson.age}</p>
-        <p>job title: {selectedPerson.jobTitle}</p>
         <p>instagram: {selectedPerson.instagram}</p>
       </div>
     </>
