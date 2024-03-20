@@ -17,7 +17,7 @@ function App() {
   const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
   const getToken = async () => {
     const token = await getIdTokenClaims();
-    console.log(token);
+    console.log(token?.__raw);
   };
   getToken();
   const [curPage, setCurPage] = useState<string>("Home");

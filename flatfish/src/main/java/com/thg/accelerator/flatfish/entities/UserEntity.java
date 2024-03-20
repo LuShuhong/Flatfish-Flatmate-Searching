@@ -30,6 +30,9 @@ public class UserEntity implements UserDetails {
     @Column(name = "Name")
     private String name;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "Birthday")
     private String birthday;
 
@@ -44,6 +47,9 @@ public class UserEntity implements UserDetails {
 
     @Column(name = "Instagram")
     private String instagram;
+
+    @Column(name = "picture")
+    private String picture;
 
     @Column(name = "BudgetMin", table = "Preferences")
     private long budgetMin;
@@ -75,9 +81,6 @@ public class UserEntity implements UserDetails {
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
-
-    @Column(name = "password")
-    private String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
