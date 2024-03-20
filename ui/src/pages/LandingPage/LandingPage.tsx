@@ -1,4 +1,3 @@
-import { LoginButton } from "../../components/LoginButton/LoginButton";
 import { SignUpButton } from "./components/SignUpButton/SignupButton";
 
 export const LandingPage: React.FC = () => {

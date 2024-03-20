@@ -1,16 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const SignUpButton: React.FC = () => {
-  const navigate = useNavigate();
-  const HandleSignUp = (): void => {
-    navigate("/signup");
-  };
   return (
-    <button
-      className="bg-[#9BBFBB] rounded-md h-1/6 w-2/5 shadow-defaultButton font-playfair-display hover:bg-[#89ada9]"
-      onClick={() => HandleSignUp()}
+    <Link
+      to="/signup"
+      className="flex items-center justify-center bg-[#9BBFBB] rounded-md h-1/6 w-2/5 shadow-defaultButton font-playfair-display hover:bg-[#89ada9]"
     >
       Sign up
-    </button>
+    </Link>
   );
 };

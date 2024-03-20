@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 
-export const RedirectToLogin: React.FC = () => {
+export const RedirectToSignUp: React.FC = () => {
   return (
-    <div className="h-full w-full">
+    <div className="w-full h-full">
       <div className="flex items-end justify-center h-1/2 w-full text-xs">
-        Already have an account?
+        Don't have an account?
       </div>
       <Link
-        to="/login"
+        to="/signup"
         className="flex items-start justify-center h-1/2 w-full text-sm"
       >
-        log in
+        Sign up
       </Link>
     </div>
   );
