@@ -45,12 +45,15 @@ public class UserService {
         String budgetMin = preferences.get("budgetMin");
         String budgetMax = preferences.get("budgetMax");
         String gender = preferences.get("gender");
+        String location1 = preferences.get("location1");
+        String location2 = preferences.get("location2");
+        String location3 = preferences.get("location3");
 
 
         List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
         //return Optional.of(usersRepo.findAll());
-        return Optional.of(profileMatcher.matchProfiles(allUsers, ageMin, ageMax, budgetMin, budgetMax, gender));
+        return Optional.of(profileMatcher.matchProfiles(allUsers, ageMin, ageMax, budgetMin, budgetMax, gender,location1,location2,location3));
     }
 
 //    public Optional<List<UserEntity>> getMatchingProfiles(String userId) {
