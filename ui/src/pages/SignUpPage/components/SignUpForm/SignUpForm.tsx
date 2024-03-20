@@ -46,7 +46,7 @@ export const SignUpForm: React.FC<Props> = ({
             fieldName="name"
             placeholder="John"
             type="text"
-            mandatory={true}
+            mandatory
             value={signUpDetails.name}
             handleChange={handleNameChange}
             warning={fieldWarning.name}
@@ -66,7 +66,7 @@ export const SignUpForm: React.FC<Props> = ({
           fieldName="email"
           placeholder="johnsmith69@gmail.com"
           type="email"
-          mandatory={true}
+          mandatory
           value={signUpDetails.userId}
           handleChange={handleEmailChange}
           warning={fieldWarning.userId}
@@ -77,7 +77,7 @@ export const SignUpForm: React.FC<Props> = ({
           fieldName="password"
           placeholder="Enter password ..."
           type="password"
-          mandatory={true}
+          mandatory
           value={signUpDetails.password}
           handleChange={handlePasswordChange}
           warning={fieldWarning.password}
@@ -100,10 +100,8 @@ export const SignUpForm: React.FC<Props> = ({
           fieldName="instagram"
           placeholder="JohnSmithInstaFollow"
           type="text"
-          mandatory={false}
           value={signUpDetails.instagram}
           handleChange={handleInstagramChange}
-          warning={false}
         />
       </div>
       <div className="flex flex-col h-1/4 w-full">

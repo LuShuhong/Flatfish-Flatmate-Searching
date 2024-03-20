@@ -17,17 +17,16 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
   const handleInstagramChange = (): void => {};
   const handleDescriptionChange = (): void => {};
   return (
-    <div className="h-full w-30%">
+    <div className="h-full w-30% border">
       <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
           <TextInput
             fieldName="name"
             placeholder="John"
             type="text"
-            mandatory={true}
+            mandatory
             value={user.name}
             handleChange={handleNameChange}
-            warning={false}
           />
         </div>
         <div className="w-1/3">
@@ -44,10 +43,10 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
           fieldName="email"
           placeholder="johnsmith69@gmail.com"
           type="email"
-          mandatory={true}
+          mandatory
           value={user.userId}
           handleChange={handleEmailChange}
-          warning={false}
+          disabled={true}
         />
       </div>
       <div className="flex h-1/8 w-full">
@@ -67,10 +66,8 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
           fieldName="instagram"
           placeholder="JohnSmithInstaFollow"
           type="text"
-          mandatory={false}
           value={user.instagram}
           handleChange={handleInstagramChange}
-          warning={false}
         />
       </div>
       <div className="flex flex-col h-1/4 w-full">

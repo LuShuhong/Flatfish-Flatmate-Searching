@@ -23,7 +23,8 @@ function App() {
     birthday: convertDateToString(new Date()),
     age: 0,
     userGender: "SELECT",
-    picture: "",
+    picture:
+      "https://i.seadn.io/gae/IJpqaGRflNtIYcpzE4Y9g3Rerxnf5DQj6qL1qHqdFea8jG8P0imxVamF4Tzu-HSLD-adot6skRF_fcJncpmUymqNaNUEuELcvi5YEQ?auto=format&dpr=1&w=1000",
     role: "USER",
     description: "",
     instagram: "",
@@ -67,7 +68,7 @@ function App() {
       <NavBar
         curPage={curPage}
         handlePageChange={handlePageChange}
-        user={curUser}
+        user={user}
         loggedInId={loggedInId}
       />
       <div className="h-70%">

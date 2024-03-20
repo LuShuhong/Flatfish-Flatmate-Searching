@@ -2,10 +2,11 @@ interface Props {
   fieldName: string;
   placeholder: string;
   type: string;
-  mandatory: boolean;
+  mandatory?: boolean;
   value: string;
   handleChange: (val: string) => void;
-  warning: boolean;
+  warning?: boolean;
+  disabled?: boolean;
 }
 
 export const TextInput: React.FC<Props> = ({
@@ -16,6 +17,7 @@ export const TextInput: React.FC<Props> = ({
   value,
   handleChange,
   warning,
+  disabled,
 }) => {
   return (
     <label className="flex flex-col justify-center w-full h-full">
@@ -36,6 +38,7 @@ export const TextInput: React.FC<Props> = ({
         placeholder={placeholder}
         value={value}
         onChange={(e) => handleChange(e.target.value)}
+        disabled={disabled}
       ></input>
     </label>
   );

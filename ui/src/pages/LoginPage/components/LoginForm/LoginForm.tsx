@@ -33,10 +33,9 @@ export const LoginForm: React.FC<Props> = ({
             fieldName="email"
             placeholder="Enter your email"
             type="email"
-            mandatory={true}
+            mandatory
             value={loginDetails.userId}
             handleChange={handleEmailChange}
-            warning={false}
           />
         </div>
         <div className="w-full h-1/4">
@@ -44,10 +43,9 @@ export const LoginForm: React.FC<Props> = ({
             fieldName="password"
             placeholder="Enter password"
             type="password"
-            mandatory={true}
+            mandatory
             value={loginDetails.password}
             handleChange={handlePasswordChange}
-            warning={false}
           />
         </div>
         {incorrectLoginDetails && (
