@@ -13,9 +13,10 @@ import { MyProfile } from "./pages/MyProfile/MyProfile";
 import { convertDateToString } from "./util/dateConverter";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
-import { post } from "./requests/postRequests";
 
 function App() {
+  const [loggedInId, setLoggedInId] = useState<string>("");
+  console.log(loggedInId);
   const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
   const getToken = async (): Promise<string | undefined> => {
     const token = await getIdTokenClaims();
@@ -31,7 +32,6 @@ function App() {
     birthday: convertDateToString(new Date()),
   };
   const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
-  console.log(initialDetails);
 
   const updateProfile = (updatedField: Partial<Profile>): void =>
     setCurUser((u) => ({ ...u, ...updatedField }));
@@ -67,7 +67,10 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/login"
+            element={<LoginPage setLoggedInId={setLoggedInId} />}
+          />
           <Route
             path="/home"
             element={

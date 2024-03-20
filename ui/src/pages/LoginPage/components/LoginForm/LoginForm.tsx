@@ -6,9 +6,16 @@ import { RedirectToSignUp } from "../RedirectToSignUp/RedirectToSignUp";
 interface Props {
   loginDetails: LoginDetails;
   updateField: (updatedField: Partial<LoginDetails>) => void;
+  handleLogin: () => void;
+  incorrectLoginDetails: boolean;
 }
 
-export const LoginForm: React.FC<Props> = ({ loginDetails, updateField }) => {
+export const LoginForm: React.FC<Props> = ({
+  loginDetails,
+  updateField,
+  handleLogin,
+  incorrectLoginDetails,
+}) => {
   const handleEmailChange = (val: string): void => {
     updateField({ userId: val });
   };
@@ -41,9 +48,14 @@ export const LoginForm: React.FC<Props> = ({ loginDetails, updateField }) => {
             handleChange={handlePasswordChange}
           />
         </div>
+        {incorrectLoginDetails && (
+          <div className="text-xs text-red-700">
+            The username or password you entered is incorrect
+          </div>
+        )}
         <div className="flex justify-center h-1/4 w-full">
           <div className="flex items-center h-full w-60%">
-            <LoginButton />
+            <LoginButton handleLogin={handleLogin} />
           </div>
           <div className="h-full w-40%">
             <RedirectToSignUp />
