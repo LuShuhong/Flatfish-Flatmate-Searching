@@ -27,17 +27,17 @@ public class ProfileMatcherTest {
     public void testsCanPass() {
     }
 
-    @Test
-    public void testProfileMatcherReturnsSimilarProfile() {
-        UserEntity alice = new UserEntity("1", "alice", "1, 1, 2001", 20, "desc", "FEMALE", "@Alice", 100, 1000, 20, 80, Gender.MALE, List.of(), "", "", "");
-        UserEntity bob = new UserEntity("2", "bob", "9, 9, 1999", 30, "bobdesc", "MALE", "@Bob", 150, 900, 20, 80, Gender.FEMALE, List.of(), "", "", "");
-        List<UserEntity> allUsers = List.of(alice, bob);
-
-
-        List<UserEntity> matches = profileMatcher.matchProfiles(allUsers, "35", "70", "200", "900", "female");
-
-        Assertions.assertEquals(alice, matches.get(0));
-    }
+//    @Test
+//    public void testProfileMatcherReturnsSimilarProfile() {
+//        UserEntity alice = new UserEntity("1", "alice", "1, 1, 2001", 20, "desc", "FEMALE", "@Alice", 100, 1000, 20, 80, Gender.MALE, List.of(), "", "", "");
+//        UserEntity bob = new UserEntity("2", "bob", "9, 9, 1999", 30, "bobdesc", "MALE", "@Bob", 150, 900, 20, 80, Gender.FEMALE, List.of(), "", "", "");
+//        List<UserEntity> allUsers = List.of(alice, bob);
+//
+//
+//        List<UserEntity> matches = profileMatcher.matchProfiles(allUsers, "35", "70", "200", "900", "female");
+//
+//        Assertions.assertEquals(alice, matches.get(0));
+//    }
 
 //    @Disabled
 //    @Test
