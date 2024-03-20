@@ -11,15 +11,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Profile } from "./util/interfaces/Profile";
 import { MyProfile } from "./pages/MyProfile/MyProfile";
 import { convertDateToString } from "./util/dateConverter";
-import React from "react";
+import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
+import { post } from "./requests/postRequests";
 
 function App() {
   const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
-  const getToken = async () => {
+  const getToken = async (): Promise<string | undefined> => {
     const token = await getIdTokenClaims();
-    console.log(token?.__raw);
+    return token?.__raw;
   };
-  getToken();
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
   const initialDetails: Partial<Profile> = {
@@ -65,6 +65,7 @@ function App() {
       <div className="h-70%">
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route
             path="/home"
             element={

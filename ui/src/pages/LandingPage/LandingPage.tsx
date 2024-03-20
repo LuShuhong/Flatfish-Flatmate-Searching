@@ -1,4 +1,5 @@
 import { LoginButton } from "../../components/LoginButton/LoginButton";
+import { SignUpButton } from "./components/SignUpButton/SignupButton";
 
 export const LandingPage: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ export const LandingPage: React.FC = () => {
           lectus. Curabitur eu faucibus lacus. Quisque porttitor risus elit, ut
           ultricies sapien ornare non.
         </div>
-        <LoginButton />
+        <SignUpButton />
       </div>
     </div>
   );
