@@ -1,6 +1,6 @@
 import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
-import { ProfileForm } from "./ProfileForm/ProfileForm";
+import { ProfileForm } from "./components/ProfileForm/ProfileForm";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 
 interface Props {

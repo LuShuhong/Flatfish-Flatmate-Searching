@@ -3,7 +3,7 @@ import { HomePage } from "./pages/HomePage/HomePage";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Matches } from "./pages/Matches/Matches";
 import { Saved } from "./pages/Saved/Saved";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Preference } from "./util/interfaces/Preference";
 import { getProfiles } from "./requests/getRequests";
@@ -12,31 +12,10 @@ import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { SignUpDetails } from "./util/interfaces/SignUpDetails";
-import { convertDateToString } from "./util/dateConverter";
+import { defaultSignUpDetails } from "./util/constants/defaultSignUpDetails";
 
 function App() {
-  const [loggedInId, setLoggedInId] = useState<string>("");
-  const [user, setUser] = useState<SignUpDetails>({
-    userId: "",
-    password: "",
-    name: "",
-    birthday: convertDateToString(new Date()),
-    age: 0,
-    userGender: "SELECT",
-    picture:
-      "https://i.seadn.io/gae/IJpqaGRflNtIYcpzE4Y9g3Rerxnf5DQj6qL1qHqdFea8jG8P0imxVamF4Tzu-HSLD-adot6skRF_fcJncpmUymqNaNUEuELcvi5YEQ?auto=format&dpr=1&w=1000",
-    role: "USER",
-    description: "",
-    instagram: "",
-  });
-  useEffect(() => {
-    if (loggedInId) {
-      fetch(`http://localhost:8080/api/v1/users/${loggedInId}`)
-        .then((resp) => resp.json())
-        .then((data) => setUser(() => data));
-    }
-  }, []);
-  console.log(loggedInId);
+  const [user, setUser] = useState<SignUpDetails>(defaultSignUpDetails);
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
   const [curUser, setCurUser] = useState<Partial<Profile>>();
@@ -69,16 +48,13 @@ function App() {
         curPage={curPage}
         handlePageChange={handlePageChange}
         user={user}
-        loggedInId={loggedInId}
+        loggedInId={user.userId}
       />
       <div className="h-70%">
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route
-            path="/login"
-            element={<LoginPage setLoggedInId={setLoggedInId} />}
-          />
+          <Route path="/login" element={<LoginPage setUser={setUser} />} />
           <Route
             path="/home"
             element={

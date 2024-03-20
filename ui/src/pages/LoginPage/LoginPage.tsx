@@ -3,12 +3,13 @@ import { LoginDetails } from "../../util/interfaces/LoginDetails";
 import { useState } from "react";
 import { post } from "../../requests/postRequests";
 import { useNavigate } from "react-router-dom";
+import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 
 interface Props {
-  setLoggedInId: React.Dispatch<React.SetStateAction<string>>;
+  setUser: React.Dispatch<React.SetStateAction<SignUpDetails>>;
 }
 
-export const LoginPage: React.FC<Props> = ({ setLoggedInId }) => {
+export const LoginPage: React.FC<Props> = ({ setUser }) => {
   const [loginDetails, setLoginDetails] = useState<LoginDetails>({
     userId: "",
     password: "",
@@ -23,7 +24,10 @@ export const LoginPage: React.FC<Props> = ({ setLoggedInId }) => {
     post("http://localhost:8080/api/v1/auth/login", loginDetails)
       .then((resp) => {
         if (resp.ok) {
-          setLoggedInId(() => loginDetails.userId);
+          fetch(`http://localhost:8080/api/v1/users/${loginDetails.userId}`)
+            .then((resp) => resp.json())
+            .then((data) => setUser(() => data))
+            .catch((err) => console.log(err));
           navigate("/home");
         } else {
           setIncorrectLoginDetails(() => true);

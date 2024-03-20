@@ -1,9 +1,11 @@
-import { TextInput } from "../../SignUpPage/components/TextInput/TextInput";
-import { OptionsInput } from "../../SignUpPage/components/OptionsInput/OptionsInput";
-import { Birthday } from "../../SignUpPage/components/Birthday/Birthday";
-import { Age } from "../../SignUpPage/components/Age/Age";
-import { Description } from "../../SignUpPage/components/Description/Description";
-import { SignUpDetails } from "../../../util/interfaces/SignUpDetails";
+import { TextInput } from "../../../SignUpPage/components/TextInput/TextInput";
+import { OptionsInput } from "../../../SignUpPage/components/OptionsInput/OptionsInput";
+import { Birthday } from "../../../SignUpPage/components/Birthday/Birthday";
+import { Age } from "../../../SignUpPage/components/Age/Age";
+import { Description } from "../../../SignUpPage/components/Description/Description";
+import { SignUpDetails } from "../../../../util/interfaces/SignUpDetails";
+import { ProfilePic } from "../ProfilePic/ProfilePic";
+import { Save } from "../Save/Save";
 
 interface Props {
   user: SignUpDetails;
@@ -17,7 +19,15 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
   const handleInstagramChange = (): void => {};
   const handleDescriptionChange = (): void => {};
   return (
-    <div className="h-full w-30% border">
+    <div className="h-full w-30%">
+      <div className="flex h-3/16 w-full">
+        <div className="flex items-center justify-center w-1/3 h-full">
+          <ProfilePic pic={user.picture} />
+        </div>
+        <div className="flex items-center w-2/3 h-full text-2xl">
+          My Profile
+        </div>
+      </div>
       <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
           <TextInput
@@ -46,7 +56,7 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
           mandatory
           value={user.userId}
           handleChange={handleEmailChange}
-          disabled={true}
+          disabled
         />
       </div>
       <div className="flex h-1/8 w-full">
@@ -75,6 +85,9 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
           value={user.description}
           handleChange={handleDescriptionChange}
         />
+      </div>
+      <div className="flex items-center justify-center h-1/16 w-full">
+        <Save />
       </div>
     </div>
   );
