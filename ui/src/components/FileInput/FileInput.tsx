@@ -1,3 +1,3 @@
 
-
-export const FileInput: React.FC<Props>
+export {}
+// export const FileInput: React.FC<Props>

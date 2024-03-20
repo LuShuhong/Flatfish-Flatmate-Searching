@@ -8,8 +8,9 @@ import { SaveProfileButton } from "../SaveProfileButton/SaveProfileButton";
 import { Profile } from "../../util/interfaces/Profile";
 import { getAge } from "../../util/ageCalculator";
 import { post } from "../../requests/postRequests";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import React from "react";
+// import { FileInput } from "../FileInput/FileInput";
 
 interface Props {
   user: Partial<Profile>;
@@ -32,6 +33,9 @@ export const ProfileInputFields: React.FC<Props> = ({
   const handleUserInstagram = (val: string): void =>
     updateProfile({ instagram: val });
 
+  const [state, setState] = useState('ready');
+  const [file, setFile] = useState<File | undefined>()
+  
   const handleSaveProfile = () => {
     setDeactivate(() => true);
     // http://localhost:8080/api/v1
@@ -47,6 +51,28 @@ export const ProfileInputFields: React.FC<Props> = ({
       instagram: user.instagram,
     });
   };
+
+  async function handleOnSubmit(e: React.SyntheticEvent) {
+    e.preventDefault();
+
+    if (typeof file === 'undefined') return;
+
+    const formData = new FormData();
+
+    formData.append('file', file);
+    formData.append('upload_preset', 'test-react-uploads-unsigned');
+    formData.append('api_key', import.meta.env.VITE_CLOUDINARY_API_KEY)
+
+    console.log('file', file)
+    setState('sent');
+  }
+
+  function handleOnChange(e: React.FormEvent<HTMLInputElement>) {
+    const target = e.target as HTMLInputElement & {
+      files: FileList;
+    }
+    setFile(target.files[0]);
+  }
   return (
     <div className="h-4/5 w-full">
       <NameInputs username={user.name} handleFirstName={handleFirstName} />
@@ -63,7 +89,9 @@ export const ProfileInputFields: React.FC<Props> = ({
         instagram={user.instagram}
         handleUserInstagram={handleUserInstagram}
       />
-      <div></div>
+      <div className="flex gap-4">
+        <input type="file" name="image" onChange={handleOnChange}/>
+      </div>
       <div className="flex items-center justify-center w-97.5% h-1/5">
         <SaveProfileButton
           handleSaveProfile={handleSaveProfile}
@@ -73,3 +101,34 @@ export const ProfileInputFields: React.FC<Props> = ({
     </div>
   );
 };
+
+
+// async function handleOnSubmit(e: React.SyntheticEvent) {
+//   e.preventDefault();
+
+//   if (!file) {
+//       console.error('No file selected');
+//       return;
+//   }
+
+//   const formData = new FormData();
+//   formData.append('file', file);
+
+//   try {
+//       const response = await fetch('http://localhost:8080/api/v1/upload', {
+//           method: 'POST',
+//           body: formData,
+//       });
+
+//       if (!response.ok) {
+//           throw new Error(`HTTP error! status: ${response.status}`);
+//       }
+
+//       const result = await response.json();
+//       console.log(result);
+//       setState('uploaded');
+//   } catch (error) {
+//       console.error('Upload failed:', error);
+//       setState('error');
+//   }
+// }
