@@ -9,6 +9,7 @@ import { Profile } from "../../util/interfaces/Profile";
 import { getAge } from "../../util/ageCalculator";
 import { post } from "../../requests/postRequests";
 import { useState } from "react";
+import React from "react";
 
 interface Props {
   user: Partial<Profile>;
@@ -33,6 +34,8 @@ export const ProfileInputFields: React.FC<Props> = ({
 
   const handleSaveProfile = () => {
     setDeactivate(() => true);
+    // http://localhost:8080/api/v1
+    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1
     post("http://localhost:8080/api/v1", {
       userId: user.email,
       name: user.name,

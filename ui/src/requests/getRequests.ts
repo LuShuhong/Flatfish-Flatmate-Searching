@@ -8,7 +8,7 @@ export const getProfiles = (
     .then((resp) => resp.json())
     .then((data) =>
       setter(() => {
-        console.log(data[0].name);
+        console.log(data);
         return data;
       })
     )
