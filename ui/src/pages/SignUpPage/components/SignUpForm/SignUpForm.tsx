@@ -5,8 +5,29 @@ import { Age } from "../Age/Age";
 import { Description } from "../Description/Description";
 import { RegisterButton } from "../RegisterButton/RegisterButton";
 import { RedirectToLogin } from "../RedirectToLogin/RedirectToLogin";
+import { SignUpDetails } from "../../../../util/interfaces/SignUpDetails";
+import { getAge } from "../../../../util/ageCalculator";
 
-export const SignUpForm: React.FC = () => {
+interface Props {
+  signUpDetails: SignUpDetails;
+  updateField: (updatedField: Partial<SignUpDetails>) => void;
+}
+
+export const SignUpForm: React.FC<Props> = ({ signUpDetails, updateField }) => {
+  const handleNameChange = (val: string): void => updateField({ name: val });
+  const handleGenderChange = (val: "MALE" | "FEMALE" | "SELECT"): void =>
+    updateField({ userGender: val });
+  const handleEmailChange = (val: string): void => updateField({ userId: val });
+  const handlePasswordChange = (val: string): void =>
+    updateField({ password: val });
+  const handleBirthdayChange = (val: string): void => {
+    updateField({ birthday: val });
+    updateField({ age: getAge(val) });
+  };
+  const handleInstagramChange = (val: string): void =>
+    updateField({ instagram: val });
+  const handleDescriptionChange = (val: string): void =>
+    updateField({ description: val });
   return (
     <div className="h-full w-30%">
       <div className="flex h-1/8 w-full">
@@ -16,10 +37,16 @@ export const SignUpForm: React.FC = () => {
             placeholder="John"
             type="text"
             mandatory={true}
+            value={signUpDetails.name}
+            handleChange={handleNameChange}
           />
         </div>
         <div className="w-1/3">
-          <OptionsInput fieldName="gender" />
+          <OptionsInput
+            fieldName="gender"
+            value={signUpDetails.userGender}
+            handleChange={handleGenderChange}
+          />
         </div>
       </div>
       <div className="flex h-1/8 w-full">
@@ -28,6 +55,8 @@ export const SignUpForm: React.FC = () => {
           placeholder="johnsmith69@gmail.com"
           type="email"
           mandatory={true}
+          value={signUpDetails.userId}
+          handleChange={handleEmailChange}
         />
       </div>
       <div className="flex h-1/8 w-full">
@@ -36,14 +65,19 @@ export const SignUpForm: React.FC = () => {
           placeholder="Enter password ..."
           type="password"
           mandatory={true}
+          value={signUpDetails.password}
+          handleChange={handlePasswordChange}
         />
       </div>
       <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
-          <Birthday />
+          <Birthday
+            value={signUpDetails.birthday}
+            handleChange={handleBirthdayChange}
+          />
         </div>
         <div className="w-1/3">
-          <Age />
+          <Age value={signUpDetails.age} />
         </div>
       </div>
       <div className="flex h-1/8 w-full">
@@ -52,10 +86,15 @@ export const SignUpForm: React.FC = () => {
           placeholder="JohnSmithInstaFollow"
           type="text"
           mandatory={false}
+          value={signUpDetails.instagram}
+          handleChange={handleInstagramChange}
         />
       </div>
       <div className="flex h-1/4 w-full">
-        <Description />
+        <Description
+          value={signUpDetails.description}
+          handleChange={handleDescriptionChange}
+        />
       </div>
       <div className="flex justify-center h-1/8 w-full">
         <div className="flex items-center h-full w-60%">

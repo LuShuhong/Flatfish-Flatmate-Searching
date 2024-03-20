@@ -3,6 +3,8 @@ interface Props {
   placeholder: string;
   type: string;
   mandatory: boolean;
+  value: string;
+  handleChange: (val: string) => void;
 }
 
 export const TextInput: React.FC<Props> = ({
@@ -10,6 +12,8 @@ export const TextInput: React.FC<Props> = ({
   placeholder,
   type,
   mandatory,
+  value,
+  handleChange,
 }) => {
   return (
     <label className="flex flex-col justify-center w-full h-full">
@@ -21,6 +25,8 @@ export const TextInput: React.FC<Props> = ({
         type={type}
         className="h-3/5 w-95% rounded-lg p-2 border border-gray-400 bg-[#E5E5E5] text-sm"
         placeholder={placeholder}
+        value={value}
+        onChange={(e) => handleChange(e.target.value)}
       ></input>
     </label>
   );
