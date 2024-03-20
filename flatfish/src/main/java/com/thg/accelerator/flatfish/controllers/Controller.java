@@ -135,11 +135,11 @@ public class Controller {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-//    @GetMapping("/savedprofiles/{userId}")
-//    public ResponseEntity<List<UserDto>> getSavedProfileByUser(@PathVariable String userId){
-//        List<UserDto> savedProfiles = savedProfileService.getSavedProfile(userId);
-//        return ResponseEntity.ok(savedProfiles);
-//    }
+    @GetMapping("/savedprofiles/{userId}")
+    public ResponseEntity<List<UserEntity>> getSavedProfileByUser(@PathVariable String userId){
+        List<UserEntity> savedProfiles = savedProfileService.getSavedProfileById(userId);
+        return ResponseEntity.ok(savedProfiles);
+    }
 
     @PutMapping("/update/preference/{id}")
     public ResponseEntity<UserDto> addPreference(@PathVariable("id") String id,

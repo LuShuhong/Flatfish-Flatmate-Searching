@@ -48,6 +48,18 @@ public class SavedProfileService {
 //                .collect(Collectors.toList());
 //    }
 
+    public List<UserEntity> getSavedProfileById(String id){
+        List<SavedProfileEntity> savedProfiles = savedRepo.findBySavingUserUserId(id);
+        List<UserEntity> profileList = savedProfiles.stream()
+                .map(SavedProfileEntity::getSavedUser) // Assuming you have a method to get the saved profile from SavedProfileEntity
+                .map(UserEntity::getUserId)
+                .map(usersRepo::findById) // Assuming you have a method to find a profile by ID
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+        return profileList.stream().collect(Collectors.toList());
+    }
+
 
     public void saveAProfile(String userId, SavedProfileEntity savedProfileEntity) {
         // Find the user by ID
