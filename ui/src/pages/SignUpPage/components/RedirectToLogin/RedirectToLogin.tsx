@@ -8,7 +8,7 @@ export const RedirectToLogin: React.FC = () => {
       </div>
       <Link
         to="/login"
-        className="flex items-start justify-center h-1/2 w-full text-sm"
+        className="flex items-start justify-center h-1/2 w-full text-sm underline"
       >
         log in
       </Link>

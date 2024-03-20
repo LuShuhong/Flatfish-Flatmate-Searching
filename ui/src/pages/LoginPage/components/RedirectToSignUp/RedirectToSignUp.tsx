@@ -8,7 +8,7 @@ export const RedirectToSignUp: React.FC = () => {
       </div>
       <Link
         to="/signup"
-        className="flex items-start justify-center h-1/2 w-full text-sm"
+        className="flex items-start justify-center h-1/2 w-full text-sm underline"
       >
         Sign up
       </Link>

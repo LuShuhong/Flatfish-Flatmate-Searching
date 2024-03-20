@@ -14,6 +14,7 @@ interface Props {
   updateField: (updatedField: Partial<SignUpDetails>) => void;
   handleRegistration: () => void;
   fieldWarning: SignUpFieldWarning;
+  userInDb: boolean;
 }
 
 export const SignUpForm: React.FC<Props> = ({
@@ -21,6 +22,7 @@ export const SignUpForm: React.FC<Props> = ({
   updateField,
   handleRegistration,
   fieldWarning,
+  userInDb,
 }) => {
   const handleNameChange = (val: string): void => updateField({ name: val });
   const handleGenderChange = (val: "MALE" | "FEMALE" | "SELECT"): void =>
@@ -104,11 +106,16 @@ export const SignUpForm: React.FC<Props> = ({
           warning={false}
         />
       </div>
-      <div className="flex h-1/4 w-full">
+      <div className="flex flex-col h-1/4 w-full">
         <Description
           value={signUpDetails.description}
           handleChange={handleDescriptionChange}
         />
+        {userInDb && (
+          <div className="text-xs text-red-700">
+            Email already registered, please login
+          </div>
+        )}
       </div>
       <div className="flex justify-center h-1/8 w-full">
         <div className="flex items-center h-full w-60%">
