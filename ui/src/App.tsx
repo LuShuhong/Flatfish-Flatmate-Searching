@@ -12,6 +12,7 @@ import { Profile } from "./util/interfaces/Profile";
 import { MyProfile } from "./pages/MyProfile/MyProfile";
 import { convertDateToString } from "./util/dateConverter";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
+import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { post } from "./requests/postRequests";
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route
             path="/home"
             element={
