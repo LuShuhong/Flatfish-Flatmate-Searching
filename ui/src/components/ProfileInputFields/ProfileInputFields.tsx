@@ -63,6 +63,7 @@ export const ProfileInputFields: React.FC<Props> = ({
         instagram={user.instagram}
         handleUserInstagram={handleUserInstagram}
       />
+      <div></div>
       <div className="flex items-center justify-center w-97.5% h-1/5">
         <SaveProfileButton
           handleSaveProfile={handleSaveProfile}
