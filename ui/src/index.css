@@ -29,3 +29,26 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: rgb(64, 62, 60);
   border-radius: 50%;
 }
+
+@keyframes jitter {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-2px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translateX(2px);
+  }
+}
+
+/* Utility class for animation */
+.jitter-animation {
+  animation: jitter 0.25s ease-in-out;
+}
