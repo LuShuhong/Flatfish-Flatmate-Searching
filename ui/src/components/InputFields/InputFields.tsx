@@ -87,7 +87,7 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
     } else if (!locationIsValid(preferences.location[0])) {
       alert("Please select a location");
     } else {
-      post("http://localhost:8080/api/v1/preferences", {
+      post("https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/preferences", {
         preferenceId: email ? email : "",
         budgetMin: preferences.budgetRange[0],
         budgetMax: preferences.budgetRange[1],
