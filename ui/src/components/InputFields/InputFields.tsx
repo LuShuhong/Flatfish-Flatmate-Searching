@@ -16,15 +16,24 @@ import React from "react";
 import { DoubleSlider } from "../DoubleSlider/DoubleSlider";
 import { MAX_AGE, MIN_AGE } from "../../util/constants/age";
 import { MAX_BUDGET, MIN_BUDGET } from "../../util/constants/budget";
+import { put } from "../../requests/putRequests";
+import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
   email: string | undefined;
+  user: SignUpDetails;
 }
 
-export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
+export const InputFields: React.FC<Props> = ({
+  getPreferences,
+  email,
+  user,
+}) => {
   const [preferences, setPreferences] =
     useState<Preference>(defaultPreferences);
+
+  const [error, setError] = useState<string>("");
 
   const updatePreferences = (updatedField: Partial<Preference>): void =>
     setPreferences((p) => ({ ...p, ...updatedField }));
@@ -68,35 +77,50 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
   };
 
   const handleMatch = (): void => {
-    if (!ageIsValid(preferences.ageRange)) {
-      alert("Maximum age must be bigger than minimum age");
+    if (user.userId === "" || !user.userId) {
+      setError((e) => "Please login to set default preferences.");
+    } else if (!ageIsValid(preferences.ageRange)) {
+      setError((e) => "Maximum age must be bigger than minimum age.");
     } else if (!budgetIsValid(preferences.budgetRange)) {
-      alert("Maximum budget must be bigger than minimum budget");
-    } else if (!locationIsValid(preferences.location[0])) {
-      alert("Please select a location");
+      setError((e) => "Maximum budget must be bigger than minimum budget.");
+    } else if (!locationIsValid(preferences.location)) {
+      setError((e) => "Choose at least one location");
     } else {
+      const filledLocations: string[] = Array.from({ length: 3 }, (v, i) =>
+        i < preferences.location.length ? preferences.location[i] : ""
+      );
+      updatePreferences({ location: filledLocations });
       getPreferences(preferences);
+      setError((e) => "");
     }
   };
 
   const handleSetDefault = (): void => {
-    if (!ageIsValid(preferences.ageRange)) {
-      alert("Maximum age must be bigger than minimum age");
+    if (user.userId === "" || !user.userId) {
+      setError((e) => "Please login to set default preferences.");
+    } else if (!ageIsValid(preferences.ageRange)) {
+      setError((e) => "Maximum age must be bigger than minimum ag.");
     } else if (!budgetIsValid(preferences.budgetRange)) {
-      alert("Maximum budget must be bigger than minimum budget");
-    } else if (!locationIsValid(preferences.location[0])) {
-      alert("Please select a location");
+      setError((e) => "Maximum budget must be bigger than minimum budget.");
+    } else if (!locationIsValid(preferences.location)) {
+      setError((e) => "Choose at least one location");
     } else {
-      post("http://localhost:8080/api/v1/preferences", {
-        preferenceId: email ? email : "",
-        budgetMin: preferences.budgetRange[0],
-        budgetMax: preferences.budgetRange[1],
-        ageMin: preferences.ageRange[0],
-        ageMax: preferences.ageRange[1],
-        gender: preferences.gender,
-        smoker: false,
-        location: preferences.location[0],
-      });
+      put(
+        `http://localhost:8080/api/v1/update/preference/${preferences.userId}`,
+        {
+          budgetMin: preferences.budgetRange[0],
+          budgetMax: preferences.budgetRange[1],
+          ageMin: preferences.ageRange[0],
+          ageMax: preferences.ageRange[1],
+          gender: preferences.gender,
+          location1: preferences.location[0],
+          location2:
+            preferences.location.length >= 2 ? preferences.location[1] : null,
+          location3:
+            preferences.location.length === 3 ? preferences.location[2] : null,
+        }
+      );
+      setError((e) => "");
     }
   };
   // http://localhost:8080/api/v1/preferences
@@ -152,6 +176,11 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
               />
             ))}
       </div>
+      {error === "" ? (
+        <></>
+      ) : (
+        <div className="jitter-animation italic">{error}</div>
+      )}
       <div className="flex items-center justify-between h-1/8 w-full">
         <MatchButton handleMatch={handleMatch} />
         <SetDefaultButton handleSetDefault={handleSetDefault} />

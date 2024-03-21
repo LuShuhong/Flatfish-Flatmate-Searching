@@ -7,27 +7,17 @@ import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Preference } from "./util/interfaces/Preference";
 import { getProfiles } from "./requests/getRequests";
-import { useAuth0 } from "@auth0/auth0-react";
 import { Profile } from "./util/interfaces/Profile";
-import { MyProfile } from "./pages/MyProfile/MyProfile";
-import { convertDateToString } from "./util/dateConverter";
-import React from "react";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
+import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
+import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { SignUpDetails } from "./util/interfaces/SignUpDetails";
+import { defaultSignUpDetails } from "./util/constants/defaultSignUpDetails";
 
 function App() {
-  const { user, isAuthenticated } = useAuth0();
+  const [user, setUser] = useState<SignUpDetails>(defaultSignUpDetails);
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
-  const initialDetails: Partial<Profile> = {
-    name: user?.name,
-    picture: user?.picture,
-    gender: user?.gender,
-    email: user?.email,
-    birthday: convertDateToString(new Date()),
-  };
-  const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
-
-  const updateProfile = (updatedField: Partial<Profile>): void =>
-    setCurUser((u) => ({ ...u, ...updatedField }));
 
   const navigate = useNavigate();
   const handlePageChange = (newPage: string): void => {
@@ -47,29 +37,33 @@ function App() {
     navigate("/matches");
   };
 
+  const updateField = (updatedField: Partial<SignUpDetails>) =>
+    setUser((u) => ({ ...u, ...updatedField }));
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
       <NavBar
         curPage={curPage}
         handlePageChange={handlePageChange}
-        user={curUser}
-        authenticated={isAuthenticated}
+        user={user}
       />
       <div className="h-70%">
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage setUser={setUser} />} />
           <Route
             path="/home"
             element={
               <HomePage
+                user={user}
                 getPreferences={getPreferences}
-                email={curUser?.email}
+                email={user.userId}
               />
             }
           />
           <Route
             path="/profile"
-            element={<MyProfile user={curUser} updateProfile={updateProfile} />}
+            element={<ProfilePage user={user} updateField={updateField} />}
           />
           <Route
             path="/matches"
