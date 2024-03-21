@@ -80,8 +80,11 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
     }
   };
 
+  // TODO: Once the new user auth si ready, check that a user is logged in
   const handleSetDefault = (): void => {
-    if (!ageIsValid(preferences.ageRange)) {
+    if (preferences.userId === "") {
+      alert("Please log in to set default preferences");
+    } else if (!ageIsValid(preferences.ageRange)) {
       alert("Maximum age must be bigger than minimum age");
     } else if (!budgetIsValid(preferences.budgetRange)) {
       alert("Maximum budget must be bigger than minimum budget");
