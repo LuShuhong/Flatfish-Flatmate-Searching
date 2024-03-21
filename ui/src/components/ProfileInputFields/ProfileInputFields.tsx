@@ -10,6 +10,7 @@ import { getAge } from "../../util/ageCalculator";
 import { post } from "../../requests/postRequests";
 import { useState, useCallback } from "react";
 import React from "react";
+import { Form } from "react-router-dom";
 // import { FileInput } from "../FileInput/FileInput";
 
 interface Props {
@@ -34,44 +35,76 @@ export const ProfileInputFields: React.FC<Props> = ({
     updateProfile({ instagram: val });
 
   const [state, setState] = useState('ready');
-  const [file, setFile] = useState<File | undefined>()
+  const [file, setFile] = useState<File | undefined>();
+  const [preview, setPreview] = useState<string |ArrayBuffer | null>(null);
   
-  const handleSaveProfile = () => {
-    setDeactivate(() => true);
-    // http://localhost:8080/api/v1
-    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1
-    post("http://localhost:8080/api/v1", {
-      userId: user.email,
-      name: user.name,
-      decription: "temp",
-      birthday: user.birthday,
-      age: user.age,
-      userGender:
-        user.gender === "m" ? "MALE" : user.gender === "f" ? "FEMALE" : "none",
-      instagram: user.instagram,
-    });
-  };
+  // const handleSaveProfile = () => {
+  //   setDeactivate(() => true);
+  //   // http://localhost:8080/api/v1
+  //   // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1
+  //   post("http://localhost:8080/api/v1", {
+  //     userId: user.email,
+  //     name: user.name,
+  //     decription: "temp",
+  //     birthday: user.birthday,
+  //     age: user.age,
+  //     userGender:
+  //       user.gender === "m" ? "MALE" : user.gender === "f" ? "FEMALE" : "none",
+  //     instagram: user.instagram,
+  //   });
+  // };
 
-  async function handleOnSubmit(e: React.SyntheticEvent) {
-    e.preventDefault();
+  const handleSaveProfile = async () => {
 
-    if (typeof file === 'undefined') return;
-
+    if (!file) {
+      console.log("No file selected.");
+      return;
+    }
+  
     const formData = new FormData();
-
-    formData.append('file', file);
-    formData.append('upload_preset', 'test-react-uploads-unsigned');
-    formData.append('api_key', import.meta.env.VITE_CLOUDINARY_API_KEY)
-
-    console.log('file', file)
-    setState('sent');
-  }
+    formData.append("userId", user.email ?? "");
+    formData.append("name", user.name ?? "");
+    formData.append("description", "temp");
+    formData.append("birthday", user.birthday ?? "");
+    formData.append("age", user.age?.toString() ?? ""); 
+    formData.append("userGender", user.gender === "m" ? "MALE" : user.gender === "f" ? "FEMALE" : "none");
+    formData.append("instagram", user.instagram ?? "");
+    formData.append("picture", file); // Append the file
+  
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/users", { 
+        method: "POST",
+        body: formData, // No headers are needed as 'Content-Type' will be set to 'multipart/form-data' automatically
+      });
+  
+      if (response.ok) {
+        console.log("Profile saved successfully");
+        setDeactivate(true); // Assuming you want to deactivate some UI element upon successful save
+        // Handle successful save (e.g., navigate to another page or show a success message)
+      } else {
+        console.error("Failed to save profile");
+        // Handle failure (e.g., show an error message)
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      // Handle error (e.g., show an error message)
+    }
+  };
 
   function handleOnChange(e: React.FormEvent<HTMLInputElement>) {
     const target = e.target as HTMLInputElement & {
       files: FileList;
     }
     setFile(target.files[0]);
+
+    const file = new FileReader;
+
+    file.onload = function() {
+      // console.log('file', file.result);
+      setPreview(file.result);
+    }
+
+    file.readAsDataURL(target.files[0])
   }
   return (
     <div className="h-4/5 w-full">
@@ -89,8 +122,15 @@ export const ProfileInputFields: React.FC<Props> = ({
         instagram={user.instagram}
         handleUserInstagram={handleUserInstagram}
       />
-      <div className="flex gap-4">
-        <input type="file" name="image" onChange={handleOnChange}/>
+      <div className="mb-5">
+        <label htmlFor="message">Image</label>
+        <input 
+          type="file" 
+          name="image" 
+          accept="image/png, image/jpg" 
+          onChange={handleOnChange}
+          multiple />
+        <img src={preview ? preview.toString() : undefined} alt="" />
       </div>
       <div className="flex items-center justify-center w-97.5% h-1/5">
         <SaveProfileButton
@@ -102,33 +142,31 @@ export const ProfileInputFields: React.FC<Props> = ({
   );
 };
 
-
 // async function handleOnSubmit(e: React.SyntheticEvent) {
 //   e.preventDefault();
 
 //   if (!file) {
-//       console.error('No file selected');
-//       return;
+//     alert('No file selected!');
+//     return;
 //   }
 
 //   const formData = new FormData();
 //   formData.append('file', file);
 
-//   try {
-//       const response = await fetch('http://localhost:8080/api/v1/upload', {
-//           method: 'POST',
-//           body: formData,
-//       });
+//   const response = await fetch('' , {
+//     method: 'POST',
+//     body: formData,
+//   });
 
-//       if (!response.ok) {
-//           throw new Error(`HTTP error! status: ${response.status}`);
-//       }
+//   console.log('file', file)
+//   setState('sent');
 
-//       const result = await response.json();
-//       console.log(result);
-//       setState('uploaded');
-//   } catch (error) {
-//       console.error('Upload failed:', error);
-//       setState('error');
+//   if (response.ok) {
+//     const result = await response.json();
+//     console.log('Upload successful: ', result);
+//     setState('success')
+//   } else {
+//     console.error('Upload failed: ', response);
+//     setState('error');
 //   }
 // }
