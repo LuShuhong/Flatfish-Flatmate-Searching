@@ -106,7 +106,7 @@ export const InputFields: React.FC<Props> = ({
       setError((e) => "Choose at least one location");
     } else {
       put(
-        `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/update/preference/${preferences.userId}`,
+        `http://localhost:8080/api/v1/update/preference/${preferences.userId}`,
         {
           budgetMin: preferences.budgetRange[0],
           budgetMax: preferences.budgetRange[1],

@@ -25,7 +25,7 @@ import static java.util.Arrays.stream;
 
 @RequestMapping("/api/v1")
 @RestController
-@CrossOrigin(origins="https://flatfish-frontend.pq46c.icekube.ics.cloud")
+@CrossOrigin(origins="http://localhost:3000")
 //https://flatfish-frontend.pq46c.icekube.ics.cloud
 //http://localhost:3000
 public class Controller {
