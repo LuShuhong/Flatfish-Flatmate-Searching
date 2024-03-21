@@ -44,6 +44,8 @@ export const SignUpPage: React.FC = () => {
       warnings++;
     }
 
+    // http://localhost:8080/api/v1/
+    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
     if (!warnings) {
       fetch(`http://localhost:8080/api/v1/users/${signUpDetails.userId}`)
         .then((resp) => {

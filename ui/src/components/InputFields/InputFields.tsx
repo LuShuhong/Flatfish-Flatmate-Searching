@@ -17,15 +17,23 @@ import { DoubleSlider } from "../DoubleSlider/DoubleSlider";
 import { MAX_AGE, MIN_AGE } from "../../util/constants/age";
 import { MAX_BUDGET, MIN_BUDGET } from "../../util/constants/budget";
 import { put } from "../../requests/putRequests";
+import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
   email: string | undefined;
+  user: SignUpDetails;
 }
 
-export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
+export const InputFields: React.FC<Props> = ({
+  getPreferences,
+  email,
+  user,
+}) => {
   const [preferences, setPreferences] =
     useState<Preference>(defaultPreferences);
+
+  const [error, setError] = useState<string>("");
 
   const updatePreferences = (updatedField: Partial<Preference>): void =>
     setPreferences((p) => ({ ...p, ...updatedField }));
@@ -69,27 +77,33 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
   };
 
   const handleMatch = (): void => {
-    if (!ageIsValid(preferences.ageRange)) {
-      alert("Maximum age must be bigger than minimum age");
+    if (user.userId === "" || !user.userId) {
+      setError((e) => "Please login to set default preferences.");
+    } else if (!ageIsValid(preferences.ageRange)) {
+      setError((e) => "Maximum age must be bigger than minimum age.");
     } else if (!budgetIsValid(preferences.budgetRange)) {
-      alert("Maximum budget must be bigger than minimum budget");
+      setError((e) => "Maximum budget must be bigger than minimum budget.");
     } else if (!locationIsValid(preferences.location)) {
-      alert("Please select a location");
+      setError((e) => "Choose at least one location");
     } else {
+      const filledLocations: string[] = Array.from({ length: 3 }, (v, i) =>
+        i < preferences.location.length ? preferences.location[i] : ""
+      );
+      updatePreferences({ location: filledLocations });
       getPreferences(preferences);
+      setError((e) => "");
     }
   };
 
-  // TODO: Once the new user auth si ready, check that a user is logged in
   const handleSetDefault = (): void => {
-    if (preferences.userId === "") {
-      alert("Please log in to set default preferences");
+    if (user.userId === "" || !user.userId) {
+      setError((e) => "Please login to set default preferences.");
     } else if (!ageIsValid(preferences.ageRange)) {
-      alert("Maximum age must be bigger than minimum age");
+      setError((e) => "Maximum age must be bigger than minimum ag.");
     } else if (!budgetIsValid(preferences.budgetRange)) {
-      alert("Maximum budget must be bigger than minimum budget");
+      setError((e) => "Maximum budget must be bigger than minimum budget.");
     } else if (!locationIsValid(preferences.location)) {
-      alert("Please select a location");
+      setError((e) => "Choose at least one location");
     } else {
       put(
         `http://localhost:8080/api/v1/update/preference/${preferences.userId}`,
@@ -106,6 +120,7 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
             preferences.location.length === 3 ? preferences.location[2] : null,
         }
       );
+      setError((e) => "");
     }
   };
   // http://localhost:8080/api/v1/preferences
@@ -161,6 +176,11 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
               />
             ))}
       </div>
+      {error === "" ? (
+        <></>
+      ) : (
+        <div className="jitter-animation italic">{error}</div>
+      )}
       <div className="flex items-center justify-between h-1/8 w-full">
         <MatchButton handleMatch={handleMatch} />
         <SetDefaultButton handleSetDefault={handleSetDefault} />
