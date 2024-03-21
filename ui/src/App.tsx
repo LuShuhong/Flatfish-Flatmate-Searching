@@ -86,7 +86,10 @@ function App() {
               />
             }
           />
-          <Route path="/saved" element={<Saved />} />
+          <Route
+            path="/saved"
+            element={<Saved currentUserEmail={initialDetails.email} />}
+          />
         </Routes>
       </div>
     </div>

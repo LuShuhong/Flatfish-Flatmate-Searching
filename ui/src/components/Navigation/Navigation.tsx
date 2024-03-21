@@ -52,7 +52,7 @@ export const Navigation: React.FC<Props> = ({
           curPage={curPage}
           handlePageChange={handlePageChange}
         />
-        <ProfileContainer name={user.name} profilePic={undefined} />
+        <ProfileContainer name={user.name} profilePic={user.picture} />
       </div>
     </>
   );
