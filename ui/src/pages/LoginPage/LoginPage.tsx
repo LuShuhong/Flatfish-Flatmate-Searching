@@ -21,10 +21,10 @@ export const LoginPage: React.FC<Props> = ({ setUser }) => {
   };
   const navigate = useNavigate();
   const handleLogin = (): void => {
-    post("http://localhost:8080/api/v1/auth/login", loginDetails)
+    post("https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/auth/login", loginDetails)
       .then((resp) => {
         if (resp.ok) {
-          fetch(`http://localhost:8080/api/v1/users/${loginDetails.userId}`)
+          fetch(`https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/users/${loginDetails.userId}`)
             .then((resp) => resp.json())
             .then((data) => setUser(() => data))
             .catch((err) => console.log(err));
@@ -35,6 +35,10 @@ export const LoginPage: React.FC<Props> = ({ setUser }) => {
       })
       .catch((error) => console.log(error));
   };
+
+  // http://localhost:8080/api/v1/
+  // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
+
   return (
     <div className="flex justify-center h-full w-full">
       <LoginForm
