@@ -9,16 +9,16 @@ interface Props {
   userEmail: any;
   curUserId: any;
 }
-export const MatchesCard: React.FC<Props> = ({
-  userEmail,
-  profile,
-  curUserId,
-}) => {
-  console.log(curUserId);
+export const MatchesCard: React.FC<Props> = ({ userEmail, profile }) => {
+  console.log(profile.userId);
   console.log(userEmail);
 
   const onClick = () => {
-    postrq("http://localhost:8080/api/v1/savedprofiles", userEmail, curUserId);
+    postrq(
+      "http://localhost:8080/api/v1/savedprofiles",
+      userEmail,
+      profile.userId
+    );
   };
 
   return (
