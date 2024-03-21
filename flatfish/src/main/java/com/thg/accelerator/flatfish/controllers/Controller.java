@@ -206,6 +206,7 @@ import com.thg.accelerator.flatfish.service.SavedProfileService;
 import com.thg.accelerator.flatfish.service.UserService;
 import com.thg.accelerator.flatfish.transformer.SavedProfileTransformer;
 import com.thg.accelerator.flatfish.transformer.Transformer;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -312,13 +313,52 @@ public class Controller {
 //        return ResponseEntity.created(location).body(savedProfileDto);
 //    }
 
-    @PostMapping("/savedprofiles")
-    public ResponseEntity<SavedProfileDto> addSavedProfile(@RequestBody SavedProfileDto savedProfileDto) {
-        savedProfileService.saveAProfile(savedProfileDto.getUserId(), SavedProfileTransformer.transformSavedProfileDtoToEntity(savedProfileDto, usersRepo));
-        URI location = MvcUriComponentsBuilder.fromMethodName(Controller.class, "getUserById", savedProfileDto.getUserId())
-                .buildAndExpand(savedProfileDto.getUserId())
-                .toUri();
-        return ResponseEntity.created(location).body(savedProfileDto);
+//    @PostMapping("/savedprofiles/{savingUserId}")
+//    public ResponseEntity<SavedProfileDto> addSavedProfile(@PathVariable String savingUserId, @RequestBody SavedProfileDto savedProfileDto) {
+//        savedProfileService.saveAProfile(savingUserId, savedProfileDto.getUserId(), SavedProfileTransformer.transformSavedProfileDtoToEntity(savedProfileDto, usersRepo));
+//        URI location = MvcUriComponentsBuilder.fromMethodName(Controller.class, "getUserById", savedProfileDto.getUserId())
+//                .buildAndExpand(savedProfileDto.getUserId())
+//                .toUri();
+//        return ResponseEntity.created(location).body(savedProfileDto);
+//    }
+
+//    @PostMapping("/api/v1/savedprofiles/{savingUserId}")
+//    public ResponseEntity<String> saveProfile(
+//            @PathVariable String savingUserId,
+//            @RequestBody SavedProfileDto savedProfileDto,
+//            String savedUserId) {
+//        savedProfileService.saveAProfile(savingUserId, SavedProfileTransformer.transformSavedProfileDtoToEntity(savedProfileDto), savedUserId);
+//        return ResponseEntity.status(HttpStatus.CREATED).body("Profile saved successfully");
+//    }
+
+//    @PostMapping("/savedprofiles")
+//    public ResponseEntity<SavedProfileDto> addSavedProfile(@RequestBody SavedProfileDto savedProfileDto) {
+//        SavedProfileEntity savedProfileEntity = SavedProfileTransformer.transformSavedProfileDtoToEntity(savedProfileDto);
+//        savedProfileService.saveAProfile(savedProfileEntity);
+//        return ResponseEntity.ok(savedProfileDto); // Or you can return the transformed DTO from the saved entity
+//    }
+
+//
+//    @PostMapping("/savedprofiles")
+//    public ResponseEntity<SavedProfileDto> addSavedProfile(@RequestBody SavedProfileDto savedProfileDto) {
+//        savedProfileService.saveAProfile(savedProfileDto.getUserId(), SavedProfileTransformer.transformSavedProfileDtoToEntity(savedProfileDto, usersRepo));
+//        URI location = MvcUriComponentsBuilder.fromMethodName(Controller.class, "getUserById", savedProfileDto.getUserId())
+//                .buildAndExpand(savedProfileDto.getUserId())
+//                .toUri();
+//        return ResponseEntity.created(location).body(savedProfileDto);
+//    }
+
+    @PostMapping("/savedprofiles/{savingUserId}/{savedUserId}")
+    public ResponseEntity<String> saveProfile(@RequestBody SavedProfileEntity savedProfileEntity, @PathVariable String savingUserId, @PathVariable String savedUserId){
+
+        try {
+            savedProfileService.saveAProfile(savingUserId, savedProfileEntity, savedUserId);
+            return ResponseEntity.ok("Profile saved successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while saving the profile");
+        }
     }
 
     @DeleteMapping("/savedprofiles/{savedProfileId}")

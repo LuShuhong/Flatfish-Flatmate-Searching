@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.thg.accelerator.flatfish.dto.SavedProfileDetailDto;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -93,23 +95,47 @@ public class SavedProfileService {
         return targetSavedUserDto;
     }
 
-    public void saveAProfile(@PathVariable String userId, SavedProfileEntity savedProfileEntity) {
-        // Find the user by ID
-        Optional<UserEntity> userEntityOptional = usersRepo.findById(userId);
+//    public void saveAProfile(String savingUserId, SavedProfileEntity  savedProfileEntity, String savedUserId) {
+//        // Find the user by ID
+//        Optional<UserEntity> savingUserEntityOptional = usersRepo.findById(savingUserId);
+//        Optional<UserEntity> savedUserEntityOptional = usersRepo.findById(savedUserId);
+//
+//        if (savingUserEntityOptional.isPresent() && savedUserEntityOptional.isPresent()) {
+//            UserEntity savedUserEntity = savedUserEntityOptional.get();
+//            savedProfileEntity.setSavedUser(savedUserEntity);; // Set the user for the saved profile
+//            savedRepo.save(savedProfileEntity);
+//        } else {
+//            // Handle case where user is not found
+//            throw new IllegalArgumentException("User with ID " + savingUserId + " not found");
+//        }
+//    }
 
-        if (userEntityOptional.isPresent()) {
-            UserEntity userEntity = userEntityOptional.get();
-            savedProfileEntity.setSavingUser(userEntity);; // Set the user for the saved profile
+    public void saveAProfile(@PathVariable String savingUserId, SavedProfileEntity savedProfileEntity, String savedUserId) {
+        // Find the user by ID
+        Optional<UserEntity> savingUserEntityOptional = usersRepo.findById(savingUserId);
+        Optional<UserEntity> savedUserEntityOptional = usersRepo.findById(savedUserId);
+
+        if(savingUserEntityOptional.isPresent() && savedUserEntityOptional.isPresent()){
+
+            UserEntity savingUserEntity = savingUserEntityOptional.get();
+            UserEntity savedUserEntity = savedUserEntityOptional.get();
+
+            savedProfileEntity.setSavingUser(savingUserEntity);
+            savedProfileEntity.setSavedUser(savedUserEntity);
             savedRepo.save(savedProfileEntity);
         } else {
             // Handle case where user is not found
-            throw new IllegalArgumentException("User with ID " + userId + " not found");
+            throw new IllegalArgumentException("User with ID " + savedUserId + " not found");
         }
     }
 
-//    public Optional<SavedProfileEntity> getProfileById(Long savedProfileId) {
-//        return savedRepo.findById(savedProfileId);
+//    public void saveAProfile(SavedProfileEntity savedProfileEntity) {
+//        savedRepo.save(savedProfileEntity);
 //    }
+//
+////    public Optional<SavedProfileEntity> getProfileById(Long savedProfileId) {
+////        return savedRepo.findById(savedProfileId);
+////    }
 
     public void deleteASavedProfile(Long id) {
         Optional<SavedProfileEntity> savedProfileEntityOptional = savedRepo.findById(id);
