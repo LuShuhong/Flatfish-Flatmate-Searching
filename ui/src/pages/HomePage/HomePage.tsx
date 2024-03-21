@@ -1,6 +1,7 @@
 import { Preference } from "../../util/interfaces/Preference";
 import { PreferenceInput } from "../../components/PreferenceInput/PreferenceInput";
 import MapComponent from "../../components/Map/Map";
+import React from "react";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 
 interface Props {

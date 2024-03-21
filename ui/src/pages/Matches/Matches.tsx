@@ -7,21 +7,12 @@ import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
 
 interface Props {
   profiles: Profile[];
+  userEmail: any;
 }
 
-export const Matches: React.FC<Props> = ({ profiles }) => {
-  console.log(profiles.length);
-  // const [openDialog, setOpenDialog] = useState<boolean>(false);
+export const Matches: React.FC<Props> = ({ profiles, userEmail }) => {
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
-  // const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  // useEffect(() => {
-  //   getProfiles(
-  //     `http://localhost:8080/api/v1/matches?userId=${profiles.userId}&gender=${profiles.gender}&ageMin=${profiles.ageRange[0]}&ageMax=${profiles.ageRange[1]}&budgetMin=${profiles.budgetRange[0]}&budgetMax=${profiles.budgetRange[1]}`,
-  //     setMatchedProfiles
-  //   );
-  // }, []);
 
   const handleShuffle = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
@@ -31,16 +22,14 @@ export const Matches: React.FC<Props> = ({ profiles }) => {
     <div className="flex items-center justify-center w-full h-full">
       {profiles.length ? (
         <div className="flex justify-center h-full flex-col items-center">
-          <MatchesCard
-            name={profiles[currentIndex].name}
-            age={profiles[currentIndex].age}
-            jobTitle={profiles[currentIndex].jobTitle}
-            instagram={profiles[currentIndex].instagram}
-            description={profiles[currentIndex].description}
-            email={profiles[currentIndex].email}
-            gender={profiles[currentIndex].gender}
-            smoker={profiles[currentIndex].smoker}
-          />
+          {profiles.length && (
+            <MatchesCard
+              profile={profiles[currentIndex]}
+              userEmail={userEmail}
+              curUserId={profiles[currentIndex].userId}
+            />
+          )}
+          {/* {console.log(profiles[currentIndex].email)} */}
           <div className="flex justfy-center p-3">
             <button
               className=""

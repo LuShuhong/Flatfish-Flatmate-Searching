@@ -1,5 +1,6 @@
 import { convertName } from "../../util/nameConverter";
 import { LogoutButton } from "../LogoutButton/LogoutButton";
+import React from "react";
 
 interface Props {
   profilePic: string | undefined;
