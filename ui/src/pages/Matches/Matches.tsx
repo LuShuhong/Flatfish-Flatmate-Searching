@@ -1,7 +1,5 @@
 import "./Matches.css";
-import { useEffect, useState } from "react";
-import { Preference } from "../../util/interfaces/Preference";
-import { getProfiles } from "../../requests/getRequests";
+import { useState } from "react";
 import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
@@ -55,7 +53,17 @@ export const Matches: React.FC<Props> = ({ profiles }) => {
           </div>
         </div>
       ) : (
-        <div className="">no matches</div>
+        <div className="grid grid-cols-1 justify-items-center w-1/2">
+          <div className="font-playfair-display text-2xl">
+            😭 No Matches Found 🥵
+          </div>
+          <div className="font-playfair-display text-large text-pretty">
+            We pay over 100 retired fishermen a LOT of mackerel to match
+            profiles together. Unfortumately, they weren't able to find anyone
+            who meets your preferences. Try relaxing your requirements, and
+            they'll give it another go.
+          </div>
+        </div>
       )}
     </div>
   );

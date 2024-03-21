@@ -3,6 +3,7 @@ package com.thg.accelerator.flatfish.service;
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
+import com.thg.accelerator.flatfish.exception.UserNotFoundException;
 import com.thg.accelerator.flatfish.repositories.PreferencesRepo;
 import com.thg.accelerator.flatfish.repositories.SavedProfileRepo;
 //import com.thg.accelerator.flatfish.repositories.UserLocationsRepo;
@@ -45,12 +46,15 @@ public class UserService {
         String budgetMin = preferences.get("budgetMin");
         String budgetMax = preferences.get("budgetMax");
         String gender = preferences.get("gender");
+        String location1 = preferences.get("location1");
+        String location2 = preferences.get("location2");
+        String location3 = preferences.get("location3");
 
 
         List<UserEntity> allUsers = usersRepo.findAll();
         // matching algorithm...
         //return Optional.of(usersRepo.findAll());
-        return Optional.of(profileMatcher.matchProfiles(allUsers, ageMin, ageMax, budgetMin, budgetMax, gender));
+        return Optional.of(profileMatcher.matchProfiles(allUsers, ageMin, ageMax, budgetMin, budgetMax, gender,location1,location2,location3));
     }
 
 //    public Optional<List<UserEntity>> getMatchingProfiles(String userId) {
@@ -83,14 +87,23 @@ public class UserService {
         usersRepo.save(userEntity);
     }
 
-    public void updatePreference(String id, UserEntity userEntity) {
-        UserEntity user = usersRepo.findById(id).get();
-        user.setBudgetMin(userEntity.getBudgetMin());
-        user.setBudgetMax(userEntity.getBudgetMax());
-        user.setAgeMin(userEntity.getAgeMin());
-        user.setAgeMax(userEntity.getAgeMax());
-        user.setGender(userEntity.getGender());
-        usersRepo.save(user);
+    public void updatePreference(String id, UserEntity userEntity) throws UserNotFoundException {
+
+        if (usersRepo.existsById(id)) {
+            UserEntity user = usersRepo.findById(id).get();
+
+            user.setBudgetMin(userEntity.getBudgetMin());
+            user.setBudgetMax(userEntity.getBudgetMax());
+            user.setAgeMin(userEntity.getAgeMin());
+            user.setAgeMax(userEntity.getAgeMax());
+            user.setGender(userEntity.getGender());
+            user.setLocation1(userEntity.getLocation1());
+            user.setLocation2(userEntity.getLocation2());
+            user.setLocation3(userEntity.getLocation3());
+            usersRepo.save(user);
+        } else {
+            throw new UserNotFoundException();
+        }
     }
 
     // TODO: Replace with vector similarity methods

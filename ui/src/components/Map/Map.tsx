@@ -23,13 +23,13 @@ const MapComponent: React.FC = () => {
 
   const status = useApiLoadingStatus();
 
-  useEffect(() => {
-    if (status === APILoadingStatus.LOADED) {
-      console.log(":(");
+  // useEffect(() => {
+  //   if (status === APILoadingStatus.LOADED) {
+  //     console.log(":(");
 
-      return;
-    }
-  }, [status]);
+  //     return;
+  //   }
+  // }, [status]);
 
   return (
     <APIProvider apiKey={"AIzaSyBB1B1ztcrr4wieOXSJAnN11dXTWI7mVuU"}>
@@ -65,3 +65,6 @@ const MapComponent: React.FC = () => {
   );
 };
 export default MapComponent;
+
+
+
