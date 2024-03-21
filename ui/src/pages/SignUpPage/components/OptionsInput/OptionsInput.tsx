@@ -3,8 +3,7 @@ interface Props {
   value: "SELECT" | "MALE" | "FEMALE";
   handleChange: (val: "SELECT" | "MALE" | "FEMALE") => void;
   warning: boolean;
-  noBox?: boolean;
-  submittable?: boolean;
+  noBackground?: boolean;
 }
 
 export const OptionsInput: React.FC<Props> = ({
@@ -12,6 +11,7 @@ export const OptionsInput: React.FC<Props> = ({
   value,
   handleChange,
   warning,
+  noBackground,
 }) => {
   return (
     <label className="flex flex-col justify-center w-full h-full">
@@ -25,7 +25,9 @@ export const OptionsInput: React.FC<Props> = ({
         )}
       </div>
       <select
-        className="h-3/5 w-5/6 rounded-lg p-2 border border-gray-400 bg-[#E5E5E5] text-sm"
+        className={`h-3/5 w-5/6 rounded-lg p-2 border border-gray-400 ${
+          noBackground ? "bg-transparent" : "bg-[#E5E5E5]"
+        } text-sm`}
         value={value}
         onChange={(e) =>
           handleChange(e.target.value as "MALE" | "SELECT" | "FEMALE")

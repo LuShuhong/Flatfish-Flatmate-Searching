@@ -54,6 +54,7 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
             value={user.userGender}
             handleChange={handleGenderChange}
             warning={false}
+            noBackground
           />
         </div>
       </div>
@@ -76,6 +77,7 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
             value={user.birthday}
             handleChange={handleBirthdayChange}
             warning={false}
+            noBackground
           />
         </div>
         <div className="w-1/3">
@@ -96,6 +98,7 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
         <Description
           value={user.description}
           handleChange={handleDescriptionChange}
+          noBackground
         />
       </div>
       <div className="flex items-center justify-center h-1/16 w-full">
