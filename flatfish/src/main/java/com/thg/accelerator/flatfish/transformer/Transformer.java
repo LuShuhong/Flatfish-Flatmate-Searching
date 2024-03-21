@@ -51,6 +51,7 @@ public class Transformer {
         userEntity.setLocation1(userDto.getLocation1());
         userEntity.setLocation2(userDto.getLocation2());
         userEntity.setLocation3(userDto.getLocation3());
+        userEntity.setRole(userDto.getRole());
         return userEntity;
     }
 }

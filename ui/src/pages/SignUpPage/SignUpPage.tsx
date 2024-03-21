@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { SignUpForm } from "./components/SignUpForm/SignUpForm";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
-import { convertDateToString } from "../../util/dateConverter";
 import { SignUpFieldWarning } from "../../util/interfaces/SignUpFieldWarning";
 import { post } from "../../requests/postRequests";
 import { useNavigate } from "react-router-dom";
@@ -50,6 +49,7 @@ export const SignUpPage: React.FC = () => {
           if (resp.ok) {
             setUserInDb(() => true);
           } else {
+            console.log(signUpDetails);
             post(
               "http://localhost:8080/api/v1/auth/register",
               signUpDetails
