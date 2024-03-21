@@ -54,7 +54,11 @@ function App() {
           <Route
             path="/home"
             element={
-              <HomePage getPreferences={getPreferences} email={user.userId} />
+              <HomePage
+                user={user}
+                getPreferences={getPreferences}
+                email={user.userId}
+              />
             }
           />
           <Route

@@ -17,13 +17,19 @@ import { DoubleSlider } from "../DoubleSlider/DoubleSlider";
 import { MAX_AGE, MIN_AGE } from "../../util/constants/age";
 import { MAX_BUDGET, MIN_BUDGET } from "../../util/constants/budget";
 import { put } from "../../requests/putRequests";
+import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
   email: string | undefined;
+  user: SignUpDetails;
 }
 
-export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
+export const InputFields: React.FC<Props> = ({
+  getPreferences,
+  email,
+  user,
+}) => {
   const [preferences, setPreferences] =
     useState<Preference>(defaultPreferences);
 
@@ -71,21 +77,26 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
   };
 
   const handleMatch = (): void => {
-    if (!ageIsValid(preferences.ageRange)) {
+    if (user.userId === "" || !user.userId) {
+      setError((e) => "Please login to set default preferences.");
+    } else if (!ageIsValid(preferences.ageRange)) {
       setError((e) => "Maximum age must be bigger than minimum age.");
     } else if (!budgetIsValid(preferences.budgetRange)) {
       setError((e) => "Maximum budget must be bigger than minimum budget.");
     } else if (!locationIsValid(preferences.location)) {
       setError((e) => "Choose at least one location");
     } else {
+      const filledLocations: string[] = Array.from({ length: 3 }, (v, i) =>
+        i < preferences.location.length ? preferences.location[i] : ""
+      );
+      updatePreferences({ location: filledLocations });
       getPreferences(preferences);
       setError((e) => "");
     }
   };
 
-  // TODO: Once the new user auth si ready, check that a user is logged in
   const handleSetDefault = (): void => {
-    if (preferences.userId === "") {
+    if (user.userId === "" || !user.userId) {
       setError((e) => "Please login to set default preferences.");
     } else if (!ageIsValid(preferences.ageRange)) {
       setError((e) => "Maximum age must be bigger than minimum ag.");
