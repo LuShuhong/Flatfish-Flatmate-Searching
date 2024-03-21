@@ -1,3 +1,0 @@
-export interface SavedProfilePostBody {
-  //   saving;
-}

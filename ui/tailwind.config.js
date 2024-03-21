@@ -15,6 +15,9 @@ module.exports = {
         "90%": "83%",
         "92%": "92%",
         "1/8": "12.5%",
+        "3/8": "37.5%",
+        "3/16": "18.75%",
+        "1/16": "6.25%",
       },
       width: {
         profileImgWidth: "22%",
@@ -31,9 +34,6 @@ module.exports = {
         profileBR: "2rem",
         "1/2": "50%",
       },
-      backgroundColor: {
-        formElementColor: "#535150",
-      },
       backgroundImage: {
         // bg1: "url('/src/img/mainBackground1.jpeg')",
         // bg2: "url('/src/img/mainBackground2.jpeg')",
@@ -47,6 +47,7 @@ module.exports = {
         "grey-darker": "#D9D9D9",
         "grey-lighter": "#E5E5E5",
         "lighter-grean": "#DBDED2",
+        formElementColor: "#535150",
       },
       boxShadow: {
         matchButton: "0 0.2rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3)",

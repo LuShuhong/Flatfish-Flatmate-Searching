@@ -200,6 +200,7 @@ import com.thg.accelerator.flatfish.dto.SavedProfileDetailDto;
 import com.thg.accelerator.flatfish.dto.SavedProfileDto;
 import com.thg.accelerator.flatfish.dto.UserDto;
 import com.thg.accelerator.flatfish.entities.UserEntity;
+import com.thg.accelerator.flatfish.exception.UserNotFoundException;
 import com.thg.accelerator.flatfish.repositories.UsersRepo;
 import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.service.SavedProfileService;
@@ -410,13 +411,12 @@ public class Controller {
 
     @PutMapping("/update/preference/{id}")
     public ResponseEntity<UserDto> addPreference(@PathVariable("id") String id,
-                                                 @RequestBody final UserDto userDto) {
-        userService.updatePreference(id, Transformer.transformUserDtoToEntity(userDto));
+            @RequestBody final UserDto userDto) {
 
         try {
+            userService.updatePreference(id, Transformer.transformUserDtoToEntity(userDto));
             return ResponseEntity.ok(userDto);
-            // Need custom exception
-        } catch (Exception e) {
+        } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
     }
