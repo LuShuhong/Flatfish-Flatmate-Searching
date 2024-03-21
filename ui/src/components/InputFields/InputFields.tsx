@@ -16,6 +16,7 @@ import React from "react";
 import { DoubleSlider } from "../DoubleSlider/DoubleSlider";
 import { MAX_AGE, MIN_AGE } from "../../util/constants/age";
 import { MAX_BUDGET, MIN_BUDGET } from "../../util/constants/budget";
+import { put } from "../../requests/putRequests";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
@@ -72,7 +73,7 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
       alert("Maximum age must be bigger than minimum age");
     } else if (!budgetIsValid(preferences.budgetRange)) {
       alert("Maximum budget must be bigger than minimum budget");
-    } else if (!locationIsValid(preferences.location[0])) {
+    } else if (!locationIsValid(preferences.location)) {
       alert("Please select a location");
     } else {
       getPreferences(preferences);
@@ -84,19 +85,24 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
       alert("Maximum age must be bigger than minimum age");
     } else if (!budgetIsValid(preferences.budgetRange)) {
       alert("Maximum budget must be bigger than minimum budget");
-    } else if (!locationIsValid(preferences.location[0])) {
+    } else if (!locationIsValid(preferences.location)) {
       alert("Please select a location");
     } else {
-      post("http://localhost:8080/api/v1/preferences", {
-        preferenceId: email ? email : "",
-        budgetMin: preferences.budgetRange[0],
-        budgetMax: preferences.budgetRange[1],
-        ageMin: preferences.ageRange[0],
-        ageMax: preferences.ageRange[1],
-        gender: preferences.gender,
-        smoker: false,
-        location: preferences.location[0],
-      });
+      put(
+        `http://localhost:8080/api/v1/update/preference/${preferences.userId}`,
+        {
+          budgetMin: preferences.budgetRange[0],
+          budgetMax: preferences.budgetRange[1],
+          ageMin: preferences.ageRange[0],
+          ageMax: preferences.ageRange[1],
+          gender: preferences.gender,
+          location1: preferences.location[0],
+          location2:
+            preferences.location.length >= 2 ? preferences.location[1] : null,
+          location3:
+            preferences.location.length === 3 ? preferences.location[2] : null,
+        }
+      );
     }
   };
   // http://localhost:8080/api/v1/preferences
