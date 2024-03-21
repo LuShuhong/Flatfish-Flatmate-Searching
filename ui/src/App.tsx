@@ -18,6 +18,7 @@ function App() {
   const [user, setUser] = useState<SignUpDetails>(defaultSignUpDetails);
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  console.log(user.password);
 
   const navigate = useNavigate();
   const handlePageChange = (newPage: string): void => {
