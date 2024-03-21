@@ -9,6 +9,6 @@ export const budgetIsValid = (budgetRange: number[]): boolean => {
   return budgetRange[SECOND_INDEX] >= budgetRange[FIRST_INDEX];
 };
 
-export const locationIsValid = (location: string): boolean => {
-  return location !== "Select";
+export const locationIsValid = (location: string[]): boolean => {
+  return location[0] !== "" && location.length >= 1;
 };
