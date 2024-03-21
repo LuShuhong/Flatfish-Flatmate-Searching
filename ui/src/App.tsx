@@ -19,10 +19,11 @@ function App() {
   const [user, setUser] = useState<SignUpDetails>(defaultSignUpDetails);
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
-  const initialDetails: Partial<Profile> = {
-    name: user?.name,
-    picture: user?.picture,
-  };
+  // console.log("userId" + user.userId);
+  // const initialDetails: Partial<Profile> = {
+  //   name: user?.name,
+  //   picture: user?.picture,
+  // };
   // const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
   // matchedProfiles.forEach((profile) => {
   //   console.log("Name:", profile.name);
@@ -83,15 +84,12 @@ function App() {
           <Route
             path="/matches"
             element={
-              <Matches
-                profiles={matchedProfiles}
-                userEmail={initialDetails.email}
-              />
+              <Matches profiles={matchedProfiles} userEmail={user.userId} />
             }
           />
           <Route
             path="/saved"
-            element={<Saved currentUserEmail={initialDetails.email} />}
+            element={<Saved currentUserEmail={user.userId} />}
           />
         </Routes>
       </div>
