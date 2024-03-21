@@ -13,11 +13,26 @@ import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { SignUpDetails } from "./util/interfaces/SignUpDetails";
 import { defaultSignUpDetails } from "./util/constants/defaultSignUpDetails";
+import React from "react";
 
 function App() {
   const [user, setUser] = useState<SignUpDetails>(defaultSignUpDetails);
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  const initialDetails: Partial<Profile> = {
+    name: user?.name,
+    picture: user?.picture,
+  };
+  // const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
+  // matchedProfiles.forEach((profile) => {
+  //   console.log("Name:", profile.name);
+  //   console.log("Age:", profile.age);
+  //   console.log("email", profile.userId);
+  //   // Add more attributes as needed
+  // // });
+
+  // const updateProfile = (updatedField: Partial<Profile>): void =>
+  //   setCurUser((u) => ({ ...u, ...updatedField }));
 
   const navigate = useNavigate();
   const handlePageChange = (newPage: string): void => {
@@ -67,9 +82,17 @@ function App() {
           />
           <Route
             path="/matches"
-            element={<Matches profiles={matchedProfiles} />}
+            element={
+              <Matches
+                profiles={matchedProfiles}
+                userEmail={initialDetails.email}
+              />
+            }
           />
-          <Route path="/saved" element={<Saved />} />
+          <Route
+            path="/saved"
+            element={<Saved currentUserEmail={initialDetails.email} />}
+          />
         </Routes>
       </div>
     </div>

@@ -16,6 +16,7 @@ public class SavedProfileDetailDto {
 //    private String userId;
     private String name;
 //    private String birthday;
+    private String userId;
     private long age;
     private String description;
     private String userGender;

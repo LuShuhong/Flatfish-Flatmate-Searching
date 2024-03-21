@@ -1,5 +1,7 @@
 import React from "react";
-import { Slider, Typography } from "@mui/material";
+// import { Slider, Typography } from "@mui/material";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
 
 interface Props {
   handleFunction: (val: [min: number, max: number]) => void;
