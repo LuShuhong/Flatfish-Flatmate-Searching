@@ -44,14 +44,16 @@ export const SignUpPage: React.FC = () => {
       warnings++;
     }
 
+    // http://localhost:8080/api/v1/
+    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
     if (!warnings) {
-      fetch(`http://localhost:8080/api/v1/users/${signUpDetails.userId}`)
+      fetch(`https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/users/${signUpDetails.userId}`)
         .then((resp) => {
           if (resp.ok) {
             setUserInDb(() => true);
           } else {
             post(
-              "http://localhost:8080/api/v1/auth/register",
+              "https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/auth/register",
               signUpDetails
             ).catch((err) => console.log(err));
             navigate("/login");
