@@ -2,13 +2,13 @@ import { NavigationButtons } from "../NavigationButtons/NavigationButtons";
 import { useState } from "react";
 import MenuIcon from "../MenuIcon/MenuIcon";
 import Xmark from "../XmarkIcon/Xmark";
-import { Profile } from "../../util/interfaces/Profile";
 import { ProfileContainer } from "../ProfileContainer/ProfileContainer";
+import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 
 interface Props {
   curPage: string;
   handlePageChange: (newPage: string) => void;
-  user: Partial<Profile>;
+  user: SignUpDetails;
 }
 
 export const Navigation: React.FC<Props> = ({
