@@ -37,6 +37,8 @@ function App() {
     navigate("/matches");
   };
 
+  const updateField = (updatedField: Partial<SignUpDetails>) =>
+    setUser((u) => ({ ...u, ...updatedField }));
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
       <NavBar
@@ -55,7 +57,10 @@ function App() {
               <HomePage getPreferences={getPreferences} email={user.userId} />
             }
           />
-          <Route path="/profile" element={<ProfilePage user={user} />} />
+          <Route
+            path="/profile"
+            element={<ProfilePage user={user} updateField={updateField} />}
+          />
           <Route
             path="/matches"
             element={<Matches profiles={matchedProfiles} />}

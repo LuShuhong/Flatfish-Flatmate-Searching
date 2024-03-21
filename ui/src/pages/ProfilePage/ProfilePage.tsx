@@ -4,12 +4,13 @@ import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 
 interface Props {
   user: SignUpDetails;
+  updateField: (updatedField: Partial<SignUpDetails>) => void;
 }
 
-export const ProfilePage: React.FC<Props> = ({ user }) => {
+export const ProfilePage: React.FC<Props> = ({ user, updateField }) => {
   return (
     <div className="flex justify-center h-full w-full">
-      <ProfileForm user={user} />
+      <ProfileForm user={user} updateField={updateField} />
     </div>
     // <div className="flex justify-center items-center w-full h-full">
     //   <ProfileInput user={user} updateProfile={updateProfile} />

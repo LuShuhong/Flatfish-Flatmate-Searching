@@ -50,6 +50,7 @@ export const SignUpForm: React.FC<Props> = ({
             value={signUpDetails.name}
             handleChange={handleNameChange}
             warning={fieldWarning.name}
+            editMode
           />
         </div>
         <div className="w-1/3">
@@ -70,6 +71,7 @@ export const SignUpForm: React.FC<Props> = ({
           value={signUpDetails.userId}
           handleChange={handleEmailChange}
           warning={fieldWarning.userId}
+          editMode
         />
       </div>
       <div className="flex h-1/8 w-full">
@@ -81,6 +83,7 @@ export const SignUpForm: React.FC<Props> = ({
           value={signUpDetails.password}
           handleChange={handlePasswordChange}
           warning={fieldWarning.password}
+          editMode
         />
       </div>
       <div className="flex h-1/8 w-full">
@@ -102,6 +105,7 @@ export const SignUpForm: React.FC<Props> = ({
           type="text"
           value={signUpDetails.instagram}
           handleChange={handleInstagramChange}
+          editMode
         />
       </div>
       <div className="flex flex-col h-1/4 w-full">

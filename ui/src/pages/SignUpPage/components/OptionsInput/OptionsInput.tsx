@@ -3,6 +3,8 @@ interface Props {
   value: "SELECT" | "MALE" | "FEMALE";
   handleChange: (val: "SELECT" | "MALE" | "FEMALE") => void;
   warning: boolean;
+  noBox?: boolean;
+  submittable?: boolean;
 }
 
 export const OptionsInput: React.FC<Props> = ({

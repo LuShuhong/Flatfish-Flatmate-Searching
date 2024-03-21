@@ -6,18 +6,26 @@ import { Description } from "../../../SignUpPage/components/Description/Descript
 import { SignUpDetails } from "../../../../util/interfaces/SignUpDetails";
 import { ProfilePic } from "../ProfilePic/ProfilePic";
 import { Save } from "../Save/Save";
+import { getAge } from "../../../../util/ageCalculator";
 
 interface Props {
   user: SignUpDetails;
+  updateField: (updatedField: Partial<SignUpDetails>) => void;
 }
 
-export const ProfileForm: React.FC<Props> = ({ user }) => {
-  const handleNameChange = (): void => {};
-  const handleGenderChange = (): void => {};
+export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
+  const handleNameChange = (val: string): void => updateField({ name: val });
+  const handleGenderChange = (val: "MALE" | "FEMALE" | "SELECT"): void =>
+    updateField({ userGender: val });
   const handleEmailChange = (): void => {};
-  const handleBirthdayChange = (): void => {};
-  const handleInstagramChange = (): void => {};
-  const handleDescriptionChange = (): void => {};
+  const handleBirthdayChange = (val: string): void => {
+    updateField({ age: getAge(val) });
+    updateField({ birthday: val });
+  };
+  const handleInstagramChange = (val: string): void =>
+    updateField({ instagram: val });
+  const handleDescriptionChange = (val: string): void =>
+    updateField({ description: val });
   return (
     <div className="h-full w-30%">
       <div className="flex h-3/16 w-full">
@@ -37,6 +45,7 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
             mandatory
             value={user.name}
             handleChange={handleNameChange}
+            edittable
           />
         </div>
         <div className="w-1/3">
@@ -57,6 +66,8 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
           value={user.userId}
           handleChange={handleEmailChange}
           disabled
+          edittable
+          strictUserId
         />
       </div>
       <div className="flex h-1/8 w-full">
@@ -68,7 +79,7 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
           />
         </div>
         <div className="w-1/3">
-          <Age value={user.age} />
+          <Age value={user.age} noBox />
         </div>
       </div>
       <div className="flex h-1/8 w-full">
@@ -78,6 +89,7 @@ export const ProfileForm: React.FC<Props> = ({ user }) => {
           type="text"
           value={user.instagram}
           handleChange={handleInstagramChange}
+          edittable
         />
       </div>
       <div className="flex flex-col h-1/4 w-full">

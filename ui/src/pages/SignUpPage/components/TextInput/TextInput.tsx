@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { EditButton } from "../../../../components/EditButton/EditButton";
+import { SubmitChangeButton } from "../../../../components/SubmitChangeButton/SubmitChangeButton";
+
 interface Props {
   fieldName: string;
   placeholder: string;
@@ -7,6 +11,9 @@ interface Props {
   handleChange: (val: string) => void;
   warning?: boolean;
   disabled?: boolean;
+  edittable?: boolean;
+  editMode?: boolean;
+  strictUserId?: boolean;
 }
 
 export const TextInput: React.FC<Props> = ({
@@ -18,7 +25,13 @@ export const TextInput: React.FC<Props> = ({
   handleChange,
   warning,
   disabled,
+  edittable,
+  editMode,
+  strictUserId,
 }) => {
+  const [edit, setEdit] = useState<boolean | undefined>(editMode);
+  const handleSubmitChange = (): void => setEdit(() => false);
+  const handleEdit = (): void => setEdit(() => true);
   return (
     <label className="flex flex-col justify-center w-full h-full">
       <div className="flex items-center">
@@ -32,14 +45,36 @@ export const TextInput: React.FC<Props> = ({
           </div>
         )}
       </div>
-      <input
-        type={type}
-        className="h-3/5 w-95% rounded-lg p-2 border border-gray-400 bg-[#E5E5E5] text-sm"
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => handleChange(e.target.value)}
-        disabled={disabled}
-      ></input>
+      {edit ? (
+        <div className="h-3/5 w-95% relative">
+          <input
+            type={type}
+            className={`h-full w-full rounded-lg p-2 border border-gray-400 bg-[#E5E5E5] text-sm ${
+              disabled && "text-gray-400"
+            }`}
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => handleChange(e.target.value)}
+            disabled={disabled}
+          ></input>
+          {edittable && (
+            <div className="absolute right-2 bottom-3.5">
+              <SubmitChangeButton handleSubmitChange={handleSubmitChange} />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="flex items-center h-3/5 w-95% p-2">
+          <div className="text-sm text-gray-500">{value}</div>
+          {!strictUserId && (
+            <div className="bg-white relative h-full">
+              <div className="absolute top-1.5 left-3">
+                <EditButton handleEdit={handleEdit} />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </label>
   );
 };
