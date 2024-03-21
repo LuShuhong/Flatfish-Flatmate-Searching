@@ -137,13 +137,23 @@ public class SavedProfileService {
 ////        return savedRepo.findById(savedProfileId);
 ////    }
 
-    public void deleteASavedProfile(Long id) {
-        Optional<SavedProfileEntity> savedProfileEntityOptional = savedRepo.findById(id);
+    public void deleteASavedProfileByUserIds(String savingUserId, String savedUserId) {
+        Optional<SavedProfileEntity> savedProfileEntityOptional = savedRepo.findBySavingUserUserIdAndSavedUserUserId(savingUserId, savedUserId);
 
         if (savedProfileEntityOptional.isPresent()) {
             savedRepo.delete(savedProfileEntityOptional.get());
         } else {
-            throw new RuntimeException(String.format("Saved Profile with ID %d not found", id) );
+            throw new RuntimeException("Saved Profile not found for saving user ID " + savingUserId + " and saved user ID " + savedUserId);
         }
     }
+
+//    public void deleteASavedProfile(Long id) {
+//        Optional<SavedProfileEntity> savedProfileEntityOptional = savedRepo.findById(id);
+//
+//        if (savedProfileEntityOptional.isPresent()) {
+//            savedRepo.delete(savedProfileEntityOptional.get());
+//        } else {
+//            throw new RuntimeException(String.format("Saved Profile with ID %d not found", id) );
+//        }
+//    }
 }

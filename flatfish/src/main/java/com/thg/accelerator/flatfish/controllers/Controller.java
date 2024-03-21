@@ -362,10 +362,10 @@ public class Controller {
         }
     }
 
-    @DeleteMapping("/savedprofiles/{savedProfileId}")
-    public ResponseEntity<SavedProfileDto> deleteSavedProfile(@PathVariable Long savedProfileId) {
+    @DeleteMapping("/savedprofiles/{savingUserId}/{savedUserId}")
+    public ResponseEntity<Void> deleteSavedProfile(@PathVariable String savingUserId, @PathVariable String savedUserId) {
         try {
-            savedProfileService.deleteASavedProfile(savedProfileId);
+            savedProfileService.deleteASavedProfileByUserIds(savingUserId, savedUserId);
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
@@ -373,6 +373,18 @@ public class Controller {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+    //    @DeleteMapping("/savedprofiles/{savedUserId}")
+//    public ResponseEntity<SavedProfileDto> deleteSavedProfile(@PathVariable String savedUserId) {
+//        try {
+//            savedProfileService.deleteASavedProfile(savedUserId);
+//            return ResponseEntity.ok().build();
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.notFound().build();
+//        } catch (Exception e) {
+//            return ResponseEntity.internalServerError().build();
+//        }
+//    }
 
     @GetMapping("/savedprofiles")
     public ResponseEntity<List<SavedProfileDto>> getAllSavedProfiles(){
