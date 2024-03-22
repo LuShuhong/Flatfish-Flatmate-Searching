@@ -54,16 +54,16 @@ public class Controller {
 
 
 
-//@GetMapping("/matchuser")
-//    public ResponseEntity<List<UserDto>> getMatchingProfilesWithoutPreferences(@RequestParam String userId) {
-//        return userService
-//                .getMatchingProfiles(userId)
-//                .map(tasks -> tasks.stream()
-//                        .map(Transformer::transformUserEntityToDto)
-//                        .collect(Collectors.toList()))
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
-//    }
+@GetMapping("/matchuser")
+    public ResponseEntity<List<UserDto>> getMatchingProfilesWithoutPreferences(@RequestParam String userId) {
+        return userService
+                .getMatchingProfiles(userId)
+                .map(user -> user.stream()
+                        .map(Transformer::transformUserEntityToDto)
+                        .collect(Collectors.toList()))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
 //    @GetMapping("/match/find?strategy=strong")
 //    public ResponseEntity<HashMap<UserDto, Integer>> getStrongMatches(String userId) {

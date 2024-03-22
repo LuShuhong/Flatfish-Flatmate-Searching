@@ -20,6 +20,39 @@ public class ProfileMatcher {
         double budgetMin = Double.parseDouble(budgetMinStr);
         double budgetMax = Double.parseDouble(budgetMaxStr);
 
+        //want to sort before return?
+        return allUsers.stream()
+                .filter(user -> user.getAge() >= ageMin)
+                .filter(user -> user.getAge() <= ageMax)
+                .filter(user -> user.getBudgetMax() >= budgetMin)
+                .filter(user -> user.getBudgetMin() <= budgetMax)
+                .filter(user -> gender.equalsIgnoreCase("unspecified") || user.getUserGender().equalsIgnoreCase(gender))
+                .filter(user -> user.getLocation1().equalsIgnoreCase(location1) || user.getLocation1().equalsIgnoreCase(location2) || user.getLocation1().equalsIgnoreCase(location3)
+                        || user.getLocation2().equalsIgnoreCase(location1) || user.getLocation2().equalsIgnoreCase(location2) || user.getLocation2().equalsIgnoreCase(location3)
+                        || user.getLocation3().equalsIgnoreCase(location1) || user.getLocation3().equalsIgnoreCase(location2) || user.getLocation3().equalsIgnoreCase(location3))
+                .toList();
+    }
+
+    public List<UserEntity> matchProfiles(List<UserEntity> allUsers, Long ageMinLong, Long ageMaxLong, Long budgetMinLong, Long budgetMaxLong, Gender targetGender, String location1, String location2, String location3) {
+
+        double ageMin = ageMinLong.doubleValue();
+        double ageMax = ageMaxLong.doubleValue();
+        double budgetMin = budgetMinLong.doubleValue();
+        double budgetMax = (budgetMaxLong.doubleValue());
+        String gender = targetGender.toString();
+
+        return allUsers.stream()
+                .filter(user -> user.getAge() >= ageMin)
+                .filter(user -> user.getAge() <= ageMax)
+                .filter(user -> user.getBudgetMax() >= budgetMin)
+                .filter(user -> user.getBudgetMin() <= budgetMax)
+                .filter(user -> gender.equalsIgnoreCase("unspecified") || user.getUserGender().equalsIgnoreCase(gender))
+                .filter(user -> user.getLocation1().equalsIgnoreCase(location1) || user.getLocation1().equalsIgnoreCase(location2) || user.getLocation1().equalsIgnoreCase(location3)
+                        || user.getLocation2().equalsIgnoreCase(location1) || user.getLocation2().equalsIgnoreCase(location2) || user.getLocation2().equalsIgnoreCase(location3)
+                        || user.getLocation3().equalsIgnoreCase(location1) || user.getLocation3().equalsIgnoreCase(location2) || user.getLocation3().equalsIgnoreCase(location3))
+                .toList();
+    }
+
         //        List<UserEntity> dealBreakerMatches = getDealbreakerMatches(allUsers, ageMin, ageMax, budgetMin, budgetMax);
 
 //        if(gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
@@ -43,18 +76,7 @@ public class ProfileMatcher {
 //            }
 //        }
 
-        //want to sort before return?
-        return allUsers.stream()
-                .filter(user -> user.getAge() >= ageMin)
-                .filter(user -> user.getAge() <= ageMax)
-                .filter(user -> user.getBudgetMax() >= budgetMin)
-                .filter(user -> user.getBudgetMin() <= budgetMax)
-                .filter(user -> gender.equalsIgnoreCase("unspecified") || user.getUserGender().equalsIgnoreCase(gender))
-                .filter(user -> user.getLocation1().equalsIgnoreCase(location1) || user.getLocation1().equalsIgnoreCase(location2) || user.getLocation1().equalsIgnoreCase(location3)
-                        || user.getLocation2().equalsIgnoreCase(location1) || user.getLocation2().equalsIgnoreCase(location2) || user.getLocation2().equalsIgnoreCase(location3)
-                        || user.getLocation3().equalsIgnoreCase(location1) || user.getLocation3().equalsIgnoreCase(location2) || user.getLocation3().equalsIgnoreCase(location3))
-                .toList();
-    }
+
 
 //    public List<UserEntity> matchProfiles(List<UserEntity> allUsers, Long ageMinLong, Long ageMaxLong, Long budgetMinLong, Long budgetMaxLong, Gender userGender) {
 //        double ageMin = (double) ageMinLong;
