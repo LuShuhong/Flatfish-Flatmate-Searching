@@ -16,8 +16,10 @@ root.render(
         domain="dev-lzo7qonm14nqgkbj.uk.auth0.com"
         clientId="SXSr4nFnjSIAPCOSDVVjOstuGx0un6EN"
         authorizationParams={{
-          redirect_uri: "http://localhost:3000/profile",
-          // redirect_uri: "https://flatfish-frontend.pq46c.icekube.ics.cloud/profile",
+          redirect_uri: "http://localhost:3000/signup",
+          // redirect_uri: "https://flatfish-frontend.pq46c.icekube.ics.cloud/home",
+          audience: "http://localhost:8080/api/v1",
+          // scope: "read:current_user update:current_user_metadata",
         }}
       >
         <App />

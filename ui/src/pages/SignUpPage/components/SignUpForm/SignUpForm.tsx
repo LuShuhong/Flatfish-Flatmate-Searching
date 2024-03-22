@@ -11,26 +11,24 @@ import { SignUpFieldWarning } from "../../../../util/interfaces/SignUpFieldWarni
 import React from "react";
 
 interface Props {
-  signUpDetails: SignUpDetails;
+  user: SignUpDetails;
   updateField: (updatedField: Partial<SignUpDetails>) => void;
   handleRegistration: () => void;
   fieldWarning: SignUpFieldWarning;
-  userInDb: boolean;
+  postFailed: boolean;
 }
 
 export const SignUpForm: React.FC<Props> = ({
-  signUpDetails,
+  user,
   updateField,
   handleRegistration,
   fieldWarning,
-  userInDb,
+  postFailed,
 }) => {
   const handleNameChange = (val: string): void => updateField({ name: val });
   const handleGenderChange = (val: "MALE" | "FEMALE" | "SELECT"): void =>
     updateField({ userGender: val });
   const handleEmailChange = (val: string): void => updateField({ userId: val });
-  const handlePasswordChange = (val: string): void =>
-    updateField({ password: val });
   const handleBirthdayChange = (val: string): void => {
     updateField({ birthday: val });
     updateField({ age: getAge(val) });
@@ -48,7 +46,7 @@ export const SignUpForm: React.FC<Props> = ({
             placeholder="John"
             type="text"
             mandatory
-            value={signUpDetails.name}
+            value={user.name}
             handleChange={handleNameChange}
             warning={fieldWarning.name}
             editMode
@@ -57,7 +55,7 @@ export const SignUpForm: React.FC<Props> = ({
         <div className="w-1/3">
           <OptionsInput
             fieldName="gender"
-            value={signUpDetails.userGender}
+            value={user.userGender}
             handleChange={handleGenderChange}
             warning={fieldWarning.userGender}
           />
@@ -68,35 +66,22 @@ export const SignUpForm: React.FC<Props> = ({
           fieldName="email"
           placeholder="johnsmith69@gmail.com"
           type="email"
-          mandatory
-          value={signUpDetails.userId}
+          value={user.userId}
           handleChange={handleEmailChange}
           warning={fieldWarning.userId}
-          editMode
-        />
-      </div>
-      <div className="flex h-1/8 w-full">
-        <TextInput
-          fieldName="password"
-          placeholder="Enter password ..."
-          type="password"
-          mandatory
-          value={signUpDetails.password}
-          handleChange={handlePasswordChange}
-          warning={fieldWarning.password}
-          editMode
+          strictUserId
         />
       </div>
       <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
           <Birthday
-            value={signUpDetails.birthday}
+            value={user.birthday}
             handleChange={handleBirthdayChange}
             warning={fieldWarning.birthday}
           />
         </div>
         <div className="w-1/3">
-          <Age value={signUpDetails.age} />
+          <Age value={user.age} />
         </div>
       </div>
       <div className="flex h-1/8 w-full">
@@ -104,19 +89,19 @@ export const SignUpForm: React.FC<Props> = ({
           fieldName="instagram"
           placeholder="JohnSmithInstaFollow"
           type="text"
-          value={signUpDetails.instagram}
+          value={user.instagram}
           handleChange={handleInstagramChange}
           editMode
         />
       </div>
       <div className="flex flex-col h-1/4 w-full">
         <Description
-          value={signUpDetails.description}
+          value={user.description}
           handleChange={handleDescriptionChange}
         />
-        {userInDb && (
+        {postFailed && (
           <div className="text-xs text-red-700">
-            Email already registered, please login
+            Something went wrong, please try again later
           </div>
         )}
       </div>
