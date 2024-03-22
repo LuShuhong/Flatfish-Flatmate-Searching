@@ -1,4 +1,4 @@
-import { SavedCard } from "../util/interfaces/SavedCard";
+
 import { Profile } from "../util/interfaces/Profile";
 
 export const deleteSaved = (url: string): void => {

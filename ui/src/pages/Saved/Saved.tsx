@@ -8,39 +8,55 @@ import { SavedCard } from "../../util/interfaces/SavedCard";
 import * as DeleteApi from "../../requests/deleteRequests";
 
 interface Props {
-  currentUserEmail: any;
+  currentUserEmail: string;
+  savedProfiles: Profile[];
+  refreshProfiles: () => void;
 }
-export const Saved: React.FC<Props> = ({ currentUserEmail }) => {
+export const Saved: React.FC<Props> = ({ currentUserEmail, savedProfiles, refreshProfiles }) => {
   const [savedUsers, setSavedUsers] = useState<Profile[]>([]);
   console.log(currentUserEmail);
 
-  useEffect(() => {
-    getProfiles(
-      `http://localhost:8080/api/v1/savedprofiles/${currentUserEmail}`,
-      setSavedUsers
-    );
-  }, []);
+  // useEffect(() => {
+  //   getProfiles(
+  //     `http://localhost:8080/api/v1/savedprofiles/${currentUserEmail}`,
+  //     setSavedUsers
+  //   );
+  // }, [currentUserEmail]);
 
-  async function deleteASavedProfile(savingUser : Profile, savedUser : SavedCard) {
-    if (typeof savedUser.savedUserId !== undefined) {
-      try {
-        await DeleteApi.deleteSavedProfile(savingUser.userId, savedUser.savedUserId);
-        const remainingSavedProfiles = await getProfiles(
-          `http://localhost:8080/api/v1/savedprofiles/${currentUserEmail}`,
-        );
-        setSavedUsers(remainingSavedProfiles); 
-      } catch (error) {
-        console.error(error);
-        alert(error)
-      }
-    } else {
-      console.error('Attempted to delete a saved profile without an ID')
+  useEffect(() => {
+    refreshSavedProfiles();
+  }, [currentUserEmail]);
+
+  const refreshSavedProfiles = async () => {
+    const profiles = await getProfiles(`http://localhost:8080/api/v1/savedprofiles/${currentUserEmail}`, setSavedUsers);
+    console.log("Fetched saved profiles:", profiles)
+  };
+
+  console.log(savedUsers.map((savedUser) => {savedUser.userId}))
+  const handleDeleteSavedProfile = async (savedUserId: string) => {
+    try {
+      await DeleteApi.deleteSavedProfile(currentUserEmail, savedUserId);
+      refreshSavedProfiles();
+    } catch (error) {
+      console.error('Failed to delete saved profile', error);
     }
-  }
+  };
 
   return (
     <>
       <div className="card-ctn ">
+        {savedUsers.map((savedUser) => (
+          <div
+            className="flex justify-center align-center h-full w-full">
+            <SavedCards
+              savedUser={savedUser}
+              key={savedUser.userId}
+              onDeleteSavedCardClicked={handleDeleteSavedProfile}
+            />
+          </div>
+        ))}
+      </div>
+      {/* <div className="card-ctn ">
         {savedUsers.map((user: Profile, index: number) => (
           <>
             <div
@@ -48,21 +64,18 @@ export const Saved: React.FC<Props> = ({ currentUserEmail }) => {
               className="flex justify-center align-center h-full w-full"
             >
               <SavedCards
-                // name={user.name}
-                // age={user.age} // Parse age as a number
-                // description={user.description}
-                // email={user.email}
-                // gender={user.gender}
-                // instagram={user.instagram}
-                // userId={user.userId}
-                savedCard={savedcard}
-                key={savedCard.userId}
-                onDeleteSavedCardClicked={deleteASavedProfile}
+                name={user.name}
+                age={user.age} // Parse age as a number
+                description={user.description}
+                email={user.email}
+                gender={user.gender}
+                instagram={user.instagram}
+                userId={user.userId}
               />
             </div>
           </>
         ))}
-      </div>
+      </div> */}
     </>
   );
 };

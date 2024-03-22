@@ -2,6 +2,9 @@ import React from "react";
 import person from "../../img/funcat.jpeg";
 import { MdDelete } from "react-icons/md";
 import { SavedCard } from "../../util/interfaces/SavedCard";
+import { Profile } from "../../util/interfaces/Profile";
+import * as DeleteApi from "../../requests/deleteRequests";
+import { getProfiles } from "../../requests/getRequests";
 
 // interface Props {
 //   name: string;
@@ -14,20 +17,26 @@ import { SavedCard } from "../../util/interfaces/SavedCard";
 // }
 
 type SavedCardProps = {
-  savedCard: SavedCard,
-  onDeleteSavedCardClicked: (savedCard: SavedCard) => void
+  savedUser: Profile,
+  onDeleteSavedCardClicked: (savedUserId: string) => void;
 }
 
-export const SavedCards: React.FC<SavedCardProps> = ({ savedCard, onDeleteSavedCardClicked }) => {
+export const SavedCards: React.FC<SavedCardProps> = ({ savedUser, onDeleteSavedCardClicked }) => {
   const {
     name,
     age,
     email,
     instagram,
-  } = savedCard;
+    userId
+  } = savedUser;
   // console.log(email);
 
   const handleClickIg = () => {};
+
+  const handleClickDelete = () => {
+    onDeleteSavedCardClicked(savedUser.userId);
+  };
+
   return (
     <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
       <div className="text-center bg-[#E5E5E5] mt-10">
@@ -55,16 +64,9 @@ export const SavedCards: React.FC<SavedCardProps> = ({ savedCard, onDeleteSavedC
         <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
           {instagram}
         </button>
-<<<<<<< HEAD
         <MdDelete
-          onClick={(e) => {
-            onDeleteSavedCardClicked(savedCard);
-            e.stopPropagation();
-          }}
+          onClick={handleClickDelete}
         />
-=======
-        <button>delete</button>
->>>>>>> dev
       </div>
     </div>
   );

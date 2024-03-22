@@ -6,7 +6,7 @@ import { Saved } from "./pages/Saved/Saved";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Preference } from "./util/interfaces/Preference";
-import { getProfiles } from "./requests/getRequests";
+import { getProfiles, getSavedProfiles } from "./requests/getRequests";
 import { Profile } from "./util/interfaces/Profile";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
@@ -14,11 +14,13 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { SignUpDetails } from "./util/interfaces/SignUpDetails";
 import { defaultSignUpDetails } from "./util/constants/defaultSignUpDetails";
 import React from "react";
+import { useEffect } from "react";
 
 function App() {
   const [user, setUser] = useState<SignUpDetails>(defaultSignUpDetails);
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  const [savedProfiles, setSavedProfiles] = useState<Profile[]>([]);
   // console.log("userId" + user.userId);
   // const initialDetails: Partial<Profile> = {
   //   name: user?.name,
@@ -55,6 +57,19 @@ function App() {
 
   const updateField = (updatedField: Partial<SignUpDetails>) =>
     setUser((u) => ({ ...u, ...updatedField }));
+  
+  useEffect(() => {
+    if (user.userId) {
+      fetchSavedProfiles(user.userId);
+    }
+  }, [user.userId]);
+
+  const fetchSavedProfiles = async (userId: string) => {
+    // Assuming getProfiles is a function that fetches profiles and returns a promise
+    const profiles = await getSavedProfiles(`http://localhost:8080/api/v1/savedprofiles/${userId}`);
+    setSavedProfiles(profiles);
+  };
+
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
       <NavBar
@@ -89,7 +104,12 @@ function App() {
           />
           <Route
             path="/saved"
-            element={<Saved currentUserEmail={user.userId} />}
+            element={<Saved 
+                        currentUserEmail={user.userId}
+                        savedProfiles={savedProfiles}
+                        refreshProfiles={() => fetchSavedProfiles(user.userId)}
+                      /> 
+            }
           />
         </Routes>
       </div>
