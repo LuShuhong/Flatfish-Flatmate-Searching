@@ -43,7 +43,10 @@ export const Saved: React.FC<Props> = ({ currentUserEmail }) => {
       <div className="card-ctn ">
         {savedUsers.map((user: Profile, index: number) => (
           <>
-            <div className="flex justify-center align-center h-full w-full">
+            <div
+              key={index}
+              className="flex justify-center align-center h-full w-full"
+            >
               <SavedCards
                 // name={user.name}
                 // age={user.age} // Parse age as a number
