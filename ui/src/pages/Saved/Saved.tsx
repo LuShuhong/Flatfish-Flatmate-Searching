@@ -12,9 +12,14 @@ interface Props {
   savedProfiles: Profile[];
   refreshProfiles: () => void;
 }
-export const Saved: React.FC<Props> = ({ currentUserEmail, savedProfiles, refreshProfiles }) => {
+export const Saved: React.FC<Props> = ({
+  currentUserEmail,
+  savedProfiles,
+  refreshProfiles,
+}) => {
   const [savedUsers, setSavedUsers] = useState<Profile[]>([]);
   console.log(currentUserEmail);
+  console.log(savedProfiles.map((saved) => saved.email));
 
   // useEffect(() => {
   //   getProfiles(
@@ -28,17 +33,24 @@ export const Saved: React.FC<Props> = ({ currentUserEmail, savedProfiles, refres
   }, [currentUserEmail]);
 
   const refreshSavedProfiles = async () => {
-    const profiles = await getProfiles(`http://localhost:8080/api/v1/savedprofiles/${currentUserEmail}`, setSavedUsers);
-    console.log("Fetched saved profiles:", profiles)
+    const profiles = await getProfiles(
+      `http://localhost:8080/api/v1/savedprofiles/${currentUserEmail}`,
+      setSavedUsers
+    );
+    console.log("Fetched saved profiles:", profiles);
   };
 
-  console.log(savedUsers.map((savedUser) => {savedUser.userId}))
+  // console.log(
+  //   savedUsers.map((savedUser) => {
+  //     savedUser.userId;
+  //   })
+  // );
   const handleDeleteSavedProfile = async (savedUserId: string) => {
     try {
       await DeleteApi.deleteSavedProfile(currentUserEmail, savedUserId);
       refreshSavedProfiles();
     } catch (error) {
-      console.error('Failed to delete saved profile', error);
+      console.error("Failed to delete saved profile", error);
     }
   };
 
@@ -46,8 +58,7 @@ export const Saved: React.FC<Props> = ({ currentUserEmail, savedProfiles, refres
     <>
       <div className="card-ctn ">
         {savedUsers.map((savedUser) => (
-          <div
-            className="flex justify-center align-center h-full w-full">
+          <div className="flex justify-center align-center h-full w-full">
             <SavedCards
               savedUser={savedUser}
               key={savedUser.userId}
