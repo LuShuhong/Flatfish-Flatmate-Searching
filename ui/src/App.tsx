@@ -14,34 +14,35 @@ import { SignUpDetails } from "./util/interfaces/SignUpDetails";
 import { defaultSignUpDetails } from "./util/constants/defaultSignUpDetails";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
+import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
 
 function App() {
-  const { user, isLoading } = useAuth0();
+  const { user } = useAuth0();
   const [userDetails, setUserDetails] =
     useState<SignUpDetails>(defaultSignUpDetails);
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
-  let savedEmail = "a";
-  if (user?.email) {
-    savedEmail = user.email;
-  }
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/v1/users/${user?.email}`).then((resp) => {
-      if (resp.ok) {
-        resp.json().then((data) => setUserDetails(() => data));
-      } else {
-        console.log(savedEmail);
-        // if (!userDetails.userId) {
-        //   setUserDetails((details) => ({
-        //     ...details,
-        //     ...{ userId: user?.email ? user.email : "" },
-        //   }));
-        // }
-      }
-    });
+    if (user?.email) {
+      fetch(`http://localhost:8080/api/v1/users/${user.email}`).then((resp) => {
+        if (resp.ok) {
+          resp.json().then((data) => setUserDetails(() => data));
+        } else {
+          setUserDetails((details) => {
+            const copy: SignUpDetails = { ...details };
+            copy.userId = user.email as string;
+            copy.name = user.name as string;
+            copy.picture = user.picture as string;
+            return copy;
+          });
+        }
+      });
+    }
   }, [user]);
-  const navigate = useNavigate();
+  console.log(userDetails);
+
   const handlePageChange = (newPage: string): void => {
     setCurPage(() => newPage);
   };
@@ -61,7 +62,8 @@ function App() {
 
   const updateField = (updatedField: Partial<SignUpDetails>) =>
     setUserDetails((u) => ({ ...u, ...updatedField }));
-  //console.log(user?.email);
+  //console.log(userDetails);
+
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
       <NavBar
@@ -72,6 +74,7 @@ function App() {
       <div className="h-70%">
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/loading" element={<LoadingPage />} />
           <Route
             path="/signup"
             element={

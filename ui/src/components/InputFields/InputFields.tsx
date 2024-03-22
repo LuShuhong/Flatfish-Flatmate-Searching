@@ -121,8 +121,6 @@ export const InputFields: React.FC<Props> = ({ getPreferences, email }) => {
     setPreferences({ ...preferences, location: newLocationList });
   };
 
-  console.log(preferences);
-
   return (
     <div className="w-full h-4/5">
       <GenderPreference
