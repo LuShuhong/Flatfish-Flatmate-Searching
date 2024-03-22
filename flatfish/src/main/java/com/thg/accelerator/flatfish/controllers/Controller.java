@@ -289,7 +289,7 @@ public class Controller {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public ResponseEntity<UserDto> addUser(@RequestBody final UserDto userDto) {
         userService.addUser(Transformer.transformUserDtoToEntity(userDto));
 
