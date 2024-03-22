@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
 @Repository
+
 public interface SavedProfileRepo extends JpaRepository<SavedProfileEntity, Long>{
     List<SavedProfileEntity> findBySavingUserUserId(String savingUserId);
 }

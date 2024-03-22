@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
 import { SignUpFieldWarning } from "./util/interfaces/SignUpFieldWarning";
 import { noFieldWarnings } from "./util/constants/noFieldWarnings";
+import React from "react";
 
 function App() {
   const { user } = useAuth0();
@@ -34,6 +35,19 @@ function App() {
   const makeNavBarVisible = (): void => {
     setNavBarVisibility(() => true);
   };
+  // console.log("userId" + user.userId);
+  // const initialDetails: Partial<Profile> = {
+  //   name: user?.name,
+  //   picture: user?.picture,
+  // };
+  // const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
+  // matchedProfiles.forEach((profile) => {
+  //   console.log("Name:", profile.name);
+  //   console.log("Age:", profile.age);
+  //   console.log("email", profile.userId);
+  //   // Add more attributes as needed
+  // // });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -102,6 +116,7 @@ function App() {
             path="/home"
             element={
               <HomePage
+                user={userDetails}
                 getPreferences={getPreferences}
                 email={userDetails.userId}
               />
@@ -115,9 +130,17 @@ function App() {
           />
           <Route
             path="/matches"
-            element={<Matches profiles={matchedProfiles} />}
+            element={
+              <Matches
+                profiles={matchedProfiles}
+                userEmail={userDetails.userId}
+              />
+            }
           />
-          <Route path="/saved" element={<Saved />} />
+          <Route
+            path="/saved"
+            element={<Saved currentUserEmail={userDetails.userId} />}
+          />
         </Routes>
       </div>
     </div>

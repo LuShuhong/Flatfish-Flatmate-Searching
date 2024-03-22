@@ -35,6 +35,10 @@ export const LoginPage: React.FC<Props> = ({ setUser }) => {
       })
       .catch((error) => console.log(error));
   };
+
+  // http://localhost:8080/api/v1/
+  // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
+
   return (
     <div className="flex justify-center h-full w-full">
       <LoginForm

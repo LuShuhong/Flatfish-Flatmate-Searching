@@ -47,6 +47,8 @@ export const SignUpPage: React.FC<Props> = ({
       warnings++;
     }
 
+    // http://localhost:8080/api/v1/
+    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
     if (!warnings) {
       post("http://localhost:8080/api/v1", user)
         .then((resp) => {
