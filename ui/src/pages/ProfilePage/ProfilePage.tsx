@@ -12,8 +12,5 @@ export const ProfilePage: React.FC<Props> = ({ user, updateField }) => {
     <div className="flex justify-center h-full w-full">
       <ProfileForm user={user} updateField={updateField} />
     </div>
-    // <div className="flex justify-center items-center w-full h-full">
-    //   <ProfileInput user={user} updateProfile={updateProfile} />
-    // </div>
   );
 };
