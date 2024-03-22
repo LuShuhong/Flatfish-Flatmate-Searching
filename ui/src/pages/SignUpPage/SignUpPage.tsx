@@ -4,9 +4,16 @@ import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 import { SignUpFieldWarning } from "../../util/interfaces/SignUpFieldWarning";
 import { post } from "../../requests/postRequests";
 import { useNavigate } from "react-router-dom";
-import { defaultSignUpDetails } from "../../util/constants/defaultSignUpDetails";
 
-export const SignUpPage: React.FC = () => {
+interface Props {
+  user: SignUpDetails;
+}
+
+export const SignUpPage: React.FC<Props> = ({ user }) => {
+  const navigate = useNavigate();
+  if (user.age) {
+    navigate("/home");
+  }
   const noWarnings: SignUpFieldWarning = {
     userId: false,
     password: false,
@@ -16,63 +23,54 @@ export const SignUpPage: React.FC = () => {
   };
   const [fieldWarning, setFieldWarning] =
     useState<SignUpFieldWarning>(noWarnings);
-  const [userInDb, setUserInDb] = useState<boolean>(false);
-  const [signUpDetails, setSignUpDetails] =
-    useState<SignUpDetails>(defaultSignUpDetails);
-  const navigate = useNavigate();
   const handleRegistration = (): void => {
     let warnings = 0;
-    if (!signUpDetails.userId) {
+    if (!user.userId) {
       setFieldWarning((w) => ({ ...w, ...{ userId: true } }));
       warnings++;
     }
-    if (!signUpDetails.password) {
+    if (!user.password) {
       setFieldWarning((w) => ({ ...w, ...{ password: true } }));
       warnings++;
     }
-    if (signUpDetails.userGender === "SELECT") {
+    if (user.userGender === "SELECT") {
       setFieldWarning((w) => ({ ...w, ...{ userGender: true } }));
       warnings++;
     }
-    if (!signUpDetails.name) {
+    if (!user.name) {
       setFieldWarning((w) => ({ ...w, ...{ name: true } }));
       warnings++;
     }
-    if (!signUpDetails.age) {
+    if (!user.age) {
       setFieldWarning((w) => ({ ...w, ...{ birthday: true } }));
       warnings++;
     }
 
     if (!warnings) {
-      fetch(`http://localhost:8080/api/v1/users/${signUpDetails.userId}`)
-        .then((resp) => {
-          if (resp.ok) {
-            setUserInDb(() => true);
-          } else {
-            console.log(signUpDetails);
-            post(
-              "http://localhost:8080/api/v1/auth/register",
-              signUpDetails
-            ).catch((err) => console.log(err));
-            navigate("/login");
-          }
-        })
-        .catch((err) => console.log(err));
+      // fetch(`http://localhost:8080/api/v1/users/${signUpDetails.userId}`)
+      //   .then((resp) => {
+      //     if (resp.ok) {
+      //     } else {
+      //       console.log(signUpDetails);
+      //       post(
+      //         "http://localhost:8080/api/v1/auth/register",
+      //         signUpDetails
+      //       ).catch((err) => console.log(err));
+      //       navigate("/home");
+      //     }
+      //   })
+      //   .catch((err) => console.log(err));
     }
   };
-  const updateField = (updatedField: Partial<SignUpDetails>): void => {
-    setSignUpDetails((details) => ({ ...details, ...updatedField }));
-    setFieldWarning(() => noWarnings);
-    setUserInDb(() => false);
-  };
+  const updateField = (updatedField: Partial<SignUpDetails>): void => {};
+
   return (
     <div className="flex justify-center h-full w-full">
       <SignUpForm
-        signUpDetails={signUpDetails}
+        user={user}
         updateField={updateField}
         handleRegistration={handleRegistration}
         fieldWarning={fieldWarning}
-        userInDb={userInDb}
       />
     </div>
   );
