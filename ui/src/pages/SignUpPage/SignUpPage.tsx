@@ -8,22 +8,22 @@ import { useNavigate } from "react-router-dom";
 interface Props {
   user: SignUpDetails;
   updateField: (updatedField: Partial<SignUpDetails>) => void;
+  fieldWarning: SignUpFieldWarning;
+  setFieldWarning: React.Dispatch<React.SetStateAction<SignUpFieldWarning>>;
+  makeNavBarVisible: () => void;
 }
 
-export const SignUpPage: React.FC<Props> = ({ user, updateField }) => {
+export const SignUpPage: React.FC<Props> = ({
+  user,
+  updateField,
+  fieldWarning,
+  setFieldWarning,
+  makeNavBarVisible,
+}) => {
   const navigate = useNavigate();
-  if (user.age) {
-    navigate("/home");
-  }
-  const noWarnings: SignUpFieldWarning = {
-    userId: false,
-    password: false,
-    userGender: false,
-    name: false,
-    birthday: false,
-  };
-  const [fieldWarning, setFieldWarning] =
-    useState<SignUpFieldWarning>(noWarnings);
+
+  const [postFailed, setPostFailed] = useState<boolean>(false);
+
   const handleRegistration = (): void => {
     let warnings = 0;
     if (!user.userId) {
@@ -48,19 +48,16 @@ export const SignUpPage: React.FC<Props> = ({ user, updateField }) => {
     }
 
     if (!warnings) {
-      // fetch(`http://localhost:8080/api/v1/users/${signUpDetails.userId}`)
-      //   .then((resp) => {
-      //     if (resp.ok) {
-      //     } else {
-      //       console.log(signUpDetails);
-      //       post(
-      //         "http://localhost:8080/api/v1/auth/register",
-      //         signUpDetails
-      //       ).catch((err) => console.log(err));
-      //       navigate("/home");
-      //     }
-      //   })
-      //   .catch((err) => console.log(err));
+      post("http://localhost:8080/api/v1", user)
+        .then((resp) => {
+          if (!resp.ok) {
+            setPostFailed(() => true);
+          } else {
+            makeNavBarVisible();
+            navigate("/home");
+          }
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -71,6 +68,7 @@ export const SignUpPage: React.FC<Props> = ({ user, updateField }) => {
         updateField={updateField}
         handleRegistration={handleRegistration}
         fieldWarning={fieldWarning}
+        postFailed={postFailed}
       />
     </div>
   );

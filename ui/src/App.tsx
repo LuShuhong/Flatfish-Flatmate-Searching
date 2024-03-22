@@ -15,13 +15,25 @@ import { defaultSignUpDetails } from "./util/constants/defaultSignUpDetails";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
+import { SignUpFieldWarning } from "./util/interfaces/SignUpFieldWarning";
+import { noFieldWarnings } from "./util/constants/noFieldWarnings";
 
 function App() {
   const { user } = useAuth0();
   const [userDetails, setUserDetails] =
     useState<SignUpDetails>(defaultSignUpDetails);
+  const [fieldWarning, setFieldWarning] =
+    useState<SignUpFieldWarning>(noFieldWarnings);
+  const updateField = (updatedField: Partial<SignUpDetails>) => {
+    setFieldWarning(() => noFieldWarnings);
+    setUserDetails((u) => ({ ...u, ...updatedField }));
+  };
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  const [navBarVisibility, setNavBarVisibility] = useState<boolean>(false);
+  const makeNavBarVisible = (): void => {
+    setNavBarVisibility(() => true);
+  };
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +41,8 @@ function App() {
       fetch(`http://localhost:8080/api/v1/users/${user.email}`).then((resp) => {
         if (resp.ok) {
           resp.json().then((data) => setUserDetails(() => data));
+          setNavBarVisibility(() => true);
+          navigate("/home");
         } else {
           setUserDetails((details) => {
             const copy: SignUpDetails = { ...details };
@@ -60,16 +74,13 @@ function App() {
     navigate("/matches");
   };
 
-  const updateField = (updatedField: Partial<SignUpDetails>) =>
-    setUserDetails((u) => ({ ...u, ...updatedField }));
-  //console.log(userDetails);
-
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
       <NavBar
         curPage={curPage}
         handlePageChange={handlePageChange}
         user={userDetails}
+        navBarVisibility={navBarVisibility}
       />
       <div className="h-70%">
         <Routes>
@@ -78,10 +89,15 @@ function App() {
           <Route
             path="/signup"
             element={
-              <SignUpPage user={userDetails} updateField={updateField} />
+              <SignUpPage
+                user={userDetails}
+                updateField={updateField}
+                fieldWarning={fieldWarning}
+                setFieldWarning={setFieldWarning}
+                makeNavBarVisible={makeNavBarVisible}
+              />
             }
           />
-          {/* <Route path="/login" element={<LoginPage setUser={setUser} />} /> */}
           <Route
             path="/home"
             element={

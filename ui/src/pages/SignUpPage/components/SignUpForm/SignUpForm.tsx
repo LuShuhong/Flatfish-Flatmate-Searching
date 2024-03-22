@@ -14,6 +14,7 @@ interface Props {
   updateField: (updatedField: Partial<SignUpDetails>) => void;
   handleRegistration: () => void;
   fieldWarning: SignUpFieldWarning;
+  postFailed: boolean;
 }
 
 export const SignUpForm: React.FC<Props> = ({
@@ -21,6 +22,7 @@ export const SignUpForm: React.FC<Props> = ({
   updateField,
   handleRegistration,
   fieldWarning,
+  postFailed,
 }) => {
   const handleNameChange = (val: string): void => updateField({ name: val });
   const handleGenderChange = (val: "MALE" | "FEMALE" | "SELECT"): void =>
@@ -63,7 +65,6 @@ export const SignUpForm: React.FC<Props> = ({
           fieldName="email"
           placeholder="johnsmith69@gmail.com"
           type="email"
-          mandatory
           value={user.userId}
           handleChange={handleEmailChange}
           warning={fieldWarning.userId}
@@ -97,6 +98,11 @@ export const SignUpForm: React.FC<Props> = ({
           value={user.description}
           handleChange={handleDescriptionChange}
         />
+        {postFailed && (
+          <div className="text-xs text-red-700">
+            Something went wrong, please try again later
+          </div>
+        )}
       </div>
       <div className="flex justify-center h-1/8 w-full">
         <div className="flex items-center h-full w-60%">
