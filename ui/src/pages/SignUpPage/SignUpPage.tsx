@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   user: SignUpDetails;
+  updateField: (updatedField: Partial<SignUpDetails>) => void;
 }
 
-export const SignUpPage: React.FC<Props> = ({ user }) => {
+export const SignUpPage: React.FC<Props> = ({ user, updateField }) => {
   const navigate = useNavigate();
   if (user.age) {
     navigate("/home");
@@ -62,7 +63,6 @@ export const SignUpPage: React.FC<Props> = ({ user }) => {
       //   .catch((err) => console.log(err));
     }
   };
-  const updateField = (updatedField: Partial<SignUpDetails>): void => {};
 
   return (
     <div className="flex justify-center h-full w-full">

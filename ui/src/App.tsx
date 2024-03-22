@@ -16,21 +16,28 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 
 function App() {
-  const { user } = useAuth0();
+  const { user, isLoading } = useAuth0();
   const [userDetails, setUserDetails] =
     useState<SignUpDetails>(defaultSignUpDetails);
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  let savedEmail = "a";
+  if (user?.email) {
+    savedEmail = user.email;
+  }
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/v1/users/${user?.email}`).then((resp) => {
       if (resp.ok) {
         resp.json().then((data) => setUserDetails(() => data));
       } else {
-        setUserDetails((details) => ({
-          ...details,
-          ...{ userId: user?.email ? user.email : "" },
-        }));
+        console.log(savedEmail);
+        // if (!userDetails.userId) {
+        //   setUserDetails((details) => ({
+        //     ...details,
+        //     ...{ userId: user?.email ? user.email : "" },
+        //   }));
+        // }
       }
     });
   }, [user]);
@@ -52,10 +59,9 @@ function App() {
     navigate("/matches");
   };
 
-  console.log(userDetails);
   const updateField = (updatedField: Partial<SignUpDetails>) =>
     setUserDetails((u) => ({ ...u, ...updatedField }));
-
+  //console.log(user?.email);
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
       <NavBar
@@ -66,7 +72,12 @@ function App() {
       <div className="h-70%">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/signup" element={<SignUpPage user={userDetails} />} />
+          <Route
+            path="/signup"
+            element={
+              <SignUpPage user={userDetails} updateField={updateField} />
+            }
+          />
           {/* <Route path="/login" element={<LoginPage setUser={setUser} />} /> */}
           <Route
             path="/home"
