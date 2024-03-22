@@ -8,6 +8,7 @@ import { RedirectToLogin } from "../RedirectToLogin/RedirectToLogin";
 import { SignUpDetails } from "../../../../util/interfaces/SignUpDetails";
 import { getAge } from "../../../../util/ageCalculator";
 import { SignUpFieldWarning } from "../../../../util/interfaces/SignUpFieldWarning";
+import React from "react";
 
 interface Props {
   signUpDetails: SignUpDetails;

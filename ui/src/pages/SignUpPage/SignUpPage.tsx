@@ -6,7 +6,7 @@ import { SignUpFieldWarning } from "../../util/interfaces/SignUpFieldWarning";
 import { post } from "../../requests/postRequests";
 import { useNavigate } from "react-router-dom";
 import { defaultSignUpDetails } from "../../util/constants/defaultSignUpDetails";
-
+import React from "react";
 export const SignUpPage: React.FC = () => {
   const noWarnings: SignUpFieldWarning = {
     userId: false,

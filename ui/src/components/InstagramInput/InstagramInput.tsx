@@ -1,3 +1,5 @@
+import React from "react";
+
 interface Props {
   instagram: string | undefined;
   handleUserInstagram: (val: string) => void;
