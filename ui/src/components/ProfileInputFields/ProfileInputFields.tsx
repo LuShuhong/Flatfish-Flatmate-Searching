@@ -34,78 +34,78 @@ export const ProfileInputFields: React.FC<Props> = ({
   const handleUserInstagram = (val: string): void =>
     updateProfile({ instagram: val });
 
-  const [state, setState] = useState('ready');
-  const [file, setFile] = useState<File | undefined>();
-  const [preview, setPreview] = useState<string |ArrayBuffer | null>(null);
+  // const [state, setState] = useState('ready');
+  // const [file, setFile] = useState<File | undefined>();
+  // const [preview, setPreview] = useState<string |ArrayBuffer | null>(null);
   
-  // const handleSaveProfile = () => {
-  //   setDeactivate(() => true);
-  //   // http://localhost:8080/api/v1
-  //   // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1
-  //   post("http://localhost:8080/api/v1", {
-  //     userId: user.email,
-  //     name: user.name,
-  //     decription: "temp",
-  //     birthday: user.birthday,
-  //     age: user.age,
-  //     userGender:
-  //       user.gender === "m" ? "MALE" : user.gender === "f" ? "FEMALE" : "none",
-  //     instagram: user.instagram,
-  //   });
-  // };
-
-  const handleSaveProfile = async () => {
-
-    if (!file) {
-      console.log("No file selected.");
-      return;
-    }
-  
-    const formData = new FormData();
-    formData.append("userId", user.email ?? "");
-    formData.append("name", user.name ?? "");
-    formData.append("description", "temp");
-    formData.append("birthday", user.birthday ?? "");
-    formData.append("age", user.age?.toString() ?? ""); 
-    formData.append("userGender", user.gender === "m" ? "MALE" : user.gender === "f" ? "FEMALE" : "none");
-    formData.append("instagram", user.instagram ?? "");
-    formData.append("picture", file); // Append the file
-  
-    try {
-      const response = await fetch("http://localhost:8080/api/v1/users", { 
-        method: "POST",
-        body: formData, // No headers are needed as 'Content-Type' will be set to 'multipart/form-data' automatically
-      });
-  
-      if (response.ok) {
-        console.log("Profile saved successfully");
-        setDeactivate(true); // Assuming you want to deactivate some UI element upon successful save
-        // Handle successful save (e.g., navigate to another page or show a success message)
-      } else {
-        console.error("Failed to save profile");
-        // Handle failure (e.g., show an error message)
-      }
-    } catch (error) {
-      console.error("Error submitting form", error);
-      // Handle error (e.g., show an error message)
-    }
+  const handleSaveProfile = () => {
+    setDeactivate(() => true);
+    // http://localhost:8080/api/v1
+    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1
+    post("http://localhost:8080/api/v1", {
+      userId: user.email,
+      name: user.name,
+      decription: "temp",
+      birthday: user.birthday,
+      age: user.age,
+      userGender:
+        user.gender === "m" ? "MALE" : user.gender === "f" ? "FEMALE" : "none",
+      instagram: user.instagram,
+    });
   };
 
-  function handleOnChange(e: React.FormEvent<HTMLInputElement>) {
-    const target = e.target as HTMLInputElement & {
-      files: FileList;
-    }
-    setFile(target.files[0]);
+  // const handleSaveProfile = async () => {
 
-    const file = new FileReader;
+  //   if (!file) {
+  //     console.log("No file selected.");
+  //     return;
+  //   }
+  
+  //   const formData = new FormData();
+  //   formData.append("userId", user.email ?? "");
+  //   formData.append("name", user.name ?? "");
+  //   formData.append("description", "temp");
+  //   formData.append("birthday", user.birthday ?? "");
+  //   formData.append("age", user.age?.toString() ?? ""); 
+  //   formData.append("userGender", user.gender === "m" ? "MALE" : user.gender === "f" ? "FEMALE" : "none");
+  //   formData.append("instagram", user.instagram ?? "");
+  //   formData.append("picture", file); // Append the file
+  
+  //   try {
+  //     const response = await fetch("http://localhost:8080/api/v1/users", { 
+  //       method: "POST",
+  //       body: formData, // No headers are needed as 'Content-Type' will be set to 'multipart/form-data' automatically
+  //     });
+  
+  //     if (response.ok) {
+  //       console.log("Profile saved successfully");
+  //       setDeactivate(true); // Assuming you want to deactivate some UI element upon successful save
+  //       // Handle successful save (e.g., navigate to another page or show a success message)
+  //     } else {
+  //       console.error("Failed to save profile");
+  //       // Handle failure (e.g., show an error message)
+  //     }
+  //   } catch (error) {
+  //     console.error("Error submitting form", error);
+  //     // Handle error (e.g., show an error message)
+  //   }
+  // };
 
-    file.onload = function() {
-      // console.log('file', file.result);
-      setPreview(file.result);
-    }
+  // function handleOnChange(e: React.FormEvent<HTMLInputElement>) {
+  //   const target = e.target as HTMLInputElement & {
+  //     files: FileList;
+  //   }
+  //   setFile(target.files[0]);
 
-    file.readAsDataURL(target.files[0])
-  }
+  //   const file = new FileReader;
+
+  //   file.onload = function() {
+  //     // console.log('file', file.result);
+  //     setPreview(file.result);
+  //   }
+
+  //   file.readAsDataURL(target.files[0])
+  // }
   return (
     <div className="h-4/5 w-full">
       <NameInputs username={user.name} handleFirstName={handleFirstName} />
@@ -122,7 +122,7 @@ export const ProfileInputFields: React.FC<Props> = ({
         instagram={user.instagram}
         handleUserInstagram={handleUserInstagram}
       />
-      <div className="mb-5">
+      {/* <div className="mb-5">
         <label htmlFor="message">Image</label>
         <input 
           type="file" 
@@ -131,7 +131,7 @@ export const ProfileInputFields: React.FC<Props> = ({
           onChange={handleOnChange}
           multiple />
         <img src={preview ? preview.toString() : undefined} alt="" />
-      </div>
+      </div> */}
       <div className="flex items-center justify-center w-97.5% h-1/5">
         <SaveProfileButton
           handleSaveProfile={handleSaveProfile}

@@ -1,5 +1,5 @@
 import React from "react";
-import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
+// import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
 import "../LocationPreference/LocationPreference.css";
 
 interface Props {

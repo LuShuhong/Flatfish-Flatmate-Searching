@@ -1,17 +1,30 @@
 import React from "react";
 import person from "../../img/funcat.jpeg";
+import { MdDelete } from "react-icons/md";
+import { SavedCard } from "../../util/interfaces/SavedCard";
 
-interface Props {
-  name: string;
-  age: string;
-  description: string;
-  email: string;
-  gender: string;
-  instagram: string;
-  userId: string;
+// interface Props {
+//   name: string;
+//   age: string;
+//   description: string;
+//   email: string;
+//   gender: string;
+//   instagram: string;
+//   userId: string;
+// }
+
+type SavedCardProps = {
+  savedCard: SavedCard,
+  onDeleteSavedCardClicked: (savedCard: SavedCard) => void
 }
 
-export const SavedCards: React.FC<Props> = ({ name, age, email }) => {
+export const SavedCards: React.FC<SavedCardProps> = ({ savedCard, onDeleteSavedCardClicked }) => {
+  const {
+    name,
+    age,
+    email,
+    instagram,
+  } = savedCard;
   // console.log(email);
   return (
     <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
@@ -38,8 +51,14 @@ export const SavedCards: React.FC<Props> = ({ name, age, email }) => {
           ullamcorper est tempus sed.
         </p>
         <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
-          instagram
+          {instagram}
         </button>
+        <MdDelete
+          onClick={(e) => {
+            onDeleteSavedCardClicked(savedCard);
+            e.stopPropagation();
+          }}
+        />
       </div>
     </div>
   );
