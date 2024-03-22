@@ -1,6 +1,7 @@
 import React from "react";
 import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
 import "../LocationPreference/LocationPreference.css";
+import { MyComponent } from "../../components/InstagramButton/MyComponent";
 
 interface Props {
   location: string[];
@@ -63,6 +64,9 @@ export const LocationPreference: React.FC<Props> = ({
             </option>
           ))}
         </select>
+      </div>
+      <div>
+        <MyComponent />
       </div>
       {/* <div className="card flex justify-content-center">
         <MultiSelect
