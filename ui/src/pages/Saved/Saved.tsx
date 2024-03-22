@@ -9,17 +9,17 @@ import * as DeleteApi from "../../requests/deleteRequests";
 
 interface Props {
   currentUserEmail: string;
-  savedProfiles: Profile[];
-  refreshProfiles: () => void;
+  // savedProfiles: Profile[];
+  // refreshProfiles: () => void;
 }
 export const Saved: React.FC<Props> = ({
   currentUserEmail,
-  savedProfiles,
-  refreshProfiles,
+  // savedProfiles,
+  // refreshProfiles,
 }) => {
   const [savedUsers, setSavedUsers] = useState<Profile[]>([]);
   console.log(currentUserEmail);
-  console.log(savedProfiles.map((saved) => saved.email));
+  console.log(savedUsers.map((saved) => saved.userId));
 
   // useEffect(() => {
   //   getProfiles(
@@ -62,6 +62,7 @@ export const Saved: React.FC<Props> = ({
             <SavedCards
               savedUser={savedUser}
               key={savedUser.userId}
+              currentUserEmail={currentUserEmail}
               onDeleteSavedCardClicked={handleDeleteSavedProfile}
             />
           </div>

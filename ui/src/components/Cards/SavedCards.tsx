@@ -17,11 +17,12 @@ import { getProfiles } from "../../requests/getRequests";
 // }
 
 type SavedCardProps = {
+  currentUserEmail: string
   savedUser: Profile,
   onDeleteSavedCardClicked: (savedUserId: string) => void;
 }
 
-export const SavedCards: React.FC<SavedCardProps> = ({ savedUser, onDeleteSavedCardClicked }) => {
+export const SavedCards: React.FC<SavedCardProps> = ({ currentUserEmail, savedUser, onDeleteSavedCardClicked }) => {
   const {
     name,
     age,

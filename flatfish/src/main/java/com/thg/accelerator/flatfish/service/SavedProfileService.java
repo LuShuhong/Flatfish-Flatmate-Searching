@@ -79,6 +79,7 @@ public class SavedProfileService {
         UserEntity targetSavedUserEntity = savedProfile.getSavedUser(); // Assuming getSavedUser returns the user that was saved
         SavedProfileDetailDto targetSavedUserDto = new SavedProfileDetailDto();
         targetSavedUserDto.setName(targetSavedUserEntity.getName());
+        targetSavedUserDto.setUserId(targetSavedUserEntity.getUserId());
         targetSavedUserDto.setAge(targetSavedUserEntity.getAge());
         targetSavedUserDto.setDescription(targetSavedUserEntity.getDescription());
         targetSavedUserDto.setUserGender(targetSavedUserEntity.getUserGender());

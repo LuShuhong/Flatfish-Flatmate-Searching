@@ -20,7 +20,8 @@ function App() {
   const [user, setUser] = useState<SignUpDetails>(defaultSignUpDetails);
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
-  const [savedProfiles, setSavedProfiles] = useState<Profile[]>([]);
+  // const [savedProfiles, setSavedProfiles] = useState<Profile[]>([]);
+  
   // console.log("userId" + user.userId);
   // const initialDetails: Partial<Profile> = {
   //   name: user?.name,
@@ -58,17 +59,17 @@ function App() {
   const updateField = (updatedField: Partial<SignUpDetails>) =>
     setUser((u) => ({ ...u, ...updatedField }));
   
-  useEffect(() => {
-    if (user.userId) {
-      fetchSavedProfiles(user.userId);
-    }
-  }, [user.userId]);
+  // useEffect(() => {
+  //   if (user.userId) {
+  //     fetchSavedProfiles(user.userId);
+  //   }
+  // }, [user.userId]);
 
-  const fetchSavedProfiles = async (userId: string) => {
-    // Assuming getProfiles is a function that fetches profiles and returns a promise
-    const profiles = await getSavedProfiles(`http://localhost:8080/api/v1/savedprofiles/${userId}`);
-    setSavedProfiles(profiles);
-  };
+  // const fetchSavedProfiles = async (userId: string) => {
+  //   // Assuming getProfiles is a function that fetches profiles and returns a promise
+  //   const profiles = await getSavedProfiles(`http://localhost:8080/api/v1/savedprofiles/${userId}`);
+  //   setSavedProfiles(profiles);
+  // };
 
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
@@ -106,8 +107,8 @@ function App() {
             path="/saved"
             element={<Saved 
                         currentUserEmail={user.userId}
-                        savedProfiles={savedProfiles}
-                        refreshProfiles={() => fetchSavedProfiles(user.userId)}
+                        // savedProfiles={savedProfiles}
+                        // refreshProfiles={() => fetchSavedProfiles(user.userId)}
                       /> 
             }
           />
