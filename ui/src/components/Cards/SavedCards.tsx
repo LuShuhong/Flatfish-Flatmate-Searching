@@ -13,6 +13,8 @@ interface Props {
 
 export const SavedCards: React.FC<Props> = ({ name, age, email }) => {
   // console.log(email);
+
+  const handleClickIg = () => {};
   return (
     <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
       <div className="text-center bg-[#E5E5E5] mt-10">
@@ -40,6 +42,7 @@ export const SavedCards: React.FC<Props> = ({ name, age, email }) => {
         <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
           instagram
         </button>
+        <button>delete</button>
       </div>
     </div>
   );
