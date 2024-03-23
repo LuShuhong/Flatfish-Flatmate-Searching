@@ -10,7 +10,9 @@ interface Props {
 }
 export const Saved: React.FC<Props> = ({ currentUserEmail }) => {
   const [savedUsers, setSavedUsers] = useState<Profile[]>([]);
-  console.log(currentUserEmail);
+  // console.log(currentUserEmail);
+  // console.log(savedUsers.map((saved) => saved.userId));
+  // console.log(savedProfiles.map((saved) => saved.userId));
 
   useEffect(() => {
     getProfiles(

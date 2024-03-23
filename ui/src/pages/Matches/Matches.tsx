@@ -4,7 +4,7 @@ import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
-
+import data from "../../data.json";
 interface Props {
   profiles: Profile[];
   userEmail: any;
@@ -13,10 +13,16 @@ interface Props {
 export const Matches: React.FC<Props> = ({ profiles, userEmail }) => {
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [clicked, setClicked] = useState<boolean>(false);
 
   const handleShuffle = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+    setClicked(true);
   };
+
+  setTimeout(() => {
+    setClicked(false);
+  }, 1000);
 
   return (
     <div className="flex items-center justify-center w-full h-full">
@@ -31,8 +37,18 @@ export const Matches: React.FC<Props> = ({ profiles, userEmail }) => {
           )}
           {/* {console.log(profiles[currentIndex].email)} */}
           <div className="flex justfy-center p-3">
+            {/* {data.map((profile: Profile, index: number) => (
+            <div
+              key={index}
+              className={`card ${currentIndex === index ? "top-card" : ""}`}
+            >
+              <span>{profile.name}</span>
+            </div>
+          ))} */}
             <button
-              className=""
+              className={`shuffle-button absolute top-0 right-0 mt-2 mr-2 ${
+                clicked ? "clicked" : ""
+              }`}
               onClick={() => {
                 handleShuffle();
               }}

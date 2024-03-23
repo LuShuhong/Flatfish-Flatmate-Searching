@@ -11,6 +11,7 @@ interface Towns {
 export const MyComponent = () => {
   // Initialize selectedCities as an array to support multiple selections
   const [selectedCities, setSelectedCities] = useState<Towns[]>([]);
+  const maxSelections = 3;
 
   const Towns: Towns[] = [
     { name: "Ancoats and Beswick" },
@@ -48,12 +49,20 @@ export const MyComponent = () => {
     { name: "Salford" },
     { name: "Salford Quays" },
   ];
+  const handleCityChange = (e: { value: Towns[] }) => {
+    // If number of selected cities exceeds maxSelections, slice the array to keep only the first maxSelections
+    if (e.value.length > maxSelections) {
+      setSelectedCities(e.value.slice(0, maxSelections));
+    } else {
+      setSelectedCities(e.value);
+    }
+  };
 
   return (
-    <div className="card flex justify-content-center">
+    <div className=" flex justify-content-center">
       <MultiSelect
         value={selectedCities}
-        onChange={(e) => setSelectedCities(e.value)}
+        onChange={handleCityChange}
         options={Towns}
         optionLabel="name"
         filter
