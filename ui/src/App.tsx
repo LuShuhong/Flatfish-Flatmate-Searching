@@ -17,6 +17,8 @@ import { useEffect } from "react";
 import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
 import { SignUpFieldWarning } from "./util/interfaces/SignUpFieldWarning";
 import { noFieldWarnings } from "./util/constants/noFieldWarnings";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 import React from "react";
 
 function App() {
@@ -35,6 +37,9 @@ function App() {
   const makeNavBarVisible = (): void => {
     setNavBarVisibility(() => true);
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+
   // console.log("userId" + user.userId);
   // const initialDetails: Partial<Profile> = {
   //   name: user?.name,
@@ -75,6 +80,7 @@ function App() {
     setCurPage(() => newPage);
   };
   const getPreferences = (p: Preference): void => {
+    setIsLoading(true); // Start loading before fetching data
     console.log(
       `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`
     );
@@ -82,7 +88,10 @@ function App() {
     // http://localhost:8080/api/v1/matches?
     getAllMatchedProfiles(
       `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`,
-      setMatchedProfiles
+      (profiles) => { 
+        setMatchedProfiles(profiles);
+        setIsLoading(false);
+      }
     );
     setCurPage(() => "My Matches");
     navigate("/matches");
@@ -128,15 +137,18 @@ function App() {
               <ProfilePage user={userDetails} updateField={updateField} />
             }
           />
-          <Route
-            path="/matches"
-            element={
-              <Matches
-                profiles={matchedProfiles}
-                userEmail={userDetails.userId}
-              />
-            }
-          />
+          <SkeletonTheme baseColor="#313131" highlightColor="#525252">
+            <Route
+              path="/matches"
+              element={
+                <Matches
+                  profiles={matchedProfiles}
+                  userEmail={userDetails.userId}
+                  isLoading={isLoading}
+                />
+              }
+            />
+          </SkeletonTheme>
           <Route
             path="/saved"
             element={<Saved currentUserEmail={userDetails.userId} />}

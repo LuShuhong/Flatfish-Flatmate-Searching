@@ -4,15 +4,22 @@ import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 interface Props {
   profiles: Profile[] | null;
   userEmail: any;
+  isLoading: boolean;
 }
 
-export const Matches: React.FC<Props> = ({ profiles, userEmail }) => {
+export const Matches: React.FC<Props> = ({ profiles, userEmail, isLoading }) => {
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  if (isLoading) {
+    return <div className="loading">Loading...</div>
+  }
 
   const handleShuffle = () => {
     if (profiles && profiles.length > 0) {
