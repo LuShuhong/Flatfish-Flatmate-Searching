@@ -6,7 +6,7 @@ import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
 
 interface Props {
-  profiles: Profile[];
+  profiles: Profile[] | null;
   userEmail: any;
 }
 
@@ -15,8 +15,20 @@ export const Matches: React.FC<Props> = ({ profiles, userEmail }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const handleShuffle = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+    if (profiles && profiles.length > 0) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+    }
   };
+
+  if (!profiles || profiles.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full">
+        <div className="text-xl font-semibold">
+          Please submit your flatmate preferences on the home page to see the results!
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center w-full h-full">

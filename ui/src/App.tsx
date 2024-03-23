@@ -6,7 +6,7 @@ import { Saved } from "./pages/Saved/Saved";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Preference } from "./util/interfaces/Preference";
-import { getProfiles, getSavedProfiles } from "./requests/getRequests";
+import { getProfiles, getAllMatchedProfiles } from "./requests/getRequests";
 import { Profile } from "./util/interfaces/Profile";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
@@ -30,7 +30,7 @@ function App() {
     setUserDetails((u) => ({ ...u, ...updatedField }));
   };
   const [curPage, setCurPage] = useState<string>("Home");
-  const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  const [matchedProfiles, setMatchedProfiles] = useState<Profile[] | null>(null);
   const [navBarVisibility, setNavBarVisibility] = useState<boolean>(false);
   const makeNavBarVisible = (): void => {
     setNavBarVisibility(() => true);
@@ -80,7 +80,7 @@ function App() {
     );
     // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matches?
     // http://localhost:8080/api/v1/matches?
-    getProfiles(
+    getAllMatchedProfiles(
       `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`,
       setMatchedProfiles
     );

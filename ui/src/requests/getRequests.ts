@@ -29,3 +29,18 @@ export const getSavedProfiles = async (url: string): Promise<Profile[]> => {
     return []; // Return an empty array as a fallback
   }
 };
+
+export const getAllMatchedProfiles = (
+  url: string,
+  setter: React.Dispatch<React.SetStateAction<Profile[]| null>>
+): void => {
+  fetch(url)
+    .then((resp) => resp.json())
+    .then((data) =>
+      setter(() => {
+        console.log(data);
+        return data;
+      })
+    )
+    .catch((error) => console.log(error));
+};
