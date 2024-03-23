@@ -78,6 +78,27 @@ public class UserService {
         }
     }
 
+    public Optional<Map<UserEntity, Double>> getMatchingUsersWithScores(String userId) {
+        Optional<UserEntity> optionalUser = usersRepo.findById(userId);
+
+        if (optionalUser.isEmpty()) {
+            return Optional.empty();
+        } else {
+            List<UserEntity> allUsers = usersRepo.findAll();
+
+            return Optional.of(profileMatcher.matchProfilesWithScore(
+                    allUsers,
+                    optionalUser.get().getAgeMin(),
+                    optionalUser.get().getAgeMax(),
+                    optionalUser.get().getBudgetMin(),
+                    optionalUser.get().getBudgetMax(),
+                    optionalUser.get().getGender(),
+                    optionalUser.get().getLocation1(),
+                    optionalUser.get().getLocation2(),
+                    optionalUser.get().getLocation3()));
+        }
+    }
+
     public Optional<List<UserEntity>> getAllUsers() {
         return Optional.of(usersRepo.findAll());
     }
