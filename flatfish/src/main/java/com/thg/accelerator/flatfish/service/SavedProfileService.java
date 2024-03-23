@@ -92,6 +92,8 @@ public class SavedProfileService {
         targetSavedUserDto.setLocation1(targetSavedUserEntity.getLocation1());
         targetSavedUserDto.setLocation2(targetSavedUserEntity.getLocation2());
         targetSavedUserDto.setLocation3(targetSavedUserEntity.getLocation3());
+        targetSavedUserDto.setPicture(targetSavedUserEntity.getPicture());
+
 
         return targetSavedUserDto;
     }
