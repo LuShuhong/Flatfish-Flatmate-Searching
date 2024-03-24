@@ -4,16 +4,16 @@ import "primereact/resources/themes/saga-blue/theme.css"; // Theme
 import "primereact/resources/primereact.min.css"; // Core CSS
 import "primeicons/primeicons.css"; // Icons
 
-interface Towns {
+interface Locations {
   name: string;
 }
 
-export const MyComponent = () => {
+export const LocationDropdown: React.FC<Locations> = ({ name }) => {
   // Initialize selectedCities as an array to support multiple selections
-  const [selectedCities, setSelectedCities] = useState<Towns[]>([]);
+  const [selectedCities, setSelectedCities] = useState<Locations[]>([]);
   const maxSelections = 3;
 
-  const Towns: Towns[] = [
+  const Locations: Locations[] = [
     { name: "Ancoats and Beswick" },
     { name: "Ardwick" },
     { name: "Baguley" },
@@ -49,7 +49,7 @@ export const MyComponent = () => {
     { name: "Salford" },
     { name: "Salford Quays" },
   ];
-  const handleCityChange = (e: { value: Towns[] }) => {
+  const handleCityChange = (e: { value: Locations[] }) => {
     // If number of selected cities exceeds maxSelections, slice the array to keep only the first maxSelections
     if (e.value.length > maxSelections) {
       setSelectedCities(e.value.slice(0, maxSelections));
@@ -63,7 +63,7 @@ export const MyComponent = () => {
       <MultiSelect
         value={selectedCities}
         onChange={handleCityChange}
-        options={Towns}
+        options={Locations}
         optionLabel="name"
         filter
         placeholder="Select Cities"

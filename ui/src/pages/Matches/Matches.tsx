@@ -26,6 +26,25 @@ export const Matches: React.FC<Props> = ({ profiles, userEmail }) => {
 
   return (
     <div className="flex items-center justify-center w-full h-full">
+      {/* {profiles.map((profile: Profile, index: number) => (
+        <div
+          className={`card-container flex justify-center h-5/6 flex-col items-center ${
+            currentIndex === index ? "top-card" : ""
+          }`}
+          style={{
+            position: "absolute",
+            left: `${index * 90}px`,
+            zIndex: profiles.length - index,
+            transition: clicked ? "z-index 0.5s ease-in-out" : "none",
+          }}
+        >
+          <MatchesCard
+            profile={profile}
+            userEmail={userEmail}
+            curUserId={profiles[index].userId}
+          />
+        </div>
+      ))} */}
       {profiles.length ? (
         <div className="flex justify-center h-full flex-col items-center">
           {profiles.length && (
@@ -38,17 +57,15 @@ export const Matches: React.FC<Props> = ({ profiles, userEmail }) => {
           {/* {console.log(profiles[currentIndex].email)} */}
           <div className="flex justfy-center p-3">
             {/* {data.map((profile: Profile, index: number) => (
-            <div
-              key={index}
-              className={`card ${currentIndex === index ? "top-card" : ""}`}
-            >
-              <span>{profile.name}</span>
-            </div>
-          ))} */}
+              <div
+                key={index}
+                className={`card ${currentIndex === index ? "top-card" : ""}`}
+              >
+                <span>{profile.name}</span>
+              </div>
+            ))} */}
             <button
-              className={`shuffle-button absolute top-0 right-0 mt-2 mr-2 ${
-                clicked ? "clicked" : ""
-              }`}
+              className={`shuffle-button ${clicked ? "clicked" : ""}`}
               onClick={() => {
                 handleShuffle();
               }}
