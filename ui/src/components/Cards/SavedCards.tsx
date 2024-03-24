@@ -1,20 +1,43 @@
 import React from "react";
 import person from "../../img/funcat.jpeg";
+import { MdDelete } from "react-icons/md";
+import { SavedCard } from "../../util/interfaces/SavedCard";
+import { Profile } from "../../util/interfaces/Profile";
+import * as DeleteApi from "../../requests/deleteRequests";
+import { getProfiles } from "../../requests/getRequests";
 
-interface Props {
-  name: string;
-  age: string;
-  description: string;
-  email: string;
-  gender: string;
-  instagram: string;
-  userId: string;
+// interface Props {
+//   name: string;
+//   age: string;
+//   description: string;
+//   email: string;
+//   gender: string;
+//   instagram: string;
+//   userId: string;
+// }
+
+type SavedCardProps = {
+  currentUserEmail: string
+  savedUser: Profile,
+  onDeleteSavedCardClicked: (savedUserId: string) => void;
 }
 
-export const SavedCards: React.FC<Props> = ({ name, age, email }) => {
+export const SavedCards: React.FC<SavedCardProps> = ({ currentUserEmail, savedUser, onDeleteSavedCardClicked }) => {
+  const {
+    name,
+    age,
+    email,
+    instagram,
+    userId
+  } = savedUser;
   // console.log(email);
 
   const handleClickIg = () => {};
+
+  const handleClickDelete = () => {
+    onDeleteSavedCardClicked(savedUser.userId);
+  };
+
   return (
     <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
       <div className="text-center bg-[#E5E5E5] mt-10">
@@ -40,9 +63,11 @@ export const SavedCards: React.FC<Props> = ({ name, age, email }) => {
           ullamcorper est tempus sed.
         </p>
         <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
-          instagram
+          {instagram}
         </button>
-        <button>delete</button>
+        <MdDelete
+          onClick={handleClickDelete}
+        />
       </div>
     </div>
   );

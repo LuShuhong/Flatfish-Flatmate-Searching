@@ -4,24 +4,71 @@ import { Profile } from "../../util/interfaces/Profile";
 import { SavedCards } from "../../components/Cards/SavedCards";
 import React, { useEffect, useState } from "react";
 import { getProfiles } from "../../requests/getRequests";
+import { SavedCard } from "../../util/interfaces/SavedCard";
+import * as DeleteApi from "../../requests/deleteRequests";
 
 interface Props {
-  currentUserEmail: any;
+  currentUserEmail: string;
+  // savedProfiles: Profile[];
+  // refreshProfiles: () => void;
 }
-export const Saved: React.FC<Props> = ({ currentUserEmail }) => {
+export const Saved: React.FC<Props> = ({
+  currentUserEmail,
+  // savedProfiles,
+  // refreshProfiles,
+}) => {
   const [savedUsers, setSavedUsers] = useState<Profile[]>([]);
   console.log(currentUserEmail);
+  console.log(savedUsers.map((saved) => saved.userId));
+
+  // useEffect(() => {
+  //   getProfiles(
+  //     `http://localhost:8080/api/v1/savedprofiles/${currentUserEmail}`,
+  //     setSavedUsers
+  //   );
+  // }, [currentUserEmail]);
 
   useEffect(() => {
-    getProfiles(
+    refreshSavedProfiles();
+  }, [currentUserEmail]);
+
+  const refreshSavedProfiles = async () => {
+    const profiles = await getProfiles(
       `http://localhost:8080/api/v1/savedprofiles/${currentUserEmail}`,
       setSavedUsers
     );
-  }, []);
+    console.log("Fetched saved profiles:", profiles);
+  };
+
+  // console.log(
+  //   savedUsers.map((savedUser) => {
+  //     savedUser.userId;
+  //   })
+  // );
+  const handleDeleteSavedProfile = async (savedUserId: string) => {
+    try {
+      await DeleteApi.deleteSavedProfile(currentUserEmail, savedUserId);
+      refreshSavedProfiles();
+    } catch (error) {
+      console.error("Failed to delete saved profile", error);
+    }
+  };
 
   return (
     <>
       <div className="card-ctn ">
+        {savedUsers.map((savedUser) => (
+          <div className="flex justify-center align-center h-full w-full">
+            <SavedCards
+              savedUser={savedUser}
+              key={savedUser.userId}
+              currentUserEmail={currentUserEmail}
+              onDeleteSavedCardClicked={handleDeleteSavedProfile}
+            />
+          </div>
+        ))}
+      </div>
+      {/* <div className="card-ctn ">
         {savedUsers.map((user: Profile, index: number) => (
           <>
             <div
@@ -40,7 +87,7 @@ export const Saved: React.FC<Props> = ({ currentUserEmail }) => {
             </div>
           </>
         ))}
-      </div>
+      </div> */}
     </>
   );
 };

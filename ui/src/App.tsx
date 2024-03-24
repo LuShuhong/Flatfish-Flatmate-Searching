@@ -6,7 +6,7 @@ import { Saved } from "./pages/Saved/Saved";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Preference } from "./util/interfaces/Preference";
-import { getProfiles } from "./requests/getRequests";
+import { getProfiles, getSavedProfiles } from "./requests/getRequests";
 import { Profile } from "./util/interfaces/Profile";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TextInput } from "../../../SignUpPage/components/TextInput/TextInput";
 import { OptionsInput } from "../../../SignUpPage/components/OptionsInput/OptionsInput";
 import { Birthday } from "../../../SignUpPage/components/Birthday/Birthday";
@@ -26,15 +27,64 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
     updateField({ instagram: val });
   const handleDescriptionChange = (val: string): void =>
     updateField({ description: val });
+
+      //to be included in a seperate component
+  const [file, setFile] = useState<File | undefined>();
+  const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
+  const handleUpload = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    console.log("file", file);
+    if (typeof file === "undefined") return;
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "test-react-uploads-unsigned");
+    formData.append("api_key", "441472483846922");
+    const results = await fetch(
+      "https://api.cloudinary.com/v1_1/dlnjjenrx/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    ).then((r) => r.json());
+    console.log("results", results);
+  };
+  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement & {
+      files: FileList;
+    };
+    console.log("target", target.files);
+    setFile(target.files[0]);
+    const file = new FileReader();
+    file.onload = function () {
+      setPreview(file.result);
+    };
+    file.readAsDataURL(target.files[0]);
+  };
+  //end of a seperate component
+  console.log(user.picture)
   return (
     <div className="h-full w-30%">
-      <div className="flex h-3/16 w-full">
-        <div className="flex items-center justify-center w-1/3 h-full">
-          <ProfilePic pic={user.picture} />
-        </div>
-        <div className="flex items-center w-2/3 h-full text-2xl">
+       <div className="flex justify-center items-center">
+      <h2 className="mb-4 text-2xl">
           My Profile
+        </h2>
         </div>
+      <div className="flex h-3/16 w-full">
+      
+        <div className="flex items-center justify-center w-1/3 h-full">
+        {preview
+          ? <img src={typeof preview === "string" ? preview : ""} alt="Preview" className="w-28 h-28 rounded-1/2" />
+          : <ProfilePic pic={user.picture} />}
+         
+        </div>
+        
+        <input
+        type="file"
+        name="image"
+        accept="image/png, image/jpg"
+        onChange={handleOnChange}
+      ></input>
+      <button onClick={handleUpload}>Upload</button>
       </div>
       <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
