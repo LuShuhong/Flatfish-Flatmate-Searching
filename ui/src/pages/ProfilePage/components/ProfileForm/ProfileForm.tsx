@@ -8,13 +8,23 @@ import { SignUpDetails } from "../../../../util/interfaces/SignUpDetails";
 import { ProfilePic } from "../ProfilePic/ProfilePic";
 import { Save } from "../Save/Save";
 import { getAge } from "../../../../util/ageCalculator";
+import { SignUpFieldWarning } from "../../../../util/interfaces/SignUpFieldWarning";
 
 interface Props {
   user: SignUpDetails;
   updateField: (updatedField: Partial<SignUpDetails>) => void;
+  handleSave: () => void;
+  postFailed: boolean;
+  fieldWarning: SignUpFieldWarning;
 }
 
-export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
+export const ProfileForm: React.FC<Props> = ({
+  user,
+  updateField,
+  handleSave,
+  postFailed,
+  fieldWarning,
+}) => {
   const handleNameChange = (val: string): void => updateField({ name: val });
   const handleGenderChange = (val: "MALE" | "FEMALE" | "SELECT"): void =>
     updateField({ userGender: val });
@@ -28,7 +38,7 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
   const handleDescriptionChange = (val: string): void =>
     updateField({ description: val });
 
-      //to be included in a seperate component
+  //to be included in a seperate component
   const [file, setFile] = useState<File | undefined>();
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
   const handleUpload = async (e: React.SyntheticEvent) => {
@@ -61,30 +71,32 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
     file.readAsDataURL(target.files[0]);
   };
   //end of a seperate component
-  console.log(user.picture)
+  console.log(user.picture);
   return (
     <div className="h-full w-30%">
-       <div className="flex justify-center items-center">
-      <h2 className="mb-4 text-2xl">
-          My Profile
-        </h2>
-        </div>
+      <div className="flex justify-center items-center">
+        <h2 className="mb-4 text-2xl">My Profile</h2>
+      </div>
       <div className="flex h-3/16 w-full">
-      
         <div className="flex items-center justify-center w-1/3 h-full">
-        {preview
-          ? <img src={typeof preview === "string" ? preview : ""} alt="Preview" className="w-28 h-28 rounded-1/2" />
-          : <ProfilePic pic={user.picture} />}
-         
+          {preview ? (
+            <img
+              src={typeof preview === "string" ? preview : ""}
+              alt="Preview"
+              className="w-28 h-28 rounded-1/2"
+            />
+          ) : (
+            <ProfilePic pic={user.picture} />
+          )}
         </div>
-        
+
         <input
-        type="file"
-        name="image"
-        accept="image/png, image/jpg"
-        onChange={handleOnChange}
-      ></input>
-      <button onClick={handleUpload}>Upload</button>
+          type="file"
+          name="image"
+          accept="image/png, image/jpg"
+          onChange={handleOnChange}
+        ></input>
+        <button onClick={handleUpload}>Upload</button>
       </div>
       <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
@@ -96,6 +108,7 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
             value={user.name}
             handleChange={handleNameChange}
             edittable
+            warning={fieldWarning.name}
           />
         </div>
         <div className="w-1/3">
@@ -103,8 +116,8 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
             fieldName="gender"
             value={user.userGender}
             handleChange={handleGenderChange}
-            warning={false}
             noBackground
+            warning={fieldWarning.userGender}
           />
         </div>
       </div>
@@ -119,6 +132,7 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
           disabled
           edittable
           strictUserId
+          warning={fieldWarning.userId}
         />
       </div>
       <div className="flex h-1/8 w-full">
@@ -126,7 +140,7 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
           <Birthday
             value={user.birthday}
             handleChange={handleBirthdayChange}
-            warning={false}
+            warning={fieldWarning.birthday}
             noBackground
           />
         </div>
@@ -150,9 +164,14 @@ export const ProfileForm: React.FC<Props> = ({ user, updateField }) => {
           handleChange={handleDescriptionChange}
           noBackground
         />
+        {postFailed && (
+          <div className="text-xs text-red-700">
+            Something went wrong, please try again later
+          </div>
+        )}
       </div>
       <div className="flex items-center justify-center h-1/16 w-full">
-        <Save />
+        <Save handleSave={handleSave} />
       </div>
     </div>
   );
