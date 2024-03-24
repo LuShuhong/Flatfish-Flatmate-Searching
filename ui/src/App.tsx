@@ -17,8 +17,6 @@ import { useEffect } from "react";
 import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
 import { SignUpFieldWarning } from "./util/interfaces/SignUpFieldWarning";
 import { noFieldWarnings } from "./util/constants/noFieldWarnings";
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css'
 import React from "react";
 
 function App() {
@@ -38,7 +36,7 @@ function App() {
     setNavBarVisibility(() => true);
   };
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // console.log("userId" + user.userId);
   // const initialDetails: Partial<Profile> = {
@@ -90,7 +88,10 @@ function App() {
       `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`,
       (profiles) => { 
         setMatchedProfiles(profiles);
-        setIsLoading(false);
+        // setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000)
       }
     );
     setCurPage(() => "My Matches");
@@ -137,18 +138,16 @@ function App() {
               <ProfilePage user={userDetails} updateField={updateField} />
             }
           />
-          <SkeletonTheme baseColor="#313131" highlightColor="#525252">
-            <Route
-              path="/matches"
-              element={
-                <Matches
-                  profiles={matchedProfiles}
-                  userEmail={userDetails.userId}
-                  isLoading={isLoading}
-                />
-              }
-            />
-          </SkeletonTheme>
+          <Route
+            path="/matches"
+            element={
+              <Matches
+                profiles={matchedProfiles}
+                userEmail={userDetails.userId}
+                isLoading={isLoading}
+              />
+            }
+          />
           <Route
             path="/saved"
             element={<Saved currentUserEmail={userDetails.userId} />}
