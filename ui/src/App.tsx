@@ -18,6 +18,7 @@ import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
 import { SignUpFieldWarning } from "./util/interfaces/SignUpFieldWarning";
 import { noFieldWarnings } from "./util/constants/noFieldWarnings";
 import React from "react";
+import { convertName } from "./util/nameConverter";
 
 function App() {
   const { user } = useAuth0();
@@ -61,7 +62,7 @@ function App() {
           setUserDetails((details) => {
             const copy: SignUpDetails = { ...details };
             copy.userId = user.email as string;
-            copy.name = user.name as string;
+            copy.name = convertName(user.name as string);
             copy.picture = user.picture as string;
             return copy;
           });
