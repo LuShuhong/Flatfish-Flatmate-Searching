@@ -2,7 +2,7 @@ import React from "react";
 // import { Slider, Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
-
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 interface Props {
   handleFunction: (val: [min: number, max: number]) => void;
   range: [min: number, max: number];
@@ -11,6 +11,16 @@ interface Props {
   thumbNames: [string, string];
 }
 
+// Define Roboto Condensed font in your theme
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      "Roboto Condensed", // Replace this with the correct font family name
+      "Arial", // Fallback font if Roboto Condensed is not available
+      "sans-serif",
+    ].join(","),
+  },
+});
 export const DoubleSlider: React.FC<Props> = ({
   handleFunction,
   range,
@@ -31,14 +41,16 @@ export const DoubleSlider: React.FC<Props> = ({
 
   return (
     <>
-      <div className="italic">{sliderName}</div>
+      <div className="italic font-serif-display text-lg">{sliderName}</div>
       <div className="flex justify-between">
-        <Typography gutterBottom>
-          {sliderProperty} Min: {value[0]}
-        </Typography>
-        <Typography align="right">
-          {sliderProperty} Max: {value[1]}
-        </Typography>
+        <ThemeProvider theme={theme}>
+          <Typography gutterBottom sx={{ fontFamily: "Roboto Condensed" }}>
+            {sliderProperty} Min: {value[0]}
+          </Typography>
+          <Typography align="right" className="font-roboto-condensed">
+            {sliderProperty} Max: {value[1]}
+          </Typography>
+        </ThemeProvider>
       </div>
       <Slider
         name={sliderName}

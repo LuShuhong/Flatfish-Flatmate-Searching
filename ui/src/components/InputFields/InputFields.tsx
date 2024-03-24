@@ -19,7 +19,7 @@ import { MAX_BUDGET, MIN_BUDGET } from "../../util/constants/budget";
 import { put } from "../../requests/putRequests";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 import { locations } from "./LocationArray";
-import { MultiValue } from "react-select";
+// import { MultiValue } from "react-select";
 
 interface Props {
   getPreferences: (preferences: Preference) => void;
