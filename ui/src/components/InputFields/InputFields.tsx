@@ -22,7 +22,7 @@ import { locations } from "./LocationArray";
 // import { MultiValue } from "react-select";
 
 interface Props {
-  getPreferences: (preferences: Preference) => void;
+  getPreferences: (user: SignUpDetails) => void;
   email: string | undefined;
   user: SignUpDetails;
 }
@@ -140,7 +140,7 @@ export const InputFields: React.FC<Props> = ({
         i < preferences.location.length ? preferences.location[i] : ""
       );
       updatePreferences({ location: filledLocations });
-      getPreferences(preferences);
+      getPreferences(user);
       setError((e) => "");
     }
   };

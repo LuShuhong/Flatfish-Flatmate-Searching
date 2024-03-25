@@ -79,7 +79,7 @@ function App() {
   const handlePageChange = (newPage: string): void => {
     setCurPage(() => newPage);
   };
-  const getPreferences = (p: Preference): void => {
+  const getPreferences = (userDetails: SignUpDetails): void => {
     setIsLoading(true); // Start loading before fetching data
     console.log(
       `http://localhost:8080/api/v1/matchuser?userId=${userDetails.userId}`
