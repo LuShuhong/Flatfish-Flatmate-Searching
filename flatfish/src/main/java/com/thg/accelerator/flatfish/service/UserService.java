@@ -1,5 +1,6 @@
 package com.thg.accelerator.flatfish.service;
 // <<<<<<< HEAD
+import com.thg.accelerator.flatfish.entities.Gender;
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
@@ -110,6 +111,10 @@ public class UserService {
     }
 
     public void addUser(UserEntity userEntity) {
+        userEntity.setGender(Gender.UNSPECIFIED);
+        userEntity.setLocation1("");
+        userEntity.setLocation2("");
+        userEntity.setLocation3("");
         usersRepo.save(userEntity);
     }
 
