@@ -22,7 +22,7 @@ import { locations } from "./LocationArray";
 // import { MultiValue } from "react-select";
 
 interface Props {
-  getPreferences: (preferences: Preference) => void;
+  getPreferences: (user: SignUpDetails) => void;
   email: string | undefined;
   user: SignUpDetails;
 }
@@ -140,7 +140,7 @@ export const InputFields: React.FC<Props> = ({
         i < preferences.location.length ? preferences.location[i] : ""
       );
       updatePreferences({ location: filledLocations });
-      getPreferences(preferences);
+      getPreferences(user);
       setError((e) => "");
     }
   };
@@ -167,6 +167,11 @@ export const InputFields: React.FC<Props> = ({
         location3:
           preferences.location.length === 3 ? preferences.location[2] : null,
       });
+      const filledLocations: string[] = Array.from({ length: 3 }, (v, i) =>
+        i < preferences.location.length ? preferences.location[i] : ""
+      );
+      updatePreferences({ location: filledLocations });
+      getPreferences(user);
       setError((e) => "");
     }
   };
@@ -215,7 +220,7 @@ export const InputFields: React.FC<Props> = ({
         setSelectedCities={setSelectedCities}
         updatePreferences={updatePreferences}
       />
-      <div className="mb-5">
+      {/* <div className="mb-5">
         {preferences.location[0] === ""
           ? ""
           : preferences.location.map((loc) => (
@@ -224,15 +229,15 @@ export const InputFields: React.FC<Props> = ({
                 preferenceEntry={loc}
               />
             ))}
-      </div>
+      </div> */}
       {error === "" ? (
         <></>
       ) : (
         <div className="jitter-animation italic">{error}</div>
       )}
       <div className="flex items-center justify-between h-1/8 w-full">
-        <MatchButton handleMatch={handleMatch} />
-        <SetDefaultButton handleSetDefault={handleSetDefault} />
+        <MatchButton handleMatch={handleSetDefault} />
+        {/* <SetDefaultButton handleSetDefault={handleSetDefault} /> */}
       </div>
     </div>
   );

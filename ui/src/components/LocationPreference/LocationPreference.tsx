@@ -109,6 +109,7 @@ export const LocationPreference: React.FC<Props> = ({
             }))}
             isMulti
             onChange={(selectedOptions) => handleSelection(selectedOptions)}
+            isOptionDisabled={(o) => selectedCities.length >= 3}
           />
 
           {/* <span className="flex-1 italic">Location:</span>
