@@ -1,4 +1,5 @@
-import { SignUpButton } from "./components/SignUpButton/SignupButton";
+import React from "react";
+import { LoginButton } from "./components/LoginButton/LoginButton";
 
 export const LandingPage: React.FC = () => {
   return (
@@ -15,7 +16,7 @@ export const LandingPage: React.FC = () => {
         <div className="flex items-center text-center align-center justify-center text-2xl h-4/5 w-full font-playfair-display pb-10">
           Reel in your next flatmate today!
         </div>
-        <SignUpButton />
+        <LoginButton />
       </div>
     </div>
   );

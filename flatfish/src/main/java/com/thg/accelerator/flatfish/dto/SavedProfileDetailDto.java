@@ -16,6 +16,7 @@ public class SavedProfileDetailDto {
 //    private String userId;
     private String name;
 //    private String birthday;
+    private String userId;
     private long age;
     private String description;
     private String userGender;
@@ -32,4 +33,5 @@ public class SavedProfileDetailDto {
     private String location1;
     private String location2;
     private String location3;
+    private String picture;
 }

@@ -105,21 +105,18 @@ export const InputFields: React.FC<Props> = ({
     } else if (!locationIsValid(preferences.location)) {
       setError((e) => "Choose at least one location");
     } else {
-      put(
-        `http://localhost:8080/api/v1/update/preference/${preferences.userId}`,
-        {
-          budgetMin: preferences.budgetRange[0],
-          budgetMax: preferences.budgetRange[1],
-          ageMin: preferences.ageRange[0],
-          ageMax: preferences.ageRange[1],
-          gender: preferences.gender,
-          location1: preferences.location[0],
-          location2:
-            preferences.location.length >= 2 ? preferences.location[1] : null,
-          location3:
-            preferences.location.length === 3 ? preferences.location[2] : null,
-        }
-      );
+      put(`http://localhost:8080/api/v1/update/preference/${user.userId}`, {
+        budgetMin: preferences.budgetRange[0],
+        budgetMax: preferences.budgetRange[1],
+        ageMin: preferences.ageRange[0],
+        ageMax: preferences.ageRange[1],
+        gender: preferences.gender,
+        location1: preferences.location[0],
+        location2:
+          preferences.location.length >= 2 ? preferences.location[1] : null,
+        location3:
+          preferences.location.length === 3 ? preferences.location[2] : null,
+      });
       setError((e) => "");
     }
   };
@@ -135,8 +132,6 @@ export const InputFields: React.FC<Props> = ({
 
     setPreferences({ ...preferences, location: newLocationList });
   };
-
-  console.log(preferences);
 
   return (
     <div className="w-full h-4/5">

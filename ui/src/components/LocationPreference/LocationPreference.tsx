@@ -1,3 +1,8 @@
+import React from "react";
+// import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
+import "../LocationPreference/LocationPreference.css";
+// import { MyComponent } from "../../components/InstagramButton/MyComponent";
+
 interface Props {
   location: string[];
   handleLocation: (val: string) => void;
@@ -60,6 +65,21 @@ export const LocationPreference: React.FC<Props> = ({
           ))}
         </select>
       </div>
+      {/* <div>
+        <MyComponent />
+      </div> */}
+      {/* <div className="card flex justify-content-center">
+        <MultiSelect
+          value={location}
+          onChange={(e: MultiSelectChangeEvent) => handleLocation(e.value)}
+          options={locations}
+          optionLabel="name"
+          filter
+          placeholder="Select Cities"
+          maxSelectedLabels={3}
+          className="w-full md:w-20rem"
+        />
+      </div> */}
     </div>
   );
 };
