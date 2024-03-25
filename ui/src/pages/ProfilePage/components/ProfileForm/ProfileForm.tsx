@@ -40,7 +40,6 @@ export const ProfileForm: React.FC<Props> = ({
 
   //to be included in a seperate component
   const [file, setFile] = useState<File | undefined>();
-  const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
   const handleUpload = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     console.log("file", file);
@@ -58,7 +57,7 @@ export const ProfileForm: React.FC<Props> = ({
     ).then((r) => r.json());
     console.log("results", results);
   };
-  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement & {
       files: FileList;
     };
@@ -66,7 +65,7 @@ export const ProfileForm: React.FC<Props> = ({
     setFile(target.files[0]);
     const file = new FileReader();
     file.onload = function () {
-      setPreview(file.result);
+      updateField({ picture: file.result as string });
     };
     file.readAsDataURL(target.files[0]);
   };
@@ -74,29 +73,17 @@ export const ProfileForm: React.FC<Props> = ({
   console.log(user.picture);
   return (
     <div className="h-full w-30%">
-      <div className="flex justify-center items-center">
-        <h2 className="mb-4 text-2xl">My Profile</h2>
-      </div>
       <div className="flex h-3/16 w-full">
-        <div className="flex items-center justify-center w-1/3 h-full">
-          {preview ? (
-            <img
-              src={typeof preview === "string" ? preview : ""}
-              alt="Preview"
-              className="w-28 h-28 rounded-1/2"
-            />
-          ) : (
-            <ProfilePic pic={user.picture} />
-          )}
+        <div className="flex items-center justify-center w-1/2 h-full">
+          <ProfilePic
+            pic={user.picture}
+            handleImageChange={handleImageChange}
+          />
+          <button onClick={handleUpload}>Upload</button>
         </div>
-
-        <input
-          type="file"
-          name="image"
-          accept="image/png, image/jpg"
-          onChange={handleOnChange}
-        ></input>
-        <button onClick={handleUpload}>Upload</button>
+        <div className="flex justify-center items-center text-2xl">
+          My Profile
+        </div>
       </div>
       <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
