@@ -167,6 +167,11 @@ export const InputFields: React.FC<Props> = ({
         location3:
           preferences.location.length === 3 ? preferences.location[2] : null,
       });
+      const filledLocations: string[] = Array.from({ length: 3 }, (v, i) =>
+        i < preferences.location.length ? preferences.location[i] : ""
+      );
+      updatePreferences({ location: filledLocations });
+      getPreferences(user);
       setError((e) => "");
     }
   };
@@ -231,8 +236,8 @@ export const InputFields: React.FC<Props> = ({
         <div className="jitter-animation italic">{error}</div>
       )}
       <div className="flex items-center justify-between h-1/8 w-full">
-        <MatchButton handleMatch={handleMatch} />
-        <SetDefaultButton handleSetDefault={handleSetDefault} />
+        <MatchButton handleMatch={handleSetDefault} />
+        {/* <SetDefaultButton handleSetDefault={handleSetDefault} /> */}
       </div>
     </div>
   );
