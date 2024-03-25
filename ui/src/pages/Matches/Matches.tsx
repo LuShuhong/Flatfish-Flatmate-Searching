@@ -4,7 +4,7 @@ import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
-import BarLoader from "react-spinners/BarLoader"
+import BarLoader from "react-spinners/BarLoader";
 
 interface Props {
   profiles: Profile[] | null;
@@ -12,9 +12,35 @@ interface Props {
   isLoading: boolean;
 }
 
-export const Matches: React.FC<Props> = ({ profiles, userEmail, isLoading }) => {
+export const Matches: React.FC<Props> = ({
+  profiles,
+  userEmail,
+  isLoading,
+}) => {
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [clicked, setClicked] = useState<boolean>(false);
+
+  // const handleShuffle = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+  //   setClicked(true);
+  // };
+
+  setTimeout(() => {
+    setClicked(false);
+  }, 1000);
+
+  // <div className="flex justfy-center p-3">
+
+  //   <button
+  //     className={`shuffle-button ${clicked ? "clicked" : ""}`}
+  //     onClick={() => {
+  //       handleShuffle();
+  //     }}
+  //   >
+  //     <ShuffleButton />
+  //   </button>
+  // </div>
   const hasSubmittedPreferences = profiles !== null;
   const hasMatches = profiles && profiles.length > 0;
 
@@ -29,12 +55,13 @@ export const Matches: React.FC<Props> = ({ profiles, userEmail, isLoading }) => 
           loading={isLoading}
         />
       </div>
-    )
+    );
   }
 
   const handleShuffle = () => {
     if (profiles && profiles.length > 0) {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+      setClicked(true);
     }
   };
 
@@ -42,13 +69,14 @@ export const Matches: React.FC<Props> = ({ profiles, userEmail, isLoading }) => 
     return (
       <div className="flex items-center justify-center w-full h-full">
         <div className="font-playfair-display text-large text-pretty">
-          Please submit your flatmate preferences on the home page to see the results!
+          Please submit your flatmate preferences on the home page to see the
+          results!
         </div>
       </div>
     );
   }
 
-  if (!hasMatches){
+  if (!hasMatches) {
     return (
       <div className="flex flex-col items-center justify-center h-full">
         <div className="grid grid-cols-1 justify-items-center w-1/2">
@@ -63,7 +91,7 @@ export const Matches: React.FC<Props> = ({ profiles, userEmail, isLoading }) => 
           </div>
         </div>
       </div>
-    );  
+    );
   }
 
   return (
@@ -79,9 +107,9 @@ export const Matches: React.FC<Props> = ({ profiles, userEmail, isLoading }) => 
         {/* {console.log(profiles[currentIndex].email)} */}
         <div className="flex justfy-center p-3">
           <button
-            className=""
+            className={`shuffle-button ${clicked ? "clicked" : ""}`}
             onClick={() => {
-            handleShuffle();
+              handleShuffle();
             }}
           >
             <ShuffleButton />

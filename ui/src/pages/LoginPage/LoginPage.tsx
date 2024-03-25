@@ -4,7 +4,7 @@ import { useState } from "react";
 import { post } from "../../requests/postRequests";
 import { useNavigate } from "react-router-dom";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
-
+import React from "react";
 interface Props {
   setUser: React.Dispatch<React.SetStateAction<SignUpDetails>>;
 }
