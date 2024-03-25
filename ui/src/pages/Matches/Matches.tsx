@@ -1,5 +1,5 @@
 import "./Matches.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
