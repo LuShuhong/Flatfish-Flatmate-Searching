@@ -9,6 +9,8 @@ interface Props {
   handleSave: () => void;
   postFailed: boolean;
   fieldWarning: SignUpFieldWarning;
+  tick: boolean;
+  changeTick: (val: boolean) => void;
 }
 
 export const ProfilePage: React.FC<Props> = ({
@@ -17,6 +19,8 @@ export const ProfilePage: React.FC<Props> = ({
   handleSave,
   postFailed,
   fieldWarning,
+  tick,
+  changeTick,
 }) => {
   return (
     <div className="flex justify-center h-full w-full">
@@ -26,6 +30,8 @@ export const ProfilePage: React.FC<Props> = ({
         handleSave={handleSave}
         postFailed={postFailed}
         fieldWarning={fieldWarning}
+        tick={tick}
+        changeTick={changeTick}
       />
     </div>
   );

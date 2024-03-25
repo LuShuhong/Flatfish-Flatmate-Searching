@@ -15,6 +15,8 @@ interface Props {
   handleSave: () => void;
   postFailed: boolean;
   fieldWarning: SignUpFieldWarning;
+  tick: boolean;
+  changeTick: (val: boolean) => void;
 }
 
 export const ProfileForm: React.FC<Props> = ({
@@ -23,6 +25,8 @@ export const ProfileForm: React.FC<Props> = ({
   handleSave,
   postFailed,
   fieldWarning,
+  tick,
+  changeTick,
 }) => {
   const handleNameChange = (val: string): void => updateField({ name: val });
   const handleGenderChange = (val: "MALE" | "FEMALE" | "SELECT"): void =>
@@ -146,7 +150,7 @@ export const ProfileForm: React.FC<Props> = ({
         )}
       </div>
       <div className="flex items-center justify-center h-1/16 w-full">
-        <Save handleSave={handleSave} />
+        <Save handleSave={handleSave} tick={tick} changeTick={changeTick} />
       </div>
     </div>
   );

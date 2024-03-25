@@ -31,6 +31,10 @@ function App() {
     setFieldWarning(() => noFieldWarnings);
     setUserDetails((u) => ({ ...u, ...updatedField }));
   };
+  const [tick, setTick] = useState<boolean>(false);
+  const changeTick = (val: boolean): void => {
+    setTick(() => val);
+  };
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[] | null>(
     null
@@ -40,22 +44,7 @@ function App() {
   const makeNavBarVisible = (): void => {
     setNavBarVisibility(() => true);
   };
-
   const [isLoading, setIsLoading] = useState(false);
-
-  // console.log("userId" + user.userId);
-  // const initialDetails: Partial<Profile> = {
-  //   name: user?.name,
-  //   picture: user?.picture,
-  // };
-  // const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
-  // matchedProfiles.forEach((profile) => {
-  //   console.log("Name:", profile.name);
-  //   console.log("Age:", profile.age);
-  //   console.log("email", profile.userId);
-  //   // Add more attributes as needed
-  // // });
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -110,9 +99,11 @@ function App() {
           console.log(user);
           if (!resp.ok) {
             setPostFailed(() => true);
-          } else {
+          } else if (curPage === "Home") {
             makeNavBarVisible();
             navigate("/home");
+          } else {
+            setTick(() => true);
           }
         })
         .catch((err) => console.log(err));
@@ -187,6 +178,8 @@ function App() {
                 handleSave={handlePost}
                 postFailed={postFailed}
                 fieldWarning={fieldWarning}
+                tick={tick}
+                changeTick={changeTick}
               />
             }
           />
