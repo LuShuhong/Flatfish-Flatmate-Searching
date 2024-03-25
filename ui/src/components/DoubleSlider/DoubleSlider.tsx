@@ -16,7 +16,7 @@ const theme = createTheme({
   typography: {
     fontFamily: [
       "Roboto Condensed", // Replace this with the correct font family name
-      "Arial", // Fallback font if Roboto Condensed is not available
+      "Arial",
       "sans-serif",
     ].join(","),
   },

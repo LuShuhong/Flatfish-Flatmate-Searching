@@ -1,6 +1,6 @@
 import React from "react";
 import person from "../../img/funcat.jpeg";
-
+import { InstagramButton } from "./InstagramButton";
 interface Props {
   name: string;
   age: string;
@@ -39,10 +39,10 @@ export const SavedCards: React.FC<Props> = ({ name, age, email }) => {
           pulvinar tellus congue eu. Nunc blandit sapien mi, sit amet
           ullamcorper est tempus sed.
         </p>
-        <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
+        {/* <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
           instagram
-        </button>
-        <button>delete</button>
+        </button> */}
+        <InstagramButton />
       </div>
     </div>
   );
