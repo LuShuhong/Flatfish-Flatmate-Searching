@@ -7,6 +7,9 @@ interface Option {
   label: string;
   value: string;
 }
+// import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
+// import { MyComponent } from "../../components/InstagramButton/MyComponent";
+
 interface Props {
   location: string[];
   preferences: Preference;

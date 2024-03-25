@@ -52,6 +52,7 @@ export const SignUpPage: React.FC<Props> = ({
     if (!warnings) {
       post("http://localhost:8080/api/v1", user)
         .then((resp) => {
+          console.log(user)
           if (!resp.ok) {
             setPostFailed(() => true);
           } else {
