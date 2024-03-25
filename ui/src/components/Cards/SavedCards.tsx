@@ -1,5 +1,5 @@
 import React from "react";
-import person from "../../img/funcat.jpeg";
+// import person from "../../img/funcat.jpeg";
 import { MdDelete } from "react-icons/md";
 import { SavedCard } from "../../util/interfaces/SavedCard";
 import { Profile } from "../../util/interfaces/Profile";
