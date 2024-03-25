@@ -117,18 +117,23 @@ public class SavedProfileService {
         // Find the user by ID
         Optional<UserEntity> savingUserEntityOptional = usersRepo.findById(savingUserId);
         Optional<UserEntity> savedUserEntityOptional = usersRepo.findById(savedUserId);
+        Optional<SavedProfileEntity> checkPresenceOptional = savedRepo.findBySavingUserUserIdAndSavedUserUserId(savingUserId, savedUserId);
 
-        if(savingUserEntityOptional.isPresent() && savedUserEntityOptional.isPresent()){
+        if(checkPresenceOptional.isEmpty()){
+            if(savingUserEntityOptional.isPresent() && savedUserEntityOptional.isPresent()){
 
-            UserEntity savingUserEntity = savingUserEntityOptional.get();
-            UserEntity savedUserEntity = savedUserEntityOptional.get();
+                UserEntity savingUserEntity = savingUserEntityOptional.get();
+                UserEntity savedUserEntity = savedUserEntityOptional.get();
 
-            savedProfileEntity.setSavingUser(savingUserEntity);
-            savedProfileEntity.setSavedUser(savedUserEntity);
-            savedRepo.save(savedProfileEntity);
-        } else {
-            // Handle case where user is not found
-            throw new IllegalArgumentException("User with ID " + savedUserId + " not found");
+                savedProfileEntity.setSavingUser(savingUserEntity);
+                savedProfileEntity.setSavedUser(savedUserEntity);
+                savedRepo.save(savedProfileEntity);
+            } else {
+                // Handle case where user is not found
+                throw new IllegalArgumentException("User with ID " + savedUserId + " not found");
+            }
+        }else {
+            throw new IllegalArgumentException(savedUserId + "repeated");
         }
     }
 
@@ -142,6 +147,7 @@ public class SavedProfileService {
 
     public void deleteASavedProfileByUserIds(String savingUserId, String savedUserId) {
         Optional<SavedProfileEntity> savedProfileEntityOptional = savedRepo.findBySavingUserUserIdAndSavedUserUserId(savingUserId, savedUserId);
+
 
         if (savedProfileEntityOptional.isPresent()) {
             savedRepo.delete(savedProfileEntityOptional.get());

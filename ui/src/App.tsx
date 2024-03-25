@@ -121,6 +121,7 @@ function App() {
     // http://localhost:8080/api/v1/matches?
     getAllMatchedProfiles(
       `http://localhost:8080/api/v1/matchuser?userId=${userDetails.userId}`,
+
       (profiles) => {
         setMatchedProfiles(profiles);
         // setIsLoading(false);
@@ -132,10 +133,9 @@ function App() {
     setCurPage(() => "My Matches");
     navigate("/matches");
   };
-
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
-      <AnimatedCursor color="0,0,0" />
+      <AnimatedCursor color="97,126,153" />
       <NavBar
         curPage={curPage}
         handlePageChange={handlePageChange}
