@@ -6,6 +6,7 @@ import { Profile } from "../../util/interfaces/Profile";
 import * as DeleteApi from "../../requests/deleteRequests";
 import { getProfiles } from "../../requests/getRequests";
 import { InstagramButton } from "./InstagramButton";
+import { InstagramIcon } from "./InstagramIcon";
 
 type SavedCardProps = {
   currentUserEmail: string;
@@ -53,18 +54,18 @@ export const SavedCards: React.FC<SavedCardProps> = ({
     //     {/* <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
     //       {instagram}
     //     </button> */}
-    //     <button
-    //       className="bg-sea-green p-1 m-4 rounded-lg shadow-md"
-    //       onClick={() =>
-    //         (window.location.href = `https://www.instagram.com/${instagram}`)
-    //       }
-    //     >
-    //       Talk To Me on Instagram
-    //     </button>
+    // <button
+    //   className="bg-sea-green p-1 m-4 rounded-lg shadow-md"
+    //   onClick={() =>
+    //     (window.location.href = `https://www.instagram.com/${instagram}`)
+    //   }
+    // >
+    //   Talk To Me on Instagram
+    // </button>
     //     <MdDelete onClick={handleClickDelete} />
     //   </div>
     // </div>
-    <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
+    <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-xl h-full w-1/4 m-8 p-4 shadow-md min-w-96 min-h-96">
       <div className="text-center bg-[#E5E5E5] mt-10">
         <img
           src={picture}
@@ -81,8 +82,14 @@ export const SavedCards: React.FC<SavedCardProps> = ({
         <p className="fonto-roboto-condensed bg-[#E5E5E5] text-center">
           {description}
         </p>
-        <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
-          instagram
+        <button
+          className="flex flex-row align-center justify-center bg-sea-green font-roboto-condensed rounded-lg shadow-md p-2 w-1/3"
+          onClick={() =>
+            (window.location.href = `https://www.instagram.com/${instagram}`)
+          }
+        >
+          <InstagramIcon />
+          Message
         </button>
         <MdDelete onClick={handleClickDelete} />
       </div>
