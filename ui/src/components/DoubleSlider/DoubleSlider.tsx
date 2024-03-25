@@ -53,6 +53,7 @@ export const DoubleSlider: React.FC<Props> = ({
         </ThemeProvider>
       </div>
       <Slider
+        style={{ color: "#52847e" }}
         name={sliderName}
         aria-label={sliderName}
         getAriaLabel={(i) => thumbNames[i]}

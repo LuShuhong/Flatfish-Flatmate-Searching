@@ -99,7 +99,7 @@ export const LocationPreference: React.FC<Props> = ({
       <div className="flex w-full">
         <div className=" flex justify-content-center w-full">
           <Select
-            className="w-full"
+            className="w-full font-roboto-condensed text-md"
             placeholder="Select up to 3 locations..."
             // defaultValue="choose up to 3 locations"
             // components={animatedComponents}

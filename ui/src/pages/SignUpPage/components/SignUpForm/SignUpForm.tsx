@@ -8,6 +8,7 @@ import { RedirectToLogin } from "../RedirectToLogin/RedirectToLogin";
 import { SignUpDetails } from "../../../../util/interfaces/SignUpDetails";
 import { getAge } from "../../../../util/ageCalculator";
 import { SignUpFieldWarning } from "../../../../util/interfaces/SignUpFieldWarning";
+import logo from "../../../../img/flat_fish_logo.png";
 import React from "react";
 
 interface Props {
@@ -38,12 +39,15 @@ export const SignUpForm: React.FC<Props> = ({
   const handleDescriptionChange = (val: string): void =>
     updateField({ description: val });
   return (
-    <div className="h-full w-30%">
-      <div className="flex h-1/8 w-full">
-        <div className="flex items-center w-2/3 h-full">
+    <div className="h-full items-center flex flex-col justify-center align-center w-30% font-playfair-display">
+      <div className="w-full flex justify-center">
+        <img src={logo} alt="image of logo" width="100" height="50" />
+      </div>
+      <div className="flex h-1/8 w-full justify-center">
+        <div className="flex items-center w-2/3 h-full ">
           <TextInput
             fieldName="name"
-            placeholder="John"
+            placeholder="Flounder"
             type="text"
             mandatory
             value={user.name}
@@ -61,7 +65,7 @@ export const SignUpForm: React.FC<Props> = ({
           />
         </div>
       </div>
-      <div className="flex h-1/8 w-full">
+      {/* <div className="flex h-1/8 w-full">
         <TextInput
           fieldName="email"
           placeholder="johnsmith69@gmail.com"
@@ -71,7 +75,7 @@ export const SignUpForm: React.FC<Props> = ({
           warning={fieldWarning.userId}
           strictUserId
         />
-      </div>
+      </div> */}
       <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
           <Birthday
@@ -87,7 +91,7 @@ export const SignUpForm: React.FC<Props> = ({
       <div className="flex h-1/8 w-full">
         <TextInput
           fieldName="instagram"
-          placeholder="JohnSmithInstaFollow"
+          placeholder="flatfish.hi"
           type="text"
           value={user.instagram}
           handleChange={handleInstagramChange}
