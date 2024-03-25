@@ -220,7 +220,7 @@ export const InputFields: React.FC<Props> = ({
         setSelectedCities={setSelectedCities}
         updatePreferences={updatePreferences}
       />
-      <div className="mb-5">
+      {/* <div className="mb-5">
         {preferences.location[0] === ""
           ? ""
           : preferences.location.map((loc) => (
@@ -229,7 +229,7 @@ export const InputFields: React.FC<Props> = ({
                 preferenceEntry={loc}
               />
             ))}
-      </div>
+      </div> */}
       {error === "" ? (
         <></>
       ) : (
