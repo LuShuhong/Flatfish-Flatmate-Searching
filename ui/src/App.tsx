@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
 import { SignUpFieldWarning } from "./util/interfaces/SignUpFieldWarning";
 import { noFieldWarnings } from "./util/constants/noFieldWarnings";
+
 import React from "react";
 import AnimatedCursor from "react-animated-cursor";
 function App() {
@@ -100,7 +101,6 @@ function App() {
     setCurPage(() => "My Matches");
     navigate("/matches");
   };
-
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
       <AnimatedCursor color="97,126,153" />

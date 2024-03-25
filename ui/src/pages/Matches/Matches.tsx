@@ -4,7 +4,6 @@ import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
-import BarLoader from "react-spinners/BarLoader";
 import PuffLoader from "react-spinners/PuffLoader";
 
 interface Props {
@@ -56,10 +55,13 @@ export const Matches: React.FC<Props> = ({
 
   if (!hasSubmittedPreferences) {
     return (
-      <div className="flex items-center justify-center w-full h-full">
-        <div className="font-playfair-display text-large text-pretty">
-          Please submit your flatmate preferences on the home page to see the
-          results!
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <div className="flex items-center text-center align-center justify-center text-3xl xl:text-2xl lg:text-xl md:text-lg sm:text-md xs:text-smh-4/5 font-playfair-display">
+          It appears that you haven't added any bait to your hook.
+        </div>
+        <div className="flex items-center text-center align-center justify-center text-3xl xl:text-2xl lg:text-xl md:text-lg sm:text-md xs:text-smh-4/5 font-playfair-display">
+          Ready to fish for your ideal flatmate? Head to the home page and
+          submit your preferences!
         </div>
       </div>
     );

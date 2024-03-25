@@ -38,9 +38,9 @@ export const SignUpForm: React.FC<Props> = ({
   const handleDescriptionChange = (val: string): void =>
     updateField({ description: val });
   return (
-    <div className="h-full w-30%">
-      <div className="flex h-1/8 w-full">
-        <div className="flex items-center w-2/3 h-full">
+    <div className="h-full w-30% font-playfair-display">
+      <div className="flex h-1/8 w-full ">
+        <div className="flex items-center w-2/3 h-full ">
           <TextInput
             fieldName="name"
             placeholder="John"
@@ -61,7 +61,7 @@ export const SignUpForm: React.FC<Props> = ({
           />
         </div>
       </div>
-      <div className="flex h-1/8 w-full">
+      {/* <div className="flex h-1/8 w-full">
         <TextInput
           fieldName="email"
           placeholder="johnsmith69@gmail.com"
@@ -71,7 +71,7 @@ export const SignUpForm: React.FC<Props> = ({
           warning={fieldWarning.userId}
           strictUserId
         />
-      </div>
+      </div> */}
       <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
           <Birthday
