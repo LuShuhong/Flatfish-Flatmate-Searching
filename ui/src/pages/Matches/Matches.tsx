@@ -5,6 +5,7 @@ import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
 import BarLoader from "react-spinners/BarLoader";
+import PuffLoader from "react-spinners/PuffLoader";
 
 interface Props {
   profiles: Profile[] | null;
@@ -30,28 +31,16 @@ export const Matches: React.FC<Props> = ({
     setClicked(false);
   }, 1000);
 
-  // <div className="flex justfy-center p-3">
-
-  //   <button
-  //     className={`shuffle-button ${clicked ? "clicked" : ""}`}
-  //     onClick={() => {
-  //       handleShuffle();
-  //     }}
-  //   >
-  //     <ShuffleButton />
-  //   </button>
-  // </div>
   const hasSubmittedPreferences = profiles !== null;
   const hasMatches = profiles && profiles.length > 0;
 
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-full">
-        <BarLoader
+        <PuffLoader
           cssOverride={{}}
-          height={15}
-          width={220}
-          color={"#0abfe6"}
+          size={250}
+          color={"#78aba5"}
           loading={isLoading}
         />
       </div>
@@ -83,7 +72,7 @@ export const Matches: React.FC<Props> = ({
           <div className="font-playfair-display text-2xl">
             😭 No Matches Found 🥵
           </div>
-          <div className="font-playfair-display text-large text-pretty">
+          <div className="font-playfair-display text-large text-pretty text-center">
             We pay over 100 retired fishermen a LOT of mackerel to match
             profiles together. Unfortumately, they weren't able to find anyone
             who meets your preferences. Try relaxing your requirements, and

@@ -30,7 +30,9 @@ function App() {
     setUserDetails((u) => ({ ...u, ...updatedField }));
   };
   const [curPage, setCurPage] = useState<string>("Home");
-  const [matchedProfiles, setMatchedProfiles] = useState<Profile[] | null>(null);
+  const [matchedProfiles, setMatchedProfiles] = useState<Profile[] | null>(
+    null
+  );
   const [navBarVisibility, setNavBarVisibility] = useState<boolean>(false);
   const makeNavBarVisible = (): void => {
     setNavBarVisibility(() => true);
@@ -86,12 +88,12 @@ function App() {
     // http://localhost:8080/api/v1/matches?
     getAllMatchedProfiles(
       `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`,
-      (profiles) => { 
+      (profiles) => {
         setMatchedProfiles(profiles);
         // setIsLoading(false);
         setTimeout(() => {
           setIsLoading(false);
-        }, 3000)
+        }, 3000);
       }
     );
     setCurPage(() => "My Matches");
@@ -100,7 +102,7 @@ function App() {
 
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
-      <AnimatedCursor color="0,0,0" />
+      <AnimatedCursor color="97,126,153" />
       <NavBar
         curPage={curPage}
         handlePageChange={handlePageChange}

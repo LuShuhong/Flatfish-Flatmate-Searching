@@ -189,24 +189,26 @@ export const InputFields: React.FC<Props> = ({
         curGender={preferences.gender}
         handleGender={handleGender}
       />
-      <DoubleSlider
-        range={[MIN_AGE, MAX_AGE]}
-        handleFunction={handleAge}
-        sliderName="Set Age Range"
-        sliderProperty="Age"
-        thumbNames={["Age minimum", "Age maximum"]}
-      />
-      {/* <BudgetPreference
+      <div className="mb-10">
+        <DoubleSlider
+          range={[MIN_AGE, MAX_AGE]}
+          handleFunction={handleAge}
+          sliderName="Set Age Range"
+          sliderProperty="Age"
+          thumbNames={["Age minimum", "Age maximum"]}
+        />
+        {/* <BudgetPreference
         budgetRange={preferences.budgetRange}
         handleBudget={handleBudget}
       /> */}
-      <DoubleSlider
-        range={[MIN_BUDGET, MAX_BUDGET]}
-        handleFunction={handleBudget}
-        sliderName="Set Budget Range"
-        sliderProperty="Budget"
-        thumbNames={["Budget minimum", "Budget maximum"]}
-      />
+        <DoubleSlider
+          range={[MIN_BUDGET, MAX_BUDGET]}
+          handleFunction={handleBudget}
+          sliderName="Set Budget Range"
+          sliderProperty="Budget"
+          thumbNames={["Budget minimum", "Budget maximum"]}
+        />
+      </div>
       <LocationPreference
         location={preferences.location}
         preferences={preferences}
