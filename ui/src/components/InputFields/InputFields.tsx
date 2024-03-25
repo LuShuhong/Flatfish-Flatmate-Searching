@@ -22,7 +22,7 @@ import { locations } from "./LocationArray";
 // import { MultiValue } from "react-select";
 
 interface Props {
-  getPreferences: (preferences: Preference) => void;
+  getPreferences: (user: SignUpDetails) => void;
   email: string | undefined;
   user: SignUpDetails;
 }
@@ -89,43 +89,6 @@ export const InputFields: React.FC<Props> = ({
     console.log(preferences);
   };
 
-  // const handleLocation1 = (val: string[]) => {
-  //   let newLocationsList: string[] = preferences.location;
-  //   if (newLocationsList[0] === "") {
-  //     newLocationsList = [val];
-  //   } else if (newLocationsList.length < 3 && !newLocationsList.includes(val)) {
-  //     newLocationsList.push(val);
-  //   }
-  // };
-
-  // const handleCityChange = (e: { value: string[] }) => {
-  //   // If number of selected cities exceeds maxSelections, slice the array to keep only the first maxSelections
-  //   if (e.value.length > maxSelections) {
-  //     setSelectedCities(e.value.slice(0, maxSelections));
-  //   } else {
-  //     setSelectedCities(e.value);
-  //   }
-  // };
-
-  // const handleLocationAndCityChange = (val: string) => {
-  //   let newLocationList: string[] = preferences.location;
-
-  //   if (newLocationList[0] === "") {
-  //     newLocationList = [val];
-  //   } else if (newLocationList.length < 3 && !newLocationList.includes(val)) {
-  //     newLocationList.push(val);
-  //   }
-  //   updatePreferences({ location: newLocationList });
-
-  //   // Update selected cities based on the location change
-  //   const selectedCities = newLocationList; // Assuming newLocationList contains the selected cities
-  //   if (selectedCities.length > maxSelections) {
-  //     setSelectedCities(selectedCities.slice(0, maxSelections));
-  //   } else {
-  //     setSelectedCities(selectedCities);
-  //   }
-  // };
-
   const handleMatch = (): void => {
     if (user.userId === "" || !user.userId) {
       setError((e) => "Please login to set default preferences.");
@@ -140,7 +103,7 @@ export const InputFields: React.FC<Props> = ({
         i < preferences.location.length ? preferences.location[i] : ""
       );
       updatePreferences({ location: filledLocations });
-      getPreferences(preferences);
+      getPreferences(user);
       setError((e) => "");
     }
   };
@@ -167,6 +130,11 @@ export const InputFields: React.FC<Props> = ({
         location3:
           preferences.location.length === 3 ? preferences.location[2] : null,
       });
+      const filledLocations: string[] = Array.from({ length: 3 }, (v, i) =>
+        i < preferences.location.length ? preferences.location[i] : ""
+      );
+      updatePreferences({ location: filledLocations });
+      getPreferences(user);
       setError((e) => "");
     }
   };
@@ -189,7 +157,7 @@ export const InputFields: React.FC<Props> = ({
         curGender={preferences.gender}
         handleGender={handleGender}
       />
-      <div className="mb-10">
+      <div className="mb-6">
         <DoubleSlider
           range={[MIN_AGE, MAX_AGE]}
           handleFunction={handleAge}
@@ -217,7 +185,7 @@ export const InputFields: React.FC<Props> = ({
         setSelectedCities={setSelectedCities}
         updatePreferences={updatePreferences}
       />
-      <div className="mb-5">
+      {/* <div className="mb-5">
         {preferences.location[0] === ""
           ? ""
           : preferences.location.map((loc) => (
@@ -226,15 +194,15 @@ export const InputFields: React.FC<Props> = ({
                 preferenceEntry={loc}
               />
             ))}
-      </div>
+      </div> */}
       {error === "" ? (
         <></>
       ) : (
         <div className="jitter-animation italic">{error}</div>
       )}
-      <div className="flex items-center justify-between h-1/8 w-full">
-        <MatchButton handleMatch={handleMatch} />
-        <SetDefaultButton handleSetDefault={handleSetDefault} />
+      <div className="flex items-center justify-center h-1/8 w-full">
+        <MatchButton handleMatch={handleSetDefault} />
+        {/* <SetDefaultButton handleSetDefault={handleSetDefault} /> */}
       </div>
     </div>
   );

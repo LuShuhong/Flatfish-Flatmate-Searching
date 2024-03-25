@@ -99,7 +99,7 @@ export const LocationPreference: React.FC<Props> = ({
       <div className="flex w-full">
         <div className=" flex justify-content-center w-full">
           <Select
-            className="w-full"
+            className="w-full font-roboto-condensed text-md"
             placeholder="Select up to 3 locations..."
             // defaultValue="choose up to 3 locations"
             // components={animatedComponents}
@@ -108,12 +108,8 @@ export const LocationPreference: React.FC<Props> = ({
               value: location,
             }))}
             isMulti
-            onChange={(selectedOptions) => {
-              if (selectedOptions && selectedOptions.length < 3) {
-                selectedOptions = selectedOptions.slice(0, 3);
-              }
-              handleSelection(selectedOptions);
-            }}
+            onChange={(selectedOptions) => handleSelection(selectedOptions)}
+            isOptionDisabled={(o) => selectedCities.length >= 3}
           />
 
           {/* <span className="flex-1 italic">Location:</span>
