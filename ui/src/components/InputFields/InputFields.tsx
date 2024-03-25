@@ -9,16 +9,12 @@ import {
   budgetIsValid,
   locationIsValid,
 } from "../../util/validPreferenceChecker";
-import { SetDefaultButton } from "../SetDefaultButton/SetDefaultButton";
-import { post } from "../../requests/postRequests";
-import { LocationEntry } from "../LocationEntry/LocationEntry";
 import React from "react";
 import { DoubleSlider } from "../DoubleSlider/DoubleSlider";
 import { MAX_AGE, MIN_AGE } from "../../util/constants/age";
 import { MAX_BUDGET, MIN_BUDGET } from "../../util/constants/budget";
 import { put } from "../../requests/putRequests";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
-import { locations } from "./LocationArray";
 // import { MultiValue } from "react-select";
 
 interface Props {

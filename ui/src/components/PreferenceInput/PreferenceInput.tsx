@@ -1,4 +1,3 @@
-import { Preference } from "../../util/interfaces/Preference";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 import { InputFields } from "../InputFields/InputFields";
 import React from "react";

@@ -66,7 +66,6 @@ function App() {
       });
     }
   }, [user]);
-  console.log(userDetails);
 
   const handlePost = (): void => {
     let warnings = 0;
