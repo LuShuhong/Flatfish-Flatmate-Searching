@@ -18,7 +18,7 @@ import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
 import { SignUpFieldWarning } from "./util/interfaces/SignUpFieldWarning";
 import { noFieldWarnings } from "./util/constants/noFieldWarnings";
 import React from "react";
-
+import AnimatedCursor from "react-animated-cursor";
 function App() {
   const { user } = useAuth0();
   const [userDetails, setUserDetails] =
@@ -102,6 +102,7 @@ function App() {
 
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
+      <AnimatedCursor color="0,0,0" />
       <NavBar
         curPage={curPage}
         handlePageChange={handlePageChange}

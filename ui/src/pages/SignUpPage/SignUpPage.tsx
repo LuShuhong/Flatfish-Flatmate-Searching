@@ -4,7 +4,7 @@ import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 import { SignUpFieldWarning } from "../../util/interfaces/SignUpFieldWarning";
 import { post } from "../../requests/postRequests";
 import { useNavigate } from "react-router-dom";
-
+import React from "react";
 interface Props {
   user: SignUpDetails;
   updateField: (updatedField: Partial<SignUpDetails>) => void;

@@ -1,3 +1,4 @@
+import React from "react";
 interface Props {
   gender: string;
   curGender: "MALE" | "FEMALE" | "UNSPECIFIED";
@@ -13,7 +14,7 @@ export const GenderOption: React.FC<Props> = ({
 }) => {
   return (
     <label className="flex items-center">
-      <span className="text-sm mr-4">{gender}</span>
+      <span className="text-md mr-4 font-roboto-condensed">{gender}</span>
       <input
         type="radio"
         className=""

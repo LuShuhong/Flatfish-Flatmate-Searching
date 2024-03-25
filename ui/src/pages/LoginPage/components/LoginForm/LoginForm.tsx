@@ -2,7 +2,7 @@ import { LoginDetails } from "../../../../util/interfaces/LoginDetails";
 import { TextInput } from "../../../SignUpPage/components/TextInput/TextInput";
 import { LoginButton } from "../LoginButton/LoginButton";
 import { RedirectToSignUp } from "../RedirectToSignUp/RedirectToSignUp";
-
+import React from "react";
 interface Props {
   loginDetails: LoginDetails;
   updateField: (updatedField: Partial<LoginDetails>) => void;
