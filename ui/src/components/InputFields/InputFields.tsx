@@ -118,6 +118,10 @@ export const InputFields: React.FC<Props> = ({
     } else if (!locationIsValid(preferences.location)) {
       setError((e) => "Choose at least one location");
     } else {
+      const filledLocations: string[] = Array.from({ length: 3 }, (v, i) =>
+        i < preferences.location.length ? preferences.location[i] : ""
+      );
+      updatePreferences({ location: filledLocations });
       put(`http://localhost:8080/api/v1/update/preference/${user.userId}`, {
         budgetMin: preferences.budgetRange[0],
         budgetMax: preferences.budgetRange[1],
@@ -125,15 +129,9 @@ export const InputFields: React.FC<Props> = ({
         ageMax: preferences.ageRange[1],
         gender: preferences.gender,
         location1: preferences.location[0],
-        location2:
-          preferences.location.length >= 2 ? preferences.location[1] : null,
-        location3:
-          preferences.location.length === 3 ? preferences.location[2] : null,
+        location2: preferences.location[1],
+        location3: preferences.location[2],
       });
-      const filledLocations: string[] = Array.from({ length: 3 }, (v, i) =>
-        i < preferences.location.length ? preferences.location[i] : ""
-      );
-      updatePreferences({ location: filledLocations });
       getPreferences(user);
       setError((e) => "");
     }
