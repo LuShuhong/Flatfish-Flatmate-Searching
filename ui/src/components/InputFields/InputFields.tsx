@@ -118,7 +118,7 @@ export const InputFields: React.FC<Props> = ({
         i < preferences.location.length ? preferences.location[i] : ""
       );
       updatePreferences({ location: filledLocations });
-      put(`http://localhost:8080/api/v1/update/preference/${user.userId}`, {
+      put(`https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/update/preference/${user.userId}`, {
         budgetMin: preferences.budgetRange[0],
         budgetMax: preferences.budgetRange[1],
         ageMin: preferences.ageRange[0],

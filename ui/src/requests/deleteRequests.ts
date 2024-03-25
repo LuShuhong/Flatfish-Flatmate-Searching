@@ -29,5 +29,7 @@ async function fetchData(input: RequestInfo, init?: RequestInit) {
 }
 
 export async function deleteSavedProfile(savingUserId : string, savedUserId : string) {
-  const response = await fetchData(`http://localhost:8080/api/v1/savedprofiles/${savingUserId}/${savedUserId}` , {method: "DELETE"});
+  const response = await fetchData(`https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/savedprofiles/${savingUserId}/${savedUserId}` , {method: "DELETE"});
 }
+
+// https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/

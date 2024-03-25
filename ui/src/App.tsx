@@ -49,7 +49,8 @@ function App() {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:8080/api/v1/users/${user.email}`).then((resp) => {
+      fetch(`https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/users/${user.email}`).then((resp) => {
+        // http://localhost:8080/api/v1
         if (resp.ok) {
           resp.json().then((data) => setUserDetails(() => data));
           setNavBarVisibility(() => true);
@@ -93,7 +94,7 @@ function App() {
     // http://localhost:8080/api/v1/
     // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
     if (!warnings) {
-      post("http://localhost:8080/api/v1", userDetails)
+      post("https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1", userDetails)
         .then((resp) => {
           console.log(user);
           if (!resp.ok) {
@@ -115,12 +116,12 @@ function App() {
   const getPreferences = (userDetails: SignUpDetails): void => {
     setIsLoading(true); // Start loading before fetching data
     console.log(
-      `http://localhost:8080/api/v1/matchuser?userId=${userDetails.userId}`
+      `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matchuser?userId=${userDetails.userId}`
     );
     // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matches?
     // http://localhost:8080/api/v1/matches?
     getAllMatchedProfiles(
-      `http://localhost:8080/api/v1/matchuser?userId=${userDetails.userId}`,
+      `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matchuser?userId=${userDetails.userId}`,
 
       (profiles) => {
         setMatchedProfiles(profiles);

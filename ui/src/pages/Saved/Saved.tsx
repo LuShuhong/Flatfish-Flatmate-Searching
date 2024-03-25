@@ -37,12 +37,14 @@ export const Saved: React.FC<Props> = ({
 
   const refreshSavedProfiles = async () => {
     const profiles = await getProfiles(
-      `http://localhost:8080/api/v1/savedprofiles/${currentUserEmail}`,
+      `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/savedprofiles/${currentUserEmail}`,
       setSavedUsers
     );
     // setIsLoading(true);
     console.log("Fetched saved profiles:", profiles);
   };
+
+  // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
 
   // setTimeout(() => {
   //   setIsLoading(false);

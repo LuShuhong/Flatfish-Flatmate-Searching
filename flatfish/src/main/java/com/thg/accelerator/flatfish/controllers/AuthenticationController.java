@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="//https://flatfish-frontend.pq46c.icekube.ics.cloud")
 //https://flatfish-frontend.pq46c.icekube.ics.cloud
 //http://localhost:3000
 public class AuthenticationController {

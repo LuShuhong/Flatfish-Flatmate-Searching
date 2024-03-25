@@ -70,7 +70,9 @@ export const MatchesCard: React.FC<Props> = ({ userEmail, profile }) => {
 
   const handleClick = () => {
     postrq(
-      `http://localhost:8080/api/v1/savedprofiles/${userEmail}/${profile.userId}`,
+      `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/savedprofiles/${userEmail}/${profile.userId}`,
+      // http://localhost:8080/api/v1
+      // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1
       userEmail,
       profile.userId
     );
