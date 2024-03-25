@@ -10,7 +10,6 @@ import {
 import { markersData } from "./MarkerData";
 
 const MapComponent: React.FC = () => {
-
   const [selectedMarker, setSelectedMarker] = useState<string | null>(null);
   // Use `any` type for marker refs as a temporary solution
   const markerRefs = useRef<{ [key: string]: any }>({});
@@ -35,8 +34,8 @@ const MapComponent: React.FC = () => {
     <APIProvider apiKey={"AIzaSyBB1B1ztcrr4wieOXSJAnN11dXTWI7mVuU"}>
       <Map
         className={"h-5/6 w-1/2 border-x-8 border-transparent ml-16"}
-        defaultZoom={14}
-        defaultCenter={{ lat: 53.4746741, lng: -2.2529036 }}
+        defaultZoom={12}
+        defaultCenter={{ lat: 53.4807593, lng: -2.2426305 }}
         mapId={"5870b0fa6e7ef7ce"}
       >
         {markersData.map((marker) => (
@@ -65,6 +64,3 @@ const MapComponent: React.FC = () => {
   );
 };
 export default MapComponent;
-
-
-

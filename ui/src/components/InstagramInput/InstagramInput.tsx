@@ -1,3 +1,5 @@
+import React from "react";
+
 interface Props {
   instagram: string | undefined;
   handleUserInstagram: (val: string) => void;
@@ -9,7 +11,7 @@ export const InstagramInput: React.FC<Props> = ({
 }) => {
   return (
     <div className="h-1/5 w-full">
-      <label className="text-xs w-full">
+      <label className="text-xs w-full font-roboto-condensed">
         Instagram
         <input
           type="text"

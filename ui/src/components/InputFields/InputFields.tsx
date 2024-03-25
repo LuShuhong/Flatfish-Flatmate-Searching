@@ -1,7 +1,7 @@
 import { GenderPreference } from "../GenderPreference/GenderPreference";
 import { LocationPreference } from "../LocationPreference/LocationPreference";
 import { MatchButton } from "../MatchButton/MatchButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Preference } from "../../util/interfaces/Preference";
 import { defaultPreferences } from "../../util/constants/defaultPreferences";
 import {
@@ -9,21 +9,24 @@ import {
   budgetIsValid,
   locationIsValid,
 } from "../../util/validPreferenceChecker";
-import { SetDefaultButton } from "../SetDefaultButton/SetDefaultButton";
-import { post } from "../../requests/postRequests";
-import { LocationEntry } from "../LocationEntry/LocationEntry";
 import React from "react";
 import { DoubleSlider } from "../DoubleSlider/DoubleSlider";
 import { MAX_AGE, MIN_AGE } from "../../util/constants/age";
 import { MAX_BUDGET, MIN_BUDGET } from "../../util/constants/budget";
 import { put } from "../../requests/putRequests";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
+// import { MultiValue } from "react-select";
 
 interface Props {
-  getPreferences: (preferences: Preference) => void;
+  getPreferences: (user: SignUpDetails) => void;
   email: string | undefined;
   user: SignUpDetails;
 }
+// interface Option {
+//   label: string;
+//   value: string;
+// }
+// interface combined extends Props, Option {}
 
 export const InputFields: React.FC<Props> = ({
   getPreferences,
@@ -32,8 +35,13 @@ export const InputFields: React.FC<Props> = ({
 }) => {
   const [preferences, setPreferences] =
     useState<Preference>(defaultPreferences);
-
+  console.log(preferences.location);
   const [error, setError] = useState<string>("");
+  const [selectedCities, setSelectedCities] = useState<string[]>([]);
+
+  useEffect(() => {
+    setSelectedCities(preferences.location);
+  }, [preferences.location]);
 
   const updatePreferences = (updatedField: Partial<Preference>): void =>
     setPreferences((p) => ({ ...p, ...updatedField }));
@@ -67,6 +75,7 @@ export const InputFields: React.FC<Props> = ({
 
   const handleLocation = (val: string) => {
     let newLocationList: string[] = preferences.location;
+
     if (newLocationList[0] === "") {
       newLocationList = [val];
     } else if (newLocationList.length < 3 && !newLocationList.includes(val)) {
@@ -90,7 +99,7 @@ export const InputFields: React.FC<Props> = ({
         i < preferences.location.length ? preferences.location[i] : ""
       );
       updatePreferences({ location: filledLocations });
-      getPreferences(preferences);
+      getPreferences(user);
       setError((e) => "");
     }
   };
@@ -105,21 +114,21 @@ export const InputFields: React.FC<Props> = ({
     } else if (!locationIsValid(preferences.location)) {
       setError((e) => "Choose at least one location");
     } else {
-      put(
-        `http://localhost:8080/api/v1/update/preference/${preferences.userId}`,
-        {
-          budgetMin: preferences.budgetRange[0],
-          budgetMax: preferences.budgetRange[1],
-          ageMin: preferences.ageRange[0],
-          ageMax: preferences.ageRange[1],
-          gender: preferences.gender,
-          location1: preferences.location[0],
-          location2:
-            preferences.location.length >= 2 ? preferences.location[1] : null,
-          location3:
-            preferences.location.length === 3 ? preferences.location[2] : null,
-        }
+      const filledLocations: string[] = Array.from({ length: 3 }, (v, i) =>
+        i < preferences.location.length ? preferences.location[i] : ""
       );
+      updatePreferences({ location: filledLocations });
+      put(`https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/update/preference/${user.userId}`, {
+        budgetMin: preferences.budgetRange[0],
+        budgetMax: preferences.budgetRange[1],
+        ageMin: preferences.ageRange[0],
+        ageMax: preferences.ageRange[1],
+        gender: preferences.gender,
+        location1: preferences.location[0],
+        location2: preferences.location[1] ? preferences.location[1] : "",
+        location3: preferences.location[2] ? preferences.location[2] : "",
+      });
+      getPreferences(user);
       setError((e) => "");
     }
   };
@@ -136,37 +145,41 @@ export const InputFields: React.FC<Props> = ({
     setPreferences({ ...preferences, location: newLocationList });
   };
 
-  console.log(preferences);
-
   return (
     <div className="w-full h-4/5">
       <GenderPreference
         curGender={preferences.gender}
         handleGender={handleGender}
       />
-      <DoubleSlider
-        range={[MIN_AGE, MAX_AGE]}
-        handleFunction={handleAge}
-        sliderName="Set Age Range"
-        sliderProperty="Age"
-        thumbNames={["Age minimum", "Age maximum"]}
-      />
-      {/* <BudgetPreference
+      <div className="mb-6">
+        <DoubleSlider
+          range={[MIN_AGE, MAX_AGE]}
+          handleFunction={handleAge}
+          sliderName="Set Age Range"
+          sliderProperty="Age"
+          thumbNames={["Age minimum", "Age maximum"]}
+        />
+        {/* <BudgetPreference
         budgetRange={preferences.budgetRange}
         handleBudget={handleBudget}
       /> */}
-      <DoubleSlider
-        range={[MIN_BUDGET, MAX_BUDGET]}
-        handleFunction={handleBudget}
-        sliderName="Set Budget Range"
-        sliderProperty="Budget"
-        thumbNames={["Budget minimum", "Budget maximum"]}
-      />
+        <DoubleSlider
+          range={[MIN_BUDGET, MAX_BUDGET]}
+          handleFunction={handleBudget}
+          sliderName="Set Budget Range"
+          sliderProperty="Budget"
+          thumbNames={["Budget minimum", "Budget maximum"]}
+        />
+      </div>
       <LocationPreference
         location={preferences.location}
-        handleLocation={handleLocation}
+        preferences={preferences}
+        setPreferences={setPreferences}
+        selectedCities={selectedCities}
+        setSelectedCities={setSelectedCities}
+        updatePreferences={updatePreferences}
       />
-      <div className="mb-5">
+      {/* <div className="mb-5">
         {preferences.location[0] === ""
           ? ""
           : preferences.location.map((loc) => (
@@ -175,15 +188,15 @@ export const InputFields: React.FC<Props> = ({
                 preferenceEntry={loc}
               />
             ))}
-      </div>
+      </div> */}
       {error === "" ? (
         <></>
       ) : (
         <div className="jitter-animation italic">{error}</div>
       )}
-      <div className="flex items-center justify-between h-1/8 w-full">
-        <MatchButton handleMatch={handleMatch} />
-        <SetDefaultButton handleSetDefault={handleSetDefault} />
+      <div className="flex items-center justify-center h-1/8 w-full">
+        <MatchButton handleMatch={handleSetDefault} />
+        {/* <SetDefaultButton handleSetDefault={handleSetDefault} /> */}
       </div>
     </div>
   );

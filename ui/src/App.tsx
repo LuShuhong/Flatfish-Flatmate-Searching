@@ -5,71 +5,199 @@ import { Matches } from "./pages/Matches/Matches";
 import { Saved } from "./pages/Saved/Saved";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Preference } from "./util/interfaces/Preference";
-import { getProfiles } from "./requests/getRequests";
+import { getAllMatchedProfiles } from "./requests/getRequests";
 import { Profile } from "./util/interfaces/Profile";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
-import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { SignUpDetails } from "./util/interfaces/SignUpDetails";
 import { defaultSignUpDetails } from "./util/constants/defaultSignUpDetails";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
+import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
+import { SignUpFieldWarning } from "./util/interfaces/SignUpFieldWarning";
+import { noFieldWarnings } from "./util/constants/noFieldWarnings";
+import { post } from "./requests/postRequests";
+import React from "react";
+import { convertName } from "./util/nameConverter";
+import AnimatedCursor from "react-animated-cursor";
 
 function App() {
-  const [user, setUser] = useState<SignUpDetails>(defaultSignUpDetails);
+  const { user } = useAuth0();
+  const [userDetails, setUserDetails] =
+    useState<SignUpDetails>(defaultSignUpDetails);
+  const [fieldWarning, setFieldWarning] =
+    useState<SignUpFieldWarning>(noFieldWarnings);
+  const updateField = (updatedField: Partial<SignUpDetails>) => {
+    setFieldWarning(() => noFieldWarnings);
+    setUserDetails((u) => ({ ...u, ...updatedField }));
+  };
+  const [tick, setTick] = useState<boolean>(false);
+  const changeTick = (val: boolean): void => {
+    setTick(() => val);
+  };
   const [curPage, setCurPage] = useState<string>("Home");
-  const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
-
+  const [matchedProfiles, setMatchedProfiles] = useState<Profile[] | null>(
+    null
+  );
+  const [navBarVisibility, setNavBarVisibility] = useState<boolean>(false);
+  const [postFailed, setPostFailed] = useState<boolean>(false);
+  const makeNavBarVisible = (): void => {
+    setNavBarVisibility(() => true);
+  };
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/users/${user.email}`).then((resp) => {
+        // http://localhost:8080/api/v1
+        if (resp.ok) {
+          resp.json().then((data) => setUserDetails(() => data));
+          setNavBarVisibility(() => true);
+          navigate("/home");
+        } else {
+          setUserDetails((details) => {
+            const copy: SignUpDetails = { ...details };
+            copy.userId = user.email as string;
+            copy.name = convertName(user.name as string);
+            copy.picture = user.picture as string;
+            return copy;
+          });
+        }
+      });
+    }
+  }, [user]);
+
+  const handlePost = (): void => {
+    let warnings = 0;
+    if (!userDetails.userId) {
+      setFieldWarning((w) => ({ ...w, ...{ userId: true } }));
+      warnings++;
+    }
+    if (!userDetails.password) {
+      setFieldWarning((w) => ({ ...w, ...{ password: true } }));
+      warnings++;
+    }
+    if (userDetails.userGender === "SELECT") {
+      setFieldWarning((w) => ({ ...w, ...{ userGender: true } }));
+      warnings++;
+    }
+    if (!userDetails.name) {
+      setFieldWarning((w) => ({ ...w, ...{ name: true } }));
+      warnings++;
+    }
+    if (!userDetails.age) {
+      setFieldWarning((w) => ({ ...w, ...{ birthday: true } }));
+      warnings++;
+    }
+
+    // http://localhost:8080/api/v1/
+    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
+    if (!warnings) {
+      post("https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1", userDetails)
+        .then((resp) => {
+          console.log(user);
+          if (!resp.ok) {
+            setPostFailed(() => true);
+          } else if (curPage === "Home") {
+            makeNavBarVisible();
+            navigate("/home");
+          } else {
+            setTick(() => true);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   const handlePageChange = (newPage: string): void => {
     setCurPage(() => newPage);
   };
-  const getPreferences = (p: Preference): void => {
+  const getPreferences = (userDetails: SignUpDetails): void => {
+    setIsLoading(true); // Start loading before fetching data
     console.log(
-      `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`
+      `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matchuser?userId=${userDetails.userId}`
     );
     // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matches?
     // http://localhost:8080/api/v1/matches?
-    getProfiles(
-      `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`,
-      setMatchedProfiles
+    getAllMatchedProfiles(
+      `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matchuser?userId=${userDetails.userId}`,
+
+      (profiles) => {
+        setMatchedProfiles(profiles);
+        // setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
+      }
     );
     setCurPage(() => "My Matches");
     navigate("/matches");
   };
-
-  const updateField = (updatedField: Partial<SignUpDetails>) =>
-    setUser((u) => ({ ...u, ...updatedField }));
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
+      <AnimatedCursor color="97,126,153" />
       <NavBar
         curPage={curPage}
         handlePageChange={handlePageChange}
-        user={user}
+        user={userDetails}
+        navBarVisibility={navBarVisibility}
       />
       <div className="h-70%">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/login" element={<LoginPage setUser={setUser} />} />
+          <Route path="/loading" element={<LoadingPage />} />
+          <Route
+            path="/signup"
+            element={
+              <SignUpPage
+                user={userDetails}
+                updateField={updateField}
+                fieldWarning={fieldWarning}
+                handleRegistration={handlePost}
+                postFailed={postFailed}
+              />
+            }
+          />
           <Route
             path="/home"
             element={
               <HomePage
-                user={user}
+                user={userDetails}
                 getPreferences={getPreferences}
-                email={user.userId}
+                email={userDetails.userId}
               />
             }
           />
           <Route
             path="/profile"
-            element={<ProfilePage user={user} updateField={updateField} />}
+            element={
+              <ProfilePage
+                user={userDetails}
+                updateField={updateField}
+                handleSave={handlePost}
+                postFailed={postFailed}
+                fieldWarning={fieldWarning}
+                tick={tick}
+                changeTick={changeTick}
+              />
+            }
           />
           <Route
             path="/matches"
-            element={<Matches profiles={matchedProfiles} />}
+            element={
+              <Matches
+                profiles={matchedProfiles}
+                userEmail={userDetails.userId}
+                isLoading={isLoading}
+                // setIsLoading={setIsLoading}
+              />
+            }
           />
-          <Route path="/saved" element={<Saved />} />
+          <Route
+            path="/saved"
+            element={<Saved currentUserEmail={userDetails.userId} />}
+          />
         </Routes>
       </div>
     </div>

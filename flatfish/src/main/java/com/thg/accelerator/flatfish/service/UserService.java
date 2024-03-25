@@ -1,5 +1,6 @@
 package com.thg.accelerator.flatfish.service;
 // <<<<<<< HEAD
+import com.thg.accelerator.flatfish.entities.Gender;
 import com.thg.accelerator.flatfish.entities.PreferenceEntity;
 import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
 import com.thg.accelerator.flatfish.entities.UserEntity;
@@ -57,23 +58,49 @@ public class UserService {
         return Optional.of(profileMatcher.matchProfiles(allUsers, ageMin, ageMax, budgetMin, budgetMax, gender,location1,location2,location3));
     }
 
-//    public Optional<List<UserEntity>> getMatchingProfiles(String userId) {
-//        Optional<UserEntity> optionalUser = usersRepo.findById(userId);
-//
-//        if (optionalUser.isEmpty()) {
-//            return Optional.empty();
-//        } else {
-//            List<UserEntity> allUsers = usersRepo.findAll();
-//
-//            return Optional.of(profileMatcher.matchProfiles(
-//                    allUsers,
-//                    optionalUser.get().getAgeMin(),
-//                    optionalUser.get().getAgeMax(),
-//                    optionalUser.get().getBudgetMin(),
-//                    optionalUser.get().getBudgetMax(),
-//                    optionalUser.get().getGender()));
-//        }
-//    }
+    public Optional<List<UserEntity>> getMatchingProfiles(String userId) {
+        Optional<UserEntity> optionalUser = usersRepo.findById(userId);
+
+        if (optionalUser.isEmpty()) {
+            return Optional.empty();
+        } else {
+            List<UserEntity> allUsers = usersRepo.findAll();
+
+            return Optional.of(profileMatcher.matchProfiles(
+                    allUsers,
+                    optionalUser.get().getUserId(),
+                    optionalUser.get().getAgeMin(),
+                    optionalUser.get().getAgeMax(),
+                    optionalUser.get().getBudgetMin(),
+                    optionalUser.get().getBudgetMax(),
+                    optionalUser.get().getGender(),
+                    optionalUser.get().getLocation1(),
+                    optionalUser.get().getLocation2(),
+                    optionalUser.get().getLocation3()));
+        }
+    }
+
+    public Optional<Map<UserEntity, Double>> getMatchingUsersWithScores(String userId) {
+        Optional<UserEntity> optionalUser = usersRepo.findById(userId);
+
+        if (optionalUser.isEmpty()) {
+            return Optional.empty();
+        } else {
+            List<UserEntity> allUsers = usersRepo.findAll();
+
+            return Optional.of(profileMatcher.matchProfilesWithScore(
+                    allUsers,
+                    optionalUser.get().getUserId(),
+                    optionalUser.get().getAgeMin(),
+                    optionalUser.get().getAgeMax(),
+                    optionalUser.get().getBudgetMin(),
+                    optionalUser.get().getBudgetMax(),
+                    optionalUser.get().getGender(),
+                    optionalUser.get().getLocation1(),
+                    optionalUser.get().getLocation2(),
+                    optionalUser.get().getLocation3()));
+        }
+    }
 
     public Optional<List<UserEntity>> getAllUsers() {
         return Optional.of(usersRepo.findAll());
@@ -84,6 +111,10 @@ public class UserService {
     }
 
     public void addUser(UserEntity userEntity) {
+        userEntity.setGender(Gender.UNSPECIFIED);
+        userEntity.setLocation1("");
+        userEntity.setLocation2("");
+        userEntity.setLocation3("");
         usersRepo.save(userEntity);
     }
 

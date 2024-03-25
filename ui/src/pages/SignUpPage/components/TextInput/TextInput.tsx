@@ -32,6 +32,9 @@ export const TextInput: React.FC<Props> = ({
   const [edit, setEdit] = useState<boolean | undefined>(editMode);
   const handleSubmitChange = (): void => setEdit(() => false);
   const handleEdit = (): void => setEdit(() => true);
+  const handleEnter = (key: string): void => {
+    key === "Enter" && edittable && setEdit(() => false);
+  };
   return (
     <label className="flex flex-col justify-center w-full h-full">
       <div className="flex items-center">
@@ -49,13 +52,14 @@ export const TextInput: React.FC<Props> = ({
         <div className="h-3/5 w-95% relative">
           <input
             type={type}
-            className={`h-full w-full rounded-lg p-2 border border-gray-400 bg-[#E5E5E5] text-sm ${
+            className={`h-full w-full rounded-lg p-2 border border-gray-400 text-sm ${
               disabled && "text-gray-400"
-            }`}
+            } ${edittable ? "bg-transparent" : "bg-[#E5E5E5]"}`}
             placeholder={placeholder}
             value={value}
             onChange={(e) => handleChange(e.target.value)}
             disabled={disabled}
+            onKeyDown={(e) => handleEnter(e.key)}
           ></input>
           {edittable && (
             <div className="absolute right-2 bottom-3.5">

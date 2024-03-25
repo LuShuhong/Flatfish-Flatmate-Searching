@@ -8,28 +8,27 @@ import { RedirectToLogin } from "../RedirectToLogin/RedirectToLogin";
 import { SignUpDetails } from "../../../../util/interfaces/SignUpDetails";
 import { getAge } from "../../../../util/ageCalculator";
 import { SignUpFieldWarning } from "../../../../util/interfaces/SignUpFieldWarning";
+import logo from "../../../../img/flat_fish_logo.png";
+import React from "react";
 
 interface Props {
-  signUpDetails: SignUpDetails;
+  user: SignUpDetails;
   updateField: (updatedField: Partial<SignUpDetails>) => void;
   handleRegistration: () => void;
   fieldWarning: SignUpFieldWarning;
-  userInDb: boolean;
+  postFailed: boolean;
 }
 
 export const SignUpForm: React.FC<Props> = ({
-  signUpDetails,
+  user,
   updateField,
   handleRegistration,
   fieldWarning,
-  userInDb,
+  postFailed,
 }) => {
   const handleNameChange = (val: string): void => updateField({ name: val });
   const handleGenderChange = (val: "MALE" | "FEMALE" | "SELECT"): void =>
     updateField({ userGender: val });
-  const handleEmailChange = (val: string): void => updateField({ userId: val });
-  const handlePasswordChange = (val: string): void =>
-    updateField({ password: val });
   const handleBirthdayChange = (val: string): void => {
     updateField({ birthday: val });
     updateField({ age: getAge(val) });
@@ -39,15 +38,18 @@ export const SignUpForm: React.FC<Props> = ({
   const handleDescriptionChange = (val: string): void =>
     updateField({ description: val });
   return (
-    <div className="h-full w-30%">
-      <div className="flex h-1/8 w-full">
-        <div className="flex items-center w-2/3 h-full">
+    <div className="h-full items-center flex flex-col justify-center align-center w-30% font-playfair-display">
+      <div className="w-full flex justify-center">
+        <img src={logo} alt="logo" width="100" height="50" />
+      </div>
+      <div className="flex h-1/8 w-full justify-center">
+        <div className="flex items-center w-2/3 h-full ">
           <TextInput
             fieldName="name"
-            placeholder="John"
+            placeholder="Flounder"
             type="text"
             mandatory
-            value={signUpDetails.name}
+            value={user.name}
             handleChange={handleNameChange}
             warning={fieldWarning.name}
             editMode
@@ -56,66 +58,42 @@ export const SignUpForm: React.FC<Props> = ({
         <div className="w-1/3">
           <OptionsInput
             fieldName="gender"
-            value={signUpDetails.userGender}
+            value={user.userGender}
             handleChange={handleGenderChange}
             warning={fieldWarning.userGender}
           />
         </div>
       </div>
       <div className="flex h-1/8 w-full">
-        <TextInput
-          fieldName="email"
-          placeholder="johnsmith69@gmail.com"
-          type="email"
-          mandatory
-          value={signUpDetails.userId}
-          handleChange={handleEmailChange}
-          warning={fieldWarning.userId}
-          editMode
-        />
-      </div>
-      <div className="flex h-1/8 w-full">
-        <TextInput
-          fieldName="password"
-          placeholder="Enter password ..."
-          type="password"
-          mandatory
-          value={signUpDetails.password}
-          handleChange={handlePasswordChange}
-          warning={fieldWarning.password}
-          editMode
-        />
-      </div>
-      <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
           <Birthday
-            value={signUpDetails.birthday}
+            value={user.birthday}
             handleChange={handleBirthdayChange}
             warning={fieldWarning.birthday}
           />
         </div>
         <div className="w-1/3">
-          <Age value={signUpDetails.age} />
+          <Age value={user.age} />
         </div>
       </div>
       <div className="flex h-1/8 w-full">
         <TextInput
           fieldName="instagram"
-          placeholder="JohnSmithInstaFollow"
+          placeholder="flatfish.hi"
           type="text"
-          value={signUpDetails.instagram}
+          value={user.instagram}
           handleChange={handleInstagramChange}
           editMode
         />
       </div>
       <div className="flex flex-col h-1/4 w-full">
         <Description
-          value={signUpDetails.description}
+          value={user.description}
           handleChange={handleDescriptionChange}
         />
-        {userInDb && (
+        {postFailed && (
           <div className="text-xs text-red-700">
-            Email already registered, please login
+            Something went wrong, please try again later
           </div>
         )}
       </div>
