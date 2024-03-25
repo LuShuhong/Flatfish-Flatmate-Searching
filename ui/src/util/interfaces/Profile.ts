@@ -8,4 +8,8 @@ export interface Profile {
   gender: string;
   instagram: string;
   picture: string;
+  userGender: string;
+  location1: string;
+  location2: string;
+  location3: string;
 }
