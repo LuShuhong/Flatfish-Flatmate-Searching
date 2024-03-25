@@ -60,16 +60,16 @@ export const SavedCards: React.FC<SavedCardProps> = ({
           instagram
         </button> */}
         {/* <InstagramButton /> */}
-        <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
+        {/* <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
           {instagram}
-        </button>
+        </button> */}
         <button
           className="bg-sea-green p-1 m-4 rounded-lg shadow-md"
           onClick={() =>
             (window.location.href = `https://www.instagram.com/${instagram}`)
           }
         >
-          Talk To Me in Instagram
+          Talk To Me on Instagram
         </button>
         <MdDelete onClick={handleClickDelete} />
       </div>
