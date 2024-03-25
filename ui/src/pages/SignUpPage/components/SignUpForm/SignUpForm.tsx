@@ -29,7 +29,6 @@ export const SignUpForm: React.FC<Props> = ({
   const handleNameChange = (val: string): void => updateField({ name: val });
   const handleGenderChange = (val: "MALE" | "FEMALE" | "SELECT"): void =>
     updateField({ userGender: val });
-  const handleEmailChange = (val: string): void => updateField({ userId: val });
   const handleBirthdayChange = (val: string): void => {
     updateField({ birthday: val });
     updateField({ age: getAge(val) });
@@ -41,7 +40,7 @@ export const SignUpForm: React.FC<Props> = ({
   return (
     <div className="h-full items-center flex flex-col justify-center align-center w-30% font-playfair-display">
       <div className="w-full flex justify-center">
-        <img src={logo} alt="image of logo" width="100" height="50" />
+        <img src={logo} alt="logo" width="100" height="50" />
       </div>
       <div className="flex h-1/8 w-full justify-center">
         <div className="flex items-center w-2/3 h-full ">
@@ -65,17 +64,6 @@ export const SignUpForm: React.FC<Props> = ({
           />
         </div>
       </div>
-      {/* <div className="flex h-1/8 w-full">
-        <TextInput
-          fieldName="email"
-          placeholder="johnsmith69@gmail.com"
-          type="email"
-          value={user.userId}
-          handleChange={handleEmailChange}
-          warning={fieldWarning.userId}
-          strictUserId
-        />
-      </div> */}
       <div className="flex h-1/8 w-full">
         <div className="flex items-center w-2/3 h-full">
           <Birthday
