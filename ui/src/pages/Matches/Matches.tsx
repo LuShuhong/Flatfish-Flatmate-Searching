@@ -26,7 +26,7 @@ export const Matches: React.FC<Props> = ({
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [clicked, setClicked] = useState<boolean>(false);
-  const [isMatchCardLoading, setIsMatchCardLoading] = useState(false);
+  // const [isMatchCardLoading, setIsMatchCardLoading] = useState(false);
 
   // const handleShuffle = () => {
   //   setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
@@ -55,12 +55,8 @@ export const Matches: React.FC<Props> = ({
 
   const handleShuffle = () => {
     if (profiles && profiles.length > 0) {
-      setIsMatchCardLoading(true);
-      setTimeout(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
-        setClicked(true);
-        setIsMatchCardLoading(false);
-      }, 2000);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+      setClicked(true);
     }
   };
 
@@ -105,7 +101,7 @@ export const Matches: React.FC<Props> = ({
               profile={profiles[currentIndex]}
               userEmail={userEmail}
               curUserId={profiles[currentIndex].userId}
-              isMatchCardLoading={isMatchCardLoading}
+              // isMatchCardLoading={isMatchCardLoading}
             />
           )}
         </SkeletonTheme>
