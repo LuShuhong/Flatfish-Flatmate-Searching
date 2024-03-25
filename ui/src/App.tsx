@@ -66,7 +66,6 @@ function App() {
       });
     }
   }, [user]);
-  console.log(userDetails);
 
   const handlePost = (): void => {
     let warnings = 0;
@@ -122,21 +121,21 @@ function App() {
     // http://localhost:8080/api/v1/matches?
     getAllMatchedProfiles(
       `http://localhost:8080/api/v1/matchuser?userId=${userDetails.userId}`,
+
       (profiles) => {
         setMatchedProfiles(profiles);
         // setIsLoading(false);
         setTimeout(() => {
           setIsLoading(false);
-        }, 3000);
+        }, 2000);
       }
     );
     setCurPage(() => "My Matches");
     navigate("/matches");
   };
-
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
-      <AnimatedCursor color="0,0,0" />
+      <AnimatedCursor color="97,126,153" />
       <NavBar
         curPage={curPage}
         handlePageChange={handlePageChange}
@@ -190,6 +189,7 @@ function App() {
                 profiles={matchedProfiles}
                 userEmail={userDetails.userId}
                 isLoading={isLoading}
+                // setIsLoading={setIsLoading}
               />
             }
           />

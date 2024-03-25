@@ -55,11 +55,15 @@ import "../../pages/Matches/Matches.css";
 import { Profile } from "../../util/interfaces/Profile";
 import { postrq } from "../../requests/savedPostRequest";
 import "./MatchesCard.css";
+import { SaveButton } from "../SaveButton/SaveButton";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface Props {
   profile: Profile;
   userEmail: any;
   curUserId: any;
+  // isMatchCardLoading: boolean;
 }
 export const MatchesCard: React.FC<Props> = ({ userEmail, profile }) => {
   const [buttonText, setButtonText] = useState("Save This Profile");

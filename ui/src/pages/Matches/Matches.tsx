@@ -1,25 +1,32 @@
 import "./Matches.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
-import BarLoader from "react-spinners/BarLoader";
+import BarLoader from "react-spinners/BarLoader"
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { SkeletonTheme } from 'react-loading-skeleton';
+import PuffLoader from "react-spinners/PuffLoader";
 
 interface Props {
   profiles: Profile[] | null;
   userEmail: any;
   isLoading: boolean;
+  // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Matches: React.FC<Props> = ({
   profiles,
   userEmail,
   isLoading,
+  // setIsLoading
 }) => {
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [clicked, setClicked] = useState<boolean>(false);
+  // const [isMatchCardLoading, setIsMatchCardLoading] = useState(false);
 
   // const handleShuffle = () => {
   //   setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
@@ -30,28 +37,16 @@ export const Matches: React.FC<Props> = ({
     setClicked(false);
   }, 1000);
 
-  // <div className="flex justfy-center p-3">
-
-  //   <button
-  //     className={`shuffle-button ${clicked ? "clicked" : ""}`}
-  //     onClick={() => {
-  //       handleShuffle();
-  //     }}
-  //   >
-  //     <ShuffleButton />
-  //   </button>
-  // </div>
   const hasSubmittedPreferences = profiles !== null;
   const hasMatches = profiles && profiles.length > 0;
 
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-full">
-        <BarLoader
+        <PuffLoader
           cssOverride={{}}
-          height={15}
-          width={220}
-          color={"#0abfe6"}
+          size={250}
+          color={"#78aba5"}
           loading={isLoading}
         />
       </div>
@@ -67,10 +62,13 @@ export const Matches: React.FC<Props> = ({
 
   if (!hasSubmittedPreferences) {
     return (
-      <div className="flex items-center justify-center w-full h-full">
-        <div className="font-playfair-display text-large text-pretty">
-          Please submit your flatmate preferences on the home page to see the
-          results!
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <div className="flex items-center text-center align-center justify-center text-3xl xl:text-2xl lg:text-xl md:text-lg sm:text-md xs:text-smh-4/5 font-playfair-display">
+          It appears that you haven't added any bait to your hook.
+        </div>
+        <div className="flex items-center text-center align-center justify-center text-3xl xl:text-2xl lg:text-xl md:text-lg sm:text-md xs:text-smh-4/5 font-playfair-display">
+          Ready to fish for your ideal flatmate? Head to the home page and
+          submit your preferences!
         </div>
       </div>
     );
@@ -83,7 +81,7 @@ export const Matches: React.FC<Props> = ({
           <div className="font-playfair-display text-2xl">
             😭 No Matches Found 🥵
           </div>
-          <div className="font-playfair-display text-large text-pretty">
+          <div className="font-playfair-display text-large text-pretty text-center">
             We pay over 100 retired fishermen a LOT of mackerel to match
             profiles together. Unfortumately, they weren't able to find anyone
             who meets your preferences. Try relaxing your requirements, and
@@ -97,13 +95,16 @@ export const Matches: React.FC<Props> = ({
   return (
     <div className="flex items-center justify-center w-full h-full">
       <div className="flex justify-center h-full flex-col items-center">
-        {profiles.length && (
-          <MatchesCard
-            profile={profiles[currentIndex]}
-            userEmail={userEmail}
-            curUserId={profiles[currentIndex].userId}
-          />
-        )}
+        <SkeletonTheme baseColor="#313131" highlightColor="#525252">
+          {profiles.length && (
+            <MatchesCard
+              profile={profiles[currentIndex]}
+              userEmail={userEmail}
+              curUserId={profiles[currentIndex].userId}
+              // isMatchCardLoading={isMatchCardLoading}
+            />
+          )}
+        </SkeletonTheme>
         {/* {console.log(profiles[currentIndex].email)} */}
         <div className="flex justfy-center p-3">
           <button
