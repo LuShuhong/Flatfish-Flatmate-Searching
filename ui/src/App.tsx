@@ -5,8 +5,7 @@ import { Matches } from "./pages/Matches/Matches";
 import { Saved } from "./pages/Saved/Saved";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Preference } from "./util/interfaces/Preference";
-import { getProfiles, getAllMatchedProfiles } from "./requests/getRequests";
+import { getAllMatchedProfiles } from "./requests/getRequests";
 import { Profile } from "./util/interfaces/Profile";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
@@ -17,8 +16,11 @@ import { useEffect } from "react";
 import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
 import { SignUpFieldWarning } from "./util/interfaces/SignUpFieldWarning";
 import { noFieldWarnings } from "./util/constants/noFieldWarnings";
+import { post } from "./requests/postRequests";
 import React from "react";
+import { convertName } from "./util/nameConverter";
 import AnimatedCursor from "react-animated-cursor";
+
 function App() {
   const { user } = useAuth0();
   const [userDetails, setUserDetails] =
@@ -29,30 +31,20 @@ function App() {
     setFieldWarning(() => noFieldWarnings);
     setUserDetails((u) => ({ ...u, ...updatedField }));
   };
+  const [tick, setTick] = useState<boolean>(false);
+  const changeTick = (val: boolean): void => {
+    setTick(() => val);
+  };
   const [curPage, setCurPage] = useState<string>("Home");
   const [matchedProfiles, setMatchedProfiles] = useState<Profile[] | null>(
     null
   );
   const [navBarVisibility, setNavBarVisibility] = useState<boolean>(false);
+  const [postFailed, setPostFailed] = useState<boolean>(false);
   const makeNavBarVisible = (): void => {
     setNavBarVisibility(() => true);
   };
-
   const [isLoading, setIsLoading] = useState(false);
-
-  // console.log("userId" + user.userId);
-  // const initialDetails: Partial<Profile> = {
-  //   name: user?.name,
-  //   picture: user?.picture,
-  // };
-  // const [curUser, setCurUser] = useState<Partial<Profile>>(initialDetails);
-  // matchedProfiles.forEach((profile) => {
-  //   console.log("Name:", profile.name);
-  //   console.log("Age:", profile.age);
-  //   console.log("email", profile.userId);
-  //   // Add more attributes as needed
-  // // });
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,7 +58,7 @@ function App() {
           setUserDetails((details) => {
             const copy: SignUpDetails = { ...details };
             copy.userId = user.email as string;
-            copy.name = user.name as string;
+            copy.name = convertName(user.name as string);
             copy.picture = user.picture as string;
             return copy;
           });
@@ -75,6 +67,48 @@ function App() {
     }
   }, [user]);
   console.log(userDetails);
+
+  const handlePost = (): void => {
+    let warnings = 0;
+    if (!userDetails.userId) {
+      setFieldWarning((w) => ({ ...w, ...{ userId: true } }));
+      warnings++;
+    }
+    if (!userDetails.password) {
+      setFieldWarning((w) => ({ ...w, ...{ password: true } }));
+      warnings++;
+    }
+    if (userDetails.userGender === "SELECT") {
+      setFieldWarning((w) => ({ ...w, ...{ userGender: true } }));
+      warnings++;
+    }
+    if (!userDetails.name) {
+      setFieldWarning((w) => ({ ...w, ...{ name: true } }));
+      warnings++;
+    }
+    if (!userDetails.age) {
+      setFieldWarning((w) => ({ ...w, ...{ birthday: true } }));
+      warnings++;
+    }
+
+    // http://localhost:8080/api/v1/
+    // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
+    if (!warnings) {
+      post("http://localhost:8080/api/v1", userDetails)
+        .then((resp) => {
+          console.log(user);
+          if (!resp.ok) {
+            setPostFailed(() => true);
+          } else if (curPage === "Home") {
+            makeNavBarVisible();
+            navigate("/home");
+          } else {
+            setTick(() => true);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   const handlePageChange = (newPage: string): void => {
     setCurPage(() => newPage);
@@ -120,8 +154,8 @@ function App() {
                 user={userDetails}
                 updateField={updateField}
                 fieldWarning={fieldWarning}
-                setFieldWarning={setFieldWarning}
-                makeNavBarVisible={makeNavBarVisible}
+                handleRegistration={handlePost}
+                postFailed={postFailed}
               />
             }
           />
@@ -138,7 +172,15 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProfilePage user={userDetails} updateField={updateField} />
+              <ProfilePage
+                user={userDetails}
+                updateField={updateField}
+                handleSave={handlePost}
+                postFailed={postFailed}
+                fieldWarning={fieldWarning}
+                tick={tick}
+                changeTick={changeTick}
+              />
             }
           />
           <Route
