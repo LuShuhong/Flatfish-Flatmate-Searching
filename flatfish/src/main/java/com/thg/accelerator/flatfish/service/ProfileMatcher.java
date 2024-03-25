@@ -34,7 +34,7 @@ public class ProfileMatcher {
     }
 
     // This method gets info from a specific user in the service layer
-    public List<UserEntity> matchProfiles(List<UserEntity> allUsers, Long ageMinLong, Long ageMaxLong, Long budgetMinLong, Long budgetMaxLong, Gender targetGender, String location1, String location2, String location3) {
+    public List<UserEntity> matchProfiles(List<UserEntity> allUsers, String userId, Long ageMinLong, Long ageMaxLong, Long budgetMinLong, Long budgetMaxLong, Gender targetGender, String location1, String location2, String location3) {
 
         double ageMin = ageMinLong.doubleValue();
         double ageMax = ageMaxLong.doubleValue();
@@ -43,6 +43,7 @@ public class ProfileMatcher {
         String gender = targetGender.toString();
 
         List<UserEntity> suitableMatches = allUsers.stream()
+                .filter(user -> user.getUserId() != userId)
                 .filter(user -> user.getAge() >= ageMin)
                 .filter(user -> user.getAge() <= ageMax)
                 .filter(user -> user.getBudgetMax() >= budgetMin)
@@ -68,7 +69,7 @@ public class ProfileMatcher {
         return vectorMatches;
     }
 
-    public Map<UserEntity, Double> matchProfilesWithScore (List<UserEntity> allUsers, Long ageMinLong, Long ageMaxLong, Long budgetMinLong, Long budgetMaxLong, Gender targetGender, String location1, String location2, String location3) {
+    public Map<UserEntity, Double> matchProfilesWithScore (List<UserEntity> allUsers, String userId, Long ageMinLong, Long ageMaxLong, Long budgetMinLong, Long budgetMaxLong, Gender targetGender, String location1, String location2, String location3) {
         double ageMin = ageMinLong.doubleValue();
         double ageMax = ageMaxLong.doubleValue();
         double budgetMin = budgetMinLong.doubleValue();
@@ -76,6 +77,7 @@ public class ProfileMatcher {
         String gender = targetGender.toString();
 
         List<UserEntity> suitableMatches = allUsers.stream()
+                .filter(user -> user.getUserId() != userId)
                 .filter(user -> user.getAge() >= ageMin)
                 .filter(user -> user.getAge() <= ageMax)
                 .filter(user -> user.getBudgetMax() >= budgetMin)

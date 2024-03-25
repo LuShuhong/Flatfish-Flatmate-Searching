@@ -67,6 +67,7 @@ public class UserService {
 
             return Optional.of(profileMatcher.matchProfiles(
                     allUsers,
+                    optionalUser.get().getUserId(),
                     optionalUser.get().getAgeMin(),
                     optionalUser.get().getAgeMax(),
                     optionalUser.get().getBudgetMin(),
@@ -88,6 +89,7 @@ public class UserService {
 
             return Optional.of(profileMatcher.matchProfilesWithScore(
                     allUsers,
+                    optionalUser.get().getUserId(),
                     optionalUser.get().getAgeMin(),
                     optionalUser.get().getAgeMax(),
                     optionalUser.get().getBudgetMin(),
