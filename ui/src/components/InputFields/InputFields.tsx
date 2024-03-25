@@ -129,8 +129,8 @@ export const InputFields: React.FC<Props> = ({
         ageMax: preferences.ageRange[1],
         gender: preferences.gender,
         location1: preferences.location[0],
-        location2: preferences.location[1],
-        location3: preferences.location[2],
+        location2: preferences.location[1] ? preferences.location[1] : "",
+        location3: preferences.location[2] ? preferences.location[2] : "",
       });
       getPreferences(user);
       setError((e) => "");
