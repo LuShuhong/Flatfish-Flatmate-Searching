@@ -146,6 +146,7 @@ function App() {
                 profiles={matchedProfiles}
                 userEmail={userDetails.userId}
                 isLoading={isLoading}
+                // setIsLoading={setIsLoading}
               />
             }
           />

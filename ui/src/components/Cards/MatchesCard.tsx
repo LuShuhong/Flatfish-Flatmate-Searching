@@ -12,8 +12,9 @@ interface Props {
   profile: Profile;
   userEmail: any;
   curUserId: any;
+  isMatchCardLoading: boolean;
 }
-export const MatchesCard: React.FC<Props> = ({ userEmail, profile }) => {
+export const MatchesCard: React.FC<Props> = ({ userEmail, profile, isMatchCardLoading }) => {
   console.log(profile.picture);
   console.log(userEmail);
 
@@ -29,18 +30,22 @@ export const MatchesCard: React.FC<Props> = ({ userEmail, profile }) => {
     <>
       <div className="flex bg-sea-green justify-center align-center w-5/6 h-5/6 rounded-xl shadow-md">
         <div className="flex justify-center align-center p-5">
-          <img
-            src={profile.picture || <Skeleton/>}
-            alt="img of person"
-            className="rounded-xl w-80 h-80"
-          />
+          {isMatchCardLoading ? (
+            <Skeleton className="rounded-xl w-80 h-80"/>
+          ) : (
+            <img
+              src={profile.picture}
+              alt="img of person"
+              className="rounded-xl w-80 h-80" 
+            />
+          )}
         </div>
         <div className="flex flex-col justify-between items-start p-8 w-full">
           <div className="flex flex-col  align-center h-full">
-            <h1 className="font-serif-display text-5xl mb-3">{profile.name || <Skeleton/>}</h1>
-            <h2 className="font-playfair-display text-lg">{profile.age || <Skeleton/>}</h2>
+            <h1 className="font-serif-display text-5xl mb-3">{isMatchCardLoading ? <Skeleton/> : profile.name }</h1>
+            <h2 className="font-playfair-display text-lg">{isMatchCardLoading ? <Skeleton/> : profile.age}</h2>
             <p className="font-roboto-condensed text-lg">
-              {profile.description || <Skeleton/>}
+              { isMatchCardLoading ? <Skeleton count={3}/> : profile.description}
             </p>
           </div>
           <div className="flex justify-end w-full">

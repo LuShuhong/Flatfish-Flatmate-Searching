@@ -4,29 +4,28 @@ import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
-<<<<<<< HEAD
 import BarLoader from "react-spinners/BarLoader"
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { SkeletonTheme } from 'react-loading-skeleton';
-=======
-import BarLoader from "react-spinners/BarLoader";
->>>>>>> dev
 
 interface Props {
   profiles: Profile[] | null;
   userEmail: any;
   isLoading: boolean;
+  // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Matches: React.FC<Props> = ({
   profiles,
   userEmail,
   isLoading,
+  // setIsLoading
 }) => {
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [clicked, setClicked] = useState<boolean>(false);
+  const [isMatchCardLoading, setIsMatchCardLoading] = useState(false);
 
   // const handleShuffle = () => {
   //   setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
@@ -67,8 +66,12 @@ export const Matches: React.FC<Props> = ({
 
   const handleShuffle = () => {
     if (profiles && profiles.length > 0) {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
-      setClicked(true);
+      setIsMatchCardLoading(true);
+      setTimeout(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+        setClicked(true);
+        setIsMatchCardLoading(false);
+      }, 2000);
     }
   };
 
@@ -110,6 +113,7 @@ export const Matches: React.FC<Props> = ({
               profile={profiles[currentIndex]}
               userEmail={userEmail}
               curUserId={profiles[currentIndex].userId}
+              isMatchCardLoading={isMatchCardLoading}
             />
           )}
         </SkeletonTheme>
