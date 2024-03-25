@@ -127,7 +127,7 @@ function App() {
         // setIsLoading(false);
         setTimeout(() => {
           setIsLoading(false);
-        }, 3000);
+        }, 2000);
       }
     );
     setCurPage(() => "My Matches");
@@ -189,6 +189,7 @@ function App() {
                 profiles={matchedProfiles}
                 userEmail={userDetails.userId}
                 isLoading={isLoading}
+                // setIsLoading={setIsLoading}
               />
             }
           />
