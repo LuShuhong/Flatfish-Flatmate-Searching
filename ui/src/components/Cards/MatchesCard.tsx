@@ -56,8 +56,8 @@ import { Profile } from "../../util/interfaces/Profile";
 import { postrq } from "../../requests/savedPostRequest";
 import "./MatchesCard.css";
 import { SaveButton } from "../SaveButton/SaveButton";
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 interface Props {
   profile: Profile;
@@ -75,39 +75,37 @@ export const MatchesCard: React.FC<Props> = ({ userEmail, profile }) => {
       profile.userId
     );
     setButtonText("Saved");
-    
+
     setTimeout(() => {
       setButtonText("Save This Profile");
     }, 1000);
   };
 
   return (
-    <div id="container">
-      <div className="product-details">
-        <h1>{profile.name}</h1>
-        <span className="hint-star star">
-          <i className="fa fa-star" aria-hidden="true"></i>
-          <i className="fa fa-star" aria-hidden="true"></i>
-          <i className="fa fa-star" aria-hidden="true"></i>
-          <i className="fa fa-star" aria-hidden="true"></i>
-          <i className="fa fa-star-o" aria-hidden="true"></i>
-        </span>
+    <div id="container" className="container">
+      <div className="user-details flex justify-center w-full">
+        <h1 className="font-serif-display">{profile.name}</h1>
+        <p className="information font-roboto-condensed">
+          {profile.description}
+        </p>
 
-        <p className="information">{profile.description}</p>
-
-        <div className="control">
-          <button className="btn" onClick={handleClick} disabled={buttonText==="Saved" ? true :false}>
+        <div className="flex justify-center">
+          <button
+            className="btn font-playfair-display"
+            onClick={handleClick}
+            disabled={buttonText === "Saved" ? true : false}
+          >
             {buttonText}
           </button>
         </div>
       </div>
 
-      <div className="product-image">
+      <div className="user-image">
         <img src={profile.picture} alt="person image" />
 
         <div className="info">
           <div className="information">
-            <h2> Description</h2>
+            <h2>About Me</h2>
             <ul>
               <li>
                 <strong>Gender: </strong>

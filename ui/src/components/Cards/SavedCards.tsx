@@ -65,7 +65,7 @@ export const SavedCards: React.FC<SavedCardProps> = ({
     //     <MdDelete onClick={handleClickDelete} />
     //   </div>
     // </div>
-    <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-xl h-full w-1/4 m-8 p-4 shadow-md min-w-96 min-h-96">
+    <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl w-1/4 m-8 p-4 shadow-md min-w-96 h-100%">
       <div className="text-center bg-[#E5E5E5] mt-10">
         <img
           src={picture}
@@ -81,17 +81,31 @@ export const SavedCards: React.FC<SavedCardProps> = ({
         <h1>{email}</h1>
         <p className="fonto-roboto-condensed bg-[#E5E5E5] text-center">
           {description}
+          {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+          malesuada orci eu viverra posuere. Etiam est libero, interdum quis dui
+          at */}
         </p>
-        <button
-          className="flex flex-row align-center justify-center bg-sea-green font-roboto-condensed rounded-lg shadow-md p-2 w-1/3"
-          onClick={() =>
-            (window.location.href = `https://www.instagram.com/${instagram}`)
-          }
-        >
-          <InstagramIcon />
-          Message
-        </button>
-        <MdDelete onClick={handleClickDelete} />
+        <div className="flex flex-row justify-around">
+          <button
+            // className="flex flex-row align-center justify-center bg-sea-green p-2 m-4 rounded-lg shadow-md hover:bg-[#89ada9]"
+            className="flex flex-row align-center justify-center rounded-lg shadow-md p-2 m-4 text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium shadow-lg rounded-lg text-sm px-5 py-2.5 text-center "
+            onClick={() =>
+              (window.location.href = `https://www.instagram.com/${instagram}`)
+            }
+          >
+            <div className="flex pt-0.5 pr-1 pl-1">
+              <InstagramIcon />
+            </div>
+            <div className="font-roboto-condensed">Message</div>
+          </button>
+          <button
+            onClick={handleClickDelete}
+            className="flex flex-row bg-sea-green p-2 m-4 rounded-lg shadow-md hover:bg-[#89ada9] font-roboto-condensed"
+          >
+            <MdDelete className="flex mt-0.5 mr-1 ml-1 " />
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );
