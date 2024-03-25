@@ -79,13 +79,7 @@ export const SavedCards: React.FC<SavedCardProps> = ({
         </h2>
         <h1>{email}</h1>
         <p className="fonto-roboto-condensed bg-[#E5E5E5] text-center">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-          malesuada orci eu viverra posuere. Etiam est libero, interdum quis dui
-          at, condimentum dapibus enim. Nullam tincidunt imperdiet ex ut
-          iaculis. Nulla facilisi. Curabitur sodales ultricies justo, sit amet
-          sollicitudin est malesuada vel. Donec dapibus sagittis ante, in
-          pulvinar tellus congue eu. Nunc blandit sapien mi, sit amet
-          ullamcorper est tempus sed.
+          {description}
         </p>
         <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
           instagram

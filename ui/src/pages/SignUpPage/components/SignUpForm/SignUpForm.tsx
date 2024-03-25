@@ -46,7 +46,7 @@ export const SignUpForm: React.FC<Props> = ({
       <div className="flex h-1/8 w-full justify-center">
         <div className="flex items-center w-2/3 h-full ">
           <TextInput
-            fieldName="name"
+            fieldName="Name"
             placeholder="Flounder"
             type="text"
             mandatory
@@ -58,7 +58,7 @@ export const SignUpForm: React.FC<Props> = ({
         </div>
         <div className="w-1/3">
           <OptionsInput
-            fieldName="gender"
+            fieldName="Gender"
             value={user.userGender}
             handleChange={handleGenderChange}
             warning={fieldWarning.userGender}
@@ -90,7 +90,7 @@ export const SignUpForm: React.FC<Props> = ({
       </div>
       <div className="flex h-1/8 w-full">
         <TextInput
-          fieldName="instagram"
+          fieldName="Instagram"
           placeholder="flatfish.hi"
           type="text"
           value={user.instagram}
