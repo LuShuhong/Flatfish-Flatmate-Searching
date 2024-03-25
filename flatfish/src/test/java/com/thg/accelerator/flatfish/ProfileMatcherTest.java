@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import static org.mockito.Mockito.mock;
 
@@ -27,44 +28,165 @@ public class ProfileMatcherTest {
     public void testsCanPass() {
     }
 
-//    @Test
-//    public void testProfileMatcherReturnsSimilarProfile() {
-//        UserEntity alice = new UserEntity("1", "alice", "1, 1, 2001", 20, "desc", "FEMALE", "@Alice", 100, 1000, 20, 80, Gender.MALE, List.of(), "", "", "");
-//        UserEntity bob = new UserEntity("2", "bob", "9, 9, 1999", 30, "bobdesc", "MALE", "@Bob", 150, 900, 20, 80, Gender.FEMALE, List.of(), "", "", "");
-//        List<UserEntity> allUsers = List.of(alice, bob);
-//
-//
-//        List<UserEntity> matches = profileMatcher.matchProfiles(allUsers, "35", "70", "200", "900", "female");
-//
-//        Assertions.assertEquals(alice, matches.get(0));
-//    }
+    @Test
+    public void testProfileMatcherReturnsSimilarProfile() {
+        UserEntity alice = new UserEntity();
+        alice.setUserId("alice");
+        alice.setAge(20);
+        alice.setUserGender("female");
+        alice.setAgeMin(18);
+        alice.setAgeMax(80);
+        alice.setBudgetMin(100);
+        alice.setBudgetMax(1000);
+        alice.setGender(Gender.MALE);
+        alice.setLocation1("Deansgate");
 
-//    @Disabled
-//    @Test
-//    public void testNoGenderPreferenceReturnsAllGenders() {
-//        UserEntity alice = new UserEntity("1", "alice", "1, 1, 2001", 20, "desc", "FEMALE", "@Alice", 100, 1000, 20, 80, Gender.MALE, 1L, 2L, 3L);
-//        UserEntity bob = new UserEntity("2", "bob", "9, 9, 1999", 30, "bobdesc", "MALE", "@Bob", 150, 900, 20, 80, Gender.FEMALE, 1L, 2L, 3L);
-//        List<UserEntity> allUsers = List.of(alice, bob);
-//
-//
-//        List<UserEntity> matches = profileMatcher.matchProfiles(allUsers, "35", "70", "200", "900", "");
-//
-//        Assertions.assertEquals(allUsers, matches);
-//    }
+        UserEntity bob = new UserEntity();
+        bob.setUserId("bob");
+        bob.setAge(25);
+        bob.setUserGender("male");
+        bob.setAgeMin(18);
+        bob.setAgeMax(100);
+        bob.setBudgetMin(200);
+        bob.setBudgetMax(800);
+        bob.setGender(Gender.FEMALE);
+        bob.setLocation1("Deansgate");
+        bob.setLocation2("Moss Side");
 
-//    @Disabled
-//    @Test
-//    public void testMatchProfileWithScoreReturnsSimilarProfile() {
-//        UserEntity alice = new UserEntity("1", "alice", "1, 1, 2001", 20, "desc", "FEMALE", "@Alice", 100, 1000, 20, 80, Gender.MALE, 1L, 2L, 3L);
-//        UserEntity bob = new UserEntity("2", "bob", "9, 9, 1999", 30, "bobdesc", "MALE", "@Bob", 150, 900, 20, 80, Gender.FEMALE, 1L, 2L, 3L);
-//        List<UserEntity> allUsers = List.of(alice, bob);
-//        Map<UserEntity, Double> userMap = new HashMap<>();
-//        userMap.put(alice, 2.5);
-//        userMap.put(bob, 25.124689052802225);
-//
-//
-//        Map<UserEntity, Double> matches = profileMatcher.matchProfilesWithScore(allUsers, "35", "70", "200", "900", "");
-//
-//        Assertions.assertEquals(userMap, matches);
-//    }
+        List<UserEntity> allUsers = List.of(alice, bob);
+
+        List<UserEntity> matches = profileMatcher.matchProfiles(allUsers, bob.getUserId(), bob.getAgeMin(), bob.getAgeMax(), bob.getBudgetMin(), bob.getBudgetMax(), bob.getGender(), bob.getLocation1(), bob.getLocation2(), bob.getLocation3());
+
+        Assertions.assertEquals(alice, matches.get(0));
+    }
+
+    @Test
+    public void testNoGenderPreferenceReturnsAllGenders() {
+        UserEntity alice = new UserEntity();
+        alice.setUserId("alice");
+        alice.setAge(20);
+        alice.setUserGender("female");
+        alice.setAgeMin(18);
+        alice.setAgeMax(80);
+        alice.setBudgetMin(100);
+        alice.setBudgetMax(1000);
+        alice.setGender(Gender.MALE);
+        alice.setLocation1("Deansgate");
+
+        UserEntity bob = new UserEntity();
+        bob.setUserId("bob");
+        bob.setAge(25);
+        bob.setUserGender("male");
+        bob.setAgeMin(18);
+        bob.setAgeMax(100);
+        bob.setBudgetMin(200);
+        bob.setBudgetMax(800);
+        bob.setGender(Gender.UNSPECIFIED);
+        bob.setLocation1("Deansgate");
+        bob.setLocation2("Moss Side");
+
+        List<UserEntity> allUsers = List.of(alice);
+
+        List<UserEntity> matches = profileMatcher.matchProfiles(allUsers, bob.getUserId(), bob.getAgeMin(), bob.getAgeMax(), bob.getBudgetMin(), bob.getBudgetMax(), bob.getGender(), bob.getLocation1(), bob.getLocation2(), bob.getLocation3());
+
+        Assertions.assertEquals(allUsers, matches);
+    }
+
+    @Test
+    public void testMatchProfileWithScoreReturnsSimilarProfile() {
+        UserEntity alice = new UserEntity();
+        alice.setUserId("alice");
+        alice.setAge(20);
+        alice.setUserGender("female");
+        alice.setAgeMin(18);
+        alice.setAgeMax(80);
+        alice.setBudgetMin(100);
+        alice.setBudgetMax(1000);
+        alice.setGender(Gender.MALE);
+        alice.setLocation1("Deansgate");
+
+        UserEntity bob = new UserEntity();
+        bob.setUserId("bob");
+        bob.setAge(25);
+        bob.setUserGender("male");
+        bob.setAgeMin(18);
+        bob.setAgeMax(100);
+        bob.setBudgetMin(200);
+        bob.setBudgetMax(800);
+        bob.setGender(Gender.UNSPECIFIED);
+        bob.setLocation1("Deansgate");
+        bob.setLocation2("Moss Side");
+
+        UserEntity charlie = new UserEntity();
+        charlie.setUserId("charlie");
+        charlie.setAge(25);
+        charlie.setUserGender("male");
+        charlie.setAgeMin(18);
+        charlie.setAgeMax(100);
+        charlie.setBudgetMin(200);
+        charlie.setBudgetMax(780);
+        charlie.setGender(Gender.UNSPECIFIED);
+        charlie.setLocation1("Deansgate");
+        charlie.setLocation2("Moss Side");
+
+        List<UserEntity> allUsers = List.of(alice, charlie);
+
+        Map<UserEntity, Double> expectedResult = new HashMap<>();
+//        expectedResult.put(bob, 0D);
+        expectedResult.put(alice, 50.99019513592785);
+        expectedResult.put(charlie, 10D);
+
+        Map<UserEntity, Double> matches = profileMatcher.matchProfilesWithScore(allUsers, bob.getUserId(), bob.getAgeMin(), bob.getAgeMax(), bob.getBudgetMin(), bob.getBudgetMax(), bob.getGender(), bob.getLocation1(), bob.getLocation2(), bob.getLocation3());
+
+        Assertions.assertEquals(expectedResult, matches);
+    }
+
+    @Test
+    public void testMatchProfilesExcludesTargetUser() {
+        UserEntity alice = new UserEntity();
+        alice.setUserId("alice");
+        alice.setAge(20);
+        alice.setUserGender("female");
+        alice.setAgeMin(18);
+        alice.setAgeMax(80);
+        alice.setBudgetMin(100);
+        alice.setBudgetMax(1000);
+        alice.setGender(Gender.MALE);
+        alice.setLocation1("Deansgate");
+
+        UserEntity bob = new UserEntity();
+        bob.setUserId("bob");
+        bob.setAge(25);
+        bob.setUserGender("male");
+        bob.setAgeMin(18);
+        bob.setAgeMax(100);
+        bob.setBudgetMin(200);
+        bob.setBudgetMax(800);
+        bob.setGender(Gender.UNSPECIFIED);
+        bob.setLocation1("Deansgate");
+        bob.setLocation2("Moss Side");
+
+        UserEntity charlie = new UserEntity();
+        charlie.setUserId("charlie");
+        charlie.setAge(25);
+        charlie.setUserGender("male");
+        charlie.setAgeMin(18);
+        charlie.setAgeMax(100);
+        charlie.setBudgetMin(200);
+        charlie.setBudgetMax(780);
+        charlie.setGender(Gender.UNSPECIFIED);
+        charlie.setLocation1("Deansgate");
+        charlie.setLocation2("Moss Side");
+
+        List<UserEntity> allUsers = List.of(alice, charlie);
+
+        Map<UserEntity, Double> expectedResult = new HashMap<>();
+//        expectedResult.put(bob, 0D);
+        expectedResult.put(alice, 50.99019513592785);
+        expectedResult.put(charlie, 10D);
+
+        Map<UserEntity, Double> matches = profileMatcher.matchProfilesWithScore(allUsers, bob.getUserId(), bob.getAgeMin(), bob.getAgeMax(), bob.getBudgetMin(), bob.getBudgetMax(), bob.getGender(), bob.getLocation1(), bob.getLocation2(), bob.getLocation3());
+
+        Assertions.assertEquals(expectedResult, matches);
+    }
 }
