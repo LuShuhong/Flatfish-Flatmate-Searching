@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { TextInput } from "../../../SignUpPage/components/TextInput/TextInput";
 import { OptionsInput } from "../../../SignUpPage/components/OptionsInput/OptionsInput";
 import { Birthday } from "../../../SignUpPage/components/Birthday/Birthday";
@@ -38,48 +37,37 @@ export const ProfileForm: React.FC<Props> = ({
   const handleDescriptionChange = (val: string): void =>
     updateField({ description: val });
 
-  //to be included in a seperate component
-  const [file, setFile] = useState<File | undefined>();
-  const handleUpload = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    console.log("file", file);
+  const handleImageChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement & {
+      files: FileList;
+    };
+    const fileReader = new FileReader();
+    fileReader.onload = function () {
+      updateField({ picture: fileReader.result as string });
+    };
+    fileReader.readAsDataURL(target.files[0]);
+
+    const file = target.files[0];
     if (typeof file === "undefined") return;
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "test-react-uploads-unsigned");
     formData.append("api_key", "441472483846922");
-    const results = await fetch(
-      "https://api.cloudinary.com/v1_1/dlnjjenrx/image/upload",
-      {
-        method: "POST",
-        body: formData,
-      }
-    ).then((r) => r.json());
-    console.log("results", results);
+    fetch("https://api.cloudinary.com/v1_1/dlnjjenrx/image/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((resp) => resp.json())
+      .then((data) => updateField({ picture: data.url }));
   };
-  const handleImageChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement & {
-      files: FileList;
-    };
-    console.log("target", target.files);
-    setFile(target.files[0]);
-    const file = new FileReader();
-    file.onload = function () {
-      updateField({ picture: file.result as string });
-    };
-    file.readAsDataURL(target.files[0]);
-  };
-  //end of a seperate component
-  console.log(user.picture);
   return (
     <div className="h-full w-30%">
       <div className="flex h-3/16 w-full">
-        <div className="flex items-center justify-center w-1/2 h-full">
+        <div className="flex items-center justify-center w-1/3 h-full">
           <ProfilePic
             pic={user.picture}
             handleImageChange={handleImageChange}
           />
-          <button onClick={handleUpload}>Upload</button>
         </div>
         <div className="flex justify-center items-center text-2xl">
           My Profile
