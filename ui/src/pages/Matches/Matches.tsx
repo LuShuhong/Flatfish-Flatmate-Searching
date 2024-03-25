@@ -4,10 +4,8 @@ import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
-import BarLoader from "react-spinners/BarLoader"
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import { SkeletonTheme } from 'react-loading-skeleton';
+import "react-loading-skeleton/dist/skeleton.css";
+import { SkeletonTheme } from "react-loading-skeleton";
 import PuffLoader from "react-spinners/PuffLoader";
 
 interface Props {
