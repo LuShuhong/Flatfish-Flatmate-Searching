@@ -1,37 +1,36 @@
 package com.thg.accelerator.flatfish.dto;
 
 import com.thg.accelerator.flatfish.entities.Gender;
-import com.thg.accelerator.flatfish.entities.SavedProfileEntity;
+import com.thg.accelerator.flatfish.entities.Role;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
-@NoArgsConstructor // for service
 @ToString
-public class SavedProfileDetailDto {
-//    private String userId;
-    private String name;
-//    private String birthday;
+public class ScoreDto {
+
     private String userId;
+    private String name;
+    private String password;
+    private String birthday;
     private long age;
     private String description;
     private String userGender;
     private String instagram;
+    private String picture;
     private long budgetMin;
     private long budgetMax;
     private long ageMin;
     private long ageMax;
-    private Gender preferredGender;
+    private Gender gender;
 
-//    private List<SavedProfileEntity> savedProfileEntities;
-
-    //    private List<UserLocationsEntity> locationsEntities;
     private String location1;
     private String location2;
     private String location3;
-    private String picture;
+
+    private Role role;
+
+    private Double score;
 }

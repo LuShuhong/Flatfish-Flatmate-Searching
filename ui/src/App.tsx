@@ -5,8 +5,7 @@ import { Matches } from "./pages/Matches/Matches";
 import { Saved } from "./pages/Saved/Saved";
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Preference } from "./util/interfaces/Preference";
-import { getProfiles } from "./requests/getRequests";
+import { getAllMatchedProfiles } from "./requests/getRequests";
 import { Profile } from "./util/interfaces/Profile";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
@@ -20,6 +19,7 @@ import { noFieldWarnings } from "./util/constants/noFieldWarnings";
 import { post } from "./requests/postRequests";
 import React from "react";
 import { convertName } from "./util/nameConverter";
+import AnimatedCursor from "react-animated-cursor";
 
 function App() {
   const { user } = useAuth0();
@@ -32,12 +32,17 @@ function App() {
     setUserDetails((u) => ({ ...u, ...updatedField }));
   };
   const [curPage, setCurPage] = useState<string>("Home");
-  const [matchedProfiles, setMatchedProfiles] = useState<Profile[]>([]);
+  const [matchedProfiles, setMatchedProfiles] = useState<Profile[] | null>(
+    null
+  );
   const [navBarVisibility, setNavBarVisibility] = useState<boolean>(false);
   const [postFailed, setPostFailed] = useState<boolean>(false);
   const makeNavBarVisible = (): void => {
     setNavBarVisibility(() => true);
   };
+
+  const [isLoading, setIsLoading] = useState(false);
+
   // console.log("userId" + user.userId);
   // const initialDetails: Partial<Profile> = {
   //   name: user?.name,
@@ -117,15 +122,22 @@ function App() {
   const handlePageChange = (newPage: string): void => {
     setCurPage(() => newPage);
   };
-  const getPreferences = (p: Preference): void => {
+  const getPreferences = (userDetails: SignUpDetails): void => {
+    setIsLoading(true); // Start loading before fetching data
     console.log(
-      `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`
+      `http://localhost:8080/api/v1/matchuser?userId=${userDetails.userId}`
     );
     // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matches?
     // http://localhost:8080/api/v1/matches?
-    getProfiles(
-      `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`,
-      setMatchedProfiles
+    getAllMatchedProfiles(
+      `http://localhost:8080/api/v1/matchuser?userId=${userDetails.userId}`,
+      (profiles) => {
+        setMatchedProfiles(profiles);
+        // setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
+      }
     );
     setCurPage(() => "My Matches");
     navigate("/matches");
@@ -133,6 +145,7 @@ function App() {
 
   return (
     <div className="h-screen w-screen bg-[#C6E2FF]">
+      <AnimatedCursor color="0,0,0" />
       <NavBar
         curPage={curPage}
         handlePageChange={handlePageChange}
@@ -183,6 +196,7 @@ function App() {
               <Matches
                 profiles={matchedProfiles}
                 userEmail={userDetails.userId}
+                isLoading={isLoading}
               />
             }
           />

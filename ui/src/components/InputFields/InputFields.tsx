@@ -1,7 +1,7 @@
 import { GenderPreference } from "../GenderPreference/GenderPreference";
 import { LocationPreference } from "../LocationPreference/LocationPreference";
 import { MatchButton } from "../MatchButton/MatchButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Preference } from "../../util/interfaces/Preference";
 import { defaultPreferences } from "../../util/constants/defaultPreferences";
 import {
@@ -18,12 +18,19 @@ import { MAX_AGE, MIN_AGE } from "../../util/constants/age";
 import { MAX_BUDGET, MIN_BUDGET } from "../../util/constants/budget";
 import { put } from "../../requests/putRequests";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
+import { locations } from "./LocationArray";
+// import { MultiValue } from "react-select";
 
 interface Props {
-  getPreferences: (preferences: Preference) => void;
+  getPreferences: (user: SignUpDetails) => void;
   email: string | undefined;
   user: SignUpDetails;
 }
+// interface Option {
+//   label: string;
+//   value: string;
+// }
+// interface combined extends Props, Option {}
 
 export const InputFields: React.FC<Props> = ({
   getPreferences,
@@ -32,8 +39,13 @@ export const InputFields: React.FC<Props> = ({
 }) => {
   const [preferences, setPreferences] =
     useState<Preference>(defaultPreferences);
-
+  console.log(preferences.location);
   const [error, setError] = useState<string>("");
+  const [selectedCities, setSelectedCities] = useState<string[]>([]);
+
+  useEffect(() => {
+    setSelectedCities(preferences.location);
+  }, [preferences.location]);
 
   const updatePreferences = (updatedField: Partial<Preference>): void =>
     setPreferences((p) => ({ ...p, ...updatedField }));
@@ -67,6 +79,7 @@ export const InputFields: React.FC<Props> = ({
 
   const handleLocation = (val: string) => {
     let newLocationList: string[] = preferences.location;
+
     if (newLocationList[0] === "") {
       newLocationList = [val];
     } else if (newLocationList.length < 3 && !newLocationList.includes(val)) {
@@ -75,6 +88,43 @@ export const InputFields: React.FC<Props> = ({
     updatePreferences({ location: newLocationList });
     console.log(preferences);
   };
+
+  // const handleLocation1 = (val: string[]) => {
+  //   let newLocationsList: string[] = preferences.location;
+  //   if (newLocationsList[0] === "") {
+  //     newLocationsList = [val];
+  //   } else if (newLocationsList.length < 3 && !newLocationsList.includes(val)) {
+  //     newLocationsList.push(val);
+  //   }
+  // };
+
+  // const handleCityChange = (e: { value: string[] }) => {
+  //   // If number of selected cities exceeds maxSelections, slice the array to keep only the first maxSelections
+  //   if (e.value.length > maxSelections) {
+  //     setSelectedCities(e.value.slice(0, maxSelections));
+  //   } else {
+  //     setSelectedCities(e.value);
+  //   }
+  // };
+
+  // const handleLocationAndCityChange = (val: string) => {
+  //   let newLocationList: string[] = preferences.location;
+
+  //   if (newLocationList[0] === "") {
+  //     newLocationList = [val];
+  //   } else if (newLocationList.length < 3 && !newLocationList.includes(val)) {
+  //     newLocationList.push(val);
+  //   }
+  //   updatePreferences({ location: newLocationList });
+
+  //   // Update selected cities based on the location change
+  //   const selectedCities = newLocationList; // Assuming newLocationList contains the selected cities
+  //   if (selectedCities.length > maxSelections) {
+  //     setSelectedCities(selectedCities.slice(0, maxSelections));
+  //   } else {
+  //     setSelectedCities(selectedCities);
+  //   }
+  // };
 
   const handleMatch = (): void => {
     if (user.userId === "" || !user.userId) {
@@ -90,7 +140,7 @@ export const InputFields: React.FC<Props> = ({
         i < preferences.location.length ? preferences.location[i] : ""
       );
       updatePreferences({ location: filledLocations });
-      getPreferences(preferences);
+      getPreferences(user);
       setError((e) => "");
     }
   };
@@ -105,6 +155,10 @@ export const InputFields: React.FC<Props> = ({
     } else if (!locationIsValid(preferences.location)) {
       setError((e) => "Choose at least one location");
     } else {
+      const filledLocations: string[] = Array.from({ length: 3 }, (v, i) =>
+        i < preferences.location.length ? preferences.location[i] : ""
+      );
+      updatePreferences({ location: filledLocations });
       put(`http://localhost:8080/api/v1/update/preference/${user.userId}`, {
         budgetMin: preferences.budgetRange[0],
         budgetMax: preferences.budgetRange[1],
@@ -112,11 +166,10 @@ export const InputFields: React.FC<Props> = ({
         ageMax: preferences.ageRange[1],
         gender: preferences.gender,
         location1: preferences.location[0],
-        location2:
-          preferences.location.length >= 2 ? preferences.location[1] : null,
-        location3:
-          preferences.location.length === 3 ? preferences.location[2] : null,
+        location2: preferences.location[1],
+        location3: preferences.location[2],
       });
+      getPreferences(user);
       setError((e) => "");
     }
   };
@@ -159,9 +212,13 @@ export const InputFields: React.FC<Props> = ({
       />
       <LocationPreference
         location={preferences.location}
-        handleLocation={handleLocation}
+        preferences={preferences}
+        setPreferences={setPreferences}
+        selectedCities={selectedCities}
+        setSelectedCities={setSelectedCities}
+        updatePreferences={updatePreferences}
       />
-      <div className="mb-5">
+      {/* <div className="mb-5">
         {preferences.location[0] === ""
           ? ""
           : preferences.location.map((loc) => (
@@ -170,15 +227,15 @@ export const InputFields: React.FC<Props> = ({
                 preferenceEntry={loc}
               />
             ))}
-      </div>
+      </div> */}
       {error === "" ? (
         <></>
       ) : (
         <div className="jitter-animation italic">{error}</div>
       )}
       <div className="flex items-center justify-between h-1/8 w-full">
-        <MatchButton handleMatch={handleMatch} />
-        <SetDefaultButton handleSetDefault={handleSetDefault} />
+        <MatchButton handleMatch={handleSetDefault} />
+        {/* <SetDefaultButton handleSetDefault={handleSetDefault} /> */}
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import React from "react";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 
 interface Props {
-  getPreferences: (preferences: Preference) => void;
+  getPreferences: (userDetails: SignUpDetails) => void;
   email: string | undefined;
   user: SignUpDetails;
 }

@@ -1,7 +1,6 @@
 import { SignUpForm } from "./components/SignUpForm/SignUpForm";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 import { SignUpFieldWarning } from "../../util/interfaces/SignUpFieldWarning";
-
 interface Props {
   user: SignUpDetails;
   updateField: (updatedField: Partial<SignUpDetails>) => void;

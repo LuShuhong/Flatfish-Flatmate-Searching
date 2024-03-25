@@ -4,7 +4,7 @@ import { InputFields } from "../InputFields/InputFields";
 import React from "react";
 
 interface Props {
-  getPreferences: (preferences: Preference) => void;
+  getPreferences: (userDetails: SignUpDetails) => void;
   email: string | undefined;
   user: SignUpDetails;
 }
