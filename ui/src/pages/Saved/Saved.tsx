@@ -19,7 +19,7 @@ export const Saved: React.FC<Props> = ({
   // refreshProfiles,
 }) => {
   const [savedUsers, setSavedUsers] = useState<Profile[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
   console.log(currentUserEmail);
   console.log(savedUsers.map((saved) => saved.userId));
 
@@ -40,13 +40,13 @@ export const Saved: React.FC<Props> = ({
       `http://localhost:8080/api/v1/savedprofiles/${currentUserEmail}`,
       setSavedUsers
     );
-    setIsLoading(true);
+    // setIsLoading(true);
     console.log("Fetched saved profiles:", profiles);
   };
 
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 3000);
+  // setTimeout(() => {
+  //   setIsLoading(false);
+  // }, 3000);
 
   const handleDeleteSavedProfile = async (savedUserId: string) => {
     try {
@@ -56,18 +56,18 @@ export const Saved: React.FC<Props> = ({
       console.error("Failed to delete saved profile", error);
     }
   };
-  if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full">
-        <PuffLoader
-          cssOverride={{}}
-          size={250}
-          color={"#78aba5"}
-          loading={isLoading}
-        />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center h-full">
+  //       <PuffLoader
+  //         cssOverride={{}}
+  //         size={250}
+  //         color={"#78aba5"}
+  //         loading={isLoading}
+  //       />
+  //     </div>
+  //   );
+  // }
 
   if (savedUsers.length === 0) {
     return (

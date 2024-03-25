@@ -1,25 +1,32 @@
 import "./Matches.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Profile } from "../../util/interfaces/Profile";
 import React from "react";
 import { MatchesCard } from "../../components/Cards/MatchesCard";
 import { ShuffleButton } from "../../components/ShuffleButton/ShuffleButton";
+import BarLoader from "react-spinners/BarLoader"
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { SkeletonTheme } from 'react-loading-skeleton';
 import PuffLoader from "react-spinners/PuffLoader";
 
 interface Props {
   profiles: Profile[] | null;
   userEmail: any;
   isLoading: boolean;
+  // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Matches: React.FC<Props> = ({
   profiles,
   userEmail,
   isLoading,
+  // setIsLoading
 }) => {
   // const [selectedPerson, setSelectedPerson] = useState<Profile | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [clicked, setClicked] = useState<boolean>(false);
+  // const [isMatchCardLoading, setIsMatchCardLoading] = useState(false);
 
   // const handleShuffle = () => {
   //   setCurrentIndex((prevIndex) => (prevIndex + 1) % profiles.length);
@@ -88,13 +95,16 @@ export const Matches: React.FC<Props> = ({
   return (
     <div className="flex items-center justify-center w-full h-full">
       <div className="flex justify-center h-full flex-col items-center">
-        {profiles.length && (
-          <MatchesCard
-            profile={profiles[currentIndex]}
-            userEmail={userEmail}
-            curUserId={profiles[currentIndex].userId}
-          />
-        )}
+        <SkeletonTheme baseColor="#313131" highlightColor="#525252">
+          {profiles.length && (
+            <MatchesCard
+              profile={profiles[currentIndex]}
+              userEmail={userEmail}
+              curUserId={profiles[currentIndex].userId}
+              // isMatchCardLoading={isMatchCardLoading}
+            />
+          )}
+        </SkeletonTheme>
         {/* {console.log(profiles[currentIndex].email)} */}
         <div className="flex justfy-center p-3">
           <button

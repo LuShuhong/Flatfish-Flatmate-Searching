@@ -5,11 +5,14 @@ import person from "../../img/O-O.jpeg";
 import { Profile } from "../../util/interfaces/Profile";
 import { postrq } from "../../requests/savedPostRequest";
 import { SaveButton } from "../SaveButton/SaveButton";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface Props {
   profile: Profile;
   userEmail: any;
   curUserId: any;
+  // isMatchCardLoading: boolean;
 }
 export const MatchesCard: React.FC<Props> = ({ userEmail, profile }) => {
   console.log(profile.picture);
