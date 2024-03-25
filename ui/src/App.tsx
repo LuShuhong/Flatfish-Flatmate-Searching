@@ -30,7 +30,9 @@ function App() {
     setUserDetails((u) => ({ ...u, ...updatedField }));
   };
   const [curPage, setCurPage] = useState<string>("Home");
-  const [matchedProfiles, setMatchedProfiles] = useState<Profile[] | null>(null);
+  const [matchedProfiles, setMatchedProfiles] = useState<Profile[] | null>(
+    null
+  );
   const [navBarVisibility, setNavBarVisibility] = useState<boolean>(false);
   const makeNavBarVisible = (): void => {
     setNavBarVisibility(() => true);
@@ -80,18 +82,18 @@ function App() {
   const getPreferences = (p: Preference): void => {
     setIsLoading(true); // Start loading before fetching data
     console.log(
-      `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`
+      `http://localhost:8080/api/v1/matchuser?userId=${userDetails.userId}`
     );
     // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/matches?
     // http://localhost:8080/api/v1/matches?
     getAllMatchedProfiles(
-      `http://localhost:8080/api/v1/matches?userId=${p.userId}&gender=${p.gender}&ageMin=${p.ageRange[0]}&ageMax=${p.ageRange[1]}&budgetMin=${p.budgetRange[0]}&budgetMax=${p.budgetRange[1]}&location1=${p.location[0]}&location2=${p.location[1]}&location3=${p.location[2]}`,
-      (profiles) => { 
+      `http://localhost:8080/api/v1/matchuser?userId=${userDetails.userId}`,
+      (profiles) => {
         setMatchedProfiles(profiles);
         // setIsLoading(false);
         setTimeout(() => {
           setIsLoading(false);
-        }, 3000)
+        }, 3000);
       }
     );
     setCurPage(() => "My Matches");
