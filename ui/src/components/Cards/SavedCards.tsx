@@ -1,10 +1,11 @@
 import React from "react";
-import person from "../../img/funcat.jpeg";
+// import person from "../../img/funcat.jpeg";
 import { MdDelete } from "react-icons/md";
 import { SavedCard } from "../../util/interfaces/SavedCard";
 import { Profile } from "../../util/interfaces/Profile";
 import * as DeleteApi from "../../requests/deleteRequests";
 import { getProfiles } from "../../requests/getRequests";
+import { InstagramButton } from "./InstagramButton";
 
 // interface Props {
 //   name: string;
@@ -27,7 +28,8 @@ export const SavedCards: React.FC<SavedCardProps> = ({
   savedUser,
   onDeleteSavedCardClicked,
 }) => {
-  const { name, age, email, instagram, userId, description, picture} = savedUser;
+  const { name, age, email, instagram, userId, description, picture } =
+    savedUser;
   console.log(savedUser);
 
   const handleClickIg = () => {};
@@ -54,13 +56,20 @@ export const SavedCards: React.FC<SavedCardProps> = ({
         <p className="fonto-roboto-condensed bg-[#E5E5E5] text-center">
           {description}
         </p>
+        {/* <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
+          instagram
+        </button> */}
+        {/* <InstagramButton /> */}
+        {/* <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
+          {instagram}
+        </button> */}
         <button
           className="bg-sea-green p-1 m-4 rounded-lg shadow-md"
           onClick={() =>
             (window.location.href = `https://www.instagram.com/${instagram}`)
           }
         >
-          Talk To Me in Instagram
+          Talk To Me on Instagram
         </button>
         <MdDelete onClick={handleClickDelete} />
       </div>
