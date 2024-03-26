@@ -65,8 +65,8 @@ export const ProfileForm: React.FC<Props> = ({
       .then((data) => updateField({ picture: data.url }));
   };
   return (
-    <div className="h-full w-30%">
-      <div className="flex h-3/16 w-full">
+    <div className="flex flex-col h-full w-30%">
+      <div className="flex h-3/16 w-full font-serif-display">
         <div className="flex items-center justify-center w-1/3 h-full">
           <ProfilePic
             pic={user.picture}
@@ -77,10 +77,10 @@ export const ProfileForm: React.FC<Props> = ({
           My Profile
         </div>
       </div>
-      <div className="flex h-1/8 w-full">
+      <div className="flex h-1/8 w-full font-playfair-display mt-10">
         <div className="flex items-center w-2/3 h-full">
           <TextInput
-            fieldName="name"
+            fieldName="Name"
             placeholder="John"
             type="text"
             mandatory
@@ -92,7 +92,7 @@ export const ProfileForm: React.FC<Props> = ({
         </div>
         <div className="w-1/3">
           <OptionsInput
-            fieldName="gender"
+            fieldName="Gender"
             value={user.userGender}
             handleChange={handleGenderChange}
             noBackground
@@ -102,7 +102,7 @@ export const ProfileForm: React.FC<Props> = ({
       </div>
       <div className="flex h-1/8 w-full">
         <TextInput
-          fieldName="email"
+          fieldName="Email"
           placeholder="johnsmith69@gmail.com"
           type="email"
           mandatory
@@ -129,7 +129,7 @@ export const ProfileForm: React.FC<Props> = ({
       </div>
       <div className="flex h-1/8 w-full">
         <TextInput
-          fieldName="instagram"
+          fieldName="Instagram"
           placeholder="JohnSmithInstaFollow"
           type="text"
           value={user.instagram}
