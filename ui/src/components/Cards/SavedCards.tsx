@@ -31,7 +31,7 @@ export const SavedCards: React.FC<SavedCardProps> = ({
   };
 
   return (
-    <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl w-1/4 m-8 p-4 shadow-md min-w-96 h-100%">
+    <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl w-1/4 m-8 p-4 shadow-md min-w-96 min-h-[444px] h-100%">
       <div className="text-center bg-[#E5E5E5] mt-10">
         <img
           src={picture}

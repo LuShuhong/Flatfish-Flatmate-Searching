@@ -25,7 +25,7 @@ spec:
         #            - --config=/config/config.yaml
         #            - --loglevel=debug
         - name: flatfish-backend
-          image: ghcr.io/thg-accelerator/thg-flatfish/flatfish-backend:v8.0.2
+          image: ghcr.io/thg-accelerator/thg-flatfish/flatfish-backend:v8.0.3
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
