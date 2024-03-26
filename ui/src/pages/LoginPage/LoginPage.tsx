@@ -21,7 +21,7 @@ export const LoginPage: React.FC<Props> = ({ setUser }) => {
   };
   const navigate = useNavigate();
   const handleLogin = (): void => {
-    post("hhttps://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/auth/login", loginDetails)
+    post("https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/auth/login", loginDetails)
       .then((resp) => {
         if (resp.ok) {
           fetch(`https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/users/${loginDetails.userId}`)
