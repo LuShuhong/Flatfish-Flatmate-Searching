@@ -43,16 +43,28 @@ public class ProfileMatcher {
         String gender = targetGender.toString();
 
         List<UserEntity> suitableMatches = allUsers.stream()
-                .filter(user -> user.getUserId() != userId)
+                .filter(user -> !user.getUserId().equals(userId))
                 .filter(user -> user.getAge() >= ageMin)
                 .filter(user -> user.getAge() <= ageMax)
                 .filter(user -> user.getBudgetMax() >= budgetMin)
                 .filter(user -> user.getBudgetMin() <= budgetMax)
                 .filter(user -> gender.equalsIgnoreCase("unspecified") || user.getUserGender().equalsIgnoreCase(gender))
-                .filter(user -> user.getLocation1().equalsIgnoreCase(location1) || user.getLocation1().equalsIgnoreCase(location2) || user.getLocation1().equalsIgnoreCase(location3)
-                        || user.getLocation2().equalsIgnoreCase(location1) || user.getLocation2().equalsIgnoreCase(location2) || user.getLocation2().equalsIgnoreCase(location3)
-                        || user.getLocation3().equalsIgnoreCase(location1) || user.getLocation3().equalsIgnoreCase(location2) || user.getLocation3().equalsIgnoreCase(location3))
+//                .filter(user -> user.getLocation1().equalsIgnoreCase(location1) || user.getLocation1().equalsIgnoreCase(location2) || user.getLocation1().equalsIgnoreCase(location3)
+//                        || user.getLocation2().equalsIgnoreCase(location1) || user.getLocation2().equalsIgnoreCase(location2) || user.getLocation2().equalsIgnoreCase(location3)
+//                        || user.getLocation3().equalsIgnoreCase(location1) || user.getLocation3().equalsIgnoreCase(location2) || user.getLocation3().equalsIgnoreCase(location3))
                 .toList();
+
+        if (location2.equals("")) {
+            suitableMatches = suitableMatches.stream().filter(user -> location1.equalsIgnoreCase(user.getLocation1()) || location1.equalsIgnoreCase(user.getLocation2()) || location1.equalsIgnoreCase(user.getLocation3())).toList();
+        } else if (location3.equals("")) {
+            suitableMatches = suitableMatches.stream().filter(user -> location1.equalsIgnoreCase(user.getLocation1()) || location1.equalsIgnoreCase(user.getLocation2()) || location1.equalsIgnoreCase(user.getLocation3())
+                        || location2.equalsIgnoreCase(user.getLocation1()) || location2.equalsIgnoreCase(user.getLocation2()) || location2.equalsIgnoreCase(user.getLocation3())).toList();
+        } else {
+            suitableMatches = suitableMatches.stream().filter(user -> location1.equalsIgnoreCase(user.getLocation1()) || location1.equalsIgnoreCase(user.getLocation2()) || location1.equalsIgnoreCase(user.getLocation3())
+                    || location2.equalsIgnoreCase(user.getLocation1()) || location2.equalsIgnoreCase(user.getLocation2()) || location2.equalsIgnoreCase(user.getLocation3())
+                            || location3.equalsIgnoreCase(user.getLocation1()) || location3.equalsIgnoreCase(user.getLocation2()) || location3.equalsIgnoreCase(user.getLocation3()))
+                    .toList();
+        }
 
         List<UserEntity> vectorMatches = new ArrayList<>();
 
