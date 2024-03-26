@@ -118,6 +118,21 @@ public class UserService {
         usersRepo.save(userEntity);
     }
 
+    public void updateProfile(String id, UserEntity userEntity) throws UserNotFoundException {
+        if (usersRepo.existsById(id)) {
+            UserEntity user = usersRepo.findById(id).get();
+            user.setName(userEntity.getName());
+            user.setUserGender(userEntity.getUserGender());
+            user.setBirthday(userEntity.getBirthday());
+            user.setAge(userEntity.getAge());
+            user.setInstagram(user.getInstagram());
+            user.setDescription(user.getDescription());
+            usersRepo.save(user);
+        } else {
+            throw new UserNotFoundException();
+        }
+    }
+
     public void updatePreference(String id, UserEntity userEntity) throws UserNotFoundException {
 
         if (usersRepo.existsById(id)) {

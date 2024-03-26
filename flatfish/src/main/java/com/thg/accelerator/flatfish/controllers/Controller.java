@@ -302,6 +302,16 @@ public class Controller {
         return ResponseEntity.created(location).body(userDto);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable("id") String id, @RequestBody final UserDto userDto) {
+        try {
+            userService.updateProfile(id, Transformer.transformUserDtoToEntity(userDto));
+            return ResponseEntity.ok(userDto);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 //    @PostMapping
 //    public ResponseEntity<SavedProfileDto> addSavedProfile(@RequestBody final SavedProfileDto savedProfileDto){
 //        // takes in a profile entity and returns a profile dto

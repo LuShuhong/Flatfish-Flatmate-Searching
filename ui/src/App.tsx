@@ -20,6 +20,7 @@ import { post } from "./requests/postRequests";
 import React from "react";
 import { convertName } from "./util/nameConverter";
 import AnimatedCursor from "react-animated-cursor";
+import { put } from "./requests/putRequests";
 
 function App() {
   const { user } = useAuth0();
@@ -49,7 +50,9 @@ function App() {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/users/${user.email}`).then((resp) => {
+      fetch(
+        `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/users/${user.email}`
+      ).then((resp) => {
         // http://localhost:8080/api/v1
         if (resp.ok) {
           resp.json().then((data) => setUserDetails(() => data));
@@ -94,22 +97,39 @@ function App() {
     // http://localhost:8080/api/v1/
     // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
     if (!warnings) {
-      post("https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1", userDetails)
-        .then((resp) => {
-          console.log(user);
+      if (curPage === "Home") {
+        post(
+          "https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1",
+          userDetails
+        )
+          .then((resp) => {
+            if (!resp.ok) {
+              setPostFailed(() => true);
+            } else {
+              makeNavBarVisible();
+              navigate("/home");
+            }
+
+            // } else {
+            //   // profile page
+            //   setTick(() => true);
+            // }
+          })
+          .catch((err) => console.log(err));
+      } else {
+        put(
+          `https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/${userDetails.userId}`,
+          userDetails
+        ).then((resp) => {
           if (!resp.ok) {
             setPostFailed(() => true);
-          } else if (curPage === "Home") {
-            makeNavBarVisible();
-            navigate("/home");
           } else {
             setTick(() => true);
           }
-        })
-        .catch((err) => console.log(err));
+        });
+      }
     }
   };
-
   const handlePageChange = (newPage: string): void => {
     setCurPage(() => newPage);
   };
