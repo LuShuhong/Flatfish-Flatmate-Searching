@@ -16,8 +16,9 @@ body {
   flex-wrap: nowrap; /* Prevent cards from wrapping to the next line */
   overflow-x: auto; /* Enable horizontal scroll */
   gap: 20px; /* Gap between cards */
-  max-width: 100%;
-  max-height: 100vh;
+  /* max-width: 100%;
+  max-height: 100vh; */
+  align-items: stretch;
   scroll-snap-type: x mandatory;
 }
 
@@ -29,4 +30,5 @@ body {
   flex: 0 0 calc(33.333% - 20px); /* Set the width of each card */
   min-width: 250px; /* Set the minimum width of each card */
   scroll-snap-align: start;
+  height: 20vh;
 }

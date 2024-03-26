@@ -11,7 +11,7 @@ export const Description: React.FC<Props> = ({
 }) => {
   return (
     <label className="flex flex-col justify-center w-full h-full">
-      <div className="text-sm">description</div>
+      <div className="text-sm">Description</div>
       <textarea
         className={`h-3/5 w-95% rounded-lg p-2 border border-gray-400 ${
           noBackground ? "bg-transparent" : "bg-[#E5E5E5]"

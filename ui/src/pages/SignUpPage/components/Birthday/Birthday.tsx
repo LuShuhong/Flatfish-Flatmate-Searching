@@ -15,7 +15,7 @@ export const Birthday: React.FC<Props> = ({
     <label className="flex flex-col justify-center w-full h-full">
       <div className="flex items-center">
         <div className="text-sm">
-          birthday<sup className="text-red-600">*</sup>
+          Birthday<sup className="text-red-600">*</sup>
         </div>
         {warning && (
           <div className="text-xs text-red-700 ml-1">

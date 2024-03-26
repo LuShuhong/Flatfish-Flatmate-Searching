@@ -6,7 +6,7 @@ interface Props {
 export const Age: React.FC<Props> = ({ value, noBox }) => {
   return (
     <label className="flex flex-col justify-center w-full h-full">
-      <div className="text-sm">age</div>
+      <div className="text-sm">Age</div>
 
       {noBox ? (
         <div className="flex items-center h-3/5 w-5/6 rounded-lg p-2 text-sm text-gray-400">
