@@ -1,5 +1,5 @@
-import { PreferenceInput } from "../../components/PreferenceInput/PreferenceInput";
-import MapComponent from "../../components/Map/Map";
+import { PreferenceInput } from "./components/PreferenceInput/PreferenceInput";
+import MapComponent from "./components/Map/Map";
 import React from "react";
 import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
 

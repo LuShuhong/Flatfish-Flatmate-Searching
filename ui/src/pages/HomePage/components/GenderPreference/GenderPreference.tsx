@@ -1,5 +1,5 @@
-import { GenderOption } from "../GenderOption/GenderOption";
-import { genders } from "../../util/constants/genders";
+import { GenderOption } from "../../../../components/GenderOption/GenderOption";
+import { genders } from "../../../../util/constants/genders";
 import React from "react";
 
 interface Props {

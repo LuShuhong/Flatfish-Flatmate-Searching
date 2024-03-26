@@ -1,4 +1,4 @@
-import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
+import { SignUpDetails } from "../../../../util/interfaces/SignUpDetails";
 import { InputFields } from "../InputFields/InputFields";
 import React from "react";
 
