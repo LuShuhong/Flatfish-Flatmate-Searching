@@ -2,19 +2,19 @@ import { GenderPreference } from "../GenderPreference/GenderPreference";
 import { LocationPreference } from "../LocationPreference/LocationPreference";
 import { MatchButton } from "../MatchButton/MatchButton";
 import { useEffect, useState } from "react";
-import { Preference } from "../../util/interfaces/Preference";
-import { defaultPreferences } from "../../util/constants/defaultPreferences";
+import { Preference } from "../../../../util/interfaces/Preference";
+import { defaultPreferences } from "../../../../util/constants/defaultPreferences";
 import {
   ageIsValid,
   budgetIsValid,
   locationIsValid,
-} from "../../util/validPreferenceChecker";
+} from "../../../../util/validPreferenceChecker";
 import React from "react";
 import { DoubleSlider } from "../DoubleSlider/DoubleSlider";
-import { MAX_AGE, MIN_AGE } from "../../util/constants/age";
-import { MAX_BUDGET, MIN_BUDGET } from "../../util/constants/budget";
-import { put } from "../../requests/putRequests";
-import { SignUpDetails } from "../../util/interfaces/SignUpDetails";
+import { MAX_AGE, MIN_AGE } from "../../../../util/constants/age";
+import { MAX_BUDGET, MIN_BUDGET } from "../../../../util/constants/budget";
+import { put } from "../../../../requests/putRequests";
+import { SignUpDetails } from "../../../../util/interfaces/SignUpDetails";
 // import { MultiValue } from "react-select";
 
 interface Props {
@@ -127,8 +127,9 @@ export const InputFields: React.FC<Props> = ({
         location1: preferences.location[0],
         location2: preferences.location[1] ? preferences.location[1] : "",
         location3: preferences.location[2] ? preferences.location[2] : "",
-      });
-      getPreferences(user);
+      })
+        .then(() => getPreferences(user))
+        .catch((err) => console.log(err));
       setError((e) => "");
     }
   };
