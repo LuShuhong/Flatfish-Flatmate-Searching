@@ -19,7 +19,8 @@ root.render(
           redirect_uri: "https://flatfish-frontend.pq46c.icekube.ics.cloud/signup",
           // redirect_uri: "https://flatfish-frontend.pq46c.icekube.ics.cloud/signup",
           // redirect_uri: "http://localhost:3000/signup",
-          audience: "https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1",
+          
+          // audience: "https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1",
           // redirect_uri: "http://localhost:8080/api/v1",
           // https://flatfish-backend.pq46c.icekube.ics.cloud/api/v1/
           // scope: "read:current_user update:current_user_metadata",
