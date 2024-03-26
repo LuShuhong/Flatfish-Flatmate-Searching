@@ -1,6 +1,7 @@
 import React from "react";
 // import person from "../../img/funcat.jpeg";
 import { MdDelete } from "react-icons/md";
+import { MdOutlineDelete } from "react-icons/md";
 import { SavedCard } from "../../util/interfaces/SavedCard";
 import { Profile } from "../../util/interfaces/Profile";
 import * as DeleteApi from "../../requests/deleteRequests";
@@ -87,8 +88,9 @@ export const SavedCards: React.FC<SavedCardProps> = ({
         </p>
         <div className="flex flex-row justify-around">
           <button
+            style={{ width: "150px" }}
             // className="flex flex-row align-center justify-center bg-sea-green p-2 m-4 rounded-lg shadow-md hover:bg-[#89ada9]"
-            className="flex flex-row align-center justify-center rounded-lg shadow-md p-2 m-4 text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium shadow-lg rounded-lg text-sm px-5 py-2.5 text-center "
+            className="flex flex-row align-center justify-center rounded-lg shadow-md p-2 m-4 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
             onClick={() =>
               (window.location.href = `https://www.instagram.com/${instagram}`)
             }
@@ -99,10 +101,12 @@ export const SavedCards: React.FC<SavedCardProps> = ({
             <div className="font-roboto-condensed">Message</div>
           </button>
           <button
+            style={{ width: "150px" }}
             onClick={handleClickDelete}
-            className="flex flex-row bg-sea-green p-2 m-4 rounded-lg shadow-md hover:bg-[#89ada9] font-roboto-condensed"
+            className="flex flex-row justify-center bg-sea-green p-2 m-4 rounded-lg shadow-md hover:bg-[#89ada9] font-roboto-condensed"
           >
-            <MdDelete className="flex mt-0.5 mr-1 ml-1 " />
+            {/* <MdDelete className="flex mt-0.5 mr-1 ml-1 " /> */}
+            <MdOutlineDelete className="flex mt-1 mb-0.5 mr-1 ml-1" />
             Delete
           </button>
         </div>
