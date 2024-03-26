@@ -1,7 +1,7 @@
 import React from "react";
 import Select, { MultiValue } from "react-select";
-import { Preference } from "../../util/interfaces/Preference";
-import "../LocationPreference/LocationPreference.css";
+import { Preference } from "../../../../util/interfaces/Preference";
+import "./LocationPreference.css";
 import makeAnimated from "react-select/animated";
 interface Option {
   label: string;

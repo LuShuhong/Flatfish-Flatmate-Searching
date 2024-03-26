@@ -40,6 +40,8 @@ public class ProfileMatcherTest {
         alice.setBudgetMax(1000);
         alice.setGender(Gender.MALE);
         alice.setLocation1("Deansgate");
+        alice.setLocation2("");
+        alice.setLocation3("");
 
         UserEntity bob = new UserEntity();
         bob.setUserId("bob");
@@ -52,6 +54,7 @@ public class ProfileMatcherTest {
         bob.setGender(Gender.FEMALE);
         bob.setLocation1("Deansgate");
         bob.setLocation2("Moss Side");
+        bob.setLocation3("");
 
         List<UserEntity> allUsers = List.of(alice, bob);
 
@@ -72,6 +75,8 @@ public class ProfileMatcherTest {
         alice.setBudgetMax(1000);
         alice.setGender(Gender.MALE);
         alice.setLocation1("Deansgate");
+        alice.setLocation2("");
+        alice.setLocation3("");
 
         UserEntity bob = new UserEntity();
         bob.setUserId("bob");
@@ -84,6 +89,7 @@ public class ProfileMatcherTest {
         bob.setGender(Gender.UNSPECIFIED);
         bob.setLocation1("Deansgate");
         bob.setLocation2("Moss Side");
+        bob.setLocation3("");
 
         List<UserEntity> allUsers = List.of(alice);
 
