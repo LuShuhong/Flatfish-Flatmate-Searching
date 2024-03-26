@@ -31,41 +31,6 @@ export const SavedCards: React.FC<SavedCardProps> = ({
   };
 
   return (
-    // <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl h-full w-1/4 m-8 p-4 shadow-md min-w-96">
-    //   <div className="text-center bg-[#E5E5E5] mt-10">
-    //     <img
-    //       src={picture}
-    //       className="rounded-full h-24 w-24 object-cover mx-auto"
-    //       alt="Profile"
-    //     />
-    //     <h1 className="bg-[#E5E5E5] font-serif-display text-4xl mt-5 mb-3">
-    //       {name}
-    //     </h1>
-    //     <h2 className="font-playfair-display text-xl bg-[#E5E5E5] mb-3">
-    //       {age}
-    //     </h2>
-    //     <h1>{email}</h1>
-    //     <p className="fonto-roboto-condensed bg-[#E5E5E5] text-center">
-    //       {description}
-    //     </p>
-    //     {/* <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
-    //       instagram
-    //     </button> */}
-    //     {/* <InstagramButton /> */}
-    //     {/* <button className="bg-sea-green p-1 m-4 rounded-lg shadow-md">
-    //       {instagram}
-    //     </button> */}
-    // <button
-    //   className="bg-sea-green p-1 m-4 rounded-lg shadow-md"
-    //   onClick={() =>
-    //     (window.location.href = `https://www.instagram.com/${instagram}`)
-    //   }
-    // >
-    //   Talk To Me on Instagram
-    // </button>
-    //     <MdDelete onClick={handleClickDelete} />
-    //   </div>
-    // </div>
     <div className="flex justify-start flex-col bg-[#E5E5E5] rounded-3xl w-1/4 m-8 p-4 shadow-md min-w-96 h-100%">
       <div className="text-center bg-[#E5E5E5] mt-10">
         <img
@@ -80,11 +45,8 @@ export const SavedCards: React.FC<SavedCardProps> = ({
           {age}
         </h2>
         <h1>{email}</h1>
-        <p className="fonto-roboto-condensed bg-[#E5E5E5] text-center">
+        <p className="fonto-roboto-condensed bg-[#E5E5E5] text-center p-7 pb-10">
           {description}
-          {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-          malesuada orci eu viverra posuere. Etiam est libero, interdum quis dui
-          at */}
         </p>
         <div className="flex flex-row justify-around">
           <button
@@ -103,11 +65,10 @@ export const SavedCards: React.FC<SavedCardProps> = ({
           <button
             style={{ width: "150px" }}
             onClick={handleClickDelete}
-            className="flex flex-row justify-center bg-sea-green p-2 m-4 rounded-lg shadow-md hover:bg-[#89ada9] font-roboto-condensed"
+            className="flex flex-row justify-center bg-sea-green p-2 m-4 rounded-lg shadow-md hover:bg-[#89ada9] font-roboto-condensed text-sm"
           >
-            {/* <MdDelete className="flex mt-0.5 mr-1 ml-1 " /> */}
             <MdOutlineDelete className="flex mt-1 mb-0.5 mr-1 ml-1" />
-            Delete
+            <span className="pt-0.5">Delete</span>
           </button>
         </div>
       </div>

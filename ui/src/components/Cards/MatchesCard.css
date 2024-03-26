@@ -10,7 +10,7 @@
 .container {
   display: flex;
   box-shadow: 0 15px 30px 1px grey;
-  background: #d7cec7;
+  background: #e5e5e5;
   text-align: center;
   border-radius: 5px;
   overflow: hidden;
@@ -59,13 +59,13 @@
   margin: 0;
   animation: chan-sh 6s ease infinite;
 }
-
+/* 
 .hint-star {
   display: inline-block;
   margin-left: 0.5em;
   color: gold;
   width: 50%;
-}
+} */
 
 #container .user-details > p {
   text-align: center;
@@ -157,7 +157,7 @@
 
 .info {
   background: rgba(27, 26, 26, 0.9);
-  font-family: "Bree Serif", serif;
+  /* font-family: "Bree Serif", serif; */
   transition: all 0.3s ease-out;
   transform: translateX(-100%);
   position: absolute;
