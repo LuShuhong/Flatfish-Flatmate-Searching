@@ -125,9 +125,9 @@ public class UserService {
             user.setUserGender(userEntity.getUserGender());
             user.setBirthday(userEntity.getBirthday());
             user.setAge(userEntity.getAge());
-            user.setInstagram(user.getInstagram());
-            user.setDescription(user.getDescription());
-            user.setPicture(user.getPicture());
+            user.setInstagram(userEntity.getInstagram());
+            user.setDescription(userEntity.getDescription());
+            user.setPicture(userEntity.getPicture());
             usersRepo.save(user);
         } else {
             throw new UserNotFoundException();
